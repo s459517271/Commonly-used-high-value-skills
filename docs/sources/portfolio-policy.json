@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "updated_at": "2026-07-27",
+  "decision_rule": "Retire a skill only when it has no unique executable asset, current external-system contract, high-risk domain guardrail, or measurable acceptance standard, and a canonical replacement covers the same user intent.",
+  "retired_skills": [
+    {
+      "name": "capture-screen",
+      "replacement": "screenshot",
+      "reason": "The cross-platform screenshot skill supersedes this macOS-only wrapper."
+    },
+    {
+      "name": "changelog-automation",
+      "replacement": "release-manager",
+      "reason": "The script-backed Release Manager already owns changelog generation, versioning, readiness, and release planning."
+    },
+    {
+      "name": "changelog-generator",
+      "replacement": "release-manager",
+      "reason": "Release Manager already owns changelog generation and release readiness."
+    },
+    {
+      "name": "ci-cd-pipeline-builder",
+      "replacement": "pipe",
+      "reason": "Pipe provides the deeper GitHub Actions workflow, security, caching, and maintenance guidance."
+    },
+    {
+      "name": "code-review-excellence",
+      "replacement": "pr-review-expert",
+      "reason": "The repository needs one canonical evidence-driven PR review workflow."
+    },
+    {
+      "name": "confidence-check",
+      "replacement": "verification-before-completion",
+      "reason": "Generic confidence labeling is model-native and the verification skill provides a stronger evidence contract."
+    },
+    {
+      "name": "debugging-strategies",
+      "replacement": "systematic-debugging",
+      "reason": "Systematic Debugging is the maintained root-cause workflow."
+    },
+    {
+      "name": "doc",
+      "replacement": "docx",
+      "reason": "DOCX is the canonical Word artifact workflow and now includes the useful rendering helper."
+    },
+    {
+      "name": "doc-coauthoring",
+      "replacement": "docx",
+      "reason": "Generic coauthoring guidance is model-native; DOCX retains the format-specific workflow and validation."
+    },
+    {
+      "name": "excel-automation",
+      "replacement": "xlsx",
+      "reason": "XLSX is the canonical spreadsheet workflow and now carries the reusable automation recipes."
+    },
+    {
+      "name": "gog",
+      "replacement": "native Google connectors",
+      "reason": "The skill depends on obsolete ClawHub and Composio connector syntax."
+    },
+    {
+      "name": "internal-comms",
+      "replacement": "native document and messaging capabilities",
+      "reason": "The content is a generic writing template without a tool contract or deterministic asset."
+    },
+    {
+      "name": "mcp-server-builder",
+      "replacement": "mcp-builder",
+      "reason": "MCP Builder is the script-backed canonical implementation and evaluation workflow."
+    },
+    {
+      "name": "parallel-debugging",
+      "replacement": "systematic-debugging",
+      "reason": "Parallel investigation is a native subagent capability and belongs inside the canonical debugging workflow."
+    },
+    {
+      "name": "pdf-creator",
+      "replacement": "pdf",
+      "reason": "PDF is the canonical creation, editing, extraction, forms, and validation workflow."
+    },
+    {
+      "name": "ppt-creator",
+      "replacement": "pptx",
+      "reason": "PPTX is the canonical slide artifact workflow and now carries the reusable orchestration assets."
+    },
+    {
+      "name": "product-analysis",
+      "replacement": "product-manager-toolkit",
+      "reason": "The workflow hard-codes deprecated model and client commands."
+    },
+    {
+      "name": "prompt-engineer-toolkit",
+      "replacement": "prompt-optimizer",
+      "reason": "The static 2024-era model recipes have high maintenance cost and low marginal value."
+    },
+    {
+      "name": "proactive-agent",
+      "replacement": "agent-workflow-designer",
+      "reason": "The thin proactive-agent wrapper adds no executable capability or external contract."
+    },
+    {
+      "name": "seo-audit",
+      "replacement": "growth",
+      "reason": "Growth already contains the complete SEO audit recipe and supporting reference."
+    },
+    {
+      "name": "skills-search",
+      "replacement": "find-skills",
+      "reason": "Find Skills is the canonical discovery and routing entry point."
+    },
+    {
+      "name": "spreadsheet",
+      "replacement": "xlsx",
+      "reason": "XLSX is the canonical spreadsheet workflow and now carries the useful examples."
+    },
+    {
+      "name": "summarize",
+      "replacement": "native summarization",
+      "reason": "The skill is an obsolete ClawHub wrapper around a model-native capability."
+    },
+    {
+      "name": "supermemory",
+      "replacement": "native memory plus project instructions",
+      "reason": "The skill exposes fictional memory commands and duplicates current client memory and repository instruction mechanisms."
+    },
+    {
+      "name": "supabase-postgres",
+      "replacement": "supabase-postgres-best-practices",
+      "reason": "Both entries track the same upstream skill; keep the complete canonical name."
+    },
+    {
+      "name": "tavily-search",
+      "replacement": "native web search or deep-research",
+      "reason": "The skill is an obsolete provider wrapper and current clients provide first-party web search."
+    },
+    {
+      "name": "teams-channel-post-writer",
+      "replacement": "native Teams connector",
+      "reason": "The skill is a generic writing template without a current Teams API contract."
+    },
+    {
+      "name": "weather",
+      "replacement": "native weather or web search",
+      "reason": "Current clients provide first-party weather and web lookup."
+    }
+  ],
+  "canonical_groups": [
+    {
+      "canonical": "systematic-debugging",
+      "retired_aliases": [
+        "debugging-strategies",
+        "parallel-debugging"
+      ]
+    },
+    {
+      "canonical": "pr-review-expert",
+      "retired_aliases": [
+        "code-review-excellence"
+      ]
+    },
+    {
+      "canonical": "find-skills",
+      "retired_aliases": [
+        "skills-search"
+      ]
+    },
+    {
+      "canonical": "release-manager",
+      "retired_aliases": [
+        "changelog-automation",
+        "changelog-generator"
+      ]
+    },
+    {
+      "canonical": "mcp-builder",
+      "retired_aliases": [
+        "mcp-server-builder"
+      ]
+    },
+    {
+      "canonical": "docx",
+      "retired_aliases": [
+        "doc",
+        "doc-coauthoring"
+      ]
+    },
+    {
+      "canonical": "xlsx",
+      "retired_aliases": [
+        "spreadsheet",
+        "excel-automation"
+      ]
+    },
+    {
+      "canonical": "pptx",
+      "retired_aliases": [
+        "ppt-creator"
+      ]
+    },
+    {
+      "canonical": "pdf",
+      "retired_aliases": [
+        "pdf-creator"
+      ]
+    },
+    {
+      "canonical": "screenshot",
+      "retired_aliases": [
+        "capture-screen"
+      ]
+    }
+  ],
+  "protected_capabilities": [
+    "deterministic scripts and validators",
+    "current external service contracts",
+    "security, compliance, incident-response, and financial guardrails",
+    "file-format creation and render validation",
+    "provider-specific deployment and diagnostics",
+    "enterprise connector permissions and mutation boundaries"
+  ]
+}

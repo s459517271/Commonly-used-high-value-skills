@@ -137,6 +137,24 @@ def load_rejected_keys(path: Path) -> tuple[set[str], set[str]]:
     return names, urls
 
 
+def load_retired_skill_names(path: Path) -> set[str]:
+    """Load permanent retirement tombstones from the portfolio policy."""
+    if not path.exists():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return set()
+    names: set[str] = set()
+    for entry in data.get("retired_skills", []) or []:
+        if not isinstance(entry, dict):
+            continue
+        name = str(entry.get("name", "")).strip()
+        if name:
+            names.add(name)
+    return names
+
+
 def new_source_health() -> dict[str, dict]:
     return {
         SOURCE_GITHUB: {"status": "unknown", "queries": 0, "results": 0, "errors": []},
@@ -534,6 +552,11 @@ def main() -> None:
         default="docs/sources/rejected-candidates.json",
         help="Path to persistent rejection cache (names/URLs to skip).",
     )
+    parser.add_argument(
+        "--portfolio-policy",
+        default="docs/sources/portfolio-policy.json",
+        help="Path to permanent retired-skill policy.",
+    )
     args = parser.parse_args()
 
     skills_dir = REPO_ROOT / args.skills_dir
@@ -543,6 +566,8 @@ def main() -> None:
     token = resolve_github_token()
     local_names = get_local_skill_names(skills_dir)
     rejected_names, rejected_urls = load_rejected_keys(REPO_ROOT / args.rejected_file)
+    retired_names = load_retired_skill_names(REPO_ROOT / args.portfolio_policy)
+    rejected_names.update(retired_names)
     print(f"Local skills indexed: {len(local_names)}")
     if rejected_names or rejected_urls:
         print(f"Rejection cache: {len(rejected_names)} names, {len(rejected_urls)} URLs")

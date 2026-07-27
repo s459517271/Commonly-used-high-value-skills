@@ -1,7 +1,7 @@
 {
   "video": {
     "url": "https://github.com/wshobson/agents",
-    "checked_at": "2026-06-29",
+    "checked_at": "2026-07-27",
     "note": "Curated from wshobson/agents after validating exact upstream plugin paths and cross-checking public skills registry listings."
   },
   "official_references": [
@@ -38,18 +38,18 @@
         "repo": "wshobson/agents",
         "path": "plugins/payment-processing/skills/billing-automation/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-29",
-        "last_synced_at": "2026-06-29",
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
         "last_synced_commit": null
       }
     },
     {
       "video_name": "changelog-automation",
       "normalized_slug": "changelog-automation",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/engineering-workflow-automation/changelog-automation/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://github.com/wshobson/agents/blob/main/plugins/documentation-generation/skills/changelog-automation/SKILL.md",
-      "notes": "Reconciled from SKILL.md source declaration; upstream tracking enabled.",
+      "notes": "Retired 2026-07-27 after consolidation into the script-backed release-manager workflow.",
       "upstream": {
         "repo": "wshobson/agents",
         "path": "plugins/documentation-generation/skills/changelog-automation/SKILL.md",
@@ -62,10 +62,10 @@
     {
       "video_name": "code-review-excellence",
       "normalized_slug": "code-review-excellence",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/developer-engineering/code-review-excellence/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://skills.sh/wshobson/agents/code-review-excellence",
-      "notes": "Imported to deepen reviewer heuristics, severity framing, and collaborative feedback quality in engineering workflows.",
+      "notes": "Retired 2026-07-27 after consolidation into pr-review-expert; retained here as provenance history.",
       "upstream": {
         "repo": "wshobson/agents",
         "path": "plugins/developer-essentials/skills/code-review-excellence/SKILL.md",
@@ -78,10 +78,10 @@
     {
       "video_name": "debugging-strategies",
       "normalized_slug": "debugging-strategies",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/developer-engineering/debugging-strategies/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://skills.sh/wshobson/agents/debugging-strategies",
-      "notes": "Imported to strengthen systematic debugging and profiling guidance across languages and runtime environments.",
+      "notes": "Retired 2026-07-27 after consolidation into systematic-debugging; retained here as provenance history.",
       "upstream": {
         "repo": "wshobson/agents",
         "path": "plugins/developer-essentials/skills/debugging-strategies/SKILL.md",
@@ -94,10 +94,10 @@
     {
       "video_name": "parallel-debugging",
       "normalized_slug": "parallel-debugging",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/developer-engineering/parallel-debugging/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://skills.sh/wshobson/agents/parallel-debugging",
-      "notes": "Imported to add Analysis of Competing Hypotheses style investigation for bugs spanning multiple subsystems or root-cause candidates.",
+      "notes": "Retired 2026-07-27 because parallel investigation is now a native subagent capability inside the canonical debugging workflow.",
       "upstream": {
         "repo": "wshobson/agents",
         "path": "plugins/agent-teams/skills/parallel-debugging/SKILL.md",

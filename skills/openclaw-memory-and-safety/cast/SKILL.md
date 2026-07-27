@@ -1,8 +1,8 @@
 ---
 name: cast
-description: '用户画像生成、角色注册、生命周期和跨智能体同步。'
+description: 'Casting personas via rapid generation, persistence, lifecycle management, and inter-agent sync. Generates personas from diverse inputs, manages via a registry, evolves data-driven, and distributes in unified format. Use when creating, updating, or syncing personas across agents. Not for UI walkthroughs (Echo) or user research design (Field).'
 zh_description: "用户画像生成、角色注册、生命周期和跨智能体同步。"
-version: "1.0.0"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/cast"
@@ -349,29 +349,29 @@ See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantic
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+<!-- LOCAL-QUALITY-SUPPLEMENT:START -->
+## Usage Notes
 
-## Local Execution Contract
+This supplement is maintained by the repository sync pipeline. It keeps the
+imported upstream skill usable inside this curated collection when the upstream
+source is intentionally concise.
 
-Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+## Common Patterns
 
-```yaml
-goal: "What measurable outcome should change?"
-scope:
-  included: []
-  excluded: []
-inputs:
-  required: []
-  optional: []
-constraints:
-  safety: []
-  compatibility: []
-deliverables: []
-validation:
-  checks: []
-  evidence: []
-risks:
-  - risk: ""
-    mitigation: ""
+```text
+1. Confirm that the user's task matches the skill trigger.
+2. Read the relevant project files or user-provided context before acting.
+3. Choose the smallest reversible action that advances the task.
+4. Run the verification command or manual check that proves the result.
+5. Report the outcome, evidence, and any remaining risk.
 ```
 
-Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.
+## Boundaries
+
+- Prefer the upstream workflow for Cast; this section only adds local quality
+  guardrails.
+- Do not invent project facts when required files, vaults, services, or tools are
+  unavailable.
+- Stop and ask for clarification when the next action could overwrite user work,
+  expose private data, or change production state.
+<!-- LOCAL-QUALITY-SUPPLEMENT:END -->

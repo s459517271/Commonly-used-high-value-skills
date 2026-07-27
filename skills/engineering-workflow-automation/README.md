@@ -4,7 +4,7 @@
 
 聚焦 GitHub、浏览器自动化、CI 排障、Playwright 与工程协作自动化。
 
-当前分类共 **16** 个技能。
+当前分类共 **15** 个技能。
 
 ## 推荐先看
 
@@ -120,7 +120,6 @@ gsd-sdk --version
 |------|------|------|------|
 | `agent-browser` | 用于让 Agent 操作真实浏览器，完成页面交互、截图录屏、脚本执行和端到端验证。 | [目录](./agent-browser/) | [SKILL.md](./agent-browser/SKILL.md) |
 | `billing-automation` | 用于构建订阅计费、自动开票、续费生命周期和催收管理流程。 | [目录](./billing-automation/) | [SKILL.md](./billing-automation/SKILL.md) |
-| `changelog-automation` | 用于基于提交、PR 和发布记录自动生成 Keep a Changelog 风格的变更日志。 | [目录](./changelog-automation/) | [SKILL.md](./changelog-automation/SKILL.md) |
 | `gh-address-comments` | 用于通过 gh CLI 处理当前分支的 GitHub PR Review 评论或 Issue 评论。 | [目录](./gh-address-comments/) | [SKILL.md](./gh-address-comments/SKILL.md) |
 | `gh-fix-ci` | 用于gh、修复、CI，支持工程协作、自动化验证和交付闭环。 | [目录](./gh-fix-ci/) | [SKILL.md](./gh-fix-ci/SKILL.md) |
 | `github` | 用于通过 GitHub CLI 自动化 Issue、PR、Review、CI 检查、标签和发布协作。 | [目录](./github/) | [SKILL.md](./github/SKILL.md) |

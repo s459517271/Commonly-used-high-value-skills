@@ -4,7 +4,7 @@
 
 聚焦 brainstorming、research、计划编写、skills 检索与任务拆解。
 
-当前分类共 **5** 个技能。
+当前分类共 **4** 个技能。
 
 ## 推荐先看
 
@@ -21,7 +21,6 @@
 | `reflect-learn` | 用于reflect、learn，支持检索、拆解、反思和决策。 | [目录](./reflect-learn/) | [SKILL.md](./reflect-learn/SKILL.md) |
 | `ripple` | 变更前影响分析，评估依赖链和一致性风险。 | [目录](./ripple/) | [SKILL.md](./ripple/SKILL.md) |
 | `scout` | 缺陷调查、复现步骤、根因分析和影响评估。 | [目录](./scout/) | [SKILL.md](./scout/SKILL.md) |
-| `tavily-search` | 用于实时联网检索最新事实、来源证据、新闻市场信息和 Tavily 检索结果。 | [目录](./tavily-search/) | [SKILL.md](./tavily-search/SKILL.md) |
 
 ## 维护方式
 

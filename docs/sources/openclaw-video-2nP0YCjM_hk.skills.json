@@ -55,10 +55,10 @@
     {
       "video_name": "Web Search",
       "normalized_slug": "tavily-search",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/task-understanding-decomposition/tavily-search/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://www.clawhub.com",
-      "notes": "Repository currently tracks tavily-search for realtime web retrieval.",
+      "notes": "Retired 2026-07-27 in favor of first-party web search and deep-research.",
       "upstream": {
         "repo": "local-repo/in-house",
         "path": "skills/task-understanding-decomposition/tavily-search/SKILL.md",
@@ -103,10 +103,10 @@
     {
       "video_name": "Proactive agent",
       "normalized_slug": "proactive-agent",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/ai-agent-platform/proactive-agent/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://www.clawhub.com",
-      "notes": "Skill exists in canonical tree.",
+      "notes": "Retired 2026-07-27 because the thin wrapper adds no capability beyond current agent runtimes.",
       "upstream": {
         "repo": "local-repo/in-house",
         "path": "skills/ai-agent-platform/proactive-agent/SKILL.md",
@@ -119,10 +119,10 @@
     {
       "video_name": "Summarize",
       "normalized_slug": "summarize",
-      "status": "verified_in_repo",
-      "repo_skill": "skills/multimodal-media/summarize/SKILL.md",
+      "status": "retired",
+      "repo_skill": null,
       "source": "https://www.clawhub.com",
-      "notes": "Skill exists in canonical tree.",
+      "notes": "Retired 2026-07-27 because summarization is model-native and the wrapper used obsolete installation syntax.",
       "upstream": {
         "repo": "local-repo/in-house",
         "path": "skills/multimodal-media/summarize/SKILL.md",

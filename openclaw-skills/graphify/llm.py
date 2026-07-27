@@ -151,13 +151,12 @@ BACKENDS: dict[str, dict] = {
         # model. GRAPHIFY_OPENAI_MODEL still wins over OPENAI_MODEL when both
         # are set (via model_env_key).
         "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
-        "default_model": os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"),
+        "default_model": os.environ.get("OPENAI_MODEL", "gpt-5-mini"),
         "env_key": "OPENAI_API_KEY",
         "model_env_key": "GRAPHIFY_OPENAI_MODEL",
         "max_tokens": 16384,
         "pricing": {"input": 0.40, "output": 1.60},  # USD per 1M tokens
-        # Default (gpt-4.1-mini) accepts temperature=0. Reasoning models
-        # (o1/o3/o4/gpt-5) reject any explicit temperature and have it omitted
+        # Reasoning models can reject an explicit temperature; it is omitted
         # automatically by _resolve_temperature; GRAPHIFY_LLM_TEMPERATURE
         # overrides either way (#1191).
         "temperature": 0,
@@ -187,15 +186,15 @@ BACKENDS: dict[str, dict] = {
         #           AZURE_OPENAI_DEPLOYMENT or GRAPHIFY_AZURE_MODEL (deployment name).
         # base_url is intentionally absent — prevents accidental routing through
         # _call_openai_compat, which requires it and uses the wrong SDK client class.
-        "default_model": os.environ.get("AZURE_OPENAI_DEPLOYMENT", os.environ.get("GRAPHIFY_AZURE_MODEL", "gpt-4o")),
+        "default_model": os.environ.get("AZURE_OPENAI_DEPLOYMENT", os.environ.get("GRAPHIFY_AZURE_MODEL", "")),
         "env_key": "AZURE_OPENAI_API_KEY",
         "model_env_key": "GRAPHIFY_AZURE_MODEL",
-        "pricing": {"input": 2.50, "output": 10.00},  # USD per 1M tokens (gpt-4o; may mis-estimate other deployments)
+        "pricing": {"input": 0.0, "output": 0.0},  # deployment-specific; avoid false cost precision
         "temperature": 0,
         "max_tokens": 16384,
     },
     "bedrock": {
-        "default_model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+        "default_model": os.environ.get("BEDROCK_MODEL_ID", ""),
         "model_env_key": "GRAPHIFY_BEDROCK_MODEL",
         "pricing": {"input": 3.0, "output": 15.0},  # USD per 1M tokens
         "temperature": 0,
@@ -1099,7 +1098,14 @@ def _default_model_for_backend(backend: str) -> str:
         model = os.environ.get(model_env_key)
         if model:
             return model
-    return cfg["default_model"]
+    model = cfg["default_model"]
+    if not model:
+        raise RuntimeError(
+            f"No model configured for backend '{backend}'. Set "
+            f"{model_env_key or 'the provider model environment variable'} "
+            "to a current provider-supported model or deployment ID."
+        )
+    return model
 
 
 def _backend_pkg_hint(pkg: str, extra: str) -> str:

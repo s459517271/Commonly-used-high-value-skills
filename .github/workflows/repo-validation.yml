@@ -30,6 +30,9 @@ jobs:
       - name: Lint skill quality
         run: python scripts/lint_skill_quality.py --min-lines 50
 
+      - name: Enforce portfolio retirement policy
+        run: python scripts/audit_skill_portfolio.py --check-policy
+
       - name: Audit external skill licenses
         run: python scripts/audit_licenses.py
 

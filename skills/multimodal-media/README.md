@@ -4,7 +4,7 @@
 
 聚焦图像、音频、视频、截图、摘要与转写的多模态生产力技能集合。
 
-当前分类共 **10** 个技能。
+当前分类共 **9** 个技能。
 
 ## 推荐先看
 
@@ -24,7 +24,6 @@
 | `sketch` | 图像生成代码、提示优化、批量生成和成本估算。 | [目录](./sketch/) | [SKILL.md](./sketch/SKILL.md) |
 | `sora` | 用于构思、生成和评审 Sora 视频或视频提示词。 | [目录](./sora/) | [SKILL.md](./sora/SKILL.md) |
 | `speech` | 用于语音，支持内容生成、编辑、分析和交付。 | [目录](./speech/) | [SKILL.md](./speech/SKILL.md) |
-| `summarize` | 用于忠实摘要网页、文档、邮件、转录稿或长文本，并提炼重点和后续行动。 | [目录](./summarize/) | [SKILL.md](./summarize/SKILL.md) |
 | `tone` | 用于tone，支持内容生成、编辑、分析和交付。 | [目录](./tone/) | [SKILL.md](./tone/SKILL.md) |
 | `transcribe` | 用于将音频或视频中的语音转写为文本，并可结合说话人分离和已知说话人提示。 | [目录](./transcribe/) | [SKILL.md](./transcribe/SKILL.md) |
 

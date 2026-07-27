@@ -4,7 +4,7 @@
 
 覆盖开发、测试、性能、架构、数据库和工程效率的核心技能集合。
 
-当前分类共 **51** 个技能。
+当前分类共 **46** 个技能。
 
 ## 推荐先看
 
@@ -23,12 +23,10 @@
 | `aws-solution-architect` | 用于 AWS 云架构设计、服务选型、成本优化与 Well-Architected Framework 评估。 | [目录](./aws-solution-architect/) | [SKILL.md](./aws-solution-architect/SKILL.md) |
 | `builder` | 生产级业务逻辑、接口集成和类型安全实现。 | [目录](./builder/) | [SKILL.md](./builder/SKILL.md) |
 | `cli-demo-generator` | 用于CLI、演示、生成，支持开发、调试、评审和交付。 | [目录](./cli-demo-generator/) | [SKILL.md](./cli-demo-generator/SKILL.md) |
-| `code-review-excellence` | 用于代码、评审、excellence，支持开发、调试、评审和交付。 | [目录](./code-review-excellence/) | [SKILL.md](./code-review-excellence/SKILL.md) |
 | `codebase-inspection` | 用于用 pygount 检查代码行数、语言构成、仓库规模和代码/注释比例。 | [目录](./codebase-inspection/) | [SKILL.md](./codebase-inspection/SKILL.md) |
 | `codebase-onboarding` | 用于代码库、onboarding，支持开发、调试、评审和交付。 | [目录](./codebase-onboarding/) | [SKILL.md](./codebase-onboarding/SKILL.md) |
 | `database-designer` | 用于数据库、设计，支持开发、调试、评审和交付。 | [目录](./database-designer/) | [SKILL.md](./database-designer/SKILL.md) |
 | `database-schema-designer` | 用于数据库、Schema、设计，支持开发、调试、评审和交付。 | [目录](./database-schema-designer/) | [SKILL.md](./database-schema-designer/SKILL.md) |
-| `debugging-strategies` | 用于调试、策略，支持开发、调试、评审和交付。 | [目录](./debugging-strategies/) | [SKILL.md](./debugging-strategies/SKILL.md) |
 | `dependency-auditor` | 用于dependency、审计，支持开发、调试、评审和交付。 | [目录](./dependency-auditor/) | [SKILL.md](./dependency-auditor/SKILL.md) |
 | `docker-expert` | 用于 Docker 容器化最佳实践、多阶段构建优化与 Docker Compose 编排。 | [目录](./docker-expert/) | [SKILL.md](./docker-expert/SKILL.md) |
 | `frontend-design` | 用于创建高质量、非模板化的前端页面、组件、仪表盘、海报和 Web UI。 | [目录](./frontend-design/) | [SKILL.md](./frontend-design/SKILL.md) |
@@ -40,13 +38,11 @@
 | `i18n-expert` | 用于i18n、expert，支持开发、调试、评审和交付。 | [目录](./i18n-expert/) | [SKILL.md](./i18n-expert/SKILL.md) |
 | `kubernetes-specialist` | 用于 Kubernetes 集群管理、Pod 调试、Helm Chart 设计、清单评审和部署优化。 | [目录](./kubernetes-specialist/) | [SKILL.md](./kubernetes-specialist/SKILL.md) |
 | `mcp-builder` | 用于MCP、构建，支持开发、调试、评审和交付。 | [目录](./mcp-builder/) | [SKILL.md](./mcp-builder/SKILL.md) |
-| `mcp-server-builder` | 用于MCP、服务器、构建，支持开发、调试、评审和交付。 | [目录](./mcp-server-builder/) | [SKILL.md](./mcp-server-builder/SKILL.md) |
 | `migration-architect` | 用于migration、架构，支持开发、调试、评审和交付。 | [目录](./migration-architect/) | [SKILL.md](./migration-architect/SKILL.md) |
 | `monorepo-navigator` | 用于Monorepo、导航，支持开发、调试、评审和交付。 | [目录](./monorepo-navigator/) | [SKILL.md](./monorepo-navigator/SKILL.md) |
 | `neon-postgres` | 用于 Neon Postgres 数据库连接、分支、迁移和运行维护。 | [目录](./neon-postgres/) | [SKILL.md](./neon-postgres/SKILL.md) |
 | `neon-postgres-egress-optimizer` | 诊断并降低 Neon / Postgres 数据出口流量与相关成本。 | [目录](./neon-postgres-egress-optimizer/) | [SKILL.md](./neon-postgres-egress-optimizer/SKILL.md) |
 | `nextjs-app-router` | 用于 Next.js App Router 项目开发、路由设计和服务端渲染实践。 | [目录](./nextjs-app-router/) | [SKILL.md](./nextjs-app-router/SKILL.md) |
-| `parallel-debugging` | 用于并行、调试，支持开发、调试、评审和交付。 | [目录](./parallel-debugging/) | [SKILL.md](./parallel-debugging/SKILL.md) |
 | `performance-profiler` | 用于性能、性能分析，支持开发、调试、评审和交付。 | [目录](./performance-profiler/) | [SKILL.md](./performance-profiler/SKILL.md) |
 | `pr-review-expert` | 用于PR、评审、expert，支持开发、调试、评审和交付。 | [目录](./pr-review-expert/) | [SKILL.md](./pr-review-expert/SKILL.md) |
 | `promptfoo-evaluation` | 用于promptfoo、评估，支持开发、调试、评审和交付。 | [目录](./promptfoo-evaluation/) | [SKILL.md](./promptfoo-evaluation/SKILL.md) |
@@ -57,7 +53,6 @@
 | `schema` | 数据库模式设计、迁移规划、索引策略和关系建模。 | [目录](./schema/) | [SKILL.md](./schema/SKILL.md) |
 | `skill-tester` | 用于技能、tester，支持开发、调试、评审和交付。 | [目录](./skill-tester/) | [SKILL.md](./skill-tester/SKILL.md) |
 | `supabase` | 用于Supabase，支持开发、调试、评审和交付。 | [目录](./supabase/) | [SKILL.md](./supabase/SKILL.md) |
-| `supabase-postgres` | 用于 Supabase 平台开发与 PostgreSQL 最佳实践，包含 RLS、Edge Functions 和实。 | [目录](./supabase-postgres/) | [SKILL.md](./supabase-postgres/SKILL.md) |
 | `supabase-postgres-best-practices` | 用于编写、评审和优化 Supabase/Postgres 查询、Schema、索引和数据库配置。 | [目录](./supabase-postgres-best-practices/) | [SKILL.md](./supabase-postgres-best-practices/SKILL.md) |
 | `systematic-debugging` | 用于systematic、调试，支持开发、调试、评审和交付。 | [目录](./systematic-debugging/) | [SKILL.md](./systematic-debugging/SKILL.md) |
 | `tailwind-design-system` | 用于 Tailwind CSS 设计系统、主题 token、组件样式和响应式布局规范。 | [目录](./tailwind-design-system/) | [SKILL.md](./tailwind-design-system/SKILL.md) |
