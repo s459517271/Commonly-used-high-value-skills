@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+from copy import deepcopy
 from datetime import date
 from pathlib import Path
 
@@ -15,7 +16,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REPO = "simota/agent-skills"
 SOURCE_URL = f"https://github.com/{SOURCE_REPO}"
-SOURCE_FILE = REPO_ROOT / "docs" / "sources" / "simota-agent-skills-2026-04.skills.json"
+SOURCE_MAPPING_REL = Path("docs/sources/simota-agent-skills-2026-04.skills.json")
+SOURCE_FILE = REPO_ROOT / SOURCE_MAPPING_REL
 
 
 SELECTED_SKILLS: dict[str, list[tuple[str, str]]] = {
@@ -229,19 +231,51 @@ def normalize_text_tree(root: Path) -> None:
             path.write_text(normalized, encoding="utf-8")
 
 
-def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> list[dict]:
+def load_existing_entries(repo_root: Path) -> dict[str, dict]:
+    mapping_path = repo_root / SOURCE_MAPPING_REL
+    if not mapping_path.exists():
+        return {}
+    payload = json.loads(mapping_path.read_text(encoding="utf-8"))
+    return {
+        entry["normalized_slug"]: entry
+        for entry in payload.get("skills", [])
+        if entry.get("normalized_slug")
+    }
+
+
+def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> tuple[list[dict], list[str]]:
     today = date.today().isoformat()
     commit = source_commit(source_dir)
     imported: list[dict] = []
+    missing_upstream: list[str] = []
+    existing_entries = load_existing_entries(repo_root)
 
     for category, skills in SELECTED_SKILLS.items():
         for name, description in skills:
             source_skill_dir = source_dir / name
             source_skill_md = source_skill_dir / "SKILL.md"
-            if not source_skill_md.exists():
-                raise FileNotFoundError(f"Missing upstream skill: {source_skill_md}")
-
             destination = repo_root / "skills" / category / name
+            if not source_skill_md.exists():
+                existing = existing_entries.get(name)
+                if existing is None or not (destination / "SKILL.md").exists():
+                    raise FileNotFoundError(
+                        f"Missing upstream skill and no retained local snapshot: {source_skill_md}"
+                    )
+                retained = deepcopy(existing)
+                upstream = retained.setdefault("upstream", {})
+                upstream["last_checked_at"] = today
+                upstream["sync_mode"] = "local-only"
+                upstream["availability"] = "missing"
+                upstream.setdefault("missing_since", today)
+                retained["notes"] = (
+                    "Retained from the last permissively licensed upstream snapshot because "
+                    f"{name}/SKILL.md is no longer present in simota/agent-skills."
+                )
+                imported.append(retained)
+                missing_upstream.append(name)
+                print(f"WARNING: retaining local snapshot; upstream path missing: {name}/SKILL.md")
+                continue
+
             raw = source_skill_md.read_text(encoding="utf-8", errors="replace")
             _, body = split_frontmatter(raw)
             skill_text = render_frontmatter(category, name, description, today) + body.lstrip()
@@ -276,7 +310,7 @@ def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> list[dict
                 }
             )
 
-    return imported
+    return imported, missing_upstream
 
 
 def write_source_mapping(entries: list[dict], repo_root: Path) -> None:
@@ -296,8 +330,9 @@ def write_source_mapping(entries: list[dict], repo_root: Path) -> None:
         ],
         "skills": entries,
     }
-    SOURCE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SOURCE_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    source_file = repo_root / SOURCE_MAPPING_REL
+    source_file.parent.mkdir(parents=True, exist_ok=True)
+    source_file.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -310,15 +345,20 @@ def main() -> int:
     repo_root = Path(args.repo_root).resolve()
     source_dir, tempdir = resolve_source_dir(args.source_dir)
     try:
-        entries = import_selected(source_dir, repo_root, args.apply)
+        entries, missing_upstream = import_selected(source_dir, repo_root, args.apply)
         if args.apply:
             write_source_mapping(entries, repo_root)
         print(
             f"{'Imported' if args.apply else 'Would import'} "
             f"{len(entries)} simota skills across {len(SELECTED_SKILLS)} categories."
         )
+        if missing_upstream:
+            print(
+                "Retained local snapshots for missing upstream skills: "
+                + ", ".join(sorted(missing_upstream))
+            )
         if args.apply:
-            print(f"Mapping: {SOURCE_FILE}")
+            print(f"Mapping: {repo_root / SOURCE_MAPPING_REL}")
     finally:
         if tempdir is not None:
             tempdir.cleanup()

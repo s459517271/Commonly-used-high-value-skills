@@ -1,0 +1,83 @@
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+from scripts import sync_simota_agent_skills as sync_simota
+
+
+class SyncSimotaAgentSkillsTests(unittest.TestCase):
+    def test_retains_local_snapshot_when_selected_upstream_skill_is_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source_dir = root / "upstream"
+            source_dir.mkdir()
+            local_skill = root / "repo/skills/ai-agent-platform/arena/SKILL.md"
+            local_skill.parent.mkdir(parents=True)
+            local_skill.write_text("# Arena\n", encoding="utf-8")
+            mapping = root / "repo" / sync_simota.SOURCE_MAPPING_REL
+            mapping.parent.mkdir(parents=True)
+            mapping.write_text(
+                json.dumps(
+                    {
+                        "skills": [
+                            {
+                                "normalized_slug": "arena",
+                                "repo_skill": "skills/ai-agent-platform/arena/SKILL.md",
+                                "notes": "Original note.",
+                                "upstream": {
+                                    "repo": sync_simota.SOURCE_REPO,
+                                    "path": "arena/SKILL.md",
+                                    "last_synced_commit": "abc123",
+                                },
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with patch.object(
+                sync_simota,
+                "SELECTED_SKILLS",
+                {"ai-agent-platform": [("arena", "Arena description.")]},
+            ):
+                entries, missing = sync_simota.import_selected(
+                    source_dir,
+                    root / "repo",
+                    apply=False,
+                )
+
+            self.assertEqual(missing, ["arena"])
+            self.assertEqual(entries[0]["upstream"]["sync_mode"], "local-only")
+            self.assertEqual(entries[0]["upstream"]["availability"], "missing")
+            self.assertEqual(entries[0]["upstream"]["last_synced_commit"], "abc123")
+            self.assertIn("Retained from the last permissively licensed", entries[0]["notes"])
+
+    def test_missing_upstream_without_local_snapshot_is_an_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source_dir = root / "upstream"
+            source_dir.mkdir()
+
+            with patch.object(
+                sync_simota,
+                "SELECTED_SKILLS",
+                {"ai-agent-platform": [("arena", "Arena description.")]},
+            ):
+                with self.assertRaisesRegex(FileNotFoundError, "no retained local snapshot"):
+                    sync_simota.import_selected(source_dir, root / "repo", apply=False)
+
+    def test_source_mapping_is_written_under_requested_repo_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo_root = Path(temp) / "repo"
+            sync_simota.write_source_mapping([], repo_root)
+
+            mapping = repo_root / sync_simota.SOURCE_MAPPING_REL
+            self.assertTrue(mapping.exists())
+            self.assertEqual(json.loads(mapping.read_text(encoding="utf-8"))["skills"], [])
+
+
+if __name__ == "__main__":
+    unittest.main()
