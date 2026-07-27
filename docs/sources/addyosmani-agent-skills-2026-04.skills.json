@@ -1,7 +1,7 @@
 {
   "video": {
     "url": "https://github.com/addyosmani/agent-skills",
-    "checked_at": "2026-07-20",
+    "checked_at": "2026-07-27",
     "note": "Curated full import of addyosmani/agent-skills; refresh with scripts/sync_addyosmani_agent_skills.py."
   },
   "official_references": [
@@ -28,9 +28,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/api-and-interface-design/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -44,9 +44,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/browser-testing-with-devtools/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-21",
-        "last_synced_at": "2026-06-21",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -60,9 +60,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/ci-cd-and-automation/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -76,9 +76,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/code-review-and-quality/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-13",
-        "last_synced_at": "2026-07-13",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -92,9 +92,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/code-simplification/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -108,9 +108,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/context-engineering/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -124,9 +124,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/debugging-and-error-recovery/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-21",
-        "last_synced_at": "2026-06-21",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -140,9 +140,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/deprecation-and-migration/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-13",
-        "last_synced_at": "2026-07-13",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -156,9 +156,25 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/documentation-and-adrs/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-20",
-        "last_synced_at": "2026-07-20",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
+      }
+    },
+    {
+      "video_name": "doubt-driven-development",
+      "normalized_slug": "doubt-driven-development",
+      "status": "verified_in_repo",
+      "repo_skill": "skills/ai-workflow/doubt-driven-development/SKILL.md",
+      "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/doubt-driven-development/SKILL.md",
+      "notes": "Imported from addyosmani/agent-skills into the AI workflow category with repeatable upstream sync.",
+      "upstream": {
+        "repo": "addyosmani/agent-skills",
+        "path": "skills/doubt-driven-development/SKILL.md",
+        "ref": "main",
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -172,9 +188,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/frontend-ui-engineering/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -188,9 +204,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/git-workflow-and-versioning/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-03",
-        "last_synced_at": "2026-07-03",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -204,9 +220,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/idea-refine/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-29",
-        "last_synced_at": "2026-06-29",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -220,9 +236,41 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/incremental-implementation/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-24",
-        "last_synced_at": "2026-06-24",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
+      }
+    },
+    {
+      "video_name": "interview-me",
+      "normalized_slug": "interview-me",
+      "status": "verified_in_repo",
+      "repo_skill": "skills/ai-workflow/interview-me/SKILL.md",
+      "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/interview-me/SKILL.md",
+      "notes": "Imported from addyosmani/agent-skills into the AI workflow category with repeatable upstream sync.",
+      "upstream": {
+        "repo": "addyosmani/agent-skills",
+        "path": "skills/interview-me/SKILL.md",
+        "ref": "main",
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
+      }
+    },
+    {
+      "video_name": "observability-and-instrumentation",
+      "normalized_slug": "observability-and-instrumentation",
+      "status": "verified_in_repo",
+      "repo_skill": "skills/ai-workflow/observability-and-instrumentation/SKILL.md",
+      "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/observability-and-instrumentation/SKILL.md",
+      "notes": "Imported from addyosmani/agent-skills into the AI workflow category with repeatable upstream sync.",
+      "upstream": {
+        "repo": "addyosmani/agent-skills",
+        "path": "skills/observability-and-instrumentation/SKILL.md",
+        "ref": "main",
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -236,9 +284,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/performance-optimization/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -252,9 +300,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/planning-and-task-breakdown/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-03",
-        "last_synced_at": "2026-07-03",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -268,9 +316,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/security-and-hardening/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-13",
-        "last_synced_at": "2026-07-13",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -284,9 +332,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/shipping-and-launch/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-24",
-        "last_synced_at": "2026-06-24",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -300,9 +348,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/source-driven-development/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -316,9 +364,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/spec-driven-development/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-03",
-        "last_synced_at": "2026-07-03",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -332,9 +380,9 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/test-driven-development/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-05-19",
-        "last_synced_at": "2026-05-19",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     },
     {
@@ -348,19 +396,19 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/using-agent-skills/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-24",
-        "last_synced_at": "2026-06-24",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "7829ffd90d973b6325f5f12f1b1226dcace74443"
       }
     }
   ],
   "verification_attempts": [
     {
-      "date": "2026-04-25",
+      "date": "2026-07-27",
       "method": "git-clone-and-local-import",
-      "target": "https://github.com/addyosmani/agent-skills@1f66d57a5e1b041b11e49a8cdca275aa472f0131",
+      "target": "https://github.com/addyosmani/agent-skills@7829ffd90d973b6325f5f12f1b1226dcace74443",
       "result": "success",
-      "evidence": "Imported 21 upstream skills into skills/ai-workflow/."
+      "evidence": "Imported 24 upstream skills into skills/ai-workflow/."
     }
   ]
 }

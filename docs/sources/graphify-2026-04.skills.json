@@ -1,13 +1,13 @@
 {
   "video": {
-    "url": "https://github.com/safishamsi/graphify",
-    "checked_at": "2026-07-20",
+    "url": "https://github.com/Graphify-Labs/graphify",
+    "checked_at": "2026-07-27",
     "note": "Curated from graphify as a codebase-and-corpus knowledge graph workflow aligned with the Karpathy-style wiki pattern. Updated from the graphifyy 0.5.0 PyPI wheel Codex skill variant."
   },
   "official_references": [
     {
       "name": "graphify repository",
-      "url": "https://github.com/safishamsi/graphify",
+      "url": "https://github.com/Graphify-Labs/graphify",
       "purpose": "Canonical upstream repository for the graphify skill."
     },
     {
@@ -22,15 +22,15 @@
       "normalized_slug": "graphify",
       "status": "verified_in_repo",
       "repo_skill": "skills/developer-engineering/graphify/SKILL.md",
-      "source": "https://pypi.org/project/graphifyy/0.5.0/",
-      "notes": "Imported as a high-leverage codebase and research graph workflow; repository copy is adapted to the canonical SKILL.md layout while preserving the upstream Codex workflow.",
+      "source": "https://github.com/Graphify-Labs/graphify/blob/v8/graphify/skill-codex.md",
+      "notes": "Synchronized from the canonical Apache-2.0 Graphify Codex skill and auxiliary package files.",
       "upstream": {
-        "repo": "safishamsi/graphify",
+        "repo": "Graphify-Labs/graphify",
         "path": "graphify/skill-codex.md",
         "ref": "v8",
-        "last_checked_at": "2026-07-20",
-        "last_synced_at": "2026-07-20",
-        "last_synced_commit": null
+        "last_checked_at": "2026-07-27",
+        "last_synced_at": "2026-07-27",
+        "last_synced_commit": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4"
       }
     }
   ],
@@ -55,6 +55,13 @@
       "target": "graphifyy==0.5.0",
       "result": "success",
       "evidence": "Downloaded the graphifyy 0.5.0 wheel and imported graphify/skill-codex.md into the canonical repository skill."
+    },
+    {
+      "date": "2026-07-27",
+      "method": "github-api-license-and-upstream-sync",
+      "target": "Graphify-Labs/graphify@62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
+      "result": "success",
+      "evidence": "Confirmed the repository redirect to Graphify-Labs/graphify, verified its Apache-2.0 license, and synchronized graphify/skill-codex.md plus adjacent package files from the v8 ref."
     }
   ]
 }

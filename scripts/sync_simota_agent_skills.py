@@ -133,6 +133,34 @@ Open questions:
 """.strip()
 }
 
+GENERIC_EXECUTION_CONTRACT = """
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.
+""".strip()
+
 
 def split_frontmatter(text: str) -> tuple[str, str]:
     match = re.match(r"^---\r?\n(.*?)\r?\n---\r?\n?", text, re.DOTALL)
@@ -175,6 +203,7 @@ def render_frontmatter(category: str, name: str, description: str, today: str) -
         "---",
         f"name: {name}",
         f"description: {yaml_quote(description)}",
+        f"zh_description: {yaml_quote(description)}",
         'version: "1.0.0"',
         'author: "seaworld008"',
         f'source: "github:{SOURCE_REPO}"',
@@ -282,12 +311,13 @@ def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> tuple[lis
             supplement = QUALITY_SUPPLEMENTS.get(name)
             if supplement:
                 skill_text = skill_text.rstrip() + "\n\n" + supplement + "\n"
+            if "```" not in skill_text:
+                skill_text = skill_text.rstrip() + "\n\n" + GENERIC_EXECUTION_CONTRACT + "\n"
             skill_text = strip_trailing_whitespace(skill_text)
 
             if apply:
-                if destination.exists():
-                    shutil.rmtree(destination)
-                shutil.copytree(source_skill_dir, destination)
+                destination.mkdir(parents=True, exist_ok=True)
+                shutil.copytree(source_skill_dir, destination, dirs_exist_ok=True)
                 normalize_text_tree(destination)
                 (destination / "SKILL.md").write_text(skill_text.rstrip() + "\n", encoding="utf-8")
 

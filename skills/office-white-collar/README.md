@@ -27,14 +27,14 @@
 | `markdown-tools` | 用于Markdown、tools，支持文档、表格、演示和资料整理。 | [目录](./markdown-tools/) | [SKILL.md](./markdown-tools/SKILL.md) |
 | `meeting-minutes-taker` | 用于会议、纪要、taker，支持文档、表格、演示和资料整理。 | [目录](./meeting-minutes-taker/) | [SKILL.md](./meeting-minutes-taker/SKILL.md) |
 | `mermaid-tools` | 用于mermaid、tools，支持文档、表格、演示和资料整理。 | [目录](./mermaid-tools/) | [SKILL.md](./mermaid-tools/SKILL.md) |
-| `morph` | 用于morph，支持文档、表格、演示和资料整理。 | [目录](./morph/) | [SKILL.md](./morph/SKILL.md) |
+| `morph` | 文档格式转换、分发版生成和可复用转换脚本。 | [目录](./morph/) | [SKILL.md](./morph/SKILL.md) |
 | `pdf` | 用于pdf，支持文档、表格、演示和资料整理。 | [目录](./pdf/) | [SKILL.md](./pdf/SKILL.md) |
 | `pdf-creator` | 用于将 Markdown 转为支持中文字体和正式排版的 PDF 文档。 | [目录](./pdf-creator/) | [SKILL.md](./pdf-creator/SKILL.md) |
 | `ppt-creator` | 用于PPT、创建，支持文档、表格、演示和资料整理。 | [目录](./ppt-creator/) | [SKILL.md](./ppt-creator/SKILL.md) |
 | `pptx` | 用于创建、编辑和美化 PowerPoint 演示文稿。 | [目录](./pptx/) | [SKILL.md](./pptx/SKILL.md) |
 | `prism` | 用于prism，支持文档、表格、演示和资料整理。 | [目录](./prism/) | [SKILL.md](./prism/SKILL.md) |
 | `spreadsheet` | 用于处理电子表格数据、公式、清洗和分析。 | [目录](./spreadsheet/) | [SKILL.md](./spreadsheet/SKILL.md) |
-| `stage` | 用于stage，支持文档、表格、演示和资料整理。 | [目录](./stage/) | [SKILL.md](./stage/SKILL.md) |
+| `stage` | 演示文稿生成、叙事节奏设计和会议演讲优化。 | [目录](./stage/) | [SKILL.md](./stage/SKILL.md) |
 | `transcript-fixer` | 用于转录稿、fixer，支持文档、表格、演示和资料整理。 | [目录](./transcript-fixer/) | [SKILL.md](./transcript-fixer/SKILL.md) |
 | `xlsx` | 用于XLSX，支持文档、表格、演示和资料整理。 | [目录](./xlsx/) | [SKILL.md](./xlsx/SKILL.md) |
 

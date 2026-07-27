@@ -5,10 +5,10 @@
 [![简体中文](https://img.shields.io/badge/README-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-1677ff)](./README.md)
 [![English](https://img.shields.io/badge/README-English-111111)](./README.en.md)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-00b894)](./openclaw-skills/README.md)
-[![Skills](https://img.shields.io/badge/Skills-313-7c3aed)](./skills/)
+[![Skills](https://img.shields.io/badge/Skills-316-7c3aed)](./skills/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-面向全球 AI 开发者与 Agent 工作流构建者的高价值 Skills 仓库，覆盖开发工程、DevOps、产品设计、运营、办公自动化、金融投资、AI 平台与安全治理等高频任务场景。当前共 **16 个分类 / 313 个技能**。
+面向全球 AI 开发者与 Agent 工作流构建者的高价值 Skills 仓库，覆盖开发工程、DevOps、产品设计、运营、办公自动化、金融投资、AI 平台与安全治理等高频任务场景。当前共 **16 个分类 / 316 个技能**。
 
 ## 为什么值得收藏
 
@@ -372,7 +372,7 @@ openclaw-skills/                        # 为 OpenClaw 生成的扁平兼容导�
 2. 打开对应技能的 `SKILL.md` 查看触发条件、操作流程和脚本说明。
 3. 若技能下含 `scripts/`、`references/`、`assets/`，优先复用现成内容。
 
-## 技能总览（按分类，16 类 / 313 技能）
+## 技能总览（按分类，16 类 / 316 技能）
 
 <a id="cat-developer-engineering"></a>
 ### 1. 开发工程（developer-engineering，51）
@@ -395,7 +395,7 @@ openclaw-skills/                        # 为 OpenClaw 生成的扁平兼容导�
 - `gateway`：用于gateway，支持开发、调试、评审和交付。
 - `git-worktree-manager`：用于Git、worktree、管理，支持开发、调试、评审和交付。
 - `github-contributor`：用于GitHub、贡献，支持开发、调试、评审和交付。
-- `graphify`：用于Graphify，支持开发、调试、评审和交付。
+- `graphify`：将代码、文档和多媒体资料映射为持久知识图谱，支持社区发现、路径查询、解释和影响分析。
 - `graphql-expert`：用于 GraphQL API 设计、Schema/Resolver 评审、查询优化和安全最佳实践。
 - `i18n-expert`：用于i18n、expert，支持开发、调试、评审和交付。
 - `kubernetes-specialist`：用于 Kubernetes 集群管理、Pod 调试、Helm Chart 设计、清单评审和部署优化。
@@ -430,7 +430,7 @@ openclaw-skills/                        # 为 OpenClaw 生成的扁平兼容导�
 - `webapp-testing`：用于使用 Playwright 测试本地 Web 应用、验证前端行为、截图和查看浏览器日志。
 
 <a id="cat-ai-workflow"></a>
-### 2. AI 工作流（ai-workflow，45）
+### 2. AI 工作流（ai-workflow，48）
 
 - `agent-workflow-designer`：用于Agent、工作流、设计，支持任务规划、执行、评审和验证。
 - `andrej-karpathy-skills`：用于应用 Andrej Karpathy 风格的 AI 学习、构建和研究实践。
@@ -446,6 +446,7 @@ openclaw-skills/                        # 为 OpenClaw 生成的扁平兼容导�
 - `deprecation-and-migration`：用于deprecation、migration，支持任务规划、执行、评审和验证。
 - `dispatching-parallel-agents`：用于拆分任务并调度多个 Agent 并行协作。
 - `documentation-and-adrs`：用于documentation、adrs，支持任务规划、执行、评审和验证。
+- `doubt-driven-development`：用新上下文的对抗性审查质疑关键决策，适用于高风险或正确性优先的开发任务。
 - `executing-plans`：用于按既定实现计划逐步执行任务，并在关键节点进行审查和完成验证。
 - `find-skills`：用于搜索、比较并安装适合当前任务的技能，帮助 Agent 正确路由能力。
 - `finishing-a-development-branch`：用于finishing、development、branch，支持任务规划、执行、评审和验证。
@@ -453,8 +454,10 @@ openclaw-skills/                        # 为 OpenClaw 生成的扁平兼容导�
 - `git-workflow-and-versioning`：用于Git、工作流、versioning，支持任务规划、执行、评审和验证。
 - `idea-refine`：用于idea、refine，支持任务规划、执行、评审和验证。
 - `incremental-implementation`：用于incremental、实现，支持任务规划、执行、评审和验证。
+- `interview-me`：通过逐问访谈澄清真实需求、目标用户与成功标准，避免在含糊请求上过早实施。
 - `nexus`：用于nexus，支持任务规划、执行、评审和验证。
 - `nlpm-audit`：审计 SKILL.md、AGENTS.md、CLAUDE.md、插件清单、hooks、commands 和提示词，检查安装一致性、质量评分、安全风险与版本漂移。
+- `observability-and-instrumentation`：为生产代码设计日志、指标、追踪和告警，使行为可观测、问题可诊断。
 - `performance-optimization`：用于性能、优化，支持任务规划、执行、评审和验证。
 - `planning-and-task-breakdown`：用于planning、任务、breakdown，支持任务规划、执行、评审和验证。
 - `prompt-optimizer`：用于提示词、optimizer，支持任务规划、执行、评审和验证。

@@ -26,11 +26,11 @@
 | `product-strategist` | 用于产品、strategist，支持产品研究、策略、界面和交付协作。 | [目录](./product-strategist/) | [SKILL.md](./product-strategist/SKILL.md) |
 | `researcher` | 用于研究，支持产品研究、策略、界面和交付协作。 | [目录](./researcher/) | [SKILL.md](./researcher/SKILL.md) |
 | `saas-scaffolder` | 用于saas、scaffolder，支持产品研究、策略、界面和交付协作。 | [目录](./saas-scaffolder/) | [SKILL.md](./saas-scaffolder/SKILL.md) |
-| `trace` | 用于trace，支持产品研究、策略、界面和交付协作。 | [目录](./trace/) | [SKILL.md](./trace/SKILL.md) |
+| `trace` | 会话回放分析、行为模式提取和体验问题叙事。 | [目录](./trace/) | [SKILL.md](./trace/SKILL.md) |
 | `ui-design-system` | 用于UI、设计、系统，支持产品研究、策略、界面和交付协作。 | [目录](./ui-design-system/) | [SKILL.md](./ui-design-system/SKILL.md) |
 | `ui-ux-pro-max` | 用于UI、UX、pro、max，支持产品研究、策略、界面和交付协作。 | [目录](./ui-ux-pro-max/) | [SKILL.md](./ui-ux-pro-max/SKILL.md) |
 | `ux-researcher-designer` | 用于UX、研究、设计，支持产品研究、策略、界面和交付协作。 | [目录](./ux-researcher-designer/) | [SKILL.md](./ux-researcher-designer/SKILL.md) |
-| `voice` | 用于voice，支持产品研究、策略、界面和交付协作。 | [目录](./voice/) | [SKILL.md](./voice/SKILL.md) |
+| `voice` | 用户反馈收集、满意度调研、评论分析和洞察提炼。 | [目录](./voice/) | [SKILL.md](./voice/SKILL.md) |
 
 ## 维护方式
 
