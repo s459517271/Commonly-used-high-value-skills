@@ -75,6 +75,67 @@ class NpxInstallerTests(unittest.TestCase):
             self.assertTrue((dest / "sample-skill" / "SKILL.md").exists())
             self.assertTrue((dest / "sample-skill" / "references" / "note.md").exists())
 
+    def test_installer_filters_by_category_and_skill_name(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for category, name in [
+                ("developer-engineering", "api-helper"),
+                ("developer-engineering", "db-helper"),
+                ("security-and-reliability", "security-helper"),
+            ]:
+                skill = root / "source" / category / name
+                skill.mkdir(parents=True)
+                (skill / "SKILL.md").write_text(
+                    f"---\nname: {name}\ndescription: test skill\n---\n\n# Test\n",
+                    encoding="utf-8",
+                )
+
+            dest = root / "installed"
+            result = subprocess.run(
+                [
+                    "node",
+                    str(INSTALLER),
+                    "install",
+                    "--target",
+                    "custom",
+                    "--source-root",
+                    str(root / "source"),
+                    "--dir",
+                    str(dest),
+                    "--category",
+                    "developer-engineering",
+                    "--skill",
+                    "db-helper",
+                ],
+                cwd=REPO_ROOT,
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertIn("Installed 1 skills", result.stdout)
+            self.assertTrue((dest / "db-helper" / "SKILL.md").exists())
+            self.assertFalse((dest / "api-helper").exists())
+            self.assertFalse((dest / "security-helper").exists())
+
+            listed = subprocess.run(
+                [
+                    "node",
+                    str(INSTALLER),
+                    "list-skills",
+                    "--source-root",
+                    str(root / "source"),
+                    "--category",
+                    "security-and-reliability",
+                ],
+                cwd=REPO_ROOT,
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+            self.assertIn("security-helper", listed.stdout)
+            self.assertNotIn("api-helper", listed.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

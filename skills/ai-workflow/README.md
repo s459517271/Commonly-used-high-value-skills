@@ -4,7 +4,7 @@
 
 聚焦 AI 编程 Agent 的规格、计划、实现、测试、审查、发布与持续同步工作流。
 
-当前分类共 **48** 个技能。
+当前分类共 **47** 个技能。
 
 ## 推荐先看
 
@@ -54,7 +54,6 @@
 | `shipping-and-launch` | 用于shipping、launch，支持任务规划、执行、评审和验证。 | [目录](./shipping-and-launch/) | [SKILL.md](./shipping-and-launch/SKILL.md) |
 | `skill-creator` | 用于技能、创建，支持任务规划、执行、评审和验证。 | [目录](./skill-creator/) | [SKILL.md](./skill-creator/SKILL.md) |
 | `skill-reviewer` | 用于技能、评审，支持任务规划、执行、评审和验证。 | [目录](./skill-reviewer/) | [SKILL.md](./skill-reviewer/SKILL.md) |
-| `skills-search` | 用于技能、搜索，支持任务规划、执行、评审和验证。 | [目录](./skills-search/) | [SKILL.md](./skills-search/SKILL.md) |
 | `source-driven-development` | 用于来源、驱动、development，支持任务规划、执行、评审和验证。 | [目录](./source-driven-development/) | [SKILL.md](./source-driven-development/SKILL.md) |
 | `spec-driven-development` | 用于spec、驱动、development，支持任务规划、执行、评审和验证。 | [目录](./spec-driven-development/) | [SKILL.md](./spec-driven-development/SKILL.md) |
 | `subagent-driven-development` | 用于subagent、驱动、development，支持任务规划、执行、评审和验证。 | [目录](./subagent-driven-development/) | [SKILL.md](./subagent-driven-development/SKILL.md) |

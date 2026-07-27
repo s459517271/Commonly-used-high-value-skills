@@ -149,6 +149,15 @@ def github_api_get(url: str, token: str | None = None) -> dict | None:
         return None
 
 
+def github_commit_sha(repo: str, ref: str, token: str | None = None) -> str | None:
+    """Resolve a GitHub ref to a commit SHA for curated monitor checkpoints."""
+    data = github_api_get(f"https://api.github.com/repos/{repo}/commits/{ref}", token)
+    if not data:
+        return None
+    sha = data.get("sha")
+    return str(sha) if sha else None
+
+
 def fetch_github_raw_via_api(raw_url: str, token: str | None = None) -> str | None:
     """Fallback for raw.githubusercontent.com fetches using GitHub Contents API."""
     m = re.match(r"https://raw\.githubusercontent\.com/([^/]+/[^/]+)/([^/]+)/(.*)", raw_url)
@@ -241,6 +250,15 @@ def remove_local_supplements(content: str) -> str:
     return content.rstrip() + "\n"
 
 
+def extract_local_supplement(content: str, marker: str) -> str:
+    match = re.search(
+        rf"<!-- {re.escape(marker)}:START -->.*?<!-- {re.escape(marker)}:END -->",
+        content,
+        flags=re.DOTALL,
+    )
+    return match.group(0).strip() if match else ""
+
+
 def comparable_body(text: str) -> str:
     body = strip_frontmatter(remove_local_supplements(text))
     return "\n".join(line.rstrip() for line in body.splitlines())
@@ -305,6 +323,7 @@ def merge_frontmatter(local_content: str, upstream_content: str) -> str:
     upstream_fm = parse_frontmatter(upstream_content)
     local_frontmatter, _ = split_frontmatter(local_content)
     upstream_frontmatter, upstream_body = split_frontmatter(upstream_content)
+    local_curation = extract_local_supplement(local_content, "LOCAL-CURATION-SUPPLEMENT")
 
     if local_frontmatter is None:
         name = upstream_fm.get("name", local_fm.get("name", "imported-skill"))
@@ -344,7 +363,13 @@ def merge_frontmatter(local_content: str, upstream_content: str) -> str:
     )
 
     merged = merged_frontmatter.rstrip() + "\n" + upstream_body.lstrip()
-    return ensure_quality_floor(merged, local_fm.get("name", upstream_fm.get("name", "synced-skill")))
+    merged = ensure_quality_floor(
+        merged,
+        local_fm.get("name", upstream_fm.get("name", "synced-skill")),
+    )
+    if local_curation:
+        merged = merged.rstrip() + "\n\n" + local_curation + "\n"
+    return merged
 
 
 def load_skills_from_source_mappings() -> list[dict]:
@@ -455,6 +480,15 @@ def check_upstream_changes(skill: dict, token: str | None) -> dict | None:
     """Check if upstream has changes for a skill."""
     repo = skill["repo"]
     skill_name = skill["name"]
+
+    if skill.get("sync_mode") == "monitor" and skill.get("last_synced_commit"):
+        current_commit = github_commit_sha(repo, skill.get("ref", "main"), token)
+        if current_commit == skill["last_synced_commit"]:
+            return {
+                "skill": skill,
+                "upstream_path": skill.get("upstream_path"),
+                "changes": "none",
+            }
     
     # Prefer exact provenance paths. Fallbacks support older frontmatter-only entries.
     if skill.get("upstream_path"):
@@ -491,7 +525,12 @@ def check_upstream_changes(skill: dict, token: str | None) -> dict | None:
                     "changes": "body_changed",
                 }
             else:
-                return None  # No changes
+                return {
+                    "skill": skill,
+                    "upstream_path": path,
+                    "upstream_content": upstream_content,
+                    "changes": "none",
+                }
     
     return None  # Could not find upstream file
 
@@ -595,6 +634,30 @@ def update_mapping_after_sync(update: dict) -> None:
     Path(mapping_path).write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def update_mapping_after_check(result: dict) -> None:
+    """Record a successful upstream comparison without claiming an unapplied sync."""
+    skill = result["skill"]
+    mapping_path = skill.get("mapping_path")
+    entry_index = skill.get("mapping_entry_index")
+    if mapping_path is None or entry_index is None:
+        return
+
+    path = Path(mapping_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        upstream = data["skills"][entry_index].setdefault("upstream", {})
+    except (KeyError, IndexError):
+        return
+
+    today = date.today().isoformat()
+    upstream["last_checked_at"] = today
+    if result.get("changes") == "none":
+        # Exact body equality proves the local snapshot is synchronized.
+        upstream["last_synced_at"] = today
+    data.setdefault("video", {})["checked_at"] = today
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Check and synchronize upstream changes for tracked skills."
@@ -620,13 +683,20 @@ def main() -> None:
     
     print(f"Checking {len(skills)} skills with external upstream sources...", flush=True)
     
+    checked_results = []
     updates = []
     for skill in skills:
         print(f"  Checking: {skill['name']} ({skill['source']})", flush=True)
-        update = check_upstream_changes(skill, token)
-        if update:
-            updates.append(update)
+        result = check_upstream_changes(skill, token)
+        if result:
+            checked_results.append(result)
+        if result and result.get("changes") == "body_changed":
+            updates.append(result)
             print(f"    → Update available!", flush=True)
+
+    if not args.dry_run:
+        for result in checked_results:
+            update_mapping_after_check(result)
     
     print(f"\n{'='*60}", flush=True)
     print(f"Results: {len(updates)} updates available out of {len(skills)} checked", flush=True)

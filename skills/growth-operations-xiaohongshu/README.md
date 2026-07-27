@@ -4,7 +4,7 @@
 
 聚焦小红书、社媒、内容、归因、竞品和增长分析的技能集合。
 
-当前分类共 **17** 个技能。
+当前分类共 **15** 个技能。
 
 ## 推荐先看
 
@@ -27,9 +27,7 @@
 | `linkedin-growth` | 构建领英线索导入、筛选、分配、邀请与待处理请求维护流水线。 | [目录](./linkedin-growth/) | [SKILL.md](./linkedin-growth/SKILL.md) |
 | `marketing-demand-acquisition` | 用于营销、需求、acquisition，支持内容、营销、渠道和数据分析。 | [目录](./marketing-demand-acquisition/) | [SKILL.md](./marketing-demand-acquisition/SKILL.md) |
 | `marketing-strategy-pmm` | 用于营销、策略、PMM，支持内容、营销、渠道和数据分析。 | [目录](./marketing-strategy-pmm/) | [SKILL.md](./marketing-strategy-pmm/SKILL.md) |
-| `prompt-engineer-toolkit` | 用于提示词、工程、工具包，支持内容、营销、渠道和数据分析。 | [目录](./prompt-engineer-toolkit/) | [SKILL.md](./prompt-engineer-toolkit/SKILL.md) |
 | `pulse` | 关键指标、埋点、漏斗、留存和仪表盘规格设计。 | [目录](./pulse/) | [SKILL.md](./pulse/SKILL.md) |
-| `seo-audit` | 用于执行网站 SEO 审计、页面优化、技术检查和搜索增长建议。 | [目录](./seo-audit/) | [SKILL.md](./seo-audit/SKILL.md) |
 | `social-media-analyzer` | 用于社交、媒体、分析，支持内容、营销、渠道和数据分析。 | [目录](./social-media-analyzer/) | [SKILL.md](./social-media-analyzer/SKILL.md) |
 | `tweetclaw-source-research` | 用于tweetclaw、来源、研究，支持内容、营销、渠道和数据分析。 | [目录](./tweetclaw-source-research/) | [SKILL.md](./tweetclaw-source-research/SKILL.md) |
 | `twitter-reader` | 用于通过 URL 抓取 Twitter/X 帖子内容、作者、时间、图片和线程回复。 | [目录](./twitter-reader/) | [SKILL.md](./twitter-reader/SKILL.md) |

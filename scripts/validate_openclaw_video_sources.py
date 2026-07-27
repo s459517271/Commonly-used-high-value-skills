@@ -9,7 +9,7 @@ from pathlib import Path
 
 REQUIRED_TOP = {"video", "official_references", "skills"}
 REQUIRED_SKILL_KEYS = {"video_name", "normalized_slug", "status", "repo_skill", "source", "notes"}
-VALID_STATUS = {"verified_in_repo", "not_a_skill", "unverified_slug"}
+VALID_STATUS = {"verified_in_repo", "not_a_skill", "unverified_slug", "retired"}
 
 
 def parse_name_from_skill_md(path: Path) -> str | None:
@@ -63,6 +63,9 @@ def validate(mapping_path: Path, repo_root: Path) -> list[str]:
                 errors.append(
                     f"skills[{idx}] slug mismatch: normalized_slug={slug}, SKILL.md name={parsed_name}, file={repo_skill}"
                 )
+
+        if status == "retired" and repo_skill is not None:
+            errors.append(f"skills[{idx}] retired entries must set repo_skill to null")
 
         if status in {"not_a_skill", "unverified_slug"} and slug is not None:
             errors.append(f"skills[{idx}] status {status} should keep normalized_slug as null until verified")

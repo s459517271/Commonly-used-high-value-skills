@@ -92,6 +92,12 @@ class SyncUpstreamTests(unittest.TestCase):
             upstream_slug: demo-skill
             ---
             # Old Body
+
+            <!-- LOCAL-CURATION-SUPPLEMENT:START -->
+            ## Repository Contract
+
+            Preserve this reviewed local rule.
+            <!-- LOCAL-CURATION-SUPPLEMENT:END -->
             """
         )
         upstream = textwrap.dedent(
@@ -112,6 +118,7 @@ class SyncUpstreamTests(unittest.TestCase):
         self.assertIn("# New Body", merged)
         self.assertNotIn("# Old Body", merged)
         self.assertIn("LOCAL-QUALITY-SUPPLEMENT:START", merged)
+        self.assertIn("Preserve this reviewed local rule.", merged)
 
     def test_check_upstream_changes_uses_exact_provenance_path(self):
         module = load_module()
@@ -151,6 +158,89 @@ class SyncUpstreamTests(unittest.TestCase):
             ["https://raw.githubusercontent.com/owner/repo/dev/nested/source.md"],
             seen_urls,
         )
+
+    def test_check_upstream_changes_reports_successful_no_change(self):
+        module = load_module()
+        local = "---\nname: demo\n---\n# Same Body\n"
+        original_fetch = module.fetch_url
+        module.fetch_url = lambda _url, _token: local
+        try:
+            result = module.check_upstream_changes(
+                {
+                    "name": "demo",
+                    "category": "ai-workflow",
+                    "repo": "owner/repo",
+                    "ref": "main",
+                    "upstream_path": "SKILL.md",
+                    "local_content": local,
+                },
+                token=None,
+            )
+        finally:
+            module.fetch_url = original_fetch
+
+        self.assertIsNotNone(result)
+        self.assertEqual("none", result["changes"])
+
+    def test_monitor_checkpoint_skips_false_positive_for_curated_body(self):
+        module = load_module()
+        original_commit_sha = module.github_commit_sha
+        original_fetch = module.fetch_url
+        module.github_commit_sha = lambda _repo, _ref, _token: "reviewed-sha"
+        module.fetch_url = lambda *_args, **_kwargs: self.fail(
+            "matching monitor checkpoint should not fetch or compare the curated body"
+        )
+        try:
+            result = module.check_upstream_changes(
+                {
+                    "name": "curated-skill",
+                    "category": "ai-workflow",
+                    "repo": "owner/repo",
+                    "ref": "main",
+                    "upstream_path": "README.md",
+                    "sync_mode": "monitor",
+                    "last_synced_commit": "reviewed-sha",
+                    "local_content": "# Original in-house rewrite\n",
+                },
+                token=None,
+            )
+        finally:
+            module.github_commit_sha = original_commit_sha
+            module.fetch_url = original_fetch
+
+        self.assertIsNotNone(result)
+        self.assertEqual("none", result["changes"])
+
+    def test_update_mapping_after_check_only_syncs_equal_body(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            mapping = Path(tmpdir) / "source.skills.json"
+            mapping.write_text(
+                json.dumps(
+                    {
+                        "video": {"checked_at": "2026-01-01"},
+                        "skills": [
+                            {
+                                "upstream": {
+                                    "last_checked_at": "2026-01-01",
+                                    "last_synced_at": "2026-01-01",
+                                }
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            base_skill = {"mapping_path": mapping, "mapping_entry_index": 0}
+
+            module.update_mapping_after_check({"skill": base_skill, "changes": "body_changed"})
+            changed = json.loads(mapping.read_text(encoding="utf-8"))
+            self.assertEqual("2026-01-01", changed["skills"][0]["upstream"]["last_synced_at"])
+            self.assertEqual(module.date.today().isoformat(), changed["skills"][0]["upstream"]["last_checked_at"])
+
+            module.update_mapping_after_check({"skill": base_skill, "changes": "none"})
+            equal = json.loads(mapping.read_text(encoding="utf-8"))
+            self.assertEqual(module.date.today().isoformat(), equal["skills"][0]["upstream"]["last_synced_at"])
 
     def test_monitor_review_guidance_includes_compare_and_curation_checklist(self):
         module = load_module()

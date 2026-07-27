@@ -41,11 +41,14 @@ function printHelp() {
 Usage:
   high-value-skills install [options]
   high-value-skills list-targets
+  high-value-skills list-skills [options]
 
 Examples:
   npx github:seaworld008/Commonly-used-high-value-skills install
   npx github:seaworld008/Commonly-used-high-value-skills install --target codex,claude
   npx github:seaworld008/Commonly-used-high-value-skills install --all
+  npx github:seaworld008/Commonly-used-high-value-skills install --category developer-engineering,security-and-reliability
+  npx github:seaworld008/Commonly-used-high-value-skills install --skill docx,xlsx,pdf,pptx
   npx github:seaworld008/Commonly-used-high-value-skills install --target custom --dir ./vendor/skills
 
 Options:
@@ -55,6 +58,8 @@ Options:
   --dir <path>           Destination directory. Required for --target custom; overrides destination for one target.
   --source-root <path>   Override categorized source skills root. Mainly useful for tests or local forks.
   --openclaw-root <path> Override flat OpenClaw source skills root. If unavailable, categorized skills are flattened.
+  --category <names>     Install only skills from these comma-separated categories.
+  --skill <names>        Install only these comma-separated skill names.
   --dry-run              Print what would be installed without writing files.
   --help, -h             Show this help.
 
@@ -73,6 +78,8 @@ function parseArgs(argv) {
     destDir: null,
     sourceRoot: path.join(REPO_ROOT, "skills"),
     openclawRoot: path.join(REPO_ROOT, "openclaw-skills"),
+    categories: [],
+    skillNames: [],
     dryRun: false,
   };
 
@@ -105,6 +112,14 @@ function parseArgs(argv) {
       args.openclawRoot = expandPath(requireValue(input, ++i, flag));
     } else if (flag.startsWith("--openclaw-root=")) {
       args.openclawRoot = expandPath(flag.slice("--openclaw-root=".length));
+    } else if (flag === "--category") {
+      args.categories = parseTargetList(requireValue(input, ++i, flag));
+    } else if (flag.startsWith("--category=")) {
+      args.categories = parseTargetList(flag.slice("--category=".length));
+    } else if (flag === "--skill") {
+      args.skillNames = parseTargetList(requireValue(input, ++i, flag));
+    } else if (flag.startsWith("--skill=")) {
+      args.skillNames = parseTargetList(flag.slice("--skill=".length));
     } else {
       throw new Error(`Unknown option: ${flag}`);
     }
@@ -159,11 +174,52 @@ function discoverCategorizedSkills(sourceRoot) {
     for (const skillName of safeReaddir(categoryPath)) {
       const skillPath = path.join(categoryPath, skillName);
       if (fs.statSync(skillPath).isDirectory() && fs.existsSync(path.join(skillPath, "SKILL.md"))) {
-        skills.push({ name: skillName, sourceDir: skillPath });
+        skills.push({ name: skillName, category, sourceDir: skillPath });
       }
     }
   }
   return skills.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function categoryMap(sourceRoot) {
+  return new Map(
+    discoverCategorizedSkills(sourceRoot).map((skill) => [skill.name, skill.category])
+  );
+}
+
+function filterSkills(skills, args) {
+  const categoryFilter = new Set(args.categories);
+  const nameFilter = new Set(args.skillNames);
+  const categoriesByName = categoryFilter.size > 0 ? categoryMap(args.sourceRoot) : new Map();
+  const selected = skills.filter((skill) => {
+    const category = skill.category || categoriesByName.get(skill.name);
+    return (
+      (categoryFilter.size === 0 || categoryFilter.has(category)) &&
+      (nameFilter.size === 0 || nameFilter.has(skill.name))
+    );
+  });
+  if ((categoryFilter.size > 0 || nameFilter.size > 0) && selected.length === 0) {
+    throw new Error("No skills matched the requested --category/--skill filters");
+  }
+  return selected;
+}
+
+function listSkills(args) {
+  const selected = filterSkills(discoverCategorizedSkills(args.sourceRoot), args);
+  const grouped = new Map();
+  for (const skill of selected) {
+    if (!grouped.has(skill.category)) {
+      grouped.set(skill.category, []);
+    }
+    grouped.get(skill.category).push(skill.name);
+  }
+  for (const category of [...grouped.keys()].sort()) {
+    console.log(`${category}:`);
+    for (const name of grouped.get(category).sort()) {
+      console.log(`  ${name}`);
+    }
+  }
+  console.log(`Total: ${selected.length} skills`);
 }
 
 function discoverFlatSkills(sourceRoot) {
@@ -189,7 +245,7 @@ function resolveInstallPlan(args, target) {
       target,
       label: "custom skills directory",
       destRoot: args.destDir,
-      skills: discoverCategorizedSkills(args.sourceRoot),
+      skills: filterSkills(discoverCategorizedSkills(args.sourceRoot), args),
     };
   }
 
@@ -203,7 +259,10 @@ function resolveInstallPlan(args, target) {
 
   const hasOpenClawExport = config.source === "openclaw" && fs.existsSync(args.openclawRoot);
   const sourceRoot = hasOpenClawExport ? args.openclawRoot : args.sourceRoot;
-  const skills = hasOpenClawExport ? discoverFlatSkills(sourceRoot) : discoverCategorizedSkills(sourceRoot);
+  const skills = filterSkills(
+    hasOpenClawExport ? discoverFlatSkills(sourceRoot) : discoverCategorizedSkills(sourceRoot),
+    args
+  );
   return {
     target,
     label: config.label,
@@ -267,6 +326,10 @@ function main() {
   }
   if (args.command === "list-targets") {
     listTargets();
+    return 0;
+  }
+  if (args.command === "list-skills") {
+    listSkills(args);
     return 0;
   }
   if (args.command !== "install") {

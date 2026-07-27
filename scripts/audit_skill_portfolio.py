@@ -19,6 +19,12 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SKILLS_DIR = REPO_ROOT / "skills"
 DEFAULT_JSON = REPO_ROOT / "docs" / "sources" / "reports" / "skill-quality-audit.json"
 DEFAULT_MARKDOWN = REPO_ROOT / "docs" / "sources" / "reports" / "skill-quality-audit.md"
+DEFAULT_POLICY = REPO_ROOT / "docs" / "sources" / "portfolio-policy.json"
+TOKEN_STOPWORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "before", "by", "for", "from",
+    "in", "into", "is", "it", "of", "on", "or", "that", "the", "this", "to",
+    "use", "uses", "using", "when", "with", "workflow", "skill", "skills",
+}
 
 
 def parse_frontmatter(text: str) -> dict[str, str]:
@@ -56,11 +62,19 @@ def word_count(text: str) -> int:
     return latin_tokens + (cjk_chars // 2)
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
 @dataclass
 class SkillAudit:
     name: str
     category: str
     path: str
+    description: str
     score: int
     action: str
     reasons: list[str]
@@ -74,6 +88,11 @@ class SkillAudit:
     heading_count: int
     has_references: bool
     has_scripts: bool
+    file_count: int
+    reference_count: int
+    script_count: int
+    asset_count: int
+    overlap_candidates: list[dict[str, Any]]
 
 
 def audit_skill(skill_md: Path) -> SkillAudit:
@@ -93,6 +112,18 @@ def audit_skill(skill_md: Path) -> SkillAudit:
     has_zh_description = bool(fm.get("zh_description"))
     has_references = (skill_md.parent / "references").exists() or (skill_md.parent / "reference").exists()
     has_scripts = (skill_md.parent / "scripts").exists()
+    files = [path for path in skill_md.parent.rglob("*") if path.is_file()]
+    reference_count = sum(
+        1
+        for path in files
+        if any(part in {"reference", "references"} for part in path.relative_to(skill_md.parent).parts)
+    )
+    script_count = sum(
+        1 for path in files if "scripts" in path.relative_to(skill_md.parent).parts
+    )
+    asset_count = sum(
+        1 for path in files if "assets" in path.relative_to(skill_md.parent).parts
+    )
 
     score = 100
     reasons: list[str] = []
@@ -160,6 +191,9 @@ def audit_skill(skill_md: Path) -> SkillAudit:
     if not has_references and not has_scripts and line_count < 160:
         score -= 5
         reasons.append("no auxiliary references or scripts")
+    if len(files) == 1 and line_count < 160:
+        score -= 6
+        reasons.append("single-file thin wrapper with no reusable assets")
 
     score = max(0, min(100, score))
     if score < 55:
@@ -174,7 +208,8 @@ def audit_skill(skill_md: Path) -> SkillAudit:
     return SkillAudit(
         name=name,
         category=category,
-        path=str(skill_md.relative_to(REPO_ROOT)),
+        path=display_path(skill_md),
+        description=description,
         score=score,
         action=action,
         reasons=reasons,
@@ -188,10 +223,108 @@ def audit_skill(skill_md: Path) -> SkillAudit:
         heading_count=heading_count,
         has_references=has_references,
         has_scripts=has_scripts,
+        file_count=len(files),
+        reference_count=reference_count,
+        script_count=script_count,
+        asset_count=asset_count,
+        overlap_candidates=[],
     )
 
 
-def build_summary(audits: list[SkillAudit]) -> dict[str, Any]:
+def load_policy(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {"retired_skills": [], "canonical_groups": []}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"Portfolio policy must be a JSON object: {path}")
+    data.setdefault("retired_skills", [])
+    data.setdefault("canonical_groups", [])
+    return data
+
+
+def similarity_tokens(audit: SkillAudit) -> set[str]:
+    text = f"{audit.name} {audit.description}"
+    tokens = {
+        token
+        for token in re.findall(r"[a-z0-9][a-z0-9-]{2,}", text.lower())
+        if token not in TOKEN_STOPWORDS
+    }
+    tokens.update(part for part in audit.name.lower().split("-") if len(part) >= 3)
+    return tokens
+
+
+def annotate_overlaps(audits: list[SkillAudit]) -> None:
+    """Attach conservative lexical overlap hints for human portfolio review.
+
+    This intentionally avoids third-party ML dependencies. It is a triage
+    signal, not an automatic deletion decision.
+    """
+    token_map = {audit.name: similarity_tokens(audit) for audit in audits}
+    for index, left in enumerate(audits):
+        candidates: list[dict[str, Any]] = []
+        left_tokens = token_map[left.name]
+        if not left_tokens:
+            continue
+        for right in audits[index + 1 :]:
+            right_tokens = token_map[right.name]
+            union = left_tokens | right_tokens
+            if not union:
+                continue
+            similarity = len(left_tokens & right_tokens) / len(union)
+            shared_name_tokens = set(left.name.split("-")) & set(right.name.split("-"))
+            if similarity >= 0.5 or (shared_name_tokens and similarity >= 0.34):
+                candidates.append(
+                    {
+                        "name": right.name,
+                        "similarity": round(similarity, 3),
+                    }
+                )
+                right.overlap_candidates.append(
+                    {
+                        "name": left.name,
+                        "similarity": round(similarity, 3),
+                    }
+                )
+        left.overlap_candidates.extend(candidates)
+
+    for audit in audits:
+        audit.overlap_candidates.sort(key=lambda item: (-item["similarity"], item["name"]))
+        del audit.overlap_candidates[5:]
+        if audit.overlap_candidates and not audit.has_scripts and audit.file_count == 1:
+            audit.score = max(0, audit.score - 6)
+            audit.reasons.append("high lexical overlap and no reusable assets")
+            if audit.score < 55:
+                audit.action = "replace_or_archive"
+            elif audit.score < 70:
+                audit.action = "improve"
+            elif audit.score < 82:
+                audit.action = "review"
+
+
+def policy_violations(audits: list[SkillAudit], policy: dict[str, Any]) -> list[dict[str, str]]:
+    active = {audit.name: audit for audit in audits}
+    violations: list[dict[str, str]] = []
+    for entry in policy.get("retired_skills", []):
+        if not isinstance(entry, dict):
+            continue
+        name = str(entry.get("name", "")).strip()
+        if name and name in active:
+            violations.append(
+                {
+                    "name": name,
+                    "path": active[name].path,
+                    "replacement": str(entry.get("replacement", "")).strip(),
+                    "reason": str(entry.get("reason", "")).strip(),
+                }
+            )
+    return violations
+
+
+def build_summary(
+    audits: list[SkillAudit],
+    *,
+    policy: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     by_action: dict[str, int] = {}
     by_category: dict[str, dict[str, int]] = {}
     for audit in audits:
@@ -200,6 +333,7 @@ def build_summary(audits: list[SkillAudit]) -> dict[str, Any]:
         cat[audit.action] = cat.get(audit.action, 0) + 1
 
     scores = [audit.score for audit in audits]
+    violations = policy_violations(audits, policy or {})
     return {
         "generated_at": date.today().isoformat(),
         "total_skills": len(audits),
@@ -208,6 +342,8 @@ def build_summary(audits: list[SkillAudit]) -> dict[str, Any]:
         "max_score": max(scores) if scores else 0,
         "by_action": dict(sorted(by_action.items())),
         "by_category": dict(sorted(by_category.items())),
+        "retired_skill_violations": violations,
+        "retired_skill_violation_count": len(violations),
     }
 
 
@@ -221,6 +357,7 @@ def write_markdown(path: Path, summary: dict[str, Any], audits: list[SkillAudit]
         f"- Total skills: {summary['total_skills']}",
         f"- Average score: {summary['average_score']}",
         f"- Action mix: {summary['by_action']}",
+        f"- Retired skills present: {summary['retired_skill_violation_count']}",
         "",
         "## Highest Priority",
         "",
@@ -232,6 +369,23 @@ def write_markdown(path: Path, summary: dict[str, Any], audits: list[SkillAudit]
         lines.append(
             f"| {audit.score} | {audit.action} | `{audit.name}` | `{audit.category}` | {reasons} |"
         )
+
+    lines.extend(
+        [
+            "",
+            "## Retired Skill Policy Violations",
+            "",
+            "| Skill | Replacement | Path | Reason |",
+            "|---|---|---|---|",
+        ]
+    )
+    for violation in summary["retired_skill_violations"]:
+        lines.append(
+            f"| `{violation['name']}` | `{violation['replacement']}` | "
+            f"`{violation['path']}` | {violation['reason']} |"
+        )
+    if not summary["retired_skill_violations"]:
+        lines.append("| _None_ |  |  |  |")
 
     lines.extend(
         [
@@ -251,7 +405,7 @@ def write_markdown(path: Path, summary: dict[str, Any], audits: list[SkillAudit]
             "",
             "## Method",
             "",
-            "Scores combine frontmatter completeness, trigger clarity, body depth, structure, examples, source/license metadata, and local-maintenance risk.",
+            "Scores combine frontmatter completeness, trigger clarity, body depth, structure, examples, reusable assets, lexical overlap, source/license metadata, and local-maintenance risk.",
             "The output is a triage baseline: low scores require human review before deletion or replacement.",
             "",
         ]
@@ -265,11 +419,20 @@ def main() -> int:
     parser.add_argument("--skills-dir", type=Path, default=DEFAULT_SKILLS_DIR)
     parser.add_argument("--json-output", type=Path, default=DEFAULT_JSON)
     parser.add_argument("--markdown-output", type=Path, default=DEFAULT_MARKDOWN)
+    parser.add_argument("--policy", type=Path, default=DEFAULT_POLICY)
+    parser.add_argument(
+        "--check-policy",
+        action="store_true",
+        help="Exit non-zero when a retired skill from the portfolio policy is present.",
+    )
     args = parser.parse_args()
 
     skill_files = sorted(args.skills_dir.glob("*/*/SKILL.md"))
     audits = sorted((audit_skill(path) for path in skill_files), key=lambda item: (item.score, item.name))
-    summary = build_summary(audits)
+    annotate_overlaps(audits)
+    audits.sort(key=lambda item: (item.score, item.name))
+    policy = load_policy(args.policy)
+    summary = build_summary(audits, policy=policy)
 
     args.json_output.parent.mkdir(parents=True, exist_ok=True)
     args.json_output.write_text(
@@ -290,6 +453,16 @@ def main() -> int:
     print(f"Wrote audit report: {args.markdown_output}")
     print(f"Audited {summary['total_skills']} skills; average score {summary['average_score']}")
     print(f"Action mix: {summary['by_action']}")
+    if args.check_policy and summary["retired_skill_violation_count"]:
+        print(
+            f"ERROR: {summary['retired_skill_violation_count']} retired skills are present.",
+        )
+        for violation in summary["retired_skill_violations"]:
+            print(
+                f"  - {violation['name']} -> {violation['replacement']} "
+                f"({violation['path']})"
+            )
+        return 1
     return 0
 
 

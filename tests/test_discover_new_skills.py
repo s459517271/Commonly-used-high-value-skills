@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -18,6 +19,27 @@ def load_module():
 
 
 class DiscoverNewSkillsTests(unittest.TestCase):
+    def test_load_retired_skill_names_reads_portfolio_tombstones(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            policy = Path(tmpdir) / "portfolio-policy.json"
+            policy.write_text(
+                json.dumps(
+                    {
+                        "retired_skills": [
+                            {"name": "legacy-helper", "replacement": "current-helper"},
+                            {"name": "duplicate-helper"},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                {"legacy-helper", "duplicate-helper"},
+                module.load_retired_skill_names(policy),
+            )
+
     def test_build_report_includes_source_health_and_errors(self):
         module = load_module()
 

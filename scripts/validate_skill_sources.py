@@ -12,7 +12,14 @@ from pathlib import Path
 
 REQUIRED_TOP = {"video", "official_references", "skills"}
 REQUIRED_SKILL_KEYS = {"video_name", "normalized_slug", "status", "repo_skill", "source", "notes"}
-VALID_STATUS = {"verified_in_repo", "verified_not_in_repo", "not_a_skill", "unverified_slug", "in_house"}
+VALID_STATUS = {
+    "verified_in_repo",
+    "verified_not_in_repo",
+    "not_a_skill",
+    "unverified_slug",
+    "in_house",
+    "retired",
+}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 URL_RE = re.compile(r"^https?://")
 
@@ -113,6 +120,11 @@ def validate_mapping(mapping_path: Path, repo_root: Path) -> list[str]:
                     f"{mapping_path}: skills[{idx}] slug mismatch: normalized_slug={slug}, "
                     f"SKILL.md name={parsed_name}, file={repo_skill}"
                 )
+
+        if status == "retired" and repo_skill is not None:
+            errors.append(
+                f"{mapping_path}: skills[{idx}] retired entries must set repo_skill to null"
+            )
 
         if status in {"not_a_skill", "unverified_slug"} and slug is not None:
             errors.append(

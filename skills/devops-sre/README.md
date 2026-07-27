@@ -4,7 +4,7 @@
 
 面向发布、CI/CD、可观测性、故障响应和环境治理的技能集合。
 
-当前分类共 **15** 个技能。
+当前分类共 **13** 个技能。
 
 ## 推荐先看
 
@@ -20,8 +20,6 @@
 | `azure-kubernetes` | 用于 Azure Kubernetes 集群管理、部署、排障和运维。 | [目录](./azure-kubernetes/) | [SKILL.md](./azure-kubernetes/SKILL.md) |
 | `beacon` | 可观测性、服务目标、告警、容量和可靠性设计。 | [目录](./beacon/) | [SKILL.md](./beacon/SKILL.md) |
 | `cc-devops-skills` | 用于cc、DevOps、技能，支持部署、监控、排障和发布管理。 | [目录](./cc-devops-skills/) | [SKILL.md](./cc-devops-skills/SKILL.md) |
-| `changelog-generator` | 用于changelog、生成，支持部署、监控、排障和发布管理。 | [目录](./changelog-generator/) | [SKILL.md](./changelog-generator/SKILL.md) |
-| `ci-cd-pipeline-builder` | 用于CI、CD、流水线、构建，支持部署、监控、排障和发布管理。 | [目录](./ci-cd-pipeline-builder/) | [SKILL.md](./ci-cd-pipeline-builder/SKILL.md) |
 | `cloudflare-troubleshooting` | 用于Cloudflare、排障，支持部署、监控、排障和发布管理。 | [目录](./cloudflare-troubleshooting/) | [SKILL.md](./cloudflare-troubleshooting/SKILL.md) |
 | `env-secrets-manager` | 用于env、secrets、管理，支持部署、监控、排障和发布管理。 | [目录](./env-secrets-manager/) | [SKILL.md](./env-secrets-manager/SKILL.md) |
 | `gear` | 依赖、构建、容器、监控和开发环境运维优化。 | [目录](./gear/) | [SKILL.md](./gear/SKILL.md) |

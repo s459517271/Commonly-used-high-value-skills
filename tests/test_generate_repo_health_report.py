@@ -1,15 +1,27 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPO_ROOT / "scripts" / "generate_repo_health_report.py"
+
+
+def load_module():
+    spec = importlib.util.spec_from_file_location("generate_repo_health_report", SCRIPT)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Failed to load {SCRIPT}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 def run_script(*args: str) -> subprocess.CompletedProcess[str]:
@@ -23,6 +35,12 @@ def run_script(*args: str) -> subprocess.CompletedProcess[str]:
 
 
 class GenerateRepoHealthReportTests(unittest.TestCase):
+    def test_default_report_uses_live_refresh_queue_not_stale_artifact(self):
+        module = load_module()
+        with mock.patch.object(module, "build_queue", return_value=[]):
+            queue = module.load_refresh_queue(REPO_ROOT, module.DEFAULT_REPORTS_DIR)
+        self.assertEqual([], queue)
+
     def test_repo_health_report_generation(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmp:
             tmp_dir = Path(tmp)
