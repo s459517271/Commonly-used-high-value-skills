@@ -69,6 +69,40 @@ class SyncSimotaAgentSkillsTests(unittest.TestCase):
                 with self.assertRaisesRegex(FileNotFoundError, "no retained local snapshot"):
                     sync_simota.import_selected(source_dir, root / "repo", apply=False)
 
+    def test_apply_preserves_local_quality_supplements_missing_upstream(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source_skill = root / "upstream/builder"
+            source_skill.mkdir(parents=True)
+            source_skill.joinpath("SKILL.md").write_text(
+                "---\nname: builder\ndescription: Build production code.\n---\n# Builder\n",
+                encoding="utf-8",
+            )
+            destination = root / "repo/skills/developer-engineering/builder"
+            supplement = destination / "references/local-quality-supplement.md"
+            supplement.parent.mkdir(parents=True)
+            supplement.write_text("# Local supplement\n", encoding="utf-8")
+
+            with patch.object(
+                sync_simota,
+                "SELECTED_SKILLS",
+                {"developer-engineering": [("builder", "Builder description.")]},
+            ):
+                entries, missing = sync_simota.import_selected(
+                    root / "upstream",
+                    root / "repo",
+                    apply=True,
+                )
+
+            self.assertEqual(len(entries), 1)
+            self.assertEqual(missing, [])
+            self.assertTrue(supplement.exists())
+            skill_text = destination.joinpath("SKILL.md").read_text(encoding="utf-8")
+            self.assertIn("# Builder", skill_text)
+            self.assertIn('zh_description: "Builder description."', skill_text)
+            self.assertIn("## Local Execution Contract", skill_text)
+            self.assertIn("```yaml", skill_text)
+
     def test_source_mapping_is_written_under_requested_repo_root(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             repo_root = Path(temp) / "repo"

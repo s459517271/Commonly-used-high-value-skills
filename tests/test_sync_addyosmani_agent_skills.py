@@ -110,6 +110,7 @@ class SyncAddyOsmaniAgentSkillsTests(unittest.TestCase):
 
             skill_text = (imported / "SKILL.md").read_text(encoding="utf-8")
             self.assertIn("source: \"github:addyosmani/agent-skills\"", skill_text)
+            self.assertIn("zh_description:", skill_text)
             self.assertIn("upstream_slug: test-driven-development", skill_text)
 
             self.assertFalse(local_skill.exists())

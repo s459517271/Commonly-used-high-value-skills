@@ -5,12 +5,12 @@
 [![简体中文](https://img.shields.io/badge/README-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-1677ff)](./README.md)
 [![English](https://img.shields.io/badge/README-English-111111)](./README.en.md)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-00b894)](./openclaw-skills/README.md)
-[![Skills](https://img.shields.io/badge/Skills-313-7c3aed)](./skills/)
+[![Skills](https://img.shields.io/badge/Skills-316-7c3aed)](./skills/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 A high-value skills repository for AI developers, organized by real work scenarios such as developer engineering, DevOps, automation, finance, design, knowledge workflows, and reliability.
 
-This repository currently contains **16 categories / 313 skills**.
+This repository currently contains **16 categories / 316 skills**.
 
 ## Who This Is For
 
@@ -314,7 +314,7 @@ openclaw-skills/                        # Generated flat export for OpenClaw
 2. Open the relevant `SKILL.md` and read its triggers, workflow, boundaries, and scripts.
 3. If a skill includes `scripts/`, `references/`, or `assets/`, reuse those files before recreating similar content.
 
-## Skill Overview (by category, 16 categories / 313 skills)
+## Skill Overview (by category, 16 categories / 316 skills)
 
 <a id="cat-developer-engineering"></a>
 ### 1. Developer Engineering (developer-engineering, 51)
@@ -372,7 +372,7 @@ openclaw-skills/                        # Generated flat export for OpenClaw
 - [`webapp-testing`](./skills/developer-engineering/webapp-testing/)
 
 <a id="cat-ai-workflow"></a>
-### 2. AI Workflow (ai-workflow, 45)
+### 2. AI Workflow (ai-workflow, 48)
 
 - [`agent-workflow-designer`](./skills/ai-workflow/agent-workflow-designer/)
 - [`andrej-karpathy-skills`](./skills/ai-workflow/andrej-karpathy-skills/)
@@ -388,6 +388,7 @@ openclaw-skills/                        # Generated flat export for OpenClaw
 - [`deprecation-and-migration`](./skills/ai-workflow/deprecation-and-migration/)
 - [`dispatching-parallel-agents`](./skills/ai-workflow/dispatching-parallel-agents/)
 - [`documentation-and-adrs`](./skills/ai-workflow/documentation-and-adrs/)
+- [`doubt-driven-development`](./skills/ai-workflow/doubt-driven-development/)
 - [`executing-plans`](./skills/ai-workflow/executing-plans/)
 - [`find-skills`](./skills/ai-workflow/find-skills/)
 - [`finishing-a-development-branch`](./skills/ai-workflow/finishing-a-development-branch/)
@@ -395,8 +396,10 @@ openclaw-skills/                        # Generated flat export for OpenClaw
 - [`git-workflow-and-versioning`](./skills/ai-workflow/git-workflow-and-versioning/)
 - [`idea-refine`](./skills/ai-workflow/idea-refine/)
 - [`incremental-implementation`](./skills/ai-workflow/incremental-implementation/)
+- [`interview-me`](./skills/ai-workflow/interview-me/)
 - [`nexus`](./skills/ai-workflow/nexus/)
 - [`nlpm-audit`](./skills/ai-workflow/nlpm-audit/)
+- [`observability-and-instrumentation`](./skills/ai-workflow/observability-and-instrumentation/)
 - [`performance-optimization`](./skills/ai-workflow/performance-optimization/)
 - [`planning-and-task-breakdown`](./skills/ai-workflow/planning-and-task-breakdown/)
 - [`prompt-optimizer`](./skills/ai-workflow/prompt-optimizer/)

@@ -10,7 +10,7 @@
 
 - [interview-system-designer](./interview-system-designer/) - 用于interview、系统、设计，支持信息整理、沟通和执行管理。
 - [teams-channel-post-writer](./teams-channel-post-writer/) - 用于teams、channel、post、writer，支持信息整理、沟通和执行管理。
-- [crest](./crest/) - 用于crest，支持信息整理、沟通和执行管理。
+- [crest](./crest/) - 技术个人品牌、主页资料、文章和公开形象策略。
 - [docs-cleaner](./docs-cleaner/) - 用于合并冗余文档、减少文档膨胀，并在保留有效内容的前提下整理知识库。
 
 ## 技能总览
@@ -19,11 +19,11 @@
 |------|------|------|------|
 | `brand-guidelines` | 用于在文档、页面或视觉产物中应用 Anthropic 风格的品牌色、字体和视觉规范。 | [目录](./brand-guidelines/) | [SKILL.md](./brand-guidelines/SKILL.md) |
 | `confidence-check` | 用于结构化自检答案、验证假设、识别不确定性并降低幻觉风险。 | [目录](./confidence-check/) | [SKILL.md](./confidence-check/SKILL.md) |
-| `crest` | 用于crest，支持信息整理、沟通和执行管理。 | [目录](./crest/) | [SKILL.md](./crest/SKILL.md) |
+| `crest` | 技术个人品牌、主页资料、文章和公开形象策略。 | [目录](./crest/) | [SKILL.md](./crest/SKILL.md) |
 | `dawn` | 用于dawn，支持信息整理、沟通和执行管理。 | [目录](./dawn/) | [SKILL.md](./dawn/SKILL.md) |
 | `docs-cleaner` | 用于合并冗余文档、减少文档膨胀，并在保留有效内容的前提下整理知识库。 | [目录](./docs-cleaner/) | [SKILL.md](./docs-cleaner/SKILL.md) |
 | `fact-checker` | 用于事实、checker，支持信息整理、沟通和执行管理。 | [目录](./fact-checker/) | [SKILL.md](./fact-checker/SKILL.md) |
-| `hearth` | 用于hearth，支持信息整理、沟通和执行管理。 | [目录](./hearth/) | [SKILL.md](./hearth/SKILL.md) |
+| `hearth` | 终端、编辑器和本地开发环境配置生成与审计。 | [目录](./hearth/) | [SKILL.md](./hearth/SKILL.md) |
 | `internal-comms` | 用于撰写状态报告、领导层更新、FAQ、事故通报和项目进展等内部沟通材料。 | [目录](./internal-comms/) | [SKILL.md](./internal-comms/SKILL.md) |
 | `interview-system-designer` | 用于interview、系统、设计，支持信息整理、沟通和执行管理。 | [目录](./interview-system-designer/) | [SKILL.md](./interview-system-designer/SKILL.md) |
 | `linkedin` | 通过 Linked API 搜索领英资料、管理连接、消息与内容发布。 | [目录](./linkedin/) | [SKILL.md](./linkedin/SKILL.md) |

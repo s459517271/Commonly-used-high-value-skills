@@ -21,7 +21,7 @@
 | `api-design-reviewer` | 用于评审 API 设计的一致性、可用性、版本策略、错误语义、安全性和开发者体验。 | [目录](./api-design-reviewer/) | [SKILL.md](./api-design-reviewer/SKILL.md) |
 | `api-test-suite-builder` | 用于API、测试、套件、构建，支持开发、调试、评审和交付。 | [目录](./api-test-suite-builder/) | [SKILL.md](./api-test-suite-builder/SKILL.md) |
 | `aws-solution-architect` | 用于 AWS 云架构设计、服务选型、成本优化与 Well-Architected Framework 评估。 | [目录](./aws-solution-architect/) | [SKILL.md](./aws-solution-architect/SKILL.md) |
-| `builder` | 用于构建，支持开发、调试、评审和交付。 | [目录](./builder/) | [SKILL.md](./builder/SKILL.md) |
+| `builder` | 生产级业务逻辑、接口集成和类型安全实现。 | [目录](./builder/) | [SKILL.md](./builder/SKILL.md) |
 | `cli-demo-generator` | 用于CLI、演示、生成，支持开发、调试、评审和交付。 | [目录](./cli-demo-generator/) | [SKILL.md](./cli-demo-generator/SKILL.md) |
 | `code-review-excellence` | 用于代码、评审、excellence，支持开发、调试、评审和交付。 | [目录](./code-review-excellence/) | [SKILL.md](./code-review-excellence/SKILL.md) |
 | `codebase-inspection` | 用于用 pygount 检查代码行数、语言构成、仓库规模和代码/注释比例。 | [目录](./codebase-inspection/) | [SKILL.md](./codebase-inspection/SKILL.md) |
@@ -32,10 +32,10 @@
 | `dependency-auditor` | 用于dependency、审计，支持开发、调试、评审和交付。 | [目录](./dependency-auditor/) | [SKILL.md](./dependency-auditor/SKILL.md) |
 | `docker-expert` | 用于 Docker 容器化最佳实践、多阶段构建优化与 Docker Compose 编排。 | [目录](./docker-expert/) | [SKILL.md](./docker-expert/SKILL.md) |
 | `frontend-design` | 用于创建高质量、非模板化的前端页面、组件、仪表盘、海报和 Web UI。 | [目录](./frontend-design/) | [SKILL.md](./frontend-design/SKILL.md) |
-| `gateway` | 用于gateway，支持开发、调试、评审和交付。 | [目录](./gateway/) | [SKILL.md](./gateway/SKILL.md) |
+| `gateway` | 接口设计、规范生成、版本策略和破坏性变更检查。 | [目录](./gateway/) | [SKILL.md](./gateway/SKILL.md) |
 | `git-worktree-manager` | 用于Git、worktree、管理，支持开发、调试、评审和交付。 | [目录](./git-worktree-manager/) | [SKILL.md](./git-worktree-manager/SKILL.md) |
 | `github-contributor` | 用于GitHub、贡献，支持开发、调试、评审和交付。 | [目录](./github-contributor/) | [SKILL.md](./github-contributor/SKILL.md) |
-| `graphify` | Use for any question about a codebase, its architecture, file relationships, or project content — especially when graphify-out/ exists, where the question should be treated as a graphify query first. Turns any input (code, docs, papers, images, videos) into a persistent knowledge graph with god nodes, community detection, and query/path/explain tools. | [目录](./graphify/) | [SKILL.md](./graphify/SKILL.md) |
+| `graphify` | 将代码、文档和多媒体资料映射为持久知识图谱，支持社区发现、路径查询、解释和影响分析。 | [目录](./graphify/) | [SKILL.md](./graphify/SKILL.md) |
 | `graphql-expert` | 用于 GraphQL API 设计、Schema/Resolver 评审、查询优化和安全最佳实践。 | [目录](./graphql-expert/) | [SKILL.md](./graphql-expert/SKILL.md) |
 | `i18n-expert` | 用于i18n、expert，支持开发、调试、评审和交付。 | [目录](./i18n-expert/) | [SKILL.md](./i18n-expert/SKILL.md) |
 | `kubernetes-specialist` | 用于 Kubernetes 集群管理、Pod 调试、Helm Chart 设计、清单评审和部署优化。 | [目录](./kubernetes-specialist/) | [SKILL.md](./kubernetes-specialist/SKILL.md) |
@@ -54,7 +54,7 @@
 | `qa-expert` | 用于质量保障、expert，支持开发、调试、评审和交付。 | [目录](./qa-expert/) | [SKILL.md](./qa-expert/SKILL.md) |
 | `repomix-safe-mixer` | 用于repomix、safe、mixer，支持开发、调试、评审和交付。 | [目录](./repomix-safe-mixer/) | [SKILL.md](./repomix-safe-mixer/SKILL.md) |
 | `rust-engineer` | 用于 Rust 代码开发、所有权和生命周期调试、异步模式选择和系统性能优化。 | [目录](./rust-engineer/) | [SKILL.md](./rust-engineer/SKILL.md) |
-| `schema` | 用于Schema，支持开发、调试、评审和交付。 | [目录](./schema/) | [SKILL.md](./schema/SKILL.md) |
+| `schema` | 数据库模式设计、迁移规划、索引策略和关系建模。 | [目录](./schema/) | [SKILL.md](./schema/SKILL.md) |
 | `skill-tester` | 用于技能、tester，支持开发、调试、评审和交付。 | [目录](./skill-tester/) | [SKILL.md](./skill-tester/SKILL.md) |
 | `supabase` | 用于Supabase，支持开发、调试、评审和交付。 | [目录](./supabase/) | [SKILL.md](./supabase/SKILL.md) |
 | `supabase-postgres` | 用于 Supabase 平台开发与 PostgreSQL 最佳实践，包含 RLS、Edge Functions 和实。 | [目录](./supabase-postgres/) | [SKILL.md](./supabase-postgres/SKILL.md) |
