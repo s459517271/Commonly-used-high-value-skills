@@ -2333,6 +2333,33 @@ class MappingSnapshot:
         self.parent_inode = parent_inode
 
 
+class StagedMappingTemporary:
+    """One staged mapping whose original inode remains pinned by an open fd."""
+
+    def __init__(
+        self,
+        path: Path,
+        descriptor: int,
+        identity: tuple[int, int],
+    ) -> None:
+        self.path = path
+        self.descriptor = descriptor
+        self.identity = identity
+
+    def __enter__(self) -> "StagedMappingTemporary":
+        return self
+
+    def __exit__(self, _exc_type, _exc, _traceback) -> None:
+        self.close()
+
+    def close(self) -> None:
+        descriptor = self.descriptor
+        if descriptor < 0:
+            return
+        self.descriptor = -1
+        os.close(descriptor)
+
+
 def serialize_mapping_json(data: dict) -> bytes:
     return (
         json.dumps(data, ensure_ascii=False, indent=2) + "\n"
@@ -2581,10 +2608,6 @@ def atomic_write_json(
             replaced=False,
             cause=exc,
         ) from exc
-    temporary_path: Path | None = None
-    temporary_identity: tuple[int, int] | None = None
-    temporary_descriptor: int | None = None
-    cleanup_directory_fd: int | None = None
     replaced = False
     payload = serialize_mapping_json(data)
     try:
@@ -2593,7 +2616,6 @@ def atomic_write_json(
             target_name,
             parent_identity,
         ):
-            cleanup_directory_fd = os.dup(directory_fd)
             if expected_snapshot is not None and (
                 expected_snapshot.parent_device is not None
                 and parent_identity
@@ -2605,7 +2627,7 @@ def atomic_write_json(
                 raise RuntimeError(
                     f"mapping parent directory changed concurrently: {path.parent}"
                 )
-            temporary_path = _stage_bytes_for_replace(
+            with _stage_bytes_for_replace(
                 path,
                 payload,
                 mode=(
@@ -2615,84 +2637,76 @@ def atomic_write_json(
                 ),
                 directory_fd=directory_fd,
                 parent_identity=parent_identity,
-            )
-            temporary_name = temporary_path.name
-            temporary_metadata = _secure_temporary_metadata(
-                temporary_path,
-                directory_fd,
-            )
-            temporary_descriptor, pinned_metadata = _pin_temporary_inode(
-                temporary_path,
-                directory_fd,
-            )
-            if (
-                pinned_metadata.st_dev,
-                pinned_metadata.st_ino,
-            ) != (
-                temporary_metadata.st_dev,
-                temporary_metadata.st_ino,
-            ):
-                raise RuntimeError(
-                    "mapping temporary inode changed while being pinned"
-                )
-            temporary_identity = (
-                pinned_metadata.st_dev,
-                pinned_metadata.st_ino,
-            )
-            installed_snapshot = MappingSnapshot(
-                content=payload,
-                sha256=hashlib.sha256(payload).hexdigest(),
-                device=temporary_metadata.st_dev,
-                inode=temporary_metadata.st_ino,
-                mode=(
-                    expected_snapshot.mode
-                    if expected_snapshot is not None
-                    else 0o600
-                ),
-                parent_device=parent_identity[0],
-                parent_inode=parent_identity[1],
-            )
-            if fault_injector is not None:
-                fault_injector("after_temp_fsync")
-            current_temporary = _secure_temporary_metadata(
-                temporary_path,
-                directory_fd,
-            )
-            pinned_temporary = os.fstat(temporary_descriptor)
-            if (
-                current_temporary.st_dev,
-                current_temporary.st_ino,
-            ) != temporary_identity:
-                raise RuntimeError(
-                    "mapping temporary inode changed before replace"
-                )
-            if (
-                pinned_temporary.st_dev,
-                pinned_temporary.st_ino,
-            ) != temporary_identity:
-                raise RuntimeError(
-                    "mapping pinned temporary inode changed before replace"
-                )
-            if expected_snapshot is not None:
-                _validate_mapping_snapshot(path, expected_snapshot)
-            elif _mapping_target_exists(path):
-                raise RuntimeError(
-                    f"mapping unexpectedly appeared before replacement: {path}"
-                )
-            _validate_mapping_parent(path, parent_identity)
-            os.replace(
-                temporary_name,
-                target_name,
-                src_dir_fd=directory_fd,
-                dst_dir_fd=directory_fd,
-            )
-            replaced = True
-            temporary_path = None
-            if fault_injector is not None:
-                fault_injector("after_replace")
-            _validate_mapping_snapshot(path, installed_snapshot)
-            os.fsync(directory_fd)
-            _validate_mapping_snapshot(path, installed_snapshot)
+            ) as temporary:
+                temporary_path = temporary.path
+                temporary_name = temporary_path.name
+                try:
+                    temporary_metadata = _secure_temporary_metadata(
+                        temporary_path,
+                        directory_fd,
+                    )
+                    if temporary.identity != (
+                        temporary_metadata.st_dev,
+                        temporary_metadata.st_ino,
+                    ):
+                        raise RuntimeError(
+                            "mapping staged inode identity is invalid"
+                        )
+                    installed_snapshot = MappingSnapshot(
+                        content=payload,
+                        sha256=hashlib.sha256(payload).hexdigest(),
+                        device=temporary_metadata.st_dev,
+                        inode=temporary_metadata.st_ino,
+                        mode=(
+                            expected_snapshot.mode
+                            if expected_snapshot is not None
+                            else 0o600
+                        ),
+                        parent_device=parent_identity[0],
+                        parent_inode=parent_identity[1],
+                    )
+                    if fault_injector is not None:
+                        fault_injector("after_temp_fsync")
+                    _validate_pinned_temporary(
+                        temporary_path,
+                        directory_fd,
+                        temporary.descriptor,
+                        temporary.identity,
+                    )
+                    if expected_snapshot is not None:
+                        _validate_mapping_snapshot(path, expected_snapshot)
+                    elif _mapping_target_exists(path):
+                        raise RuntimeError(
+                            "mapping unexpectedly appeared before "
+                            f"replacement: {path}"
+                        )
+                    _validate_mapping_parent(path, parent_identity)
+                    os.replace(
+                        temporary_name,
+                        target_name,
+                        src_dir_fd=directory_fd,
+                        dst_dir_fd=directory_fd,
+                    )
+                    replaced = True
+                    if fault_injector is not None:
+                        fault_injector("after_replace")
+                    _validate_mapping_snapshot(path, installed_snapshot)
+                    os.fsync(directory_fd)
+                    _validate_mapping_snapshot(path, installed_snapshot)
+                finally:
+                    try:
+                        _validate_pinned_temporary(
+                            temporary_path,
+                            directory_fd,
+                            temporary.descriptor,
+                            temporary.identity,
+                        )
+                        os.unlink(
+                            temporary_name,
+                            dir_fd=directory_fd,
+                        )
+                    except (FileNotFoundError, RuntimeError):
+                        pass
     except BaseException as exc:
         if isinstance(exc, AtomicMappingWriteError):
             raise
@@ -2701,35 +2715,6 @@ def atomic_write_json(
             replaced=replaced,
             cause=exc,
         ) from exc
-    finally:
-        if temporary_path is not None and cleanup_directory_fd is not None:
-            try:
-                current = _secure_temporary_metadata(
-                    temporary_path,
-                    cleanup_directory_fd,
-                )
-                pinned = (
-                    os.fstat(temporary_descriptor)
-                    if temporary_descriptor is not None
-                    else None
-                )
-                if temporary_identity is not None and (
-                    current.st_dev,
-                    current.st_ino,
-                ) == temporary_identity and pinned is not None and (
-                    pinned.st_dev,
-                    pinned.st_ino,
-                ) == temporary_identity:
-                    os.unlink(
-                        temporary_path.name,
-                        dir_fd=cleanup_directory_fd,
-                    )
-            except (FileNotFoundError, RuntimeError):
-                pass
-        if temporary_descriptor is not None:
-            os.close(temporary_descriptor)
-        if cleanup_directory_fd is not None:
-            os.close(cleanup_directory_fd)
 
 
 def _stage_bytes_for_replace(
@@ -2740,7 +2725,7 @@ def _stage_bytes_for_replace(
     suffix: str = ".tmp",
     directory_fd: int | None = None,
     parent_identity: tuple[int, int] | None = None,
-) -> Path:
+) -> StagedMappingTemporary:
     path = Path(path)
     if directory_fd is None:
         with _open_mapping_parent(path) as (
@@ -2769,15 +2754,18 @@ def _stage_bytes_for_replace(
     fd = os.open(temporary_name, flags, 0o600, dir_fd=directory_fd)
     temporary = path.parent / temporary_name
     descriptor_metadata = os.fstat(fd)
+    pinned_descriptor: int | None = None
     try:
         if not stat.S_ISREG(descriptor_metadata.st_mode):
             raise ValueError("mapping temporary inode is not regular")
-        with os.fdopen(fd, "wb") as stream:
-            fd = -1
-            stream.write(payload)
-            stream.flush()
-            os.fchmod(stream.fileno(), mode)
-            os.fsync(stream.fileno())
+        remaining = memoryview(payload)
+        while remaining:
+            written = os.write(fd, remaining)
+            if written <= 0:
+                raise OSError("mapping temporary write made no progress")
+            remaining = remaining[written:]
+        os.fchmod(fd, mode)
+        os.fsync(fd)
         metadata = os.stat(
             temporary_name,
             dir_fd=directory_fd,
@@ -2790,15 +2778,70 @@ def _stage_bytes_for_replace(
             or metadata.st_ino != descriptor_metadata.st_ino
         ):
             raise ValueError("mapping temporary inode changed before replace")
+        pinned_descriptor, pinned_metadata = _pin_temporary_inode(
+            temporary,
+            directory_fd,
+        )
+        if (
+            pinned_metadata.st_dev,
+            pinned_metadata.st_ino,
+        ) != (
+            descriptor_metadata.st_dev,
+            descriptor_metadata.st_ino,
+        ):
+            raise RuntimeError(
+                f"mapping temporary changed while being pinned: {temporary}"
+            )
+        identity = (
+            descriptor_metadata.st_dev,
+            descriptor_metadata.st_ino,
+        )
+        os.close(fd)
+        fd = -1
+        _validate_pinned_temporary(
+            temporary,
+            directory_fd,
+            pinned_descriptor,
+            identity,
+        )
         _validate_mapping_parent(path, parent_identity)
-        return temporary
+        _validate_pinned_temporary(
+            temporary,
+            directory_fd,
+            pinned_descriptor,
+            identity,
+        )
+        result = StagedMappingTemporary(
+            temporary,
+            pinned_descriptor,
+            identity,
+        )
+        pinned_descriptor = None
+        return result
     except BaseException:
+        cleanup_descriptor = (
+            pinned_descriptor
+            if pinned_descriptor is not None
+            else fd
+        )
+        try:
+            if cleanup_descriptor is not None and cleanup_descriptor >= 0:
+                _validate_pinned_temporary(
+                    temporary,
+                    directory_fd,
+                    cleanup_descriptor,
+                    (
+                        descriptor_metadata.st_dev,
+                        descriptor_metadata.st_ino,
+                    ),
+                )
+                os.unlink(temporary_name, dir_fd=directory_fd)
+        except (FileNotFoundError, RuntimeError):
+            pass
+        if pinned_descriptor is not None:
+            os.close(pinned_descriptor)
         if fd >= 0:
             os.close(fd)
-        try:
-            os.unlink(temporary_name, dir_fd=directory_fd)
-        except FileNotFoundError:
-            pass
         raise
 
 
@@ -2850,6 +2893,24 @@ def _pin_temporary_inode(
         raise
 
 
+def _validate_pinned_temporary(
+    path: Path,
+    directory_fd: int,
+    descriptor: int,
+    identity: tuple[int, int],
+) -> os.stat_result:
+    """Require the temporary name and retained descriptor to bind one inode."""
+    named = _secure_temporary_metadata(path, directory_fd)
+    pinned = os.fstat(descriptor)
+    if (
+        not stat.S_ISREG(pinned.st_mode)
+        or (named.st_dev, named.st_ino) != identity
+        or (pinned.st_dev, pinned.st_ino) != identity
+    ):
+        raise RuntimeError(f"mapping temporary inode changed: {path}")
+    return named
+
+
 def _stage_private_mapping_recovery(path: Path, payload: bytes) -> Path:
     """Preserve rollback bytes even when the canonical parent was detached."""
     recovery_root = _mapping_lock_path(path).parent
@@ -2875,7 +2936,10 @@ def _stage_private_mapping_recovery(path: Path, payload: bytes) -> Path:
         f".{hashlib.sha256(str(path).encode('utf-8')).hexdigest()}."
         f"{os.urandom(16).hex()}.recovery.json"
     )
+    recovery_path = recovery_root / name
     descriptor = -1
+    pinned_descriptor: int | None = None
+    created_identity: tuple[int, int] | None = None
     try:
         descriptor = os.open(
             name,
@@ -2886,19 +2950,45 @@ def _stage_private_mapping_recovery(path: Path, payload: bytes) -> Path:
             0o600,
             dir_fd=directory_fd,
         )
-        with os.fdopen(descriptor, "wb") as stream:
-            descriptor = -1
-            stream.write(payload)
-            stream.flush()
-            os.fchmod(stream.fileno(), 0o600)
-            os.fsync(stream.fileno())
+        created = os.fstat(descriptor)
+        if not stat.S_ISREG(created.st_mode):
+            raise RuntimeError("private mapping recovery inode is unsafe")
+        created_identity = (created.st_dev, created.st_ino)
+        remaining = memoryview(payload)
+        while remaining:
+            written = os.write(descriptor, remaining)
+            if written <= 0:
+                raise OSError("private mapping recovery write made no progress")
+            remaining = remaining[written:]
+        os.fchmod(descriptor, 0o600)
+        os.fsync(descriptor)
         metadata = os.stat(
             name,
             dir_fd=directory_fd,
             follow_symlinks=False,
         )
-        if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
+        if (
+            stat.S_ISLNK(metadata.st_mode)
+            or not stat.S_ISREG(metadata.st_mode)
+            or (metadata.st_dev, metadata.st_ino) != created_identity
+        ):
             raise RuntimeError("private mapping recovery inode is unsafe")
+        pinned_descriptor, pinned = _pin_temporary_inode(
+            recovery_path,
+            directory_fd,
+        )
+        if (pinned.st_dev, pinned.st_ino) != created_identity:
+            raise RuntimeError(
+                "private mapping recovery inode changed while being pinned"
+            )
+        os.close(descriptor)
+        descriptor = -1
+        _validate_pinned_temporary(
+            recovery_path,
+            directory_fd,
+            pinned_descriptor,
+            created_identity,
+        )
         os.fsync(directory_fd)
         current_root = recovery_root.lstat()
         if (
@@ -2910,25 +3000,40 @@ def _stage_private_mapping_recovery(path: Path, payload: bytes) -> Path:
             raise RuntimeError(
                 "private mapping recovery root changed concurrently"
             )
-        recovery_path = recovery_root / name
-        current_file = recovery_path.lstat()
-        if (
-            current_file.st_dev != metadata.st_dev
-            or current_file.st_ino != metadata.st_ino
-            or stat.S_ISLNK(current_file.st_mode)
-            or not stat.S_ISREG(current_file.st_mode)
-        ):
-            raise RuntimeError(
-                "private mapping recovery file changed concurrently"
-            )
+        _validate_pinned_temporary(
+            recovery_path,
+            directory_fd,
+            pinned_descriptor,
+            created_identity,
+        )
+        os.close(pinned_descriptor)
+        pinned_descriptor = None
         return recovery_path
     except BaseException:
+        cleanup_descriptor = (
+            pinned_descriptor
+            if pinned_descriptor is not None
+            else descriptor
+        )
+        try:
+            if (
+                cleanup_descriptor is not None
+                and cleanup_descriptor >= 0
+                and created_identity is not None
+            ):
+                _validate_pinned_temporary(
+                    recovery_path,
+                    directory_fd,
+                    cleanup_descriptor,
+                    created_identity,
+                )
+                os.unlink(name, dir_fd=directory_fd)
+        except (FileNotFoundError, RuntimeError):
+            pass
+        if pinned_descriptor is not None:
+            os.close(pinned_descriptor)
         if descriptor >= 0:
             os.close(descriptor)
-        try:
-            os.unlink(name, dir_fd=directory_fd)
-        except FileNotFoundError:
-            pass
         raise
     finally:
         os.close(directory_fd)
@@ -2949,10 +3054,12 @@ def _atomic_write_json_batch_locked(
     snapshots: dict[Path, MappingSnapshot] = {}
     installed_snapshots: dict[Path, MappingSnapshot] = {}
     staged: dict[Path, Path | None] = {}
+    staged_temporaries: dict[Path, StagedMappingTemporary] = {}
     directory_fds: dict[Path, int] = {}
     target_names: dict[Path, str] = {}
     parent_identities: dict[Path, tuple[int, int]] = {}
     parent_stack = ExitStack()
+    temporary_stack = ExitStack()
     replaced: list[Path] = []
     try:
         for path in paths:
@@ -2977,22 +3084,34 @@ def _atomic_write_json_batch_locked(
                     f"mapping parent directory changed concurrently: {path.parent}"
                 )
             payload = serialize_mapping_json(prepared[path])
-            staged[path] = _stage_bytes_for_replace(
-                path,
-                payload,
-                mode=modes[path],
-                directory_fd=descriptor,
-                parent_identity=parent_identity,
+            temporary = temporary_stack.enter_context(
+                _stage_bytes_for_replace(
+                    path,
+                    payload,
+                    mode=modes[path],
+                    directory_fd=descriptor,
+                    parent_identity=parent_identity,
+                )
             )
+            staged[path] = temporary.path
+            staged_temporaries[path] = temporary
             temporary_metadata = _secure_temporary_metadata(
                 staged[path],
                 descriptor,
             )
+            if temporary.identity != (
+                temporary_metadata.st_dev,
+                temporary_metadata.st_ino,
+            ):
+                raise RuntimeError(
+                    f"mapping staged inode identity is invalid: "
+                    f"{staged[path]}"
+                )
             installed_snapshots[path] = MappingSnapshot(
                 content=payload,
                 sha256=hashlib.sha256(payload).hexdigest(),
-                device=temporary_metadata.st_dev,
-                inode=temporary_metadata.st_ino,
+                device=temporary.identity[0],
+                inode=temporary.identity[1],
                 mode=modes[path],
                 parent_device=parent_identity[0],
                 parent_inode=parent_identity[1],
@@ -3007,20 +3126,12 @@ def _atomic_write_json_batch_locked(
             if temporary is None:
                 raise RuntimeError(f"missing staged mapping: {path}")
             _validate_mapping_snapshot(path, snapshots[path])
-            current_temporary = _secure_temporary_metadata(
+            _validate_pinned_temporary(
                 temporary,
                 directory_fds[path],
+                staged_temporaries[path].descriptor,
+                staged_temporaries[path].identity,
             )
-            if (
-                current_temporary.st_dev,
-                current_temporary.st_ino,
-            ) != (
-                installed_snapshots[path].device,
-                installed_snapshots[path].inode,
-            ):
-                raise RuntimeError(
-                    f"mapping temporary inode changed before replace: {temporary}"
-                )
             _validate_mapping_parent(path, parent_identities[path])
             os.replace(
                 temporary.name,
@@ -3048,56 +3159,82 @@ def _atomic_write_json_batch_locked(
             rollback: Path | None = None
             try:
                 _validate_mapping_snapshot(path, installed_snapshots[path])
-                rollback = _stage_bytes_for_replace(
+                with _stage_bytes_for_replace(
                     path,
                     originals[path],
                     mode=modes[path],
                     suffix=".rollback.tmp",
                     directory_fd=directory_fds[path],
                     parent_identity=parent_identities[path],
-                )
-                rollback_metadata = _secure_temporary_metadata(
-                    rollback,
-                    directory_fds[path],
-                )
-                rollback_snapshot = MappingSnapshot(
-                    content=originals[path],
-                    sha256=hashlib.sha256(originals[path]).hexdigest(),
-                    device=rollback_metadata.st_dev,
-                    inode=rollback_metadata.st_ino,
-                    mode=modes[path],
-                    parent_device=parent_identities[path][0],
-                    parent_inode=parent_identities[path][1],
-                )
-                os.replace(
-                    rollback.name,
-                    target_names[path],
-                    src_dir_fd=directory_fds[path],
-                    dst_dir_fd=directory_fds[path],
-                )
-                _validate_mapping_snapshot(path, rollback_snapshot)
-                rolled_back_snapshots[path] = rollback_snapshot
+                ) as rollback_temporary:
+                    rollback = rollback_temporary.path
+                    try:
+                        rollback_metadata = _secure_temporary_metadata(
+                            rollback,
+                            directory_fds[path],
+                        )
+                        if rollback_temporary.identity != (
+                            rollback_metadata.st_dev,
+                            rollback_metadata.st_ino,
+                        ):
+                            raise RuntimeError(
+                                "mapping rollback staged inode identity is "
+                                f"invalid: {rollback}"
+                            )
+                        rollback_snapshot = MappingSnapshot(
+                            content=originals[path],
+                            sha256=hashlib.sha256(
+                                originals[path]
+                            ).hexdigest(),
+                            device=rollback_temporary.identity[0],
+                            inode=rollback_temporary.identity[1],
+                            mode=modes[path],
+                            parent_device=parent_identities[path][0],
+                            parent_inode=parent_identities[path][1],
+                        )
+                        _validate_pinned_temporary(
+                            rollback,
+                            directory_fds[path],
+                            rollback_temporary.descriptor,
+                            rollback_temporary.identity,
+                        )
+                        os.replace(
+                            rollback.name,
+                            target_names[path],
+                            src_dir_fd=directory_fds[path],
+                            dst_dir_fd=directory_fds[path],
+                        )
+                        rollback = None
+                        _validate_mapping_snapshot(path, rollback_snapshot)
+                        rolled_back_snapshots[path] = rollback_snapshot
+                    finally:
+                        if rollback is not None:
+                            try:
+                                _validate_pinned_temporary(
+                                    rollback,
+                                    directory_fds[path],
+                                    rollback_temporary.descriptor,
+                                    rollback_temporary.identity,
+                                )
+                                os.unlink(
+                                    rollback.name,
+                                    dir_fd=directory_fds[path],
+                                )
+                            except (FileNotFoundError, RuntimeError):
+                                pass
             except BaseException as rollback_error:
                 rollback_errors.append(rollback_error)
-                if rollback is not None:
-                    try:
-                        os.unlink(
-                            rollback.name,
-                            dir_fd=directory_fds[path],
-                        )
-                    except FileNotFoundError:
-                        pass
                 try:
-                    recovery = _stage_bytes_for_replace(
+                    with _stage_bytes_for_replace(
                         path,
                         originals[path],
                         mode=0o600,
                         suffix=".recovery.json",
                         directory_fd=directory_fds[path],
                         parent_identity=parent_identities[path],
-                    )
-                    recovery_paths.append(recovery)
-                    recovery_recorded.add(path)
+                    ) as recovery_temporary:
+                        recovery_paths.append(recovery_temporary.path)
+                        recovery_recorded.add(path)
                 except BaseException as recovery_error:
                     rollback_errors.append(recovery_error)
                     try:
@@ -3122,17 +3259,16 @@ def _atomic_write_json_batch_locked(
                 if path in recovery_recorded:
                     continue
                 try:
-                    recovery_paths.append(
-                        _stage_bytes_for_replace(
-                            path,
-                            originals[path],
-                            mode=0o600,
-                            suffix=".recovery.json",
-                            directory_fd=directory_fds[path],
-                            parent_identity=parent_identities[path],
-                        )
-                    )
-                    recovery_recorded.add(path)
+                    with _stage_bytes_for_replace(
+                        path,
+                        originals[path],
+                        mode=0o600,
+                        suffix=".recovery.json",
+                        directory_fd=directory_fds[path],
+                        parent_identity=parent_identities[path],
+                    ) as recovery_temporary:
+                        recovery_paths.append(recovery_temporary.path)
+                        recovery_recorded.add(path)
                 except BaseException as recovery_error:
                     rollback_errors.append(recovery_error)
                     try:
@@ -3163,23 +3299,26 @@ def _atomic_write_json_batch_locked(
     finally:
         for path, temporary in staged.items():
             if temporary is not None:
+                staged_temporary = staged_temporaries.get(path)
+                if staged_temporary is None:
+                    continue
                 try:
-                    current = _secure_temporary_metadata(
+                    _validate_pinned_temporary(
                         temporary,
                         directory_fds[path],
+                        staged_temporary.descriptor,
+                        staged_temporary.identity,
                     )
-                    expected = installed_snapshots.get(path)
-                    if expected is not None and (
-                        current.st_dev,
-                        current.st_ino,
-                    ) == (expected.device, expected.inode):
-                        os.unlink(
-                            temporary.name,
-                            dir_fd=directory_fds[path],
-                        )
+                    os.unlink(
+                        temporary.name,
+                        dir_fd=directory_fds[path],
+                    )
                 except (FileNotFoundError, RuntimeError):
                     pass
-        parent_stack.close()
+        try:
+            temporary_stack.close()
+        finally:
+            parent_stack.close()
 
 
 def atomic_write_json_batch(
@@ -3227,10 +3366,11 @@ def atomic_write_json_batch(
 def _validate_candidate_mappings(prepared: dict[Path, dict]) -> None:
     """Run full provenance and unique-claim gates without replacing mappings."""
     staged: dict[Path, Path] = {}
+    staged_temporaries: dict[Path, StagedMappingTemporary] = {}
     directory_fds: dict[Path, int] = {}
     parent_identities: dict[Path, tuple[int, int]] = {}
-    temporary_identities: dict[Path, tuple[int, int]] = {}
     parent_stack = ExitStack()
+    temporary_stack = ExitStack()
     try:
         for path, data in prepared.items():
             descriptor, _target_name, parent_identity = (
@@ -3239,26 +3379,48 @@ def _validate_candidate_mappings(prepared: dict[Path, dict]) -> None:
             directory_fds[path] = descriptor
             parent_identities[path] = parent_identity
             payload = serialize_mapping_json(data)
-            staged[path] = _stage_bytes_for_replace(
-                path,
-                payload,
-                mode=0o600,
-                suffix=".validation.skills.json",
-                directory_fd=descriptor,
-                parent_identity=parent_identity,
+            temporary = temporary_stack.enter_context(
+                _stage_bytes_for_replace(
+                    path,
+                    payload,
+                    mode=0o600,
+                    suffix=".validation.skills.json",
+                    directory_fd=descriptor,
+                    parent_identity=parent_identity,
+                )
             )
+            staged[path] = temporary.path
+            staged_temporaries[path] = temporary
             temporary_metadata = _secure_temporary_metadata(
                 staged[path],
                 descriptor,
             )
-            temporary_identities[path] = (
+            if temporary.identity != (
                 temporary_metadata.st_dev,
                 temporary_metadata.st_ino,
-            )
+            ):
+                raise RuntimeError(
+                    "validation mapping staged inode identity is invalid: "
+                    f"{staged[path]}"
+                )
         errors: list[str] = []
-        for path in sorted(staged.values()):
+        for mapping_path in sorted(staged):
+            path = staged[mapping_path]
+            temporary = staged_temporaries[mapping_path]
+            _validate_pinned_temporary(
+                path,
+                directory_fds[mapping_path],
+                temporary.descriptor,
+                temporary.identity,
+            )
             errors.extend(
                 validate_provenance_mapping(path, REPO_ROOT, allow_v1=False)
+            )
+            _validate_pinned_temporary(
+                path,
+                directory_fds[mapping_path],
+                temporary.descriptor,
+                temporary.identity,
             )
         staged_paths = set(staged.values())
         original_paths = set(staged)
@@ -3269,12 +3431,28 @@ def _validate_candidate_mappings(prepared: dict[Path, dict]) -> None:
             if path not in original_paths and path not in staged_paths
         ]
         repository_paths.extend(staged.values())
+        for mapping_path, temporary_path in staged.items():
+            temporary = staged_temporaries[mapping_path]
+            _validate_pinned_temporary(
+                temporary_path,
+                directory_fds[mapping_path],
+                temporary.descriptor,
+                temporary.identity,
+            )
         errors.extend(
             validate_repository_mappings(
                 sorted(repository_paths),
                 REPO_ROOT,
             )
         )
+        for mapping_path, temporary_path in staged.items():
+            temporary = staged_temporaries[mapping_path]
+            _validate_pinned_temporary(
+                temporary_path,
+                directory_fds[mapping_path],
+                temporary.descriptor,
+                temporary.identity,
+            )
         if errors:
             raise RuntimeError(
                 "candidate mapping failed full provenance validation: "
@@ -3282,7 +3460,8 @@ def _validate_candidate_mappings(prepared: dict[Path, dict]) -> None:
             )
     finally:
         cleanup_errors: list[BaseException] = []
-        for mapping_path, temporary in staged.items():
+        for mapping_path, temporary_path in staged.items():
+            temporary = staged_temporaries[mapping_path]
             try:
                 _validate_mapping_parent(
                     mapping_path,
@@ -3291,29 +3470,28 @@ def _validate_candidate_mappings(prepared: dict[Path, dict]) -> None:
             except BaseException as exc:
                 cleanup_errors.append(exc)
             try:
-                metadata = _secure_temporary_metadata(
-                    temporary,
+                _validate_pinned_temporary(
+                    temporary_path,
                     directory_fds[mapping_path],
+                    temporary.descriptor,
+                    temporary.identity,
                 )
-                if (metadata.st_dev, metadata.st_ino) != temporary_identities[
-                    mapping_path
-                ]:
-                    raise RuntimeError(
-                        f"validation mapping inode changed: {temporary}"
-                    )
                 os.unlink(
-                    temporary.name,
+                    temporary_path.name,
                     dir_fd=directory_fds[mapping_path],
                 )
             except FileNotFoundError:
                 cleanup_errors.append(
                     RuntimeError(
-                        f"validation mapping disappeared: {temporary}"
+                        f"validation mapping disappeared: {temporary_path}"
                     )
                 )
             except BaseException as exc:
                 cleanup_errors.append(exc)
-        parent_stack.close()
+        try:
+            temporary_stack.close()
+        finally:
+            parent_stack.close()
         if cleanup_errors and sys.exc_info()[0] is None:
             raise RuntimeError(
                 "candidate mapping cleanup failed safely: "

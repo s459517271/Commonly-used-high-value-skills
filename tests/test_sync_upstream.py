@@ -162,6 +162,70 @@ def load_module():
 
 class SyncUpstreamTests(unittest.TestCase):
     @staticmethod
+    def _open_fd_count() -> int:
+        fd_root = Path("/dev/fd")
+        if not fd_root.exists():
+            raise unittest.SkipTest("/dev/fd is unavailable")
+        return len(list(fd_root.iterdir()))
+
+    @staticmethod
+    def _install_post_stage_metadata_attack(
+        module,
+        *,
+        root: Path,
+        replacement_kind: str,
+        selector,
+    ):
+        """Replace a staged name on its first caller-side metadata check."""
+        real_secure = module._secure_temporary_metadata
+        call_counts: dict[Path, int] = {}
+        foreign: list[Path] = []
+        sentinel = b"foreign-post-stage-occupant"
+        symlink_target = root / "foreign-target"
+        symlink_target.write_bytes(sentinel)
+
+        def attack(path, directory_fd):
+            candidate = Path(path)
+            if selector(candidate):
+                call_counts[candidate] = call_counts.get(candidate, 0) + 1
+                # The stage helper performs two pinned checks.  The third call
+                # is the first fallible caller-side check after it returns.
+                if call_counts[candidate] == 3:
+                    candidate.unlink()
+                    if replacement_kind == "regular":
+                        candidate.write_bytes(sentinel)
+                    elif replacement_kind == "symlink":
+                        candidate.symlink_to(symlink_target)
+                    elif replacement_kind != "missing":
+                        raise AssertionError(
+                            f"unknown replacement kind: {replacement_kind}"
+                        )
+                    foreign.append(candidate)
+            return real_secure(path, directory_fd)
+
+        module._secure_temporary_metadata = attack
+        return real_secure, foreign, sentinel
+
+    def _assert_foreign_stage_state(
+        self,
+        foreign: list[Path],
+        replacement_kind: str,
+        sentinel: bytes,
+    ) -> None:
+        self.assertEqual(1, len(foreign))
+        path = foreign[0]
+        if replacement_kind == "missing":
+            self.assertFalse(path.exists())
+            self.assertFalse(path.is_symlink())
+            return
+        self.assertTrue(path.exists())
+        if replacement_kind == "symlink":
+            self.assertTrue(path.is_symlink())
+        else:
+            self.assertEqual(sentinel, path.read_bytes())
+        path.unlink()
+
+    @staticmethod
     def _mapping_fixture(path: Path) -> dict:
         path.write_text(
             json.dumps(
@@ -5181,6 +5245,114 @@ os._exit(73)
             self.assertEqual(sentinel, foreign[0].read_bytes())
             foreign[0].unlink()
 
+    def test_stage_helper_pins_created_inode_before_parent_validation(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                module = load_module()
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    module.REPO_ROOT = root
+                    mapping = root / "mapping.json"
+                    mapping.write_text(
+                        '{"value": "old"}\n',
+                        encoding="utf-8",
+                    )
+                    sentinel = b"foreign-pre-pin-occupant"
+                    symlink_target = root / "foreign-target"
+                    symlink_target.write_bytes(sentinel)
+                    foreign: list[Path] = []
+                    real_validate_parent = module._validate_mapping_parent
+
+                    def replace_during_parent_validation(path, identity):
+                        real_validate_parent(path, identity)
+                        if foreign:
+                            return
+                        candidates = list(
+                            root.glob(".mapping.json.*.tmp")
+                        )
+                        if not candidates:
+                            return
+                        self.assertEqual(1, len(candidates))
+                        candidate = candidates[0]
+                        candidate.unlink()
+                        if replacement_kind == "symlink":
+                            candidate.symlink_to(symlink_target)
+                        else:
+                            candidate.write_bytes(sentinel)
+                        foreign.append(candidate)
+
+                    module._validate_mapping_parent = (
+                        replace_during_parent_validation
+                    )
+                    try:
+                        with self.assertRaises(
+                            module.AtomicMappingWriteError
+                        ) as raised:
+                            module.atomic_write_json(
+                                mapping,
+                                {"value": "new"},
+                            )
+                    finally:
+                        module._validate_mapping_parent = real_validate_parent
+
+                    self.assertFalse(raised.exception.replaced)
+                    self.assertEqual(
+                        b'{"value": "old"}\n',
+                        mapping.read_bytes(),
+                    )
+                    self.assertEqual(1, len(foreign))
+                    self.assertTrue(foreign[0].exists())
+                    if replacement_kind == "symlink":
+                        self.assertTrue(foreign[0].is_symlink())
+                    else:
+                        self.assertEqual(sentinel, foreign[0].read_bytes())
+                    foreign[0].unlink()
+
+    def test_atomic_mapping_post_stage_failures_do_not_leak_fds(self):
+        module = load_module()
+        for replacement_kind in ("regular", "symlink", "missing"):
+            with self.subTest(replacement_kind=replacement_kind):
+                baseline_fds = self._open_fd_count()
+                for _iteration in range(12):
+                    with tempfile.TemporaryDirectory() as tmpdir:
+                        root = Path(tmpdir)
+                        module.REPO_ROOT = root
+                        mapping = root / "mapping.json"
+                        original = b'{"value": "old"}\n'
+                        mapping.write_bytes(original)
+                        real_secure, foreign, sentinel = (
+                            self._install_post_stage_metadata_attack(
+                                module,
+                                root=root,
+                                replacement_kind=replacement_kind,
+                                selector=lambda path: path.name.endswith(
+                                    ".tmp"
+                                ),
+                            )
+                        )
+                        try:
+                            with self.assertRaises(
+                                module.AtomicMappingWriteError
+                            ) as raised:
+                                module.atomic_write_json(
+                                    mapping,
+                                    {"value": "new"},
+                                )
+                        finally:
+                            module._secure_temporary_metadata = real_secure
+
+                        self.assertFalse(raised.exception.replaced)
+                        self.assertEqual(original, mapping.read_bytes())
+                        self._assert_foreign_stage_state(
+                            foreign,
+                            replacement_kind,
+                            sentinel,
+                        )
+                    self.assertEqual(
+                        baseline_fds,
+                        self._open_fd_count(),
+                    )
+
     def test_atomic_mapping_writer_cas_preserves_concurrent_mapping_change(self):
         module = load_module()
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -5316,6 +5488,117 @@ os._exit(73)
             self.assertEqual(originals[first], first.read_bytes())
             self.assertEqual(originals[second], second.read_bytes())
 
+    def test_mapping_batch_pins_staged_inode_and_preserves_foreign_occupant(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                module = load_module()
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    module.REPO_ROOT = root
+                    first = root / "first.skills.json"
+                    second = root / "second.skills.json"
+                    first.write_text(
+                        '{"value": "old-one"}\n', encoding="utf-8"
+                    )
+                    second.write_text(
+                        '{"value": "old-two"}\n', encoding="utf-8"
+                    )
+                    originals = {
+                        first: first.read_bytes(),
+                        second: second.read_bytes(),
+                    }
+                    sentinel = b"foreign-batch-temporary"
+                    symlink_target = root / "foreign-target"
+                    symlink_target.write_bytes(sentinel)
+                    foreign: list[Path] = []
+
+                    def replace_staged_name(event, path):
+                        if (
+                            event != "after_stage"
+                            or path != first
+                            or foreign
+                        ):
+                            return
+                        candidates = list(
+                            root.glob(".first.skills.json.*.tmp")
+                        )
+                        self.assertEqual(1, len(candidates))
+                        candidate = candidates[0]
+                        candidate.unlink()
+                        if replacement_kind == "symlink":
+                            candidate.symlink_to(symlink_target)
+                        else:
+                            candidate.write_bytes(sentinel)
+                        foreign.append(candidate)
+
+                    with self.assertRaises(
+                        module.AtomicMappingBatchError
+                    ) as raised:
+                        module.atomic_write_json_batch(
+                            {
+                                first: {"value": "new-one"},
+                                second: {"value": "new-two"},
+                            },
+                            fault_injector=replace_staged_name,
+                        )
+
+                    self.assertTrue(raised.exception.rollback_succeeded)
+                    self.assertEqual(originals[first], first.read_bytes())
+                    self.assertEqual(originals[second], second.read_bytes())
+                    self.assertEqual(1, len(foreign))
+                    self.assertTrue(foreign[0].exists())
+                    if replacement_kind == "symlink":
+                        self.assertTrue(foreign[0].is_symlink())
+                    else:
+                        self.assertEqual(sentinel, foreign[0].read_bytes())
+                    foreign[0].unlink()
+
+    def test_mapping_batch_post_stage_failures_do_not_leak_fds(self):
+        module = load_module()
+        for replacement_kind in ("regular", "symlink", "missing"):
+            with self.subTest(replacement_kind=replacement_kind):
+                baseline_fds = self._open_fd_count()
+                for _iteration in range(12):
+                    with tempfile.TemporaryDirectory() as tmpdir:
+                        root = Path(tmpdir)
+                        module.REPO_ROOT = root
+                        mapping = root / "mapping.skills.json"
+                        original = b'{"value": "old"}\n'
+                        mapping.write_bytes(original)
+                        real_secure, foreign, sentinel = (
+                            self._install_post_stage_metadata_attack(
+                                module,
+                                root=root,
+                                replacement_kind=replacement_kind,
+                                selector=lambda path: path.name.endswith(
+                                    ".tmp"
+                                ),
+                            )
+                        )
+                        try:
+                            with self.assertRaises(
+                                module.AtomicMappingBatchError
+                            ) as raised:
+                                module._atomic_write_json_batch_locked(
+                                    {mapping: {"value": "new"}},
+                                )
+                        finally:
+                            module._secure_temporary_metadata = real_secure
+
+                        self.assertTrue(
+                            raised.exception.rollback_succeeded
+                        )
+                        self.assertEqual(original, mapping.read_bytes())
+                        self._assert_foreign_stage_state(
+                            foreign,
+                            replacement_kind,
+                            sentinel,
+                        )
+                    self.assertEqual(
+                        baseline_fds,
+                        self._open_fd_count(),
+                    )
+
     def test_atomic_mapping_batch_surfaces_recovery_files_when_rollback_fails(self):
         module = load_module()
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -5357,6 +5640,188 @@ os._exit(73)
             self.assertTrue(
                 all(path.is_file() for path in raised.exception.recovery_paths)
             )
+
+    def test_batch_rollback_temp_pin_preserves_foreign_occupant(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                module = load_module()
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    module.REPO_ROOT = root
+                    first = root / "first.skills.json"
+                    second = root / "second.skills.json"
+                    first.write_text(
+                        '{"value": "old-one"}\n', encoding="utf-8"
+                    )
+                    second.write_text(
+                        '{"value": "old-two"}\n', encoding="utf-8"
+                    )
+                    sentinel = b"foreign-rollback-temporary"
+                    symlink_target = root / "foreign-target"
+                    symlink_target.write_bytes(sentinel)
+                    foreign: list[Path] = []
+
+                    def fail_second(event, path):
+                        if event == "after_replace" and path == second:
+                            raise OSError("force rollback")
+
+                    real_pin = module._pin_temporary_inode
+
+                    def replace_after_pin(path, directory_fd):
+                        descriptor, metadata = real_pin(path, directory_fd)
+                        candidate = Path(path)
+                        if (
+                            candidate.name.endswith(".rollback.tmp")
+                            and not foreign
+                        ):
+                            candidate.unlink()
+                            if replacement_kind == "symlink":
+                                candidate.symlink_to(symlink_target)
+                            else:
+                                candidate.write_bytes(sentinel)
+                            foreign.append(candidate)
+                        return descriptor, metadata
+
+                    module._pin_temporary_inode = replace_after_pin
+                    try:
+                        with self.assertRaises(
+                            module.AtomicMappingBatchError
+                        ) as raised:
+                            module.atomic_write_json_batch(
+                                {
+                                    first: {"value": "new-one"},
+                                    second: {"value": "new-two"},
+                                },
+                                fault_injector=fail_second,
+                            )
+                    finally:
+                        module._pin_temporary_inode = real_pin
+
+                    self.assertFalse(raised.exception.rollback_succeeded)
+                    self.assertTrue(raised.exception.recovery_paths)
+                    self.assertEqual(1, len(foreign))
+                    self.assertTrue(foreign[0].exists())
+                    if replacement_kind == "symlink":
+                        self.assertTrue(foreign[0].is_symlink())
+                    else:
+                        self.assertEqual(sentinel, foreign[0].read_bytes())
+                    foreign[0].unlink()
+
+    def test_batch_rollback_post_stage_failures_do_not_leak_fds(self):
+        module = load_module()
+        for replacement_kind in ("regular", "symlink", "missing"):
+            with self.subTest(replacement_kind=replacement_kind):
+                baseline_fds = self._open_fd_count()
+                for _iteration in range(12):
+                    with tempfile.TemporaryDirectory() as tmpdir:
+                        root = Path(tmpdir)
+                        module.REPO_ROOT = root
+                        first = root / "first.skills.json"
+                        second = root / "second.skills.json"
+                        first_original = b'{"value": "old-one"}\n'
+                        second_original = b'{"value": "old-two"}\n'
+                        first.write_bytes(first_original)
+                        second.write_bytes(second_original)
+
+                        def fail_after_second_replace(event, path):
+                            if event == "after_replace" and path == second:
+                                raise OSError("force rollback")
+
+                        real_secure, foreign, sentinel = (
+                            self._install_post_stage_metadata_attack(
+                                module,
+                                root=root,
+                                replacement_kind=replacement_kind,
+                                selector=lambda path: (
+                                    path.name.startswith(
+                                        ".second.skills.json."
+                                    )
+                                    and path.name.endswith(".rollback.tmp")
+                                ),
+                            )
+                        )
+                        try:
+                            with self.assertRaises(
+                                module.AtomicMappingBatchError
+                            ) as raised:
+                                module._atomic_write_json_batch_locked(
+                                    {
+                                        first: {"value": "new-one"},
+                                        second: {"value": "new-two"},
+                                    },
+                                    fault_injector=fail_after_second_replace,
+                                )
+                        finally:
+                            module._secure_temporary_metadata = real_secure
+
+                        self.assertFalse(
+                            raised.exception.rollback_succeeded
+                        )
+                        self.assertEqual(first_original, first.read_bytes())
+                        self.assertFalse(second.is_symlink())
+                        self.assertNotEqual(sentinel, second.read_bytes())
+                        self._assert_foreign_stage_state(
+                            foreign,
+                            replacement_kind,
+                            sentinel,
+                        )
+                    self.assertEqual(
+                        baseline_fds,
+                        self._open_fd_count(),
+                    )
+
+    def test_private_recovery_pin_preserves_foreign_occupant(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                module = load_module()
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    module.REPO_ROOT = root
+                    mapping = root / "mapping.skills.json"
+                    mapping.write_text(
+                        '{"value": "old"}\n', encoding="utf-8"
+                    )
+                    sentinel = b"foreign-private-recovery"
+                    symlink_target = root / "foreign-target"
+                    symlink_target.write_bytes(sentinel)
+                    foreign: list[Path] = []
+                    real_pin = module._pin_temporary_inode
+
+                    def replace_after_pin(path, directory_fd):
+                        descriptor, metadata = real_pin(path, directory_fd)
+                        candidate = Path(path)
+                        if (
+                            candidate.name.endswith(".recovery.json")
+                            and not foreign
+                        ):
+                            candidate.unlink()
+                            if replacement_kind == "symlink":
+                                candidate.symlink_to(symlink_target)
+                            else:
+                                candidate.write_bytes(sentinel)
+                            foreign.append(candidate)
+                        return descriptor, metadata
+
+                    module._pin_temporary_inode = replace_after_pin
+                    try:
+                        with self.assertRaisesRegex(
+                            RuntimeError,
+                            "temporary inode changed|temporary is unsafe",
+                        ):
+                            module._stage_private_mapping_recovery(
+                                mapping,
+                                b'{"value": "recovery"}\n',
+                            )
+                    finally:
+                        module._pin_temporary_inode = real_pin
+
+                    self.assertEqual(1, len(foreign))
+                    self.assertTrue(foreign[0].exists())
+                    if replacement_kind == "symlink":
+                        self.assertTrue(foreign[0].is_symlink())
+                    else:
+                        self.assertEqual(sentinel, foreign[0].read_bytes())
+                    foreign[0].unlink()
 
     def test_mapping_batch_rejects_detached_parent_after_replace(self):
         module = load_module()
@@ -5497,6 +5962,124 @@ os._exit(73)
                 [],
                 list(detached.glob(".*.validation.skills.json")),
             )
+
+    def test_candidate_validation_pins_temp_and_preserves_foreign_occupant(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                module = load_module()
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    module.REPO_ROOT = root
+                    sources = root / "docs" / "sources"
+                    sources.mkdir(parents=True)
+                    module.SOURCE_MAPPINGS_DIR = sources
+                    mapping = sources / "mapping.skills.json"
+                    mapping.write_text(
+                        '{"schema_version": 2}\n',
+                        encoding="utf-8",
+                    )
+                    sentinel = b"foreign-validation-temporary"
+                    symlink_target = root / "foreign-target"
+                    symlink_target.write_bytes(sentinel)
+                    foreign: list[Path] = []
+                    original_validate = module.validate_provenance_mapping
+                    original_repository_validate = (
+                        module.validate_repository_mappings
+                    )
+
+                    def replace_validation_temp(path, *_args, **_kwargs):
+                        candidate = Path(path)
+                        candidate.unlink()
+                        if replacement_kind == "symlink":
+                            candidate.symlink_to(symlink_target)
+                        else:
+                            candidate.write_bytes(sentinel)
+                        foreign.append(candidate)
+                        return []
+
+                    module.validate_provenance_mapping = (
+                        replace_validation_temp
+                    )
+                    module.validate_repository_mappings = (
+                        lambda *_args, **_kwargs: []
+                    )
+                    try:
+                        with self.assertRaisesRegex(
+                            RuntimeError,
+                            "temporary inode changed|temporary is unsafe",
+                        ):
+                            module._validate_candidate_mappings(
+                                {mapping: {"schema_version": 2}}
+                            )
+                    finally:
+                        module.validate_provenance_mapping = original_validate
+                        module.validate_repository_mappings = (
+                            original_repository_validate
+                        )
+
+                    self.assertEqual(1, len(foreign))
+                    self.assertTrue(foreign[0].exists())
+                    if replacement_kind == "symlink":
+                        self.assertTrue(foreign[0].is_symlink())
+                    else:
+                        self.assertEqual(sentinel, foreign[0].read_bytes())
+                    foreign[0].unlink()
+
+    def test_candidate_post_stage_failures_do_not_leak_fds(self):
+        module = load_module()
+        original_validate = module.validate_provenance_mapping
+        original_repository_validate = module.validate_repository_mappings
+        module.validate_provenance_mapping = lambda *_args, **_kwargs: []
+        module.validate_repository_mappings = lambda *_args, **_kwargs: []
+        try:
+            for replacement_kind in ("regular", "symlink", "missing"):
+                with self.subTest(replacement_kind=replacement_kind):
+                    baseline_fds = self._open_fd_count()
+                    for _iteration in range(12):
+                        with tempfile.TemporaryDirectory() as tmpdir:
+                            root = Path(tmpdir)
+                            module.REPO_ROOT = root
+                            sources = root / "docs" / "sources"
+                            sources.mkdir(parents=True)
+                            module.SOURCE_MAPPINGS_DIR = sources
+                            mapping = sources / "mapping.skills.json"
+                            original = b'{"schema_version": 2}\n'
+                            mapping.write_bytes(original)
+                            real_secure, foreign, sentinel = (
+                                self._install_post_stage_metadata_attack(
+                                    module,
+                                    root=root,
+                                    replacement_kind=replacement_kind,
+                                    selector=lambda path: path.name.endswith(
+                                        ".validation.skills.json"
+                                    ),
+                                )
+                            )
+                            try:
+                                with self.assertRaises(
+                                    (RuntimeError, FileNotFoundError)
+                                ):
+                                    module._validate_candidate_mappings(
+                                        {mapping: {"schema_version": 2}}
+                                    )
+                            finally:
+                                module._secure_temporary_metadata = (
+                                    real_secure
+                                )
+
+                            self.assertEqual(original, mapping.read_bytes())
+                            self._assert_foreign_stage_state(
+                                foreign,
+                                replacement_kind,
+                                sentinel,
+                            )
+                        self.assertEqual(
+                            baseline_fds,
+                            self._open_fd_count(),
+                        )
+        finally:
+            module.validate_provenance_mapping = original_validate
+            module.validate_repository_mappings = original_repository_validate
 
     def test_report_json_exposes_degraded_state_and_conserved_counts(self):
         module = load_module()
