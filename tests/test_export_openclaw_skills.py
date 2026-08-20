@@ -1,10 +1,12 @@
 import importlib.util
+import json
 import stat
 import subprocess
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +25,21 @@ def load_export_module():
 class ExportOpenClawSkillsTests(unittest.TestCase):
     @staticmethod
     def git_index_modes(*paths: str) -> dict[str, str]:
+        snapshot = REPO_ROOT / ".hvs-stage-index-modes.json"
+        if snapshot.is_file() and not (REPO_ROOT / ".git").exists():
+            payload = json.loads(snapshot.read_text(encoding="utf-8"))
+            if (
+                payload.get("schema_version") != 1
+                or payload.get("source") != "trusted-git-index"
+                or not isinstance(payload.get("modes"), dict)
+            ):
+                raise AssertionError("malformed trusted Git index snapshot")
+            prefixes = tuple(path.rstrip("/") + "/" for path in paths)
+            return {
+                relative: mode
+                for relative, mode in payload["modes"].items()
+                if relative in paths or relative.startswith(prefixes)
+            }
         output = subprocess.check_output(
             [
                 "git",
@@ -141,6 +158,32 @@ class ExportOpenClawSkillsTests(unittest.TestCase):
             mismatches,
             "Tracked OpenClaw artifacts must preserve canonical Git modes.",
         )
+
+    def test_index_mode_gate_consumes_trusted_snapshot_without_git_metadata(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / ".hvs-stage-index-modes.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "source": "trusted-git-index",
+                        "modes": {
+                            "skills/category/demo/SKILL.md": "100755",
+                            "openclaw-skills/demo/SKILL.md": "100755",
+                            "README.md": "100644",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch(
+                f"{__name__}.REPO_ROOT",
+                root,
+            ):
+                self.assertEqual(
+                    {"skills/category/demo/SKILL.md": "100755"},
+                    self.git_index_modes("skills"),
+                )
 
     def test_export_preserves_extra_frontmatter_blocks(self):
         module = load_export_module()

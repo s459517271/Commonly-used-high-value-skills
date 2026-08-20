@@ -12,7 +12,6 @@ import json
 import os
 import re
 import stat
-import tempfile
 from copy import deepcopy
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -900,72 +899,166 @@ def migrate_payload(
     return migrated
 
 
-def atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
-    """Durably replace JSON through an exclusively-created sibling file.
+def _validate_atomic_temporary(
+    directory_fd: int,
+    name: str,
+    descriptors: tuple[int, ...],
+    identity: tuple[int, int],
+) -> None:
+    """Require a temporary name and every retained fd to bind one inode."""
+    named = os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+    if stat.S_ISLNK(named.st_mode) or not stat.S_ISREG(named.st_mode):
+        raise RuntimeError(f"unsafe JSON temporary: {name}")
+    if (named.st_dev, named.st_ino) != identity:
+        raise RuntimeError(f"JSON temporary inode changed: {name}")
+    for descriptor in descriptors:
+        opened = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or (opened.st_dev, opened.st_ino) != identity
+        ):
+            raise RuntimeError(f"JSON temporary descriptor changed: {name}")
 
-    ``mkstemp`` avoids the predictable temporary pathname used by the legacy
-    writer, so a pre-created symlink cannot redirect the write.  Existing
-    destination permissions are retained, and both file contents and the
-    containing directory are synced around the atomic rename.
+
+def atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
+    """Durably replace JSON while pinning its created inode until rename.
+
+    The writer fd remains open until an O_NOFOLLOW read fd pins the exact
+    creation-time inode. Cleanup unlinks only that inode, never a foreign file
+    that appears under the temporary name after an ABA replacement.
     """
     path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    directory_flags = (
+        os.O_RDONLY
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    directory_fd = os.open(path.parent, directory_flags)
     original_mode: int | None = None
     try:
-        destination_stat = path.lstat()
+        destination_stat = os.stat(
+            path.name,
+            dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
     except FileNotFoundError:
         pass
+    except BaseException:
+        os.close(directory_fd)
+        raise
     else:
         if stat.S_ISLNK(destination_stat.st_mode):
+            os.close(directory_fd)
             raise ValueError(f"refusing to replace symlink destination: {path}")
         if not stat.S_ISREG(destination_stat.st_mode):
+            os.close(directory_fd)
             raise ValueError(
                 f"refusing to replace non-regular destination: {path}"
             )
         original_mode = stat.S_IMODE(destination_stat.st_mode)
 
-    file_descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.",
-        suffix=".tmp",
-        dir=path.parent,
-    )
-    temporary = Path(temporary_name)
+    temporary_name = ""
+    file_descriptor = -1
+    pinned_descriptor = -1
+    identity: tuple[int, int] | None = None
     try:
-        created_stat = os.fstat(file_descriptor)
-        if not stat.S_ISREG(created_stat.st_mode):
-            raise RuntimeError(f"temporary path is not a regular file: {temporary}")
-        if original_mode is not None:
-            os.fchmod(file_descriptor, original_mode)
-
-        handle = os.fdopen(file_descriptor, "w", encoding="utf-8")
-        file_descriptor = -1
-        with handle:
-            handle.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-
-        named_stat = temporary.lstat()
-        if (
-            not stat.S_ISREG(named_stat.st_mode)
-            or named_stat.st_dev != created_stat.st_dev
-            or named_stat.st_ino != created_stat.st_ino
-        ):
-            raise RuntimeError(
-                f"temporary path changed before atomic replace: {temporary}"
+        create_flags = (
+            os.O_WRONLY
+            | os.O_CREAT
+            | os.O_EXCL
+            | getattr(os, "O_NOFOLLOW", 0)
+        )
+        for _ in range(128):
+            candidate = f".{path.name}.{os.urandom(16).hex()}.tmp"
+            try:
+                file_descriptor = os.open(
+                    candidate,
+                    create_flags,
+                    0o600,
+                    dir_fd=directory_fd,
+                )
+            except FileExistsError:
+                continue
+            temporary_name = candidate
+            break
+        else:
+            raise FileExistsError(
+                f"unable to allocate JSON temporary beside {path}"
             )
 
-        os.replace(temporary, path)
-        directory_fd = os.open(
-            path.parent,
-            os.O_RDONLY | getattr(os, "O_DIRECTORY", 0),
+        created_stat = os.fstat(file_descriptor)
+        if not stat.S_ISREG(created_stat.st_mode):
+            raise RuntimeError(
+                f"JSON temporary is not regular: {temporary_name}"
+            )
+        identity = (created_stat.st_dev, created_stat.st_ino)
+        encoded = (
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+        ).encode("utf-8")
+        remaining = memoryview(encoded)
+        while remaining:
+            written = os.write(file_descriptor, remaining)
+            if written <= 0:
+                raise OSError("JSON temporary write made no progress")
+            remaining = remaining[written:]
+        os.fchmod(
+            file_descriptor,
+            original_mode if original_mode is not None else 0o600,
         )
-        try:
-            os.fsync(directory_fd)
-        finally:
-            os.close(directory_fd)
+        os.fsync(file_descriptor)
+
+        pinned_descriptor = os.open(
+            temporary_name,
+            os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+            dir_fd=directory_fd,
+        )
+        _validate_atomic_temporary(
+            directory_fd,
+            temporary_name,
+            (file_descriptor, pinned_descriptor),
+            identity,
+        )
+        os.close(file_descriptor)
+        file_descriptor = -1
+        _validate_atomic_temporary(
+            directory_fd,
+            temporary_name,
+            (pinned_descriptor,),
+            identity,
+        )
+        os.replace(
+            temporary_name,
+            path.name,
+            src_dir_fd=directory_fd,
+            dst_dir_fd=directory_fd,
+        )
+        temporary_name = ""
+        os.fsync(directory_fd)
     finally:
+        if temporary_name and identity is not None:
+            try:
+                cleanup_descriptors = tuple(
+                    descriptor
+                    for descriptor in (pinned_descriptor,)
+                    if descriptor >= 0
+                )
+                if not cleanup_descriptors and file_descriptor >= 0:
+                    cleanup_descriptors = (file_descriptor,)
+                _validate_atomic_temporary(
+                    directory_fd,
+                    temporary_name,
+                    cleanup_descriptors,
+                    identity,
+                )
+                os.unlink(temporary_name, dir_fd=directory_fd)
+            except (OSError, RuntimeError):
+                pass
         if file_descriptor >= 0:
             os.close(file_descriptor)
-        temporary.unlink(missing_ok=True)
+        if pinned_descriptor >= 0:
+            os.close(pinned_descriptor)
+        os.close(directory_fd)
 
 
 def discover_source_mappings(sources_dir: Path) -> list[Path]:

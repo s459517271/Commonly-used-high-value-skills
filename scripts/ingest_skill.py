@@ -2704,11 +2704,14 @@ def run_pipeline(
 
 IGNORED_STAGE_NAMES = {
     ".git",
+    ".hvs-stage-index-modes.json",
     ".hvs-transactions",
     ".pytest_cache",
     "__pycache__",
     ".DS_Store",
 }
+
+STAGE_INDEX_MODES_NAME = ".hvs-stage-index-modes.json"
 
 
 def _read_regular_at(
@@ -2884,6 +2887,7 @@ def _copy_stage_repository(repo_root: Path, destination: Path) -> None:
         repo_root,
         directory_modes=directory_modes,
     )
+    index_modes = _trusted_git_index_modes(repo_root)
     destination.mkdir(mode=0o700)
     for relative, mode in sorted(
         directory_modes.items(),
@@ -2912,6 +2916,89 @@ def _copy_stage_repository(repo_root: Path, destination: Path) -> None:
         finally:
             if descriptor >= 0:
                 os.close(descriptor)
+    if index_modes is not None:
+        snapshot = (
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "source": "trusted-git-index",
+                    "modes": index_modes,
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n"
+        ).encode("utf-8")
+        snapshot_flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY
+        if hasattr(os, "O_NOFOLLOW"):
+            snapshot_flags |= os.O_NOFOLLOW
+        snapshot_fd = os.open(
+            destination / STAGE_INDEX_MODES_NAME,
+            snapshot_flags,
+            0o600,
+        )
+        try:
+            remaining = memoryview(snapshot)
+            while remaining:
+                written = os.write(snapshot_fd, remaining)
+                if written <= 0:
+                    raise OSError("stage index snapshot write made no progress")
+                remaining = remaining[written:]
+            os.fsync(snapshot_fd)
+        finally:
+            os.close(snapshot_fd)
+
+
+def _trusted_git_index_modes(repo_root: Path) -> dict[str, str] | None:
+    """Capture the real worktree index without copying any .git control data."""
+    try:
+        top = subprocess.run(
+            ["git", "-C", str(repo_root), "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            check=False,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise RuntimeError(f"cannot inspect staging Git index: {exc}") from exc
+    if top.returncode != 0:
+        return None
+    try:
+        resolved_repo = repo_root.resolve(strict=True)
+        git_root = Path(top.stdout.strip()).resolve(strict=True)
+    except (FileNotFoundError, RuntimeError) as exc:
+        raise RuntimeError(f"cannot resolve staging Git worktree: {exc}") from exc
+    if resolved_repo != git_root:
+        return None
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(resolved_repo), "ls-files", "--stage", "-z"],
+            capture_output=True,
+            check=False,
+            timeout=30,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise RuntimeError(f"cannot capture staging Git index: {exc}") from exc
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(
+            "cannot capture staging Git index"
+            + (f": {detail}" if detail else "")
+        )
+    modes: dict[str, str] = {}
+    for record in completed.stdout.split(b"\0"):
+        if not record:
+            continue
+        metadata, separator, raw_path = record.partition(b"\t")
+        fields = metadata.split()
+        if not separator or len(fields) != 3 or fields[2] != b"0":
+            raise RuntimeError("Git index snapshot contains a malformed record")
+        mode = fields[0].decode("ascii")
+        if mode not in {"100644", "100755", "120000", "160000"}:
+            raise RuntimeError(f"Git index snapshot contains invalid mode {mode}")
+        relative = raw_path.decode("utf-8", errors="surrogateescape")
+        modes[relative] = mode
+    return dict(sorted(modes.items()))
 
 
 def _translate_plan_to_stage(

@@ -344,12 +344,7 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             hostile_temporary = root / f".{mapping.name}.hostile.tmp"
             hostile_temporary.symlink_to(external)
 
-            with mock.patch.object(
-                provenance.tempfile,
-                "_get_candidate_names",
-                return_value=iter(("hostile", "safe")),
-            ):
-                provenance.atomic_write_json(mapping, {"schema_version": 2})
+            provenance.atomic_write_json(mapping, {"schema_version": 2})
 
             self.assertEqual(
                 {"schema_version": 2},
@@ -357,8 +352,79 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             )
             self.assertEqual("do not overwrite\n", external.read_text(encoding="utf-8"))
             self.assertTrue(hostile_temporary.is_symlink())
-            self.assertFalse((root / f".{mapping.name}.safe.tmp").exists())
             self.assertEqual(0o640, os.stat(mapping).st_mode & 0o777)
+
+    def test_atomic_writer_rejects_temp_aba_and_preserves_foreign_occupant(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    fd_root = Path("/dev/fd")
+                    before_fds = (
+                        len(list(fd_root.iterdir()))
+                        if fd_root.exists()
+                        else None
+                    )
+                    mapping = root / "example.skills.json"
+                    original = b'{"old":true}\n'
+                    mapping.write_bytes(original)
+                    sentinel = root / "sentinel"
+                    sentinel.write_bytes(b"sentinel")
+                    real_validate = provenance._validate_atomic_temporary
+                    calls = 0
+                    foreign: Path | None = None
+
+                    def attack(directory_fd, name, descriptors, identity):
+                        nonlocal calls, foreign
+                        calls += 1
+                        if calls == 2:
+                            foreign = root / name
+                            foreign.unlink()
+                            if replacement_kind == "regular":
+                                foreign.write_bytes(b"foreign")
+                            else:
+                                foreign.symlink_to(sentinel)
+                        return real_validate(
+                            directory_fd,
+                            name,
+                            descriptors,
+                            identity,
+                        )
+
+                    with (
+                        mock.patch.object(
+                            provenance,
+                            "_validate_atomic_temporary",
+                            side_effect=attack,
+                        ),
+                        self.assertRaisesRegex(
+                            RuntimeError,
+                            "temporary inode changed|unsafe JSON temporary",
+                        ),
+                    ):
+                        provenance.atomic_write_json(
+                            mapping,
+                            {"schema_version": 2},
+                        )
+
+                    self.assertEqual(original, mapping.read_bytes())
+                    self.assertIsNotNone(foreign)
+                    assert foreign is not None
+                    self.assertTrue(
+                        foreign.exists() or foreign.is_symlink(),
+                        "cleanup must not delete a foreign temporary occupant",
+                    )
+                    if replacement_kind == "regular":
+                        self.assertEqual(b"foreign", foreign.read_bytes())
+                    else:
+                        self.assertTrue(foreign.is_symlink())
+                    self.assertEqual(b"sentinel", sentinel.read_bytes())
+                    if before_fds is not None:
+                        self.assertEqual(
+                            before_fds,
+                            len(list(fd_root.iterdir())),
+                            "atomic JSON writer leaked a descriptor",
+                        )
 
     def test_managed_digest_refresh_is_explicit_and_updates_matching_origin_only(self):
         with tempfile.TemporaryDirectory() as tmpdir:

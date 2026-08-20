@@ -1267,6 +1267,48 @@ class IngestSkillTests(unittest.TestCase):
             self.assertEqual("do-not-touch", sentinel.read_text())
             self.assertFalse(destination.exists())
 
+    def test_stage_copy_exports_trusted_index_modes_without_git_directory(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+            base = Path(tmpdir)
+            root = base / "repo"
+            root.mkdir()
+            subprocess.run(
+                ["git", "init", "-q", str(root)],
+                check=True,
+            )
+            canonical = root / "skills" / "category" / "demo" / "SKILL.md"
+            exported = root / "openclaw-skills" / "demo" / "SKILL.md"
+            canonical.parent.mkdir(parents=True)
+            exported.parent.mkdir(parents=True)
+            canonical.write_text("---\nname: demo\n---\n", encoding="utf-8")
+            exported.write_bytes(canonical.read_bytes())
+            canonical.chmod(0o755)
+            exported.chmod(0o755)
+            subprocess.run(
+                ["git", "-C", str(root), "add", "skills", "openclaw-skills"],
+                check=True,
+            )
+
+            destination = base / "stage"
+            module._copy_stage_repository(root, destination)
+
+            self.assertFalse((destination / ".git").exists())
+            snapshot_path = (
+                destination / module.STAGE_INDEX_MODES_NAME
+            )
+            self.assertEqual(0o600, stat.S_IMODE(snapshot_path.stat().st_mode))
+            snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
+            self.assertEqual("trusted-git-index", snapshot["source"])
+            self.assertEqual(
+                "100755",
+                snapshot["modes"]["skills/category/demo/SKILL.md"],
+            )
+            self.assertEqual(
+                "100755",
+                snapshot["modes"]["openclaw-skills/demo/SKILL.md"],
+            )
+
     def test_repo_root_ancestor_symlink_is_rejected_nofollow(self):
         module = load_module()
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
