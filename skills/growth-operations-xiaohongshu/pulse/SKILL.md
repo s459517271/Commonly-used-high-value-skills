@@ -1,6 +1,6 @@
 ---
 name: pulse
-description: "Defining KPIs, tracking events, and dashboards: North Star Metric, funnel and cohort analysis, test-intelligence views. GA4/Amplitude/Mixpanel/PostHog. Use when metrics design is needed."
+description: 'Defining KPIs, tracking events, and dashboards: North Star Metric, funnel and cohort analysis, test-intelligence views. GA4/Amplitude/Mixpanel/PostHog. Use when metrics design is needed.'
 zh_description: "关键指标、埋点、漏斗、留存和仪表盘规格设计。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - north_star_metric_definition: Define primary success metrics with metric tree (NSM → 3-5 input KPIs → output KPIs), supporting and counter metrics

@@ -65,7 +65,7 @@
             "ref": "v0.9.47",
             "resolved_commit": "b14b52e94ec3d9840413d81777f4c134eac0a40d",
             "path_commit": "3d19463484ebcf773b399ddad9fd3363b2ab3bff",
-            "content_sha256": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
+            "content_sha256": "565a103f9c5848004139c51ecfc5676f36629bd828d1f9f610136c5a46fdcd36",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -82,7 +82,7 @@
       "managed_files": [
         {
           "path": "skills/developer-engineering/graphify/SKILL.md",
-          "sha256": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
+          "sha256": "565a103f9c5848004139c51ecfc5676f36629bd828d1f9f610136c5a46fdcd36",
           "owner": "graphify",
           "mode": "100644"
         },

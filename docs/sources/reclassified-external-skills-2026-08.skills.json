@@ -3131,7 +3131,7 @@
             "ref": "master",
             "resolved_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
             "path_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
-            "content_sha256": "a49110db39700d672c45b8719c4f1f10023f4807c93651640a82b83bce32f612",
+            "content_sha256": "1f905b2c0bca9ab80e0fffdfc8b36fe4f335e9ffcc1586d06fe03759bdc8699a",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -3148,7 +3148,7 @@
       "managed_files": [
         {
           "path": "skills/growth-operations-xiaohongshu/x-twitter-scraper/SKILL.md",
-          "sha256": "a49110db39700d672c45b8719c4f1f10023f4807c93651640a82b83bce32f612",
+          "sha256": "1f905b2c0bca9ab80e0fffdfc8b36fe4f335e9ffcc1586d06fe03759bdc8699a",
           "owner": "x-twitter-scraper",
           "mode": "100644"
         }

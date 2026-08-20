@@ -1,6 +1,6 @@
 ---
 name: lore
-description: "Curating cross-agent knowledge and institutional memory: extracts patterns from agent journals into METAPATTERNS.md, detects knowledge decay, propagates best practices. Use for memory curation."
+description: 'Curating cross-agent knowledge and institutional memory: extracts patterns from agent journals into METAPATTERNS.md, detects knowledge decay, propagates best practices. Use for memory curation.'
 zh_description: "跨智能体知识沉淀、模式提炼和最佳实践传播。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - cross_agent_synthesis: Extract and correlate patterns across agent journals, postmortems, and remediation logs

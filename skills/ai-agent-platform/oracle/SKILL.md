@@ -1,6 +1,6 @@
 ---
 name: oracle
-description: "Designing and evaluating AI/ML systems: prompt engineering, RAG design, LLM application patterns, AI safety, evaluation frameworks, MLOps, cost optimization. Use for AI pipelines or eval harnesses."
+description: 'Designing and evaluating AI/ML systems: prompt engineering, RAG design, LLM application patterns, AI safety, evaluation frameworks, MLOps, cost optimization. Use for AI pipelines or eval harnesses.'
 zh_description: "人工智能应用设计、评估、检索增强和安全护栏规划。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - prompt_engineering: Design, optimize, and evaluate LLM prompts

@@ -1,6 +1,6 @@
 ---
 name: lark-approval
-description: "飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办不是飞书任务；非审批类待办走 lark-task。不负责创建审批定义；三方审批定义不走原生提单。"
+description: '飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办不是飞书任务；非审批类待办走 lark-task。不负责创建审批定义；三方审批定义不走原生提单。'
 zh_description: "用于查询、处理和发起飞书原生审批，区分审批待办与普通飞书任务。"
 version: "1.0.7"
 author: larksuite
@@ -17,6 +17,7 @@ metadata:
     bins: ["lark-cli"]
   cliHelp: "lark-cli approval --help"
 ---
+
 **CRITICAL — 开始前 MUST 先用 Read 工具读取 [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md)，其中包含认证、权限处理**
 
 所有命令默认 `--as user`（审批是人的动作）。调用前先按需读取 references 下对应的文件，查参数结构，不要猜字段；**references 是第一信息源**，只有在 reference 未覆盖的原生 / 高级场景下，才额外用 `lark-cli ... --help`、`lark-cli schema` 等方式补充确认字段。

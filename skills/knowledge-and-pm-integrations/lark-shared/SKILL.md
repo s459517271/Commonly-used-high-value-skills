@@ -1,6 +1,6 @@
 ---
 name: lark-shared
-description: "Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identity, business-domain permissions (--domain, including all/docs/drive), missing scopes, revoking authorization, or handling _notice JSON."
+description: 'Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identity, business-domain permissions (--domain, including all/docs/drive), missing scopes, revoking authorization, or handling _notice JSON.'
 zh_description: "用于lark、shared，支持知识管理、项目同步和平台集成。"
 version: "1.0.11"
 author: larksuite
@@ -16,6 +16,7 @@ metadata:
   requires:
     bins: ["lark-cli"]
 ---
+
 # lark-cli 共享规则
 
 所有 `lark-*` skill 共享的底座：身份、认证、输出契约与高风险操作。

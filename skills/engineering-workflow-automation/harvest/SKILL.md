@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - pr_collection: Collect PR data with repository, period, author, label, state filters using per_page=100 and --paginate optimization

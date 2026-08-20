@@ -1,6 +1,6 @@
 ---
 name: nexus
-description: "Orchestrating multi-specialist task chains and scope-adaptive product delivery: classifies intent, selects and executes the minimum viable chain, aggregates results, and verifies acceptance criteria. For multi-domain tasks, build-first delivery, and product lifecycle execution."
+description: 'Orchestrating multi-specialist task chains and scope-adaptive product delivery: classifies intent, selects and executes the minimum viable chain, aggregates results, and verifies acceptance criteria. For multi-domain tasks, build-first delivery, and product lifecycle execution.'
 zh_description: "多智能体任务分解、链路编排、执行协调和结果整合。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - task_chain_orchestration: Classify, select, execute, aggregate, and verify minimum viable specialist chains

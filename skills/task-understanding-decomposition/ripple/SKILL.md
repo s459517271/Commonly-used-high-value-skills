@@ -1,6 +1,6 @@
 ---
 name: ripple
-description: "Analyzing pre-change impact across vertical (dependency chains, files) and horizontal (pattern consistency, naming) dimensions. Use to estimate blast radius before a refactor. No code."
+description: 'Analyzing pre-change impact across vertical (dependency chains, files) and horizontal (pattern consistency, naming) dimensions. Use to estimate blast radius before a refactor. No code.'
 zh_description: "变更前影响分析，评估依赖链和一致性风险。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - vertical_impact: Pre-change dependency chain tracing with depth-level confidence (L0-L3) and breaking change classification

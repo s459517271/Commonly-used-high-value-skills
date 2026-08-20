@@ -1,6 +1,6 @@
 ---
 name: gateway
-description: "Designing and reviewing APIs: OpenAPI spec generation, versioning strategy, breaking change detection, REST/GraphQL best practices. Use for API design or OpenAPI specs."
+description: 'Designing and reviewing APIs: OpenAPI spec generation, versioning strategy, breaking change detection, REST/GraphQL best practices. Use for API design or OpenAPI specs.'
 zh_description: "接口设计、规范生成、版本策略和破坏性变更检查。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - rest_api_design: Resource-oriented URL design, HTTP method selection (RFC 9110), status codes, pagination, idempotency keys

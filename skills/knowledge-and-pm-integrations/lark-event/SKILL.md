@@ -1,6 +1,6 @@
 ---
 name: lark-event
-description: "Lark/Feishu real-time event listening / subscribing / consuming: stream events as NDJSON via `lark-cli event consume <EventKey>` (covers IM messages/reactions/chat changes, Approval status changes, Task updates, VC meeting started/joined/ended, Minutes generated, Whiteboard updated, etc.). Use for Lark bots, real-time message processing, long-running subscribers, streaming webhook/push handlers. Supports `--max-events` / `--timeout` bounded runs and a stderr ready-marker contract — designed for AI agents running as subprocesses."
+description: 'Lark/Feishu real-time event listening / subscribing / consuming: stream events as NDJSON via `lark-cli event consume <EventKey>` (covers IM messages/reactions/chat changes, Approval status changes, Task updates, VC meeting started/joined/ended, Minutes generated, Whiteboard updated, etc.). Use for Lark bots, real-time message processing, long-running subscribers, streaming webhook/push handlers. Supports `--max-events` / `--timeout` bounded runs and a stderr ready-marker contract — designed for AI agents running as subprocesses.'
 zh_description: "用于订阅、消费和处理飞书实时事件流，支持消息、任务、会议纪要和画板更新。"
 version: "1.0.10"
 author: larksuite
@@ -17,6 +17,7 @@ metadata:
     bins: ["lark-cli"]
   cliHelp: "lark-cli event --help"
 ---
+
 # Lark Events
 
 > **Prerequisite:** Read [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md) first for authentication, `--as user/bot` switching, `Permission denied` handling, and safety rules.

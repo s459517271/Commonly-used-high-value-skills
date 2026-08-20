@@ -1,6 +1,6 @@
 ---
 name: compete
-description: "Triggers when researching competitive or professional positioning: market intelligence, engineer brands, profiles, and content strategy. Research and strategy only — not code."
+description: 'Triggers when researching competitive or professional positioning: market intelligence, engineer brands, profiles, and content strategy. Research and strategy only — not code.'
 zh_description: "竞品研究、差异化定位、矩阵对比和竞争战卡。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - competitor_research: Discovery, profiling, and tiering of direct/indirect competitors and substitutes

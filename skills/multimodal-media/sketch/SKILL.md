@@ -1,6 +1,6 @@
 ---
 name: sketch
-description: "Generating AI image-generation code using the Gemini API. Handles text-to-image generation, image editing, and prompt optimization. Use when image generation code is needed."
+description: 'Generating AI image-generation code using the Gemini API. Handles text-to-image generation, image editing, and prompt optimization. Use when image generation code is needed.'
 zh_description: "图像生成代码、提示优化、批量生成和成本估算。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - text_to_image: Generate images from text prompts via Gemini API

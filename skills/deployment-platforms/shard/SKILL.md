@@ -1,6 +1,6 @@
 ---
 name: shard
-description: "Designing multi-tenant architectures with tenant isolation strategies, RLS, routing, and scale design for SaaS. Use when designing multi-tenant SaaS systems or tenant isolation."
+description: 'Designing multi-tenant architectures with tenant isolation strategies, RLS, routing, and scale design for SaaS. Use when designing multi-tenant SaaS systems or tenant isolation.'
 zh_description: "多租户架构、租户隔离、路由和规模化设计。"
 version: "1.0.2"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - isolation_strategy: Design tenant isolation (database-per-tenant, schema-per-tenant, row-level)

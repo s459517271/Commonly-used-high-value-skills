@@ -1,6 +1,6 @@
 ---
 name: cloak
-description: "Engineering privacy and data governance: PII detection, data flow mapping, consent patterns, GDPR/CCPA-compliant implementation, DPIA. Use when privacy-by-design is needed."
+description: 'Engineering privacy and data governance: PII detection, data flow mapping, consent patterns, GDPR/CCPA-compliant implementation, DPIA. Use when privacy-by-design is needed.'
 zh_description: "隐私工程、敏感信息流、同意管理和数据治理。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - pii_detection: Regex/AST-based PII pattern scanning, data classification (Personal/Sensitive/Special Category), field-level tagging

@@ -1,6 +1,6 @@
 ---
 name: lark-skill-maker
-description: "创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。"
+description: '创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。'
 zh_description: "用于把飞书 API 操作封装为可复用技能、流程模板和多步自动化。"
 version: "1.0.3"
 author: larksuite
@@ -16,6 +16,7 @@ metadata:
   requires:
     bins: ["lark-cli"]
 ---
+
 # Skill Maker
 
 基于 lark-cli 创建新 Skill。Skill = 一份 `SKILL.md`，教 AI 用 CLI 命令完成任务。

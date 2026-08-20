@@ -1,6 +1,6 @@
 ---
 name: ledger
-description: "Optimizing FinOps and cloud cost: IaC-based estimation, right-sizing, RI/SP recommendations, anomaly detection, budget alerts, AI/GPU workload economics. Use to forecast or cut cloud spend."
+description: 'Optimizing FinOps and cloud cost: IaC-based estimation, right-sizing, RI/SP recommendations, anomaly detection, budget alerts, AI/GPU workload economics. Use to forecast or cut cloud spend.'
 zh_description: "云成本、预算告警、资源规格和人工智能工作负载成本优化。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - iac_cost_estimation: Estimate cloud costs from Terraform/CloudFormation/Pulumi code using pricing APIs and Infracost

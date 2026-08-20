@@ -1,6 +1,6 @@
 ---
 name: beacon
-description: "Engineering observability and reliability: SLO/SLI design, distributed tracing, alerting, dashboards, capacity planning, toil automation, reliability review. Use for instrumentation or SLO definition."
+description: 'Engineering observability and reliability: SLO/SLI design, distributed tracing, alerting, dashboards, capacity planning, toil automation, reliability review. Use for instrumentation or SLO definition.'
 zh_description: "可观测性、服务目标、告警、容量和可靠性设计。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - slo_sli_design: SLO/SLI definition, error budget calculation, multi-window multi-burn-rate alerting (14.4×/6×/3×/1×), error budget consumption policy gates

@@ -1,6 +1,6 @@
 ---
 name: scaffold
-description: "Provisioning infrastructure via cloud IaC (Terraform/OpenTofu/CloudFormation/Pulumi) and local dev environments (Docker Compose, env vars). Use for IaC design or multi-cloud provisioning."
+description: 'Provisioning infrastructure via cloud IaC (Terraform/OpenTofu/CloudFormation/Pulumi) and local dev environments (Docker Compose, env vars). Use for IaC design or multi-cloud provisioning.'
 zh_description: "云基础设施、环境配置和本地开发部署脚手架。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - terraform_provisioning: Design and generate Terraform/OpenTofu configurations with module best practices

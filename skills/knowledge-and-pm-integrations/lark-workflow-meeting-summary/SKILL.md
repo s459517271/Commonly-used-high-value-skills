@@ -1,6 +1,6 @@
 ---
 name: lark-workflow-meeting-summary
-description: "会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。"
+description: '会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。'
 zh_description: "用于汇总指定时间范围内的飞书会议纪要，并生成结构化会议报告或周报。"
 version: "1.0.5"
 author: larksuite
@@ -16,6 +16,7 @@ metadata:
   requires:
     bins: ["lark-cli"]
 ---
+
 # 会议纪要汇总工作流
 
 **CRITICAL — 开始前 MUST 先用 Read 工具读取 [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md)，其中包含认证、权限处理**。然后阅读 [`../lark-vc/SKILL.md`](../lark-vc/SKILL.md)，了解会议纪要相关操作。

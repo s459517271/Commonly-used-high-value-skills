@@ -1,6 +1,6 @@
 ---
 name: builder
-description: "Implementing robust business logic, API integrations, data models, and reproducible AI image-generation code with type safety. Use for production implementation, Gemini image API pipelines, or interactive pair programming."
+description: 'Implementing robust business logic, API integrations, data models, and reproducible AI image-generation code with type safety. Use for production implementation, Gemini image API pipelines, or interactive pair programming.'
 zh_description: "生产级业务逻辑、接口集成和类型安全实现。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - type_safe_implementation: Type-safe business logic implementation (DDD patterns, always-valid domain model)

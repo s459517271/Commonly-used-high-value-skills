@@ -1,6 +1,6 @@
 ---
 name: hearth
-description: "Generating and auditing personal dev environment configs (zsh/tmux/neovim/ghostty) and automating the macOS desktop via AppleScript/JXA (Finder, Mail, Safari). Use for dotfiles or Apple Events."
+description: 'Generating and auditing personal dev environment configs (zsh/tmux/neovim/ghostty) and automating the macOS desktop via AppleScript/JXA (Finder, Mail, Safari). Use for dotfiles or Apple Events.'
 zh_description: "终端、编辑器和本地开发环境配置生成与审计。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - shell_configuration: zsh/fish/bash modular config generation with startup optimization

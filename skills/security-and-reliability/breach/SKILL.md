@@ -1,6 +1,6 @@
 ---
 name: breach
-description: "Designing red team attack scenarios, threat models, MITRE ATT&CK/OWASP application, Purple Team exercises, and AI/LLM red teaming. Use when adversarial security validation is needed."
+description: 'Designing red team attack scenarios, threat models, MITRE ATT&CK/OWASP application, Purple Team exercises, and AI/LLM red teaming. Use when adversarial security validation is needed.'
 zh_description: "红队场景、攻击路径、威胁建模和对抗演练设计。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - threat_modeling: Design threat models using STRIDE, PASTA, Attack Trees, and MITRE ATT&CK mapping

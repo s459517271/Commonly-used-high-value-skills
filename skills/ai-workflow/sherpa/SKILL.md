@@ -1,6 +1,6 @@
 ---
 name: sherpa
-description: "Guiding workflows by decomposing complex tasks (Epics) into Atomic Steps under 15 minutes each, with progress tracking and drift prevention. Use when complex decomposition is needed."
+description: 'Guiding workflows by decomposing complex tasks (Epics) into Atomic Steps under 15 minutes each, with progress tracking and drift prevention. Use when complex decomposition is needed.'
 zh_description: "把复杂任务拆成短步骤，控制漂移并推进交付。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - task_decomposition: Break complex epics into 15-minute atomic steps

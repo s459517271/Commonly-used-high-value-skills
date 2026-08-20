@@ -1,6 +1,6 @@
 ---
 name: lark-calendar
-description: "飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会议室时使用。不负责：查询过去的视频会议记录（走 lark-vc）、待办任务（走 lark-task）。"
+description: '飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会议室时使用。不负责：查询过去的视频会议记录（走 lark-vc）、待办任务（走 lark-task）。'
 zh_description: "用于查询、创建和管理飞书日历事件与日程安排。"
 version: "1.0.7"
 author: larksuite
@@ -17,6 +17,7 @@ metadata:
     bins: ["lark-cli"]
   cliHelp: "lark-cli calendar --help"
 ---
+
 # calendar (v4)
 
 开始前先读 [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md)（认证、权限处理）。

@@ -1,6 +1,6 @@
 ---
 name: latch
-description: "Proposing, configuring, debugging, and maintaining Claude Code hooks (PreToolUse/PostToolUse/Stop and other lifecycle events). Use for workflow automation or quality gates via hooks."
+description: 'Proposing, configuring, debugging, and maintaining Claude Code hooks (PreToolUse/PostToolUse/Stop and other lifecycle events). Use for workflow automation or quality gates via hooks.'
 zh_description: "配置和维护生命周期钩子、质量门禁和自动化守卫。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - hook_design: Propose hook sets with event, matcher, type, and justification

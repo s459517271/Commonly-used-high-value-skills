@@ -1,6 +1,6 @@
 ---
 name: lens
-description: "Comprehending and investigating codebases: structure mapping, feature discovery, data flow tracing for 'does X exist?' or 'how does Y work?'. Includes a conversational ask mode. Does not write code."
+description: 'Comprehending and investigating codebases: structure mapping, feature discovery, data flow tracing for ''does X exist?'' or ''how does Y work?''. Includes a conversational ask mode. Does not write code.'
 zh_description: "代码库理解、功能发现、数据流追踪和上下文调查。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - feature_discovery: Identify whether a specific feature/functionality exists in the codebase

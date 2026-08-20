@@ -1,6 +1,6 @@
 ---
 name: lark-vc
-description: "飞书视频会议：查询进行中的会议列表（含会议 ID）、读取会中实时内容（发言、聊天、共享等）、发送会中消息，以及搜索历史会议、查询会议纪要（总结/待办/章节/逐字稿）和参会人快照。Agent 真实入会/离会走 lark-vc-agent；查询未来日程走 lark-calendar。"
+description: '飞书视频会议：查询进行中的会议列表（含会议 ID）、读取会中实时内容（发言、聊天、共享等）、发送会中消息，以及搜索历史会议、查询会议纪要（总结/待办/章节/逐字稿）和参会人快照。Agent 真实入会/离会走 lark-vc-agent；查询未来日程走 lark-calendar。'
 zh_description: "飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。"
 version: "1.0.8"
 author: larksuite
@@ -17,6 +17,7 @@ metadata:
     bins: ["lark-cli"]
   cliHelp: "lark-cli vc --help"
 ---
+
 # vc (v1)
 
 **CRITICAL — 开始前 MUST 先用 Read 工具读取 [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md)，其中包含认证、权限处理**

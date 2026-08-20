@@ -1,6 +1,6 @@
 ---
 name: voice
-description: "Collecting user feedback via NPS surveys, review analysis, sentiment analysis, feedback classification, and insight extraction reports. Use when establishing feedback loops."
+description: 'Collecting user feedback via NPS surveys, review analysis, sentiment analysis, feedback classification, and insight extraction reports. Use when establishing feedback loops.'
 zh_description: "用户反馈收集、满意度调研、评论分析和洞察提炼。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - feedback_collection: Design feedback collection mechanisms (NPS, CSAT, CES, exit surveys, reviews)

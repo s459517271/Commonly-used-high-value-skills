@@ -1,6 +1,6 @@
 ---
 name: crest
-description: "Building engineer self-branding by turning technical contributions into a professional brand. Use for GitHub/LinkedIn/blog/conference positioning or content strategy."
+description: Building engineer self-branding by turning technical contributions into a professional brand. Use for GitHub/LinkedIn/blog/conference positioning or content strategy.
 zh_description: "技术个人品牌、主页资料、文章和公开形象策略。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - brand_audit: Multi-channel brand health scoring and gap analysis

@@ -17,7 +17,7 @@ SKILL_ROOT = REPO_ROOT / "skills" / "ai-agent-platform" / "hermes-agent"
 RELEASE_COMMIT = "e624e9fde561e1add9388384012b295fde669ade"
 PATH_COMMIT = "59b1c40cdfb5f62c863df4e7667c91f008c70cd2"
 CANONICAL_SHA256 = (
-    "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f"
+    "567e5b24ddd1642dae78b6d64c65a1f89864c84f02806db2357faef8a03594cc"
 )
 
 

@@ -1,6 +1,6 @@
 ---
 name: stage
-description: "Generating slides via Marp, reveal.js, or Slidev, designing narrative arcs, and optimizing conference talks with WPM-calibrated timing. Use when creating or pacing presentations."
+description: 'Generating slides via Marp, reveal.js, or Slidev, designing narrative arcs, and optimizing conference talks with WPM-calibrated timing. Use when creating or pacing presentations.'
 zh_description: "演示文稿生成、叙事节奏设计和会议演讲优化。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - slide_generation: Generate Markdown-based slides (Marp/reveal.js/Slidev)

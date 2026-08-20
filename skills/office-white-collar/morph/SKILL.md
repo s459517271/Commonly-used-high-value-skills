@@ -1,6 +1,6 @@
 ---
 name: morph
-description: "Converting document formats (Markdown/Word/Excel/PDF/HTML) and generating reusable conversion scripts. Use for distributable specs, accessibility-compliant PDFs, or Pandoc/LibreOffice pipelines."
+description: 'Converting document formats (Markdown/Word/Excel/PDF/HTML) and generating reusable conversion scripts. Use for distributable specs, accessibility-compliant PDFs, or Pandoc/LibreOffice pipelines.'
 zh_description: "文档格式转换、分发版生成和可复用转换脚本。"
 version: "1.0.2"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - format_conversion: Convert between Markdown, Word, Excel, PDF, HTML formats

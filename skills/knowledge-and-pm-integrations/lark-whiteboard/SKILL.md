@@ -1,6 +1,6 @@
 ---
 name: lark-whiteboard
-description: "Use when querying, exporting, or editing Lark whiteboards, including preview images, raw node structures, and structured canvas updates."
+description: 'Use when querying, exporting, or editing Lark whiteboards, including preview images, raw node structures, and structured canvas updates.'
 zh_description: "用于查询、导出和编辑飞书云文档中的画板内容和节点结构。"
 version: "1.0.8"
 author: larksuite
@@ -17,6 +17,7 @@ metadata:
     bins: ["lark-cli"]
   cliHelp: "lark-cli whiteboard --help"
 ---
+
 > [!IMPORTANT]
 > - 运行 `lark-cli --version`，确认可用，无需询问用户。
 > - 运行 `npx -y @larksuite/whiteboard-cli@^0.2.13 -v`，确认可用，无需询问用户。

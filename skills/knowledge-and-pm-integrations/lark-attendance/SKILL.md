@@ -1,6 +1,6 @@
 ---
 name: lark-attendance
-description: "Use when querying Lark attendance records, checking missing clock-ins, and preparing traceable explanations for attendance exceptions."
+description: 'Use when querying Lark attendance records, checking missing clock-ins, and preparing traceable explanations for attendance exceptions.'
 zh_description: "用于查询飞书考勤记录、核对打卡缺失、整理异常考勤并生成可追溯说明。"
 version: "1.0.3"
 author: larksuite
@@ -17,6 +17,7 @@ metadata:
     bins: ["lark-cli"]
   cliHelp: "lark-cli attendance --help"
 ---
+
 # attendance (v1)
 
 **CRITICAL — 开始前 MUST 先用 Read 工具读取 [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md)，其中包含认证、权限处理**

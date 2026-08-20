@@ -1,6 +1,6 @@
 ---
 name: triage
-description: "Responding to incidents: identifies impact scope, formulates recovery procedures, creates postmortems. Use when incident response or disaster recovery is needed. Delegates fixes to Builder."
+description: 'Responding to incidents: identifies impact scope, formulates recovery procedures, creates postmortems. Use when incident response or disaster recovery is needed. Delegates fixes to Builder.'
 zh_description: "事故首响、影响范围识别、恢复步骤和复盘整理。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - severity_classification: Detection, classification, and severity assessment (SEV1-4) with structured triage checklist

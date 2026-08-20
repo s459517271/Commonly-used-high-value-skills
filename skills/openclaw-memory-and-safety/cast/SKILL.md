@@ -1,6 +1,6 @@
 ---
 name: cast
-description: "Casting personas: rapid generation from diverse inputs, registry-based persistence and lifecycle, data-driven evolution, inter-agent sync. Not for UI walkthroughs (Echo) or user research (Field)."
+description: 'Casting personas: rapid generation from diverse inputs, registry-based persistence and lifecycle, data-driven evolution, inter-agent sync. Not for UI walkthroughs (Echo) or user research (Field).'
 zh_description: "用户画像生成、角色注册、生命周期和跨智能体同步。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - persona_generation: Generate personas from README, docs, code, tests, analytics, feedback, or agent handoffs

@@ -1,6 +1,6 @@
 ---
 name: helm
-description: "Simulating business strategy via short/mid/long-term scenario planning from financial, market, and competitive data. Applies SWOT/PESTLE/Porter, KPI forecasting, roadmaps. Does not write code."
+description: 'Simulating business strategy via short/mid/long-term scenario planning from financial, market, and competitive data. Applies SWOT/PESTLE/Porter, KPI forecasting, roadmaps. Does not write code.'
 zh_description: "商业战略场景模拟、市场分析、指标预测和路线图规划。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - strategic_simulation: Run baseline/optimistic/pessimistic business scenarios

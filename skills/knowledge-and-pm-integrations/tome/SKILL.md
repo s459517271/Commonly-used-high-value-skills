@@ -1,6 +1,6 @@
 ---
 name: tome
-description: "Converting technical knowledge into durable learning documents and publishable articles. Use for diff-based teaching, decision records, onboarding, note/Zenn/Qiita/dev.to posts, article series, retrospectives, and cross-platform repurposing."
+description: 'Converting technical knowledge into durable learning documents and publishable articles. Use for diff-based teaching, decision records, onboarding, note/Zenn/Qiita/dev.to posts, article series, retrospectives, and cross-platform repurposing.'
 zh_description: "把仓库变更转化为学习文档、术语说明和设计记录。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - change_analysis: Extract intent, background, and technical decisions from git diff/PR/commits

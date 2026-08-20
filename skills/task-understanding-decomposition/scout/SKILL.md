@@ -1,6 +1,6 @@
 ---
 name: scout
-description: "Investigating bugs via root cause analysis, reproduction steps, and impact assessment. Investigation-only — finds why bugs occur and where to fix them, no code. Use when a bug needs RCA before a fix."
+description: 'Investigating bugs via root cause analysis, reproduction steps, and impact assessment. Investigation-only — finds why bugs occur and where to fix them, no code. Use when a bug needs RCA before a fix.'
 zh_description: "缺陷调查、复现步骤、根因分析和影响评估。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - bug_investigation: Investigate bug reports and reproduce issues

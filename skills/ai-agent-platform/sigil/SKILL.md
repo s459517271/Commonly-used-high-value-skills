@@ -1,6 +1,6 @@
 ---
 name: sigil
-description: "Designing a repository's project-local operating layer and generating its skills, recipes, workflows, and routing map. Not for global ecosystem agents (Architect) or runtime execution (Nexus)."
+description: 'Designing a repository''s project-local operating layer and generating its skills, recipes, workflows, and routing map. Not for global ecosystem agents (Architect) or runtime execution (Nexus).'
 zh_description: "根据项目代码自动生成贴合仓库约定的技能。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - project_analysis: Detect stack, structure, conventions, existing skills, and sync drift

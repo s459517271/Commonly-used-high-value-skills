@@ -1,6 +1,6 @@
 ---
 name: trace
-description: "Analyzing session replays, extracting persona-based behavioral patterns, and storytelling UX issues. Reads the 'why' from real user operation logs. Works with Field/Echo for persona validation."
+description: 'Analyzing session replays, extracting persona-based behavioral patterns, and storytelling UX issues. Reads the ''why'' from real user operation logs. Works with Field/Echo for persona validation.'
 zh_description: "会话回放分析、行为模式提取和体验问题叙事。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - session_replay_analysis: Analyze click/scroll/navigation patterns from session recordings to extract behavioral insights

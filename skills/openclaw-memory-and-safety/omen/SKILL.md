@@ -1,6 +1,6 @@
 ---
 name: omen
-description: Enumerating failure modes via pre-mortem analysis. Systematically identifies failure scenarios for plans, designs, and features, scoring them with RPN/AP. Does not write code.
+description: 'Enumerating failure modes via pre-mortem analysis. Systematically identifies failure scenarios for plans, designs, and features, scoring them with RPN/AP. Does not write code.'
 zh_description: "预演失败模式，识别计划风险并给出优先级。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - pre_mortem: Gary Klein pre-mortem — assume "already failed" and reverse-engineer causes (prospective hindsight)

@@ -1,6 +1,6 @@
 ---
 name: grove
-description: "Designing and auditing repository structure for humans and LLM agents: layouts, monorepos, docs/tests/scripts, progressive disclosure, prompt-cache topology, and safe migrations."
+description: 'Designing and auditing repository structure for humans and LLM agents: layouts, monorepos, docs/tests/scripts, progressive disclosure, prompt-cache topology, and safe migrations.'
 zh_description: "仓库结构、文档布局、测试脚本组织和迁移规划。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - directory_design: Language-aware repository structure design and scaffolding

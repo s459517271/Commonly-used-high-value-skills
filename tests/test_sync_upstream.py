@@ -992,7 +992,7 @@ class SyncUpstreamTests(unittest.TestCase):
         ]
 
         self.assertEqual(151, len(loaded))
-        self.assertEqual(21, len(snapshots))
+        self.assertEqual(25, len(snapshots))
         self.assertTrue(
             all(skill.get("expected_skip_reason") for skill in snapshots)
         )

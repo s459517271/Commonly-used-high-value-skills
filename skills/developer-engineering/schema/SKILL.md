@@ -1,6 +1,6 @@
 ---
 name: schema
-description: Designing database schemas, migrations, and multi-tenant architecture: RLS, tenant routing, provisioning, quotas, and isolation. Not for query-plan tuning (Tuner).
+description: 'Designing database schemas, migrations, and multi-tenant architecture: RLS, tenant routing, provisioning, quotas, and isolation. Not for query-plan tuning (Tuner).'
 zh_description: "数据库模式设计、迁移规划、索引策略和关系建模。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - data_modeling: Design normalized database schemas and ER diagrams

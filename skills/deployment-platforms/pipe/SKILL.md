@@ -1,6 +1,6 @@
 ---
 name: pipe
-description: "Designing GitHub Actions workflows in depth: trigger strategy, security hardening, performance optimization, PR automation, and Reusable Workflow design."
+description: 'Designing GitHub Actions workflows in depth: trigger strategy, security hardening, performance optimization, PR automation, and Reusable Workflow design.'
 zh_description: "持续集成工作流、触发策略、安全加固和复用设计。"
 version: "1.0.3"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - gha_workflow_design: Design GitHub Actions workflows with advanced patterns

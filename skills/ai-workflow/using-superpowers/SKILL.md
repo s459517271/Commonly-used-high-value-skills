@@ -1,6 +1,6 @@
 ---
 name: using-superpowers
-description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
+description: 'Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions'
 zh_description: "用于使用 Superpowers 工作流提升计划、执行和验证质量。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 4
 complexity: "intermediate"
 ---
+
 <SUBAGENT-STOP>
 If you were dispatched as a subagent to execute a specific task, ignore this skill.
 </SUBAGENT-STOP>

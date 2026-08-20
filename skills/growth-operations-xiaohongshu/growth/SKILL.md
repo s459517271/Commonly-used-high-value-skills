@@ -1,6 +1,6 @@
 ---
 name: growth
-description: "Optimizing SEO (meta/OGP/JSON-LD/headings), SMO (social sharing), CRO (CTA/form/exit-intent), and GEO (AI citation optimization). Use for search ranking, conversion, or AI visibility."
+description: 'Optimizing SEO (meta/OGP/JSON-LD/headings), SMO (social sharing), CRO (CTA/form/exit-intent), and GEO (AI citation optimization). Use for search ranking, conversion, or AI visibility.'
 zh_description: "搜索、社交、转化和人工智能引用优化的一体化增长。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - seo_meta_implementation: Title, description, canonical, robots meta tags per page

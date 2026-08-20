@@ -1,6 +1,6 @@
 ---
 name: gear
-description: "Managing dependencies, CI/CD, advanced GitHub Actions workflows, containers, secrets, and operational config. Use for build, workflow, or environment work."
+description: 'Managing dependencies, CI/CD, advanced GitHub Actions workflows, containers, secrets, and operational config. Use for build, workflow, or environment work.'
 zh_description: "依赖、构建、容器、监控和开发环境运维优化。"
 version: "1.0.5"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - dependency_management: npm/pnpm/yarn/bun audit, update, lockfile conflict resolution, version pinning, supply chain defense (postinstall blocking via allowBuilds, trustPolicy, blockExoticSubdeps, cooldown periods, provenance verification)

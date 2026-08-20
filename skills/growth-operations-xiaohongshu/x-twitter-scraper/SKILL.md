@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "Use Xquik for X/Twitter REST, MCP, SDKs, search, filtered exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for X API alternatives, pricing comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Read-only by default. Require explicit approval for writes, private reads, monitors, webhooks & metered bulk jobs."
+description: 'Use Xquik for X/Twitter REST, MCP, SDKs, search, filtered exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for X API alternatives, pricing comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Read-only by default. Require explicit approval for writes, private reads, monitors, webhooks & metered bulk jobs.'
 zh_description: "用于抓取和分析 X/Twitter 公开内容、线程和增长信号。"
 version: "1.0.2"
 author: "Xquik-dev"
@@ -115,6 +115,7 @@ metadata:
       signature: skill.oms.sig required for signed release artifacts.
       evaluations: Tier-3 evaluation evidence and BENCHMARK.md required before NVIDIA-Verified release.
 ---
+
 # Xquik X Data Platform
 
 > Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.

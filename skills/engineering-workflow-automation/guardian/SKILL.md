@@ -1,6 +1,6 @@
 ---
 name: guardian
-description: Gatekeeping Git/PR by classifying change essence and recommending granularity, naming, and strategy. Use when PR preparation or commit strategy is needed.
+description: 'Gatekeeping Git/PR by classifying change essence and recommending granularity, naming, and strategy. Use when PR preparation or commit strategy is needed.'
 zh_description: "提交、分支、合并请求策略和变更粒度把关。"
 version: "1.0.4"
 author: "seaworld008"
@@ -13,6 +13,7 @@ updated_at: "2026-08-20"
 quality: 5
 complexity: "advanced"
 ---
+
 <!--
 CAPABILITIES_SUMMARY:
 - change_classification: Classify changes as Essential/Supporting/Incidental/Generated/Configuration
