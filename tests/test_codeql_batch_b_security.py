@@ -217,7 +217,7 @@ def test_tick_sqlite_immediate_claim_allows_only_one_live_contender(
     assert_node_ok(result)
 
 
-def test_tick_legacy_file_lock_is_read_only_and_live_or_invalid_blocks(
+def test_tick_legacy_file_lock_is_read_only_and_unsafe_types_block(
     tmp_path: Path,
 ) -> None:
     module_url = TICK.as_uri()
@@ -246,8 +246,23 @@ def test_tick_legacy_file_lock_is_read_only_and_live_or_invalid_blocks(
 
         const invalidPath = path.join(root, "invalid.lock");
         fs.writeFileSync(invalidPath, "not-a-lock", { mode: 0o600 });
-        assert.equal(legacyLockBlocks(invalidPath, () => false), true);
+        assert.equal(
+          legacyLockBlocks(invalidPath, () => false),
+          false,
+          "a stable malformed regular file cannot belong to a live legacy worker",
+        );
         assert.equal(fs.existsSync(invalidPath), true);
+
+        const symlinkTarget = path.join(root, "symlink-target");
+        const symlinkPath = path.join(root, "symlink.lock");
+        fs.writeFileSync(symlinkTarget, String(process.pid), { mode: 0o600 });
+        fs.symlinkSync(symlinkTarget, symlinkPath);
+        assert.equal(
+          legacyLockBlocks(symlinkPath, () => false),
+          true,
+          "unsafe legacy path types remain fail-closed",
+        );
+        assert.equal(fs.readFileSync(symlinkTarget, "utf8"), String(process.pid));
         """
         % json.dumps(module_url),
         str(tmp_path),

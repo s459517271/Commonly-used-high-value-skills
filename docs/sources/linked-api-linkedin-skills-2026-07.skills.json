@@ -592,7 +592,7 @@
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/tick.mjs",
-          "sha256": "359c0364076c354289b6d80278451eb3d4dcb21081621054ab04c563616e332d",
+          "sha256": "71365cf52dcb4bcf1352e275c01869c3670202b00d1c84c3e590b1c88815d40b",
           "owner": "linkedin-growth",
           "mode": "100644"
         }

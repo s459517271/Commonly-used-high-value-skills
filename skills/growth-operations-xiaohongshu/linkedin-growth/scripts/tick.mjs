@@ -343,12 +343,15 @@ export function readLegacyLockSnapshot(filePath) {
     fd = openSync(filePath, constants.O_RDONLY | (constants.O_NOFOLLOW || 0));
   } catch (error) {
     if (error?.code === 'ENOENT') return null;
-    return { invalid: true };
+    return { invalid: true, recoverable: false };
   }
   try {
     const before = fstatSync(fd, { bigint: true });
-    if (!before.isFile() || before.size <= 0n || before.size > BigInt(LOCK_MAX_BYTES)) {
-      return { invalid: true };
+    if (!before.isFile()) {
+      return { invalid: true, recoverable: false };
+    }
+    if (before.size <= 0n || before.size > BigInt(LOCK_MAX_BYTES)) {
+      return { invalid: true, recoverable: true };
     }
     const buffer = Buffer.alloc(Number(before.size));
     let offset = 0;
@@ -366,10 +369,12 @@ export function readLegacyLockSnapshot(filePath) {
       before.mtimeNs !== after.mtimeNs ||
       before.ctimeNs !== after.ctimeNs
     ) {
-      return { invalid: true };
+      return { invalid: true, recoverable: false };
     }
     const record = parseLockRecord(buffer.toString('utf8'), { allowLegacyPid: true });
-    return record ? { invalid: false, record } : { invalid: true };
+    return record
+      ? { invalid: false, record }
+      : { invalid: true, recoverable: true };
   } finally {
     closeSync(fd);
   }
@@ -378,7 +383,7 @@ export function readLegacyLockSnapshot(filePath) {
 export function legacyLockBlocks(filePath, processAlive = isProcessAlive) {
   const snapshot = readLegacyLockSnapshot(filePath);
   if (snapshot === null) return false;
-  if (snapshot.invalid) return true;
+  if (snapshot.invalid) return !snapshot.recoverable;
   return processAlive(snapshot.record.pid);
 }
 
