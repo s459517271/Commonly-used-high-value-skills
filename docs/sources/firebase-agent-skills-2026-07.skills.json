@@ -68,7 +68,8 @@
         {
           "path": "skills/security-and-reliability/firebase-security-rules-auditor/SKILL.md",
           "owner": "firebase-security-rules-auditor",
-          "sha256": "91b3a59f6e981e5eab000eafc1ba17d209eab0d3eab1b213f134f5a4a3b162a7"
+          "sha256": "91b3a59f6e981e5eab000eafc1ba17d209eab0d3eab1b213f134f5a4a3b162a7",
+          "mode": "100644"
         }
       ]
     }

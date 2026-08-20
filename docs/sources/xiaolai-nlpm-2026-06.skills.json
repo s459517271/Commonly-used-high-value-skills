@@ -54,7 +54,7 @@
         "last_synced_at": "2026-08-18",
         "last_synced_commit": "d4ca2d45618334dc86c79a09ab1b2bbe2c47e1d7"
       },
-      "kind": "mirror",
+      "kind": "overlay",
       "sync_mode": "monitor",
       "origins": [
         {
@@ -77,13 +77,97 @@
             "last_checked_at": "2026-08-18",
             "last_synced_at": "2026-08-18"
           }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/nlpm-audit",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/audit-rules.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/audit-rules.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/ci-and-maintenance.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/ci-and-maintenance.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/command-recipes.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/command-recipes.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/scoring-rubric.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/scoring-rubric.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/security-patterns.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/security-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py",
+              "target": "skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
         }
       ],
       "managed_files": [
         {
           "path": "skills/ai-workflow/nlpm-audit/SKILL.md",
+          "sha256": "a604f3831f0a6821ce47c490f291ccbccf2e07befe9e6b85fcbf55ee55f1d844",
           "owner": "nlpm-audit",
-          "sha256": "a604f3831f0a6821ce47c490f291ccbccf2e07befe9e6b85fcbf55ee55f1d844"
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/audit-rules.md",
+          "sha256": "617e7027a19862ff1fd1774022c242dff1f280e91eba24cc90c86029deded1fb",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/ci-and-maintenance.md",
+          "sha256": "1db27fcc9c7d97296b7796f4ad0a28865c9a1cb2f378078997538e8d91f15f4d",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/command-recipes.md",
+          "sha256": "51aeba20f8747cbd4b47ae60059d4325c0c30eafc962ea06427fd8c54083de0e",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/scoring-rubric.md",
+          "sha256": "c0d1012434b5a70b3fc8a52e2decc37b563c1809afdde7b5a0a51a6ce4080b1a",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/security-patterns.md",
+          "sha256": "e2b5eca8c8c767e868990261241b6dffb718b86c67495b39cdb3b69949c08cc7",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py",
+          "sha256": "0600d88a50b1430008894961f7833f2cc6332b14fbf5180c4a83bf8f3d54ec92",
+          "owner": "nlpm-audit",
+          "mode": "100644"
         }
       ]
     }

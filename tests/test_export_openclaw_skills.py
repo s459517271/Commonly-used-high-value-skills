@@ -1,8 +1,12 @@
 import importlib.util
+import json
+import stat
+import subprocess
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +23,45 @@ def load_export_module():
 
 
 class ExportOpenClawSkillsTests(unittest.TestCase):
+    @staticmethod
+    def git_index_modes(*paths: str) -> dict[str, str]:
+        snapshot = REPO_ROOT / ".hvs-stage-index-modes.json"
+        if snapshot.is_file() and not (REPO_ROOT / ".git").exists():
+            payload = json.loads(snapshot.read_text(encoding="utf-8"))
+            if (
+                payload.get("schema_version") != 1
+                or payload.get("source") != "trusted-git-index"
+                or not isinstance(payload.get("modes"), dict)
+            ):
+                raise AssertionError("malformed trusted Git index snapshot")
+            prefixes = tuple(path.rstrip("/") + "/" for path in paths)
+            return {
+                relative: mode
+                for relative, mode in payload["modes"].items()
+                if relative in paths or relative.startswith(prefixes)
+            }
+        output = subprocess.check_output(
+            [
+                "git",
+                "ls-files",
+                "--stage",
+                "-z",
+                "--",
+                *paths,
+            ],
+            cwd=REPO_ROOT,
+        )
+        modes: dict[str, str] = {}
+        for record in output.split(b"\0"):
+            if not record:
+                continue
+            metadata, separator, raw_path = record.partition(b"\t")
+            fields = metadata.split()
+            if not separator or len(fields) != 3 or fields[2] != b"0":
+                raise AssertionError(f"malformed Git index record: {record!r}")
+            modes[raw_path.decode("utf-8")] = fields[0].decode("ascii")
+        return modes
+
     def test_export_flattens_skill_tree_and_synthesizes_frontmatter(self):
         module = load_export_module()
 
@@ -56,6 +99,91 @@ class ExportOpenClawSkillsTests(unittest.TestCase):
             self.assertIn("name: demo-skill", exported_skill_md)
             self.assertIn("description: Automates demo workflow for local testing.", exported_skill_md)
             self.assertIn("# Demo Skill", exported_skill_md)
+
+    def test_export_preserves_executable_mode(self):
+        module = load_export_module()
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            source_root = tmp / "skills"
+            output_root = tmp / "openclaw-skills"
+            skill_dir = source_root / "developer-engineering" / "demo-skill"
+            scripts = skill_dir / "scripts"
+            scripts.mkdir(parents=True)
+            skill_md = skill_dir / "SKILL.md"
+            skill_md.write_text(
+                "---\nname: demo-skill\ndescription: Demo.\n---\n# Demo\n",
+                encoding="utf-8",
+            )
+            skill_md.chmod(0o755)
+            executable = scripts / "check.sh"
+            executable.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+            executable.chmod(0o755)
+
+            module.export_openclaw_skills(source_root, output_root)
+
+            exported = output_root / "demo-skill" / "scripts" / "check.sh"
+            self.assertEqual(executable.read_bytes(), exported.read_bytes())
+            self.assertEqual(0o755, stat.S_IMODE(exported.stat().st_mode))
+            exported_skill = output_root / "demo-skill" / "SKILL.md"
+            self.assertEqual(0o755, stat.S_IMODE(exported_skill.stat().st_mode))
+
+    def test_tracked_openclaw_export_modes_match_canonical_index(self):
+        module = load_export_module()
+        canonical_modes = self.git_index_modes("skills")
+        exported_modes = self.git_index_modes("openclaw-skills")
+        mismatches: list[str] = []
+
+        for canonical, mode in sorted(canonical_modes.items()):
+            parts = Path(canonical).parts
+            if len(parts) < 4:
+                continue
+            skill_root = Path(*parts[:3])
+            if f"{skill_root.as_posix()}/SKILL.md" not in canonical_modes:
+                continue
+            relative = Path(*parts[3:])
+            if any(part in module.IGNORED_NAMES for part in relative.parts):
+                continue
+            exported = (
+                Path("openclaw-skills") / parts[2] / relative
+            ).as_posix()
+            exported_mode = exported_modes.get(exported)
+            if exported_mode != mode:
+                mismatches.append(
+                    f"{canonical} -> {exported}: {mode} != {exported_mode}"
+                )
+
+        self.assertEqual(
+            [],
+            mismatches,
+            "Tracked OpenClaw artifacts must preserve canonical Git modes.",
+        )
+
+    def test_index_mode_gate_consumes_trusted_snapshot_without_git_metadata(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / ".hvs-stage-index-modes.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "source": "trusted-git-index",
+                        "modes": {
+                            "skills/category/demo/SKILL.md": "100755",
+                            "openclaw-skills/demo/SKILL.md": "100755",
+                            "README.md": "100644",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch(
+                f"{__name__}.REPO_ROOT",
+                root,
+            ):
+                self.assertEqual(
+                    {"skills/category/demo/SKILL.md": "100755"},
+                    self.git_index_modes("skills"),
+                )
 
     def test_export_preserves_extra_frontmatter_blocks(self):
         module = load_export_module()

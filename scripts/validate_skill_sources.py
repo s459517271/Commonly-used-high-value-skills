@@ -17,6 +17,8 @@ try:
         COMMIT_RE,
         DATE_RE as V2_DATE_RE,
         EXTERNAL_KINDS,
+        GIT_FILE_MODES,
+        LOCAL_CURATION_REPO,
         SCHEMA_VERSION,
         SHA256_RE,
         UNKNOWN_LICENSE_VALUES,
@@ -25,6 +27,7 @@ try:
         VALID_SYNC_MODES,
         discover_source_mappings,
         github_repo,
+        git_file_mode,
         infer_channel,
         is_local_repo,
         is_local_source,
@@ -32,6 +35,7 @@ try:
         parse_frontmatter,
         safe_relative_path,
         sha256_file,
+        valid_github_repo,
     )
 except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
     from scripts.provenance_v2 import (
@@ -39,6 +43,8 @@ except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
         COMMIT_RE,
         DATE_RE as V2_DATE_RE,
         EXTERNAL_KINDS,
+        GIT_FILE_MODES,
+        LOCAL_CURATION_REPO,
         SCHEMA_VERSION,
         SHA256_RE,
         UNKNOWN_LICENSE_VALUES,
@@ -47,6 +53,7 @@ except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
         VALID_SYNC_MODES,
         discover_source_mappings,
         github_repo,
+        git_file_mode,
         infer_channel,
         is_local_repo,
         is_local_source,
@@ -54,7 +61,13 @@ except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
         parse_frontmatter,
         safe_relative_path,
         sha256_file,
+        valid_github_repo,
     )
+
+try:
+    from audit_licenses import PERMISSIVE_LICENSES
+except ModuleNotFoundError:  # pragma: no cover - import path used by tests
+    from scripts.audit_licenses import PERMISSIVE_LICENSES
 
 REQUIRED_TOP = {"video", "official_references", "skills"}
 REQUIRED_SKILL_KEYS = {"video_name", "normalized_slug", "status", "repo_skill", "source", "notes"}
@@ -281,6 +294,78 @@ def _validate_tracking(
         if value and not V2_DATE_RE.fullmatch(str(value)):
             errors.append(f"{label}.{key} must be YYYY-MM-DD or null")
 
+    license_checkpoint = tracking.get("license_checkpoint")
+    if license_checkpoint is not None:
+        checkpoint_label = f"{label}.license_checkpoint"
+        if local:
+            errors.append(
+                f"{checkpoint_label} is forbidden for a local origin"
+            )
+        elif not isinstance(license_checkpoint, dict):
+            errors.append(f"{checkpoint_label} must be an object")
+        else:
+            required_checkpoint = {
+                "path",
+                "blob_sha",
+                "content_sha256",
+                "spdx",
+                "resolved_commit",
+            }
+            allowed_checkpoint = required_checkpoint | {"api_spdx"}
+            missing_checkpoint = required_checkpoint - set(license_checkpoint)
+            extra_checkpoint = set(license_checkpoint) - allowed_checkpoint
+            if missing_checkpoint:
+                errors.append(
+                    f"{checkpoint_label} missing keys: "
+                    f"{sorted(missing_checkpoint)}"
+                )
+            if extra_checkpoint:
+                errors.append(
+                    f"{checkpoint_label} unknown keys: "
+                    f"{sorted(extra_checkpoint)}"
+                )
+            if not safe_relative_path(license_checkpoint.get("path")):
+                errors.append(f"{checkpoint_label}.path must be a safe path")
+            blob_sha = license_checkpoint.get("blob_sha")
+            if not isinstance(blob_sha, str) or not COMMIT_RE.fullmatch(blob_sha):
+                errors.append(
+                    f"{checkpoint_label}.blob_sha must be a full Git object hash"
+                )
+            checkpoint_hash = license_checkpoint.get("content_sha256")
+            if (
+                not isinstance(checkpoint_hash, str)
+                or not SHA256_RE.fullmatch(checkpoint_hash)
+            ):
+                errors.append(
+                    f"{checkpoint_label}.content_sha256 must be SHA-256"
+                )
+            checkpoint_spdx = license_checkpoint.get("spdx")
+            if checkpoint_spdx not in PERMISSIVE_LICENSES:
+                errors.append(
+                    f"{checkpoint_label}.spdx must be a permitted SPDX identifier"
+                )
+            checkpoint_commit = license_checkpoint.get("resolved_commit")
+            if (
+                not isinstance(checkpoint_commit, str)
+                or not COMMIT_RE.fullmatch(checkpoint_commit)
+            ):
+                errors.append(
+                    f"{checkpoint_label}.resolved_commit must be a full commit"
+                )
+            api_spdx = license_checkpoint.get("api_spdx")
+            if api_spdx is not None and (
+                not isinstance(api_spdx, str)
+                or not api_spdx
+                or api_spdx != api_spdx.strip()
+                or len(api_spdx) > 128
+                or any(ord(character) < 0x20 for character in api_spdx)
+            ):
+                errors.append(f"{checkpoint_label}.api_spdx is invalid")
+            elif api_spdx not in {None, "NOASSERTION", checkpoint_spdx}:
+                errors.append(
+                    f"{checkpoint_label}.api_spdx conflicts with detected SPDX"
+                )
+
 
 def _validate_artifacts(
     artifacts: object,
@@ -360,15 +445,29 @@ def _validate_origin(
         local = False
     else:
         local = is_local_repo(repo)
+        if not local and not valid_github_repo(repo):
+            errors.append(
+                f"{label}.repo must be a canonical GitHub owner/repo"
+            )
 
     origin_path = origin.get("path")
     if origin_path is not None and not safe_relative_path(origin_path):
         errors.append(f"{label}.path must be a safe relative path or null")
 
-    if kind in EXTERNAL_KINDS and local:
+    curated_local = kind in {"overlay", "snapshot"} and local
+    if kind in EXTERNAL_KINDS and local and not curated_local:
         errors.append(f"{label} must be an external origin for kind {kind}")
     if kind == "in_house" and not local:
         errors.append(f"{label} must be local for kind in_house")
+    if repo == LOCAL_CURATION_REPO and kind not in {"overlay", "snapshot"}:
+        errors.append(
+            f"{label}.repo {LOCAL_CURATION_REPO!r} is only valid for "
+            "overlay or snapshot entries"
+        )
+    if curated_local and repo != LOCAL_CURATION_REPO:
+        errors.append(
+            f"{label}.repo must be {LOCAL_CURATION_REPO!r} for local curation"
+        )
 
     license_value = origin.get("license")
     if not local and (
@@ -376,17 +475,25 @@ def _validate_origin(
         or license_value.strip().lower() in UNKNOWN_LICENSE_VALUES
     ):
         errors.append(f"{label}.license must declare an external origin license")
+    if curated_local and license_value is not None:
+        errors.append(f"{label}.license must be null for local curation")
 
     sync_mode = origin.get("sync_mode")
     if sync_mode not in VALID_SYNC_MODES:
         errors.append(f"{label}.sync_mode invalid: {sync_mode!r}")
     else:
-        if sync_mode != entry_sync_mode:
+        if curated_local and sync_mode != "local-only":
+            errors.append(f"{label}.sync_mode must be 'local-only'")
+        elif not curated_local and sync_mode != entry_sync_mode:
             errors.append(
                 f"{label}.sync_mode must match entry sync_mode "
                 f"{entry_sync_mode!r}"
             )
-        if legacy_sync_mode is not None and sync_mode != legacy_sync_mode:
+        if (
+            not curated_local
+            and legacy_sync_mode is not None
+            and sync_mode != legacy_sync_mode
+        ):
             errors.append(
                 f"{label}.sync_mode must match legacy upstream.sync_mode "
                 f"{legacy_sync_mode!r}"
@@ -402,6 +509,16 @@ def _validate_origin(
         local=local,
         errors=errors,
     )
+    if (
+        not local
+        and isinstance(tracking, dict)
+        and isinstance(tracking.get("license_checkpoint"), dict)
+        and tracking["license_checkpoint"].get("spdx") != license_value
+    ):
+        errors.append(
+            f"{label}.tracking.license_checkpoint.spdx must match "
+            "origin.license"
+        )
     if not local and isinstance(tracking, dict):
         channel = tracking.get("channel")
         ref = tracking.get("ref")
@@ -573,9 +690,10 @@ def _validate_composition(
             if selector == "source_package":
                 canonical_value = value.lower()
                 source_package_ids.add(canonical_value)
-                if "/" not in value:
+                if not valid_github_repo(value):
                     errors.append(
-                        f"{dep_label}.source_package must look like owner/repo"
+                        f"{dep_label}.source_package must be a canonical "
+                        "GitHub owner/repo"
                     )
                 if value != value.strip() or value != canonical_value:
                     errors.append(
@@ -675,15 +793,24 @@ def _validate_frontmatter_semantics(
             for origin in origins
             if isinstance(origin, dict) and not is_local_repo(origin.get("repo"))
         }
-        if (
-            frontmatter_license
-            and len(origin_licenses) == 1
-            and frontmatter_license.lower() not in origin_licenses
-        ):
-            errors.append(
-                f"{label} frontmatter license {frontmatter_license!r} "
-                "does not match its origin license"
-            )
+        if frontmatter_license and origin_licenses:
+            expression = frontmatter_license.strip()
+            has_or = bool(re.search(r"\s+OR\s+", expression, re.IGNORECASE))
+            declared_licenses = {
+                part.strip().strip("()").lower()
+                for part in re.split(
+                    r"\s+(?:AND|OR)\s+",
+                    expression,
+                    flags=re.IGNORECASE,
+                )
+                if part.strip().strip("()")
+            }
+            if has_or or declared_licenses != origin_licenses:
+                errors.append(
+                    f"{label} frontmatter license {frontmatter_license!r} "
+                    "does not preserve the complete external origin license "
+                    f"lineage {sorted(origin_licenses)!r}"
+                )
 
 
 def _validate_v2_entry(
@@ -728,8 +855,16 @@ def _validate_v2_entry(
         errors.append(
             f"{mapping}: skills[{idx}].origins must not be empty for kind {kind}"
         )
+    if kind in EXTERNAL_KINDS and origins and not any(
+        isinstance(origin, dict) and not is_local_repo(origin.get("repo"))
+        for origin in origins
+    ):
+        errors.append(
+            f"{mapping}: skills[{idx}] kind {kind} requires an external origin"
+        )
     artifact_file_targets: set[str] = set()
     artifact_directory_targets: set[str] = set()
+    artifact_target_claims: dict[str, list[tuple[int, dict, dict]]] = {}
     for origin_idx, origin in enumerate(origins, 1):
         _validate_origin(
             origin,
@@ -752,6 +887,9 @@ def _validate_v2_entry(
                         artifact_directory_targets.add(target)
                     else:
                         artifact_file_targets.add(target)
+                    artifact_target_claims.setdefault(target, []).append(
+                        (origin_idx, origin, artifact)
+                    )
 
     _validate_legacy_owner_consistency(
         item,
@@ -760,6 +898,33 @@ def _validate_v2_entry(
         origins,
         errors,
     )
+
+    for target, claims in sorted(artifact_target_claims.items()):
+        origin_owners = {origin_index for origin_index, _, _ in claims}
+        if len(origin_owners) > 1:
+            errors.append(
+                f"{mapping}: skills[{idx}] artifact target {target!r} "
+                "must have exactly one origin owner; found "
+                f"{len(origin_owners)}"
+            )
+
+    repo_skill = item.get("repo_skill")
+    if kind in EXTERNAL_KINDS and isinstance(repo_skill, str):
+        repo_skill_owners = [
+            (origin, artifact)
+            for origin in origins
+            if isinstance(origin, dict)
+            for artifact in origin.get("artifacts", [])
+            if isinstance(artifact, dict)
+            and _artifact_owns_repo_skill(artifact, repo_skill)
+        ]
+        if len(repo_skill_owners) == 1 and is_local_repo(
+            repo_skill_owners[0][0].get("repo")
+        ):
+            errors.append(
+                f"{mapping}: skills[{idx}] external repo_skill must be owned "
+                "by an external origin"
+            )
 
     managed_files = item.get("managed_files")
     if not isinstance(managed_files, list):
@@ -775,9 +940,14 @@ def _validate_v2_entry(
             if not isinstance(managed, dict):
                 errors.append(f"{label} must be an object")
                 continue
-            missing = {"path", "sha256", "owner"} - set(managed)
+            missing = {"path", "sha256", "owner", "mode"} - set(managed)
             if missing:
                 errors.append(f"{label} missing keys: {sorted(missing)}")
+            declared_mode = managed.get("mode")
+            if declared_mode not in GIT_FILE_MODES:
+                errors.append(
+                    f"{label}.mode must be one of {sorted(GIT_FILE_MODES)}"
+                )
             path_value = managed.get("path")
             if not safe_relative_path(path_value):
                 errors.append(f"{label}.path must be a safe relative path")
@@ -801,6 +971,18 @@ def _validate_v2_entry(
                             f"{mapping}: skills[{idx}] managed file "
                             f"{path_value!r} sha256 does not match "
                             "repository content"
+                        )
+                    current_mode = git_file_mode(candidate)
+                    if current_mode is None:
+                        errors.append(
+                            f"{mapping}: skills[{idx}] managed file "
+                            f"{path_value!r} has a mode Git cannot represent"
+                        )
+                    elif declared_mode != current_mode:
+                        errors.append(
+                            f"{mapping}: skills[{idx}] managed file "
+                            f"{path_value!r} mode {declared_mode!r} does not "
+                            f"match repository mode {current_mode!r}"
                         )
             content_hash = managed.get("sha256")
             if (
@@ -833,19 +1015,24 @@ def _validate_v2_entry(
                 "must be listed in managed_files"
             )
         for target in sorted(managed_targets):
-            if target in artifact_file_targets:
-                continue
-            target_path = PurePosixPath(target.replace("\\", "/"))
-            covered_by_directory = any(
-                PurePosixPath(directory.replace("\\", "/"))
-                in target_path.parents
-                for directory in artifact_directory_targets
-            )
-            if not covered_by_directory:
+            owners = {
+                origin_idx
+                for origin_idx, origin in enumerate(origins, 1)
+                if isinstance(origin, dict)
+                for artifact in origin.get("artifacts", [])
+                if isinstance(artifact, dict)
+                and _artifact_owns_repo_skill(artifact, target)
+            }
+            if not owners:
                 errors.append(
                     f"{mapping}: skills[{idx}] managed file {target!r} "
                     "must be covered by an exact file artifact or a parent "
                     "directory artifact"
+                )
+            elif len(owners) > 1:
+                errors.append(
+                    f"{mapping}: skills[{idx}] managed file {target!r} "
+                    f"must have exactly one artifact owner; found {len(owners)}"
                 )
 
         canonical_repo_skill = _canonical_repo_skill_path(item)
@@ -992,38 +1179,38 @@ def validate_mapping(
 
 
 def _entry_content_sha256(item: dict, repo_root: Path) -> str | None:
-    if item.get("kind") not in {"in_house", "composite"}:
-        origins = item.get("origins")
-        if isinstance(origins, list):
-            for origin in origins:
-                if not isinstance(origin, dict):
-                    continue
-                tracking = origin.get("tracking")
-                if not isinstance(tracking, dict):
-                    continue
-                content_hash = tracking.get("content_sha256")
-                if (
-                    isinstance(content_hash, str)
-                    and SHA256_RE.fullmatch(content_hash)
-                ):
-                    return content_hash.lower()
-
     repo_skill = item.get("repo_skill")
+    if not isinstance(repo_skill, str) or not safe_relative_path(repo_skill):
+        return None
+    origins = item.get("origins")
+    if not isinstance(origins, list):
+        return None
+    owner_claims = [
+        (origin, artifact)
+        for origin in origins
+        if isinstance(origin, dict)
+        and isinstance(origin.get("artifacts"), list)
+        for artifact in origin["artifacts"]
+        if _artifact_owns_repo_skill(artifact, repo_skill)
+    ]
+    if len(owner_claims) != 1:
+        return None
+    owner = owner_claims[0][0]
+
+    if item.get("kind") not in {"in_house", "composite"}:
+        tracking = owner.get("tracking")
+        content_hash = (
+            tracking.get("content_sha256")
+            if isinstance(tracking, dict)
+            else None
+        )
+        if isinstance(content_hash, str) and SHA256_RE.fullmatch(content_hash):
+            return content_hash.lower()
+
     if isinstance(repo_skill, str) and safe_relative_path(repo_skill):
         skill_path = _safe_repository_file(repo_root, repo_skill)
         if skill_path is not None:
             return sha256_file(skill_path)
-    origins = item.get("origins")
-    if isinstance(origins, list):
-        for origin in origins:
-            if not isinstance(origin, dict):
-                continue
-            tracking = origin.get("tracking")
-            if not isinstance(tracking, dict):
-                continue
-            content_hash = tracking.get("content_sha256")
-            if isinstance(content_hash, str) and SHA256_RE.fullmatch(content_hash):
-                return content_hash.lower()
     return None
 
 

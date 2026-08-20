@@ -2,6 +2,7 @@ import importlib.util
 import io
 import json
 import os
+import re
 import sys
 import tempfile
 import unittest
@@ -124,15 +125,41 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             schema["$defs"]["managedFile"]["properties"]["sha256"]["$ref"],
         )
         self.assertEqual(
+            ["100644", "100755"],
+            schema["$defs"]["managedFile"]["properties"]["mode"]["enum"],
+        )
+        self.assertIn("mode", schema["$defs"]["managedFile"]["required"])
+        self.assertEqual(
             "#/$defs/sha256",
             schema["$defs"]["composition"]["properties"]["dependency_lock"][
                 "additionalProperties"
             ]["$ref"],
         )
+        local_tracking_contract = (
+            schema["$defs"]["origin"]["allOf"][0]["then"]["properties"][
+                "tracking"
+            ]["allOf"][1]
+        )
+        self.assertEqual(
+            ["license_checkpoint"],
+            local_tracking_contract["not"]["required"],
+        )
         self.assertEqual(
             "#/$defs/nullableSha256",
             schema["$defs"]["tracking"]["properties"]["content_sha256"]["$ref"],
         )
+        relative_pattern = schema["$defs"]["relativePath"]["pattern"]
+        self.assertIsNotNone(re.fullmatch(relative_pattern, "references/guide.md"))
+        for invalid_path in (
+            "references\\guide.md",
+            "references//guide.md",
+            "references/./guide.md",
+            "references/guide.md/",
+        ):
+            self.assertIsNone(
+                re.fullmatch(relative_pattern, invalid_path),
+                invalid_path,
+            )
 
         with tempfile.TemporaryDirectory() as tmpdir:
             sources = Path(tmpdir)
@@ -169,6 +196,7 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
                         "path": rel,
                         "sha256": provenance.sha256_file(root / rel),
                         "owner": "example",
+                        "mode": "100644",
                     }
                 ],
                 entry["managed_files"],
@@ -316,12 +344,7 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             hostile_temporary = root / f".{mapping.name}.hostile.tmp"
             hostile_temporary.symlink_to(external)
 
-            with mock.patch.object(
-                provenance.tempfile,
-                "_get_candidate_names",
-                return_value=iter(("hostile", "safe")),
-            ):
-                provenance.atomic_write_json(mapping, {"schema_version": 2})
+            provenance.atomic_write_json(mapping, {"schema_version": 2})
 
             self.assertEqual(
                 {"schema_version": 2},
@@ -329,8 +352,79 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             )
             self.assertEqual("do not overwrite\n", external.read_text(encoding="utf-8"))
             self.assertTrue(hostile_temporary.is_symlink())
-            self.assertFalse((root / f".{mapping.name}.safe.tmp").exists())
             self.assertEqual(0o640, os.stat(mapping).st_mode & 0o777)
+
+    def test_atomic_writer_rejects_temp_aba_and_preserves_foreign_occupant(self):
+        for replacement_kind in ("regular", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    root = Path(tmpdir)
+                    fd_root = Path("/dev/fd")
+                    before_fds = (
+                        len(list(fd_root.iterdir()))
+                        if fd_root.exists()
+                        else None
+                    )
+                    mapping = root / "example.skills.json"
+                    original = b'{"old":true}\n'
+                    mapping.write_bytes(original)
+                    sentinel = root / "sentinel"
+                    sentinel.write_bytes(b"sentinel")
+                    real_validate = provenance._validate_atomic_temporary
+                    calls = 0
+                    foreign: Path | None = None
+
+                    def attack(directory_fd, name, descriptors, identity):
+                        nonlocal calls, foreign
+                        calls += 1
+                        if calls == 2:
+                            foreign = root / name
+                            foreign.unlink()
+                            if replacement_kind == "regular":
+                                foreign.write_bytes(b"foreign")
+                            else:
+                                foreign.symlink_to(sentinel)
+                        return real_validate(
+                            directory_fd,
+                            name,
+                            descriptors,
+                            identity,
+                        )
+
+                    with (
+                        mock.patch.object(
+                            provenance,
+                            "_validate_atomic_temporary",
+                            side_effect=attack,
+                        ),
+                        self.assertRaisesRegex(
+                            RuntimeError,
+                            "temporary inode changed|unsafe JSON temporary",
+                        ),
+                    ):
+                        provenance.atomic_write_json(
+                            mapping,
+                            {"schema_version": 2},
+                        )
+
+                    self.assertEqual(original, mapping.read_bytes())
+                    self.assertIsNotNone(foreign)
+                    assert foreign is not None
+                    self.assertTrue(
+                        foreign.exists() or foreign.is_symlink(),
+                        "cleanup must not delete a foreign temporary occupant",
+                    )
+                    if replacement_kind == "regular":
+                        self.assertEqual(b"foreign", foreign.read_bytes())
+                    else:
+                        self.assertTrue(foreign.is_symlink())
+                    self.assertEqual(b"sentinel", sentinel.read_bytes())
+                    if before_fds is not None:
+                        self.assertEqual(
+                            before_fds,
+                            len(list(fd_root.iterdir())),
+                            "atomic JSON writer leaked a descriptor",
+                        )
 
     def test_managed_digest_refresh_is_explicit_and_updates_matching_origin_only(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -503,6 +597,7 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
                     "path": rel,
                     "sha256": provenance.sha256_file(root / rel),
                     "owner": "example",
+                    "mode": "100644",
                 },
                 migrated["skills"][0]["managed_files"][0],
             )
@@ -526,6 +621,29 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
         ):
             with self.subTest(invalid=invalid):
                 self.assertFalse(provenance.safe_relative_path(invalid))
+
+    def test_github_repo_parser_requires_exact_host_and_canonical_repo(self):
+        self.assertEqual(
+            "owner/upstream",
+            provenance.github_repo("github:Owner/Upstream"),
+        )
+        self.assertEqual(
+            "owner/upstream",
+            provenance.github_repo(
+                "https://github.com/Owner/Upstream/blob/main/SKILL.md"
+            ),
+        )
+        for invalid in (
+            "https://evilgithub.com/owner/upstream",
+            "https://github.com.evil.test/owner/upstream",
+            "https://github.com//owner/upstream",
+            "https://user@github.com/owner/upstream",
+            "github:owner/upstream/extra",
+            "github:-owner/upstream",
+            "github:owner/..",
+        ):
+            with self.subTest(invalid=invalid):
+                self.assertIsNone(provenance.github_repo(invalid))
 
 
 class ProvenanceV2ValidationTests(unittest.TestCase):
@@ -685,6 +803,97 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                 any("external origin license" in error for error in errors)
             )
             self.assertTrue(any("sync_mode invalid" in error for error in errors))
+
+    def test_license_checkpoint_rejects_conflicting_github_spdx(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            mapping, data = self.make_migrated_mapping(root)
+            tracking = data["skills"][0]["origins"][0]["tracking"]
+            tracking["license_checkpoint"] = {
+                "path": "LICENSE",
+                "blob_sha": "b" * 40,
+                "content_sha256": "c" * 64,
+                "spdx": "MIT",
+                "resolved_commit": "a" * 40,
+                "api_spdx": "Apache-2.0",
+            }
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+
+            errors = validator.validate_mapping(mapping, root)
+
+            self.assertTrue(
+                any(
+                    "api_spdx conflicts with detected SPDX" in error
+                    for error in errors
+                ),
+                errors,
+            )
+
+            tracking["license_checkpoint"]["api_spdx"] = "NOASSERTION"
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual([], validator.validate_mapping(mapping, root))
+
+    def test_frontmatter_license_must_cover_every_external_origin(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            mapping, data = self.make_migrated_mapping(root)
+            entry = data["skills"][0]
+            sidecar = "skills/category/example/references/apache.md"
+            (root / sidecar).parent.mkdir(parents=True)
+            (root / sidecar).write_text("apache origin\n", encoding="utf-8")
+            second = deepcopy(entry["origins"][0])
+            second["repo"] = "other/apache-source"
+            second["license"] = "Apache-2.0"
+            second["path"] = "docs/apache.md"
+            second["artifacts"] = [
+                {
+                    "source": "docs/apache.md",
+                    "target": sidecar,
+                    "type": "file",
+                }
+            ]
+            entry["origins"].append(second)
+            entry["managed_files"].append(
+                {
+                    "path": sidecar,
+                    "sha256": provenance.sha256_file(root / sidecar),
+                    "owner": "example",
+                    "mode": "100644",
+                }
+            )
+            skill_path = root / entry["repo_skill"]
+            skill_path.write_text(
+                skill_path.read_text(encoding="utf-8").replace(
+                    "license: MIT",
+                    "license: BSD-3-Clause",
+                ),
+                encoding="utf-8",
+            )
+            entry["managed_files"][0]["sha256"] = provenance.sha256_file(skill_path)
+            entry["origins"][0]["tracking"]["content_sha256"] = (
+                entry["managed_files"][0]["sha256"]
+            )
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any("license lineage" in error for error in errors),
+                errors,
+            )
+
+            skill_path.write_text(
+                skill_path.read_text(encoding="utf-8").replace(
+                    "license: BSD-3-Clause",
+                    "license: MIT AND Apache-2.0",
+                ),
+                encoding="utf-8",
+            )
+            entry["managed_files"][0]["sha256"] = provenance.sha256_file(skill_path)
+            entry["origins"][0]["tracking"]["content_sha256"] = (
+                entry["managed_files"][0]["sha256"]
+            )
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual([], validator.validate_mapping(mapping, root))
 
     def test_default_and_canary_channels_reject_replace(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -850,7 +1059,6 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             mapping, data = self.make_migrated_mapping(root)
-            entry = data["skills"][0]
 
             mutations = (
                 ("repo", "different/upstream", "upstream.repo"),
@@ -986,6 +1194,36 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                 any("owner must match normalized_slug" in error for error in errors)
             )
 
+    def test_managed_file_mode_must_match_repository_executable_bit(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            mapping, data = self.make_migrated_mapping(root)
+            entry = data["skills"][0]
+            skill_path = root / entry["repo_skill"]
+
+            skill_path.chmod(0o755)
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any(
+                    "mode '100644' does not match repository mode '100755'"
+                    in error
+                    for error in errors
+                ),
+                errors,
+            )
+
+            entry["managed_files"][0]["mode"] = "100755"
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual([], validator.validate_mapping(mapping, root))
+
+            skill_path.chmod(0o4755)
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any("mode Git cannot represent" in error for error in errors),
+                errors,
+            )
+
     def test_directory_artifact_covers_only_explicit_managed_descendants(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
@@ -1008,6 +1246,7 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                     "path": guide,
                     "sha256": provenance.sha256_file(guide_path),
                     "owner": "example",
+                    "mode": "100644",
                 }
             )
             mapping.write_text(json.dumps(data), encoding="utf-8")
@@ -1664,6 +1903,54 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                 ),
                 errors,
             )
+
+    def test_dependency_hash_uses_unique_repo_skill_owner_only(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            _, data = self.make_migrated_mapping(root, "dependency")
+            entry = data["skills"][0]
+            owner_hash = entry["origins"][0]["tracking"]["content_sha256"]
+            unrelated = deepcopy(entry["origins"][0])
+            unrelated["repo"] = "other/unrelated"
+            unrelated["license"] = "Apache-2.0"
+            unrelated["path"] = "docs/other.md"
+            unrelated["artifacts"] = [
+                {
+                    "source": "docs/other.md",
+                    "target": "skills/category/dependency/references/other.md",
+                    "type": "file",
+                }
+            ]
+            unrelated["tracking"]["content_sha256"] = "f" * 64
+            entry["origins"].insert(0, unrelated)
+
+            self.assertEqual(
+                owner_hash,
+                validator._entry_content_sha256(entry, root),
+            )
+
+            duplicate_in_owner = deepcopy(entry)
+            duplicate_in_owner["origins"][1]["artifacts"].append(
+                deepcopy(duplicate_in_owner["origins"][1]["artifacts"][0])
+            )
+            self.assertIsNone(
+                validator._entry_content_sha256(duplicate_in_owner, root)
+            )
+
+            duplicate_owner = deepcopy(unrelated)
+            duplicate_owner["artifacts"] = [
+                {
+                    "source": "other/SKILL.md",
+                    "target": entry["repo_skill"],
+                    "type": "file",
+                }
+            ]
+            entry["origins"].append(duplicate_owner)
+            self.assertIsNone(validator._entry_content_sha256(entry, root))
+
+            for origin in entry["origins"]:
+                origin["artifacts"] = []
+            self.assertIsNone(validator._entry_content_sha256(entry, root))
 
     def test_dependency_lock_detects_stale_composite(self):
         with tempfile.TemporaryDirectory() as tmpdir:

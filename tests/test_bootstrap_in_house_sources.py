@@ -1,6 +1,5 @@
 import hashlib
 import importlib.util
-import json
 import tempfile
 import textwrap
 import unittest
@@ -106,6 +105,7 @@ class BootstrapInHouseSourcesTests(unittest.TestCase):
                             (local_only_skill / "SKILL.md").read_bytes()
                         ).hexdigest(),
                         "owner": "summary-helper",
+                        "mode": "100644",
                     }
                 ],
                 skills["summary-helper"]["managed_files"],

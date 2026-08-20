@@ -8,7 +8,8 @@
 - 外部来源必须可追溯：复制外部文本前先确认 permissive license。
 - 未授权但高信号的候选只能做原创 in-house rewrite，不能复制 upstream 文本。
 - 生成文件只能通过 pipeline 更新，不能手工改。
-- 每周自动化必须使用强推理模型运行：`gpt-5.5`，`reasoning_effort = high`。
+- 每周自动化必须使用当期可用的强推理 agentic coding 模型，并设置
+  `reasoning_effort = high`；不要在治理规则中固定会过期的模型版本。
 - 维护输出必须能回答：新增了什么、更新了什么、为什么没有删除、哪些外部源被阻塞、验证是否干净。
 
 ## 2. 每周推荐顺序
@@ -33,6 +34,15 @@ python scripts/sync_upstream.py --check-only --record-check
 
 同步通道遵循以下边界：稳定 release 或不可变 fixed ref 可在门禁通过后自动更新；默认分支、canary 和组合依赖只做 monitor，必须按 commit range 人工复核。
 
+周期检查以机器报告为准，不以日志中的“0 updates”作为成功证明：
+
+```bash
+python scripts/sync_upstream.py --check-only \
+  --report-json /tmp/upstream-report.json
+```
+
+`complete`/`degraded`/`failed` 分别使用退出码 `0`/`2`/`1`。`degraded` 必须保留或更新复核 Issue；`failed` 必须使自动化失败，不能关闭既有 Issue。报告的七项计数必须守恒。
+
 如果发现有可应用的上游更新：
 
 ```bash
@@ -45,6 +55,18 @@ python scripts/sync_upstream.py --apply
 python scripts/ingest_skill.py --dir skills/<category>/<skill-name> --source "<source_url>"
 ```
 
+外部接入会先写独立 provenance v2 mapping，再执行 in-house bootstrap，避免外部技能被误登记为自研。GitHub 来源应同时给出精确路径；接入后用 artifact inventory 检查所有 sidecar 的所有权：
+
+```bash
+python scripts/ingest_skill.py \
+  --dir skills/<category>/<skill-name> \
+  --source "github:<owner>/<repo>" \
+  --source-url "https://github.com/<owner>/<repo>" \
+  --upstream-path "path/to/SKILL.md"
+python scripts/reconcile_artifact_inventory.py \
+  --output /tmp/artifact-inventory.json
+```
+
 任何技能变更后都跑完整 pipeline：
 
 ```bash
@@ -55,7 +77,9 @@ python scripts/generate_tags_index.py && \
 python scripts/build_catalog_json.py && \
 python scripts/check_readme_sync.py && \
 python scripts/lint_skill_quality.py --min-lines 50 && \
+python scripts/audit_skill_portfolio.py --check-policy && \
 python scripts/validate_skill_sources.py && \
+python scripts/reconcile_artifact_inventory.py --offline --check-clean --quiet && \
 python scripts/check_source_coverage.py --min-percent 100 && \
 python scripts/audit_licenses.py && \
 python -m pytest -q tests
@@ -78,7 +102,11 @@ python scripts/audit_skill_portfolio.py
 | `improve` | 内容深度或可执行性不足 | 在同 PR 中补强；补不强则寻找替代 |
 | `replace_or_archive` | 不适合继续作为高价值技能 | 找更优质 permissive 替代；没有替代则归档或删除 |
 
-删除或替换前必须人工复核，不要只按分数机械删除。高质量但 upstream 消失的技能可以保留为本地维护快照，并在 provenance 中标记 `sync_mode: archived` 或改为 `source: in-house`。
+删除或替换前必须人工复核，不要只按分数机械删除。高质量但 upstream
+消失的外部技能可以保留为 licensed `snapshot`，并在 v2 entry 与 origin
+中标记 `sync_mode: archived` 或 `local-only`。不能把已复制的外部内容
+简单改写成 `source: in-house` 来丢弃许可证 lineage；只有真正独立创作、
+不再复制上游表达的重写版才可转为 in-house。
 
 退役必须记录 decision ledger：替代项、独有资产、外部契约、许可证和安装端清理动作。只有替代技能完全覆盖意图，并且原技能没有独有脚本、高风险 guardrail、外部契约或验收标准时，才允许删除活动副本。
 
@@ -150,14 +178,30 @@ python scripts/backfill_zh_descriptions.py --refresh-generated
 | license missing / unknown | 仓库治理问题 | 必须修复或改 in-house，不能只记录 |
 | generated diff drift | 仓库生成链路问题 | 重新跑 pipeline 并提交生成结果 |
 
-同步脚本应优先使用 provenance 中的精确 upstream path。对已归档或本地维护的来源，用以下字段阻止无意义 404 噪声：
+同步脚本应优先使用 provenance 中的精确 upstream path。对已归档或本地维护
+的来源，要同时更新 v2 entry、origin 和兼容层 `upstream`，不能只改 legacy
+字段。例如：
+
+下面两个片段只展示状态迁移时必须同步修改的字段；未展示的 provenance
+v2 必填字段仍须保留并通过 schema 与 repository validator。
 
 ```json
 {
+  "kind": "snapshot",
+  "sync_mode": "archived",
   "upstream": {
     "sync_mode": "archived",
     "archived_at": "2026-06-29"
-  }
+  },
+  "origins": [{
+    "repo": "owner/repo",
+    "sync_mode": "archived",
+    "tracking": {
+      "channel": "fixed_ref",
+      "ref": "<immutable-commit>",
+      "resolved_commit": "<immutable-commit>"
+    }
+  }]
 }
 ```
 
@@ -165,9 +209,20 @@ python scripts/backfill_zh_descriptions.py --refresh-generated
 
 ```json
 {
+  "kind": "snapshot",
+  "sync_mode": "local-only",
   "upstream": {
     "sync_mode": "local-only"
-  }
+  },
+  "origins": [{
+    "repo": "owner/repo",
+    "sync_mode": "local-only",
+    "tracking": {
+      "channel": "fixed_ref",
+      "ref": "<immutable-commit>",
+      "resolved_commit": "<immutable-commit>"
+    }
+  }]
 }
 ```
 
@@ -183,7 +238,9 @@ python scripts/backfill_zh_descriptions.py --refresh-generated
 
 优先替换而不是直接删除。替换候选必须比原技能在至少两个维度上更好：更清晰触发、更深内容、更好示例、更可信来源、更活跃维护、更明确 license。
 
-如果没有更优替代，但本地版本仍有价值，应保留并改为 in-house 维护快照，而不是为了“清空 warning”删除。
+如果没有更优替代，但本地版本仍有价值，应保留为带原许可证 lineage 的
+`snapshot`；只有完全原创重写的内容才改为 `in_house`。不能为了“清空
+warning”删除仍有独有价值的能力。
 
 ## 8. PR 和分支策略
 

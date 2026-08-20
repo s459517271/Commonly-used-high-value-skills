@@ -12,10 +12,10 @@ import json
 import os
 import re
 import stat
-import tempfile
 from copy import deepcopy
 from pathlib import Path, PurePosixPath
 from typing import Any
+from urllib.parse import urlsplit
 
 SCHEMA_VERSION = 2
 
@@ -40,6 +40,7 @@ VALID_CHANNELS = {
 }
 ACTIVE_STATUSES = {"verified_in_repo", "in_house"}
 LOCAL_SOURCE_VALUES = {"", "in-house", "in_house", "local"}
+LOCAL_CURATION_REPO = "local-repo/curation"
 UNKNOWN_LICENSE_VALUES = {
     "",
     "unknown",
@@ -50,12 +51,14 @@ UNKNOWN_LICENSE_VALUES = {
 }
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---(?:\s*\n|$)", re.DOTALL)
-GITHUB_REPO_RE = re.compile(
-    r"(?:github\.com/|^github:)([^/\s]+/[^/\s#?]+)", re.IGNORECASE
+GITHUB_OWNER_RE = re.compile(
+    r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$"
 )
+GITHUB_REPOSITORY_RE = re.compile(r"^[A-Za-z0-9._-]+$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$", re.IGNORECASE)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+GIT_FILE_MODES = frozenset({"100644", "100755"})
 
 
 def parse_frontmatter(path: Path) -> dict[str, str]:
@@ -89,17 +92,87 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def git_file_mode(path: Path) -> str | None:
+    """Return the regular-file mode representable by a Git tree.
+
+    Git persists only the executable bit for ordinary files.  Symlinks,
+    non-regular files, and special permission bits cannot be authorized by a
+    managed-file checkpoint.
+    """
+    try:
+        metadata = path.lstat()
+    except OSError:
+        return None
+    permissions = stat.S_IMODE(metadata.st_mode)
+    if (
+        stat.S_ISLNK(metadata.st_mode)
+        or not stat.S_ISREG(metadata.st_mode)
+        or permissions & 0o7000
+    ):
+        return None
+    return "100755" if permissions & 0o111 else "100644"
+
+
+def valid_github_repo(value: object) -> bool:
+    """Whether ``value`` is one canonical GitHub ``owner/repository`` id."""
+    if not isinstance(value, str) or value != value.strip():
+        return False
+    if value.count("/") != 1:
+        return False
+    owner, repository = value.split("/", 1)
+    if repository.lower().endswith(".git"):
+        return False
+    return bool(
+        GITHUB_OWNER_RE.fullmatch(owner)
+        and GITHUB_REPOSITORY_RE.fullmatch(repository)
+        and repository not in {".", ".."}
+    )
+
+
 def github_repo(value: str | None) -> str | None:
-    """Return a normalized ``owner/repo`` from a GitHub source declaration."""
-    if not value:
+    """Return a normalized GitHub repository from an exact declaration.
+
+    Substring matching is intentionally forbidden: hosts such as
+    ``evilgithub.com`` and credential-bearing URLs must never establish source
+    lineage.
+    """
+    if not isinstance(value, str) or not value or value != value.strip():
         return None
-    match = GITHUB_REPO_RE.search(value.strip())
-    if not match:
+    candidate = value
+    if candidate.lower().startswith("github:"):
+        repository = candidate[len("github:") :]
+        if repository.lower().endswith(".git"):
+            repository = repository[:-4]
+        if not valid_github_repo(repository):
+            return None
+        return repository.lower()
+
+    try:
+        parsed = urlsplit(candidate)
+        parsed_port = parsed.port
+    except ValueError:
         return None
-    result = match.group(1).rstrip("/")
-    if result.lower().endswith(".git"):
-        result = result[:-4]
-    return result.lower()
+    if (
+        parsed.scheme.lower() not in {"http", "https"}
+        or parsed.hostname is None
+        or parsed.hostname.lower() != "github.com"
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed_port is not None
+    ):
+        return None
+    raw_parts = parsed.path.split("/")
+    if (
+        len(raw_parts) < 3
+        or raw_parts[0] != ""
+        or not raw_parts[1]
+        or not raw_parts[2]
+    ):
+        return None
+    repository = f"{raw_parts[1]}/{raw_parts[2]}"
+    if repository.lower().endswith(".git"):
+        repository = repository[:-4]
+    return repository.lower() if valid_github_repo(repository) else None
 
 
 def is_local_repo(repo: str | None) -> bool:
@@ -307,24 +380,27 @@ def _requested_sync_mode(item: dict[str, Any], kind: str) -> str:
 
 
 def _normalize_entry_sync_modes(item: dict[str, Any], kind: str) -> None:
-    """Keep origin, v2 entry, and legacy upstream modes policy-identical."""
+    """Normalize entry modes while preserving mixed local-overlay semantics."""
     requested = _requested_sync_mode(item, kind)
     origins = item.get("origins")
     proposals: list[str] = []
+    origin_proposals: list[tuple[dict[str, Any], str]] = []
     if isinstance(origins, list):
         for origin in origins:
             if not isinstance(origin, dict):
                 continue
             tracking = origin.get("tracking")
-            proposals.append(
-                normalize_sync_mode(
-                    kind=kind,
-                    tracking=tracking,
-                    repo=origin.get("repo"),
-                    requested_mode=requested,
-                    status=item.get("status"),
-                )
+            proposal = normalize_sync_mode(
+                kind=kind,
+                tracking=tracking,
+                repo=origin.get("repo"),
+                requested_mode=requested,
+                status=item.get("status"),
             )
+            if origin.get("repo") == LOCAL_CURATION_REPO:
+                proposal = "local-only"
+            proposals.append(proposal)
+            origin_proposals.append((origin, proposal))
 
     if not proposals:
         upstream = (
@@ -358,10 +434,8 @@ def _normalize_entry_sync_modes(item: dict[str, Any], kind: str) -> None:
         normalized = "replace"
 
     item["sync_mode"] = normalized
-    if isinstance(origins, list):
-        for origin in origins:
-            if isinstance(origin, dict):
-                origin["sync_mode"] = normalized
+    for origin, proposal in origin_proposals:
+        origin["sync_mode"] = proposal
     upstream = item.get("upstream")
     if isinstance(upstream, dict):
         upstream["sync_mode"] = normalized
@@ -447,6 +521,8 @@ def _managed_file(
             if candidate.is_file() and not candidate.is_symlink()
             else None
         )
+    if refresh_hash or "mode" not in record:
+        record["mode"] = git_file_mode(candidate)
     return record
 
 
@@ -474,7 +550,18 @@ def _migrate_managed_files(
             if record is not None:
                 existing_by_path[path] = record
 
-    targets = local_targets if local_targets is not None else existing_paths
+    if local_targets is not None:
+        # Preserve the reviewed manifest order and append only newly discovered
+        # local files in the scanner's deterministic order.  Reconciliation
+        # tools may use bytewise POSIX sorting while Path sorts by components;
+        # reordering otherwise-identical ownership records is not a migration.
+        local_target_set = set(local_targets)
+        targets = [
+            path for path in existing_paths if path in local_target_set
+        ]
+        targets.extend(path for path in local_targets if path not in targets)
+    else:
+        targets = existing_paths
     if local_targets is None and not targets:
         target = _artifact_target(item)
         targets = [target] if target else []
@@ -541,6 +628,7 @@ def _refresh_declared_managed_digests(
             continue
         digest = sha256_file(candidate)
         managed["sha256"] = digest
+        managed["mode"] = git_file_mode(candidate)
         if path == repo_skill:
             repo_skill_digest = digest
 
@@ -572,8 +660,15 @@ def _refresh_local_origin(
 ) -> dict[str, Any]:
     """Refresh repository-local facts without changing external checkpoints."""
     refreshed = deepcopy(origin)
-    artifacts = _local_artifacts(item, repo_root)
-    refreshed["artifacts"] = artifacts
+    curated_overlay = refreshed.get("repo") == LOCAL_CURATION_REPO
+    if curated_overlay:
+        # A curation origin owns only the explicit supplements assigned to it.
+        # Expanding it to the whole skill directory would steal ownership of
+        # the externally sourced SKILL.md and exact sidecars.
+        artifacts = deepcopy(refreshed.get("artifacts"))
+        refreshed["artifacts"] = artifacts if isinstance(artifacts, list) else []
+    else:
+        refreshed["artifacts"] = _local_artifacts(item, repo_root)
 
     upstream = item.get("upstream") if isinstance(item.get("upstream"), dict) else {}
     target = _artifact_target(item)
@@ -584,26 +679,37 @@ def _refresh_local_origin(
     skill_target = target
     skill_path = repo_root / skill_target if skill_target else None
     tracking["channel"] = "local"
-    tracking["ref"] = str(upstream.get("ref") or tracking.get("ref") or "local")
-    tracking.setdefault("resolved_commit", None)
-    tracking.setdefault("path_commit", None)
+    tracking["ref"] = (
+        "local"
+        if curated_overlay
+        else str(upstream.get("ref") or tracking.get("ref") or "local")
+    )
+    if curated_overlay:
+        tracking["resolved_commit"] = None
+        tracking["path_commit"] = None
+    else:
+        tracking.setdefault("resolved_commit", None)
+        tracking.setdefault("path_commit", None)
     previous_content_hash = tracking.get("content_sha256")
-    current_content_hash = (
-        sha256_file(skill_path)
-        if skill_path is not None
+    if curated_overlay:
+        current_content_hash = None
+    elif (
+        skill_path is not None
         and skill_path.is_file()
         and not skill_path.is_symlink()
-        else None
-    )
+    ):
+        current_content_hash = sha256_file(skill_path)
+    else:
+        current_content_hash = None
     tracking["content_sha256"] = current_content_hash
     checked_at = (
         tracking_date
-        or upstream.get("last_checked_at")
         or tracking.get("last_checked_at")
+        or (None if curated_overlay else upstream.get("last_checked_at"))
     )
     previous_synced_at = (
-        upstream.get("last_synced_at")
-        or tracking.get("last_synced_at")
+        tracking.get("last_synced_at")
+        or (None if curated_overlay else upstream.get("last_synced_at"))
     )
     content_changed = current_content_hash != previous_content_hash
     synced_at = (
@@ -613,8 +719,9 @@ def _refresh_local_origin(
     )
     tracking["last_checked_at"] = checked_at
     tracking["last_synced_at"] = synced_at
-    upstream["last_checked_at"] = checked_at
-    upstream["last_synced_at"] = synced_at
+    if not curated_overlay:
+        upstream["last_checked_at"] = checked_at
+        upstream["last_synced_at"] = synced_at
     refreshed["tracking"] = tracking
     return refreshed
 
@@ -737,12 +844,16 @@ def migrate_entry(
 
     _normalize_entry_sync_modes(migrated, kind)
 
-    has_local_origin = any(
-        isinstance(origin, dict) and is_local_repo(origin.get("repo"))
+    has_full_local_origin = any(
+        isinstance(origin, dict)
+        and is_local_repo(origin.get("repo"))
+        and origin.get("repo") != LOCAL_CURATION_REPO
         for origin in migrated.get("origins", [])
     )
     local_targets = (
-        _skill_artifact_paths(migrated, repo_root) if has_local_origin else None
+        _skill_artifact_paths(migrated, repo_root)
+        if has_full_local_origin
+        else None
     )
     migrated["managed_files"] = _migrate_managed_files(
         migrated,
@@ -788,72 +899,166 @@ def migrate_payload(
     return migrated
 
 
-def atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
-    """Durably replace JSON through an exclusively-created sibling file.
+def _validate_atomic_temporary(
+    directory_fd: int,
+    name: str,
+    descriptors: tuple[int, ...],
+    identity: tuple[int, int],
+) -> None:
+    """Require a temporary name and every retained fd to bind one inode."""
+    named = os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+    if stat.S_ISLNK(named.st_mode) or not stat.S_ISREG(named.st_mode):
+        raise RuntimeError(f"unsafe JSON temporary: {name}")
+    if (named.st_dev, named.st_ino) != identity:
+        raise RuntimeError(f"JSON temporary inode changed: {name}")
+    for descriptor in descriptors:
+        opened = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or (opened.st_dev, opened.st_ino) != identity
+        ):
+            raise RuntimeError(f"JSON temporary descriptor changed: {name}")
 
-    ``mkstemp`` avoids the predictable temporary pathname used by the legacy
-    writer, so a pre-created symlink cannot redirect the write.  Existing
-    destination permissions are retained, and both file contents and the
-    containing directory are synced around the atomic rename.
+
+def atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
+    """Durably replace JSON while pinning its created inode until rename.
+
+    The writer fd remains open until an O_NOFOLLOW read fd pins the exact
+    creation-time inode. Cleanup unlinks only that inode, never a foreign file
+    that appears under the temporary name after an ABA replacement.
     """
     path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    directory_flags = (
+        os.O_RDONLY
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    directory_fd = os.open(path.parent, directory_flags)
     original_mode: int | None = None
     try:
-        destination_stat = path.lstat()
+        destination_stat = os.stat(
+            path.name,
+            dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
     except FileNotFoundError:
         pass
+    except BaseException:
+        os.close(directory_fd)
+        raise
     else:
         if stat.S_ISLNK(destination_stat.st_mode):
+            os.close(directory_fd)
             raise ValueError(f"refusing to replace symlink destination: {path}")
         if not stat.S_ISREG(destination_stat.st_mode):
+            os.close(directory_fd)
             raise ValueError(
                 f"refusing to replace non-regular destination: {path}"
             )
         original_mode = stat.S_IMODE(destination_stat.st_mode)
 
-    file_descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.",
-        suffix=".tmp",
-        dir=path.parent,
-    )
-    temporary = Path(temporary_name)
+    temporary_name = ""
+    file_descriptor = -1
+    pinned_descriptor = -1
+    identity: tuple[int, int] | None = None
     try:
-        created_stat = os.fstat(file_descriptor)
-        if not stat.S_ISREG(created_stat.st_mode):
-            raise RuntimeError(f"temporary path is not a regular file: {temporary}")
-        if original_mode is not None:
-            os.fchmod(file_descriptor, original_mode)
-
-        handle = os.fdopen(file_descriptor, "w", encoding="utf-8")
-        file_descriptor = -1
-        with handle:
-            handle.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-
-        named_stat = temporary.lstat()
-        if (
-            not stat.S_ISREG(named_stat.st_mode)
-            or named_stat.st_dev != created_stat.st_dev
-            or named_stat.st_ino != created_stat.st_ino
-        ):
-            raise RuntimeError(
-                f"temporary path changed before atomic replace: {temporary}"
+        create_flags = (
+            os.O_WRONLY
+            | os.O_CREAT
+            | os.O_EXCL
+            | getattr(os, "O_NOFOLLOW", 0)
+        )
+        for _ in range(128):
+            candidate = f".{path.name}.{os.urandom(16).hex()}.tmp"
+            try:
+                file_descriptor = os.open(
+                    candidate,
+                    create_flags,
+                    0o600,
+                    dir_fd=directory_fd,
+                )
+            except FileExistsError:
+                continue
+            temporary_name = candidate
+            break
+        else:
+            raise FileExistsError(
+                f"unable to allocate JSON temporary beside {path}"
             )
 
-        os.replace(temporary, path)
-        directory_fd = os.open(
-            path.parent,
-            os.O_RDONLY | getattr(os, "O_DIRECTORY", 0),
+        created_stat = os.fstat(file_descriptor)
+        if not stat.S_ISREG(created_stat.st_mode):
+            raise RuntimeError(
+                f"JSON temporary is not regular: {temporary_name}"
+            )
+        identity = (created_stat.st_dev, created_stat.st_ino)
+        encoded = (
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+        ).encode("utf-8")
+        remaining = memoryview(encoded)
+        while remaining:
+            written = os.write(file_descriptor, remaining)
+            if written <= 0:
+                raise OSError("JSON temporary write made no progress")
+            remaining = remaining[written:]
+        os.fchmod(
+            file_descriptor,
+            original_mode if original_mode is not None else 0o600,
         )
-        try:
-            os.fsync(directory_fd)
-        finally:
-            os.close(directory_fd)
+        os.fsync(file_descriptor)
+
+        pinned_descriptor = os.open(
+            temporary_name,
+            os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+            dir_fd=directory_fd,
+        )
+        _validate_atomic_temporary(
+            directory_fd,
+            temporary_name,
+            (file_descriptor, pinned_descriptor),
+            identity,
+        )
+        os.close(file_descriptor)
+        file_descriptor = -1
+        _validate_atomic_temporary(
+            directory_fd,
+            temporary_name,
+            (pinned_descriptor,),
+            identity,
+        )
+        os.replace(
+            temporary_name,
+            path.name,
+            src_dir_fd=directory_fd,
+            dst_dir_fd=directory_fd,
+        )
+        temporary_name = ""
+        os.fsync(directory_fd)
     finally:
+        if temporary_name and identity is not None:
+            try:
+                cleanup_descriptors = tuple(
+                    descriptor
+                    for descriptor in (pinned_descriptor,)
+                    if descriptor >= 0
+                )
+                if not cleanup_descriptors and file_descriptor >= 0:
+                    cleanup_descriptors = (file_descriptor,)
+                _validate_atomic_temporary(
+                    directory_fd,
+                    temporary_name,
+                    cleanup_descriptors,
+                    identity,
+                )
+                os.unlink(temporary_name, dir_fd=directory_fd)
+            except (OSError, RuntimeError):
+                pass
         if file_descriptor >= 0:
             os.close(file_descriptor)
-        temporary.unlink(missing_ok=True)
+        if pinned_descriptor >= 0:
+            os.close(pinned_descriptor)
+        os.close(directory_fd)
 
 
 def discover_source_mappings(sources_dir: Path) -> list[Path]:

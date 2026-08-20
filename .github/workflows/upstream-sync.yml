@@ -24,6 +24,8 @@ jobs:
       - name: Discover new skills from external sources
         id: discovery
         run: python scripts/discover_new_skills.py --output docs/sources/reports/discovery.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
 
       - name: Check upstream GitHub updates
@@ -38,10 +40,12 @@ jobs:
         run: python scripts/generate_sync_report.py --discovery docs/sources/reports/discovery.json --upstream docs/sources/reports/upstream-check.json --output docs/sources/reports/sync-report.md
 
       - name: Reconcile weekly sync issue
-        if: steps.discovery.outcome == 'success' && steps.upstream.outcome == 'success'
+        if: always()
         uses: actions/github-script@v7
         env:
-          HAS_UPDATES: ${{ steps.report.outputs.has_updates }}
+          NEEDS_ATTENTION: ${{ steps.report.outputs.needs_attention }}
+          SYNC_STATE: ${{ steps.report.outputs.sync_state }}
+          REPORT_OUTCOME: ${{ steps.report.outcome }}
           REPORT_PATH: docs/sources/reports/sync-report.md
         with:
           script: |
@@ -50,8 +54,17 @@ jobs:
             const repo = context.repo.repo;
             const title = '[Auto Sync] Weekly skill discovery report';
             const labels = ['auto-sync', 'skill-discovery'];
-            const report = fs.readFileSync(process.env.REPORT_PATH, 'utf8');
-            const hasUpdates = process.env.HAS_UPDATES === 'true';
+            const reportSucceeded = process.env.REPORT_OUTCOME === 'success';
+            const reportExists = fs.existsSync(process.env.REPORT_PATH);
+            const report = reportExists
+              ? fs.readFileSync(process.env.REPORT_PATH, 'utf8')
+              : '# Weekly Skill Sync Report\n\nReport rendering failed before an artifact was written.';
+            const needsAttention = reportSucceeded
+              ? process.env.NEEDS_ATTENTION === 'true'
+              : true;
+            const syncState = reportSucceeded
+              ? (process.env.SYNC_STATE || 'failed')
+              : 'failed';
             const openIssues = await github.paginate(github.rest.issues.listForRepo, {
               owner,
               repo,
@@ -60,10 +73,31 @@ jobs:
               per_page: 100,
             });
             const matching = openIssues
-              .filter(issue => !issue.pull_request && issue.title.startsWith(title))
+              .filter(issue => !issue.pull_request && issue.title === title)
               .sort((a, b) => b.number - a.number);
 
-            if (hasUpdates) {
+            if (syncState !== 'complete') {
+              const primary = matching.shift();
+              if (primary) {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: primary.number,
+                  title,
+                  body: report,
+                });
+              } else {
+                await github.rest.issues.create({
+                  owner,
+                  repo,
+                  title,
+                  body: report,
+                  labels,
+                });
+              }
+              // A degraded or failed scan is not authoritative enough to close
+              // duplicates. Preserve every additional issue for human review.
+            } else if (needsAttention) {
               let primary = matching.shift();
               if (primary) {
                 await github.rest.issues.update({
@@ -103,7 +137,7 @@ jobs:
                   owner,
                   repo,
                   issue_number: issue.number,
-                  body: 'The latest weekly scan found no meaningful discovery or upstream drift. Closing automatically.',
+                  body: `The latest weekly scan completed with state ${syncState} and found no meaningful discovery or upstream drift. Closing automatically.`,
                 });
                 await github.rest.issues.update({
                   owner,
@@ -116,8 +150,32 @@ jobs:
             }
 
       - name: Upload reports as artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: sync-reports
           path: docs/sources/reports/
           retention-days: 30
+
+      - name: Enforce sync automation state
+        if: always()
+        env:
+          SYNC_STATE: ${{ steps.report.outputs.sync_state }}
+          REPORT_OUTCOME: ${{ steps.report.outcome }}
+        run: |
+          if [ "$REPORT_OUTCOME" != "success" ]; then
+            echo "::error::Sync report rendering failed; refusing to trust or reconcile its outputs."
+            exit 1
+          fi
+          case "$SYNC_STATE" in
+            complete)
+              echo "Upstream automation completed."
+              ;;
+            degraded)
+              echo "::warning::Upstream automation is degraded; the canonical issue records required review."
+              ;;
+            *)
+              echo "::error::Upstream automation failed or produced no trustworthy state."
+              exit 1
+              ;;
+          esac

@@ -45,15 +45,45 @@ class DiscoverNewSkillsTests(unittest.TestCase):
 
         report = module.build_discovery_report(
             local_skill_count=10,
-            all_discoveries=[{"name": "alpha"}],
-            unique_discoveries=[{"name": "alpha"}],
+            all_discoveries=[
+                module.make_discovery(
+                    source_key="github",
+                    name="alpha",
+                    source="GitHub",
+                    url="https://github.com/example/alpha",
+                    repo_stars=1,
+                    description="Alpha",
+                )
+            ],
+            unique_discoveries=[
+                module.make_discovery(
+                    source_key="github",
+                    name="alpha",
+                    source="GitHub",
+                    url="https://github.com/example/alpha",
+                    repo_stars=1,
+                    description="Alpha",
+                )
+            ],
             source_health={
                 "github": {
                     "status": "degraded",
                     "errors": [{"kind": "unauthorized", "message": "401"}],
                     "queries": 2,
                     "results": 1,
-                }
+                },
+                "skills_sh": {
+                    "status": "healthy",
+                    "errors": [],
+                    "queries": 1,
+                    "results": 0,
+                },
+                "clawhub": {
+                    "status": "healthy",
+                    "errors": [],
+                    "queries": 1,
+                    "results": 0,
+                },
             },
         )
 
@@ -63,6 +93,9 @@ class DiscoverNewSkillsTests(unittest.TestCase):
         self.assertIn("source_health", report)
         self.assertEqual("degraded", report["source_health"]["github"]["status"])
         self.assertEqual("unauthorized", report["errors"][0]["kind"])
+        self.assertEqual(1, report["source_health"]["github"]["emitted"])
+        self.assertEqual(1, report["source_health"]["github"]["unique_emitted"])
+        self.assertEqual(1, report["raw_discovered"])
 
     def test_classify_fetch_error_recognizes_http_statuses(self):
         module = load_module()

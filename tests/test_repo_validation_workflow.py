@@ -38,6 +38,11 @@ class RepoValidationWorkflowTests(unittest.TestCase):
         self.assertIn("python scripts/audit_licenses.py", commands)
         self.assertIn("python scripts/validate_skill_sources.py", commands)
         self.assertIn(
+            "python scripts/reconcile_artifact_inventory.py "
+            "--offline --check-clean --quiet",
+            commands,
+        )
+        self.assertIn(
             "python scripts/check_source_coverage.py --min-percent 100",
             commands,
         )

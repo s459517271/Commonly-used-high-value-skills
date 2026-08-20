@@ -116,9 +116,9 @@
         "tracking"
       ],
       "properties": {
-        "repo": {
-          "type": "string",
-          "pattern": "^[^/]+/[^/]+$"
+      "repo": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?/[A-Za-z0-9._-]+$"
         },
         "path": {
           "oneOf": [
@@ -154,7 +154,59 @@
         "tracking": {
           "$ref": "#/$defs/tracking"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "repo": {
+                "const": "local-repo/curation"
+              }
+            },
+            "required": [
+              "repo"
+            ]
+          },
+          "then": {
+            "properties": {
+              "license": {
+                "type": "null"
+              },
+              "sync_mode": {
+                "const": "local-only"
+              },
+              "tracking": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/tracking"
+                  },
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "local"
+                      },
+                      "ref": {
+                        "const": "local"
+                      },
+                      "resolved_commit": {
+                        "type": "null"
+                      },
+                      "path_commit": {
+                        "type": "null"
+                      }
+                    },
+                    "not": {
+                      "required": [
+                        "license_checkpoint"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
     },
     "artifact": {
       "type": "object",
@@ -182,7 +234,8 @@
       "required": [
         "path",
         "sha256",
-        "owner"
+        "owner",
+        "mode"
       ],
       "properties": {
         "path": {
@@ -194,6 +247,12 @@
         "owner": {
           "type": "string",
           "minLength": 1
+        },
+        "mode": {
+          "enum": [
+            "100644",
+            "100755"
+          ]
         }
       },
       "additionalProperties": false
@@ -237,8 +296,45 @@
         },
         "last_synced_at": {
           "$ref": "#/$defs/nullableDate"
+        },
+        "license_checkpoint": {
+          "$ref": "#/$defs/licenseCheckpoint"
         }
       }
+    },
+    "licenseCheckpoint": {
+      "type": "object",
+      "required": [
+        "path",
+        "blob_sha",
+        "content_sha256",
+        "spdx",
+        "resolved_commit"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "blob_sha": {
+          "$ref": "#/$defs/commit"
+        },
+        "content_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "spdx": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolved_commit": {
+          "$ref": "#/$defs/commit"
+        },
+        "api_spdx": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "additionalProperties": false
     },
     "composition": {
       "type": "object",
@@ -271,9 +367,9 @@
           "type": "string",
           "minLength": 1
         },
-        "source_package": {
-          "type": "string",
-          "pattern": "^[^/]+/[^/]+$"
+      "source_package": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?/[A-Za-z0-9._-]+$"
         },
         "role": {
           "type": "string",
@@ -303,13 +399,11 @@
         }
       ]
     },
-    "relativePath": {
-      "type": "string",
-      "minLength": 1,
-      "not": {
-        "pattern": "(^\\.?/?$|^/|^[A-Za-z]:[\\\\/]|(^|/)\\.\\.(/|$))"
-      }
-    },
+  "relativePath": {
+    "type": "string",
+    "minLength": 1,
+    "pattern": "^(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))[^/]+(?:/[^/]+)*$"
+  },
     "nullableCommit": {
       "oneOf": [
         {
