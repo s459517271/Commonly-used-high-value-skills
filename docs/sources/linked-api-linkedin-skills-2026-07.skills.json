@@ -121,7 +121,7 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/growth-operations-xiaohongshu/linkedin-growth/SKILL.md",
       "source": "https://github.com/Linked-API/linkedin-skills/tree/edd0bdbbb25776e9288186b88969b29175531995/linkedin-growth",
-      "notes": "Imported under MIT at the recorded commit; repository-local quality and authorization guidance is preserved in marked supplements.",
+      "notes": "Imported under MIT at the recorded commit; repository-local quality and authorization guidance plus private-cache, fixed Notion endpoint/redirect, and ownership-token lock hardening are preserved as a curation overlay.",
       "upstream": {
         "repo": "Linked-API/linkedin-skills",
         "path": "linkedin-growth/SKILL.md",
@@ -276,11 +276,6 @@
               "type": "file"
             },
             {
-              "source": "linkedin-growth/scripts/migrate-notion.mjs",
-              "target": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/migrate-notion.mjs",
-              "type": "file"
-            },
-            {
               "source": "linkedin-growth/scripts/network-invite.mjs",
               "target": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/network-invite.mjs",
               "type": "file"
@@ -319,11 +314,6 @@
               "source": "linkedin-growth/scripts/status.mjs",
               "target": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/status.mjs",
               "type": "file"
-            },
-            {
-              "source": "linkedin-growth/scripts/tick.mjs",
-              "target": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/tick.mjs",
-              "type": "file"
             }
           ],
           "tracking": {
@@ -353,6 +343,16 @@
             {
               "source": "skills/growth-operations-xiaohongshu/linkedin-growth/LICENSE",
               "target": "skills/growth-operations-xiaohongshu/linkedin-growth/LICENSE",
+              "type": "file"
+            },
+            {
+              "source": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/migrate-notion.mjs",
+              "target": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/migrate-notion.mjs",
+              "type": "file"
+            },
+            {
+              "source": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/tick.mjs",
+              "target": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/tick.mjs",
               "type": "file"
             }
           ],
@@ -538,7 +538,7 @@
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/migrate-notion.mjs",
-          "sha256": "576e0a4cc2038e0264d542a1e5fc3c7c67e10c18a3674f4afb714bd410233e94",
+          "sha256": "8d242a11caaa366705b652af49867c6961d1d6445587c2365e691d91fec9aa03",
           "owner": "linkedin-growth",
           "mode": "100644"
         },
@@ -592,7 +592,7 @@
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/tick.mjs",
-          "sha256": "00820ae3d533e90e76c90120a8030aa8187bcc01cb5636ca7a28c57d99f9ee71",
+          "sha256": "71365cf52dcb4bcf1352e275c01869c3670202b00d1c84c3e590b1c88815d40b",
           "owner": "linkedin-growth",
           "mode": "100644"
         }
