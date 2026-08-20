@@ -325,9 +325,98 @@ function validateBundleManifest(data, requestedName) {
   ) {
     throw new Error(`Bundle '${requestedName}' has an unsafe or unpinned installer spec`);
   }
+  if (
+    installer.registry !== "npm" ||
+    installer.spec !== `${installer.package}@${installer.version}`
+  ) {
+    throw new Error(`Bundle '${requestedName}' has inconsistent installer metadata`);
+  }
   if (!/^[0-9a-f]{64}$/.test(installer.tarball_sha256 || "")) {
     throw new Error(`Bundle '${requestedName}' has an invalid tarball digest`);
   }
+  if (
+    !/^sha512-[A-Za-z0-9+/]+={0,2}$/.test(installer.integrity || "") ||
+    !/^[0-9a-f]{40}$/.test(installer.npm_shasum || "") ||
+    !Number.isInteger(installer.unpacked_size) ||
+    installer.unpacked_size < 0
+  ) {
+    throw new Error(`Bundle '${requestedName}' has incomplete package metadata`);
+  }
+}
+
+function expectedNpmPackFilename(installer) {
+  return (
+    `${installer.package.replace(/^@/, "").replace(/\//g, "-")}-` +
+    `${installer.version}.tgz`
+  );
+}
+
+function downloadAndVerifyBundle(installer, tempDir) {
+  const result = spawnSync(
+    "npm",
+    ["pack", installer.spec, "--json", "--ignore-scripts"],
+    {
+      cwd: tempDir,
+      encoding: "utf8",
+      maxBuffer: 10 * 1024 * 1024,
+      shell: false,
+    }
+  );
+  if (result.error) {
+    throw new Error(`Unable to download pinned bundle: ${result.error.message}`);
+  }
+  if (result.status !== 0) {
+    const detail = (result.stderr || "").trim().slice(0, 500);
+    throw new Error(
+      `npm pack failed with status ${result.status}${detail ? `: ${detail}` : ""}`
+    );
+  }
+
+  let records;
+  try {
+    records = JSON.parse(result.stdout);
+  } catch {
+    throw new Error("npm pack returned invalid JSON metadata");
+  }
+  if (!Array.isArray(records) || records.length !== 1) {
+    throw new Error("npm pack did not return exactly one package record");
+  }
+  const record = records[0];
+  const expectedFilename = expectedNpmPackFilename(installer);
+  if (
+    !record ||
+    record.id !== installer.spec ||
+    record.name !== installer.package ||
+    record.version !== installer.version ||
+    record.filename !== expectedFilename ||
+    record.integrity !== installer.integrity ||
+    record.shasum !== installer.npm_shasum ||
+    record.unpackedSize !== installer.unpacked_size ||
+    !Array.isArray(record.files) ||
+    record.files.length !== installer.package_files
+  ) {
+    throw new Error("npm pack metadata does not match the governed bundle manifest");
+  }
+
+  const entries = fs.readdirSync(tempDir);
+  if (entries.length !== 1 || entries[0] !== expectedFilename) {
+    throw new Error("npm pack did not produce exactly the expected tarball");
+  }
+  const tarballPath = path.join(tempDir, expectedFilename);
+  const stat = fs.lstatSync(tarballPath);
+  if (stat.isSymbolicLink() || !stat.isFile() || stat.size !== record.size) {
+    throw new Error("npm pack output is not the expected regular tarball");
+  }
+  const actualDigest = sha256File(tarballPath);
+  if (
+    !crypto.timingSafeEqual(
+      Buffer.from(actualDigest, "hex"),
+      Buffer.from(installer.tarball_sha256, "hex")
+    )
+  ) {
+    throw new Error("Downloaded bundle tarball SHA-256 does not match the manifest");
+  }
+  return tarballPath;
 }
 
 function listBundles() {
@@ -644,12 +733,27 @@ function runBundle(args) {
     console.log(`[dry-run] Acceptance contract from pinned manifest: ${expected}.`);
     return 0;
   }
-  const result = spawnSync("npx", commandArgs, { stdio: "inherit", shell: false });
-  if (result.error) throw result.error;
-  if (result.status !== 0) {
-    throw new Error(
-      `Official ${args.bundle} installer exited with status ${result.status}`
-    );
+  const tempDir = fs.mkdtempSync(
+    path.join(os.tmpdir(), `${INSTALLER_ID}-bundle-`)
+  );
+  if (process.platform !== "win32") fs.chmodSync(tempDir, 0o700);
+  try {
+    const tarballPath = downloadAndVerifyBundle(data.installer, tempDir);
+    const verifiedCommandArgs = ["--yes", tarballPath, ...flags, "--global"];
+    const result = spawnSync("npx", verifiedCommandArgs, {
+      stdio: "inherit",
+      shell: false,
+    });
+    if (result.error) {
+      throw new Error(`Unable to run verified bundle installer: ${result.error.message}`);
+    }
+    if (result.status !== 0) {
+      throw new Error(
+        `Official ${args.bundle} installer exited with status ${result.status}`
+      );
+    }
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
   }
   console.log(
     `Installed governed bundle ${args.bundle} (${data.installer.spec}). ` +

@@ -34,7 +34,10 @@ class RepoValidationWorkflowTests(unittest.TestCase):
 
         job_commands = run_commands(job)
         commands = "\n".join(job_commands)
-        self.assertIn("python -m pip install pyyaml pytest", job_commands)
+        self.assertIn(
+            "python -m pip install pyyaml pytest jsonschema",
+            job_commands,
+        )
         self.assertIn("python scripts/audit_skill_portfolio.py --check-policy", commands)
         self.assertIn("python scripts/audit_licenses.py", commands)
         self.assertIn("python scripts/validate_skill_sources.py", commands)

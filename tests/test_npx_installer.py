@@ -1,5 +1,8 @@
+import base64
+import hashlib
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -12,6 +15,116 @@ PACKAGE_JSON = REPO_ROOT / "package.json"
 
 
 class NpxInstallerTests(unittest.TestCase):
+    def _make_bundle_fixture(self, root, *, valid_digest=True):
+        repo = root / "repo"
+        (repo / "bin").mkdir(parents=True)
+        (repo / "docs" / "sources").mkdir(parents=True)
+        shutil.copy2(INSTALLER, repo / "bin" / INSTALLER.name)
+        (repo / "package.json").write_text(
+            json.dumps({"name": "bundle-gate-test", "version": "1.0.0"}),
+            encoding="utf-8",
+        )
+
+        payload = b"verified local bundle fixture\n"
+        package = "@opengsd/gsd-core"
+        version = "1.11.0"
+        spec = f"{package}@{version}"
+        filename = f"opengsd-gsd-core-{version}.tgz"
+        integrity = "sha512-" + base64.b64encode(
+            hashlib.sha512(payload).digest()
+        ).decode("ascii")
+        shasum = hashlib.sha1(payload).hexdigest()
+        digest = hashlib.sha256(payload).hexdigest()
+        manifest = {
+            "bundle": {"id": "gsd-core"},
+            "install_policy": {"mode": "explicit_only", "default_install": False},
+            "bundle_inventory": {
+                "package_files": 1,
+                "skills": 71,
+                "agents": 34,
+                "commands": 71,
+                "runtime_files": 12,
+            },
+            "installer": {
+                "registry": "npm",
+                "package": package,
+                "version": version,
+                "spec": spec,
+                "tarball_sha256": digest if valid_digest else "0" * 64,
+                "integrity": integrity,
+                "npm_shasum": shasum,
+                "package_files": 1,
+                "unpacked_size": len(payload),
+            },
+        }
+        (repo / "docs" / "sources" / "open-gsd-core-2026-08.bundle.json").write_text(
+            json.dumps(manifest), encoding="utf-8"
+        )
+        record = {
+            "id": spec,
+            "name": package,
+            "version": version,
+            "size": len(payload),
+            "unpackedSize": len(payload),
+            "shasum": shasum,
+            "integrity": integrity,
+            "filename": filename,
+            "files": [{"path": "package.json"}],
+        }
+        return repo, payload, record
+
+    def _write_fake_node_command(self, directory, name, source):
+        if os.name == "nt":
+            self.skipTest("fake npm/npx shims in this test are POSIX-only")
+        command = directory / name
+        command.write_text(
+            f"#!{shutil.which('node')}\n{source}", encoding="utf-8"
+        )
+        command.chmod(0o755)
+
+    def _bundle_env(self, fake_bin, temp_root, payload, record, log_path):
+        return {
+            **os.environ,
+            "PATH": os.pathsep.join([str(fake_bin), os.environ.get("PATH", "")]),
+            "TMPDIR": str(temp_root),
+            "TMP": str(temp_root),
+            "TEMP": str(temp_root),
+            "FAKE_TARBALL_BASE64": base64.b64encode(payload).decode("ascii"),
+            "FAKE_PACK_RECORD": json.dumps(record),
+            "FAKE_NPX_LOG": str(log_path),
+        }
+
+    def _write_fake_bundle_commands(self, fake_bin):
+        fake_bin.mkdir()
+        self._write_fake_node_command(
+            fake_bin,
+            "npm",
+            """
+"use strict";
+const fs = require("fs");
+const path = require("path");
+const record = JSON.parse(process.env.FAKE_PACK_RECORD);
+const payload = Buffer.from(process.env.FAKE_TARBALL_BASE64, "base64");
+fs.writeFileSync(path.join(process.cwd(), record.filename), payload);
+process.stdout.write(JSON.stringify([record]));
+""",
+        )
+        self._write_fake_node_command(
+            fake_bin,
+            "npx",
+            """
+"use strict";
+const fs = require("fs");
+const path = require("path");
+const args = process.argv.slice(2);
+const tarball = args[1];
+const stat = fs.lstatSync(tarball);
+if (args[0] !== "--yes" || !path.isAbsolute(tarball) ||
+    stat.isSymbolicLink() || !stat.isFile()) process.exit(23);
+fs.writeFileSync(process.env.FAKE_NPX_LOG, JSON.stringify(args));
+""",
+        )
+
     def test_package_exposes_installer_bin_and_skill_files(self):
         data = json.loads(PACKAGE_JSON.read_text(encoding="utf-8"))
 
@@ -362,6 +475,116 @@ class NpxInstallerTests(unittest.TestCase):
             )
             self.assertNotEqual(0, rejected.returncode)
             self.assertIn("optional/list-only", rejected.stderr)
+
+    def test_bundle_install_verifies_tarball_then_executes_local_copy_and_cleans_temp(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            repo, payload, record = self._make_bundle_fixture(root)
+            fake_bin = root / "fake-bin"
+            self._write_fake_bundle_commands(fake_bin)
+            temp_root = root / "bundle-temp"
+            temp_root.mkdir()
+            log_path = root / "npx.json"
+            env = self._bundle_env(
+                fake_bin, temp_root, payload, record, log_path
+            )
+
+            result = subprocess.run(
+                [
+                    shutil.which("node"),
+                    str(repo / "bin" / INSTALLER.name),
+                    "install",
+                    "--bundle",
+                    "gsd-core",
+                    "--target",
+                    "codex",
+                ],
+                cwd=repo,
+                env=env,
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+
+            args = json.loads(log_path.read_text(encoding="utf-8"))
+            self.assertEqual("--yes", args[0])
+            self.assertEqual(["--codex", "--global"], args[2:])
+            self.assertTrue(Path(args[1]).is_absolute())
+            self.assertFalse(Path(args[1]).exists())
+            self.assertEqual([], list(temp_root.iterdir()))
+            self.assertIn("Installed governed bundle gsd-core", result.stdout)
+
+    def test_bundle_install_rejects_digest_drift_before_execution_and_cleans_temp(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            repo, payload, record = self._make_bundle_fixture(
+                root, valid_digest=False
+            )
+            fake_bin = root / "fake-bin"
+            self._write_fake_bundle_commands(fake_bin)
+            temp_root = root / "bundle-temp"
+            temp_root.mkdir()
+            log_path = root / "npx.json"
+            env = self._bundle_env(
+                fake_bin, temp_root, payload, record, log_path
+            )
+
+            result = subprocess.run(
+                [
+                    shutil.which("node"),
+                    str(repo / "bin" / INSTALLER.name),
+                    "install",
+                    "--bundle",
+                    "gsd-core",
+                    "--target",
+                    "codex",
+                ],
+                cwd=repo,
+                env=env,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("SHA-256 does not match", result.stderr)
+            self.assertFalse(log_path.exists())
+            self.assertEqual([], list(temp_root.iterdir()))
+
+    def test_bundle_install_fails_closed_and_cleans_temp_when_npm_cannot_spawn(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            repo, _, _ = self._make_bundle_fixture(root)
+            temp_root = root / "bundle-temp"
+            temp_root.mkdir()
+            empty_path = root / "empty-path"
+            empty_path.mkdir()
+            env = {
+                **os.environ,
+                "PATH": str(empty_path),
+                "TMPDIR": str(temp_root),
+                "TMP": str(temp_root),
+                "TEMP": str(temp_root),
+            }
+
+            result = subprocess.run(
+                [
+                    shutil.which("node"),
+                    str(repo / "bin" / INSTALLER.name),
+                    "install",
+                    "--bundle",
+                    "gsd-core",
+                    "--target",
+                    "codex",
+                ],
+                cwd=repo,
+                env=env,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("Unable to download pinned bundle", result.stderr)
+            self.assertEqual([], list(temp_root.iterdir()))
 
     def test_conflict_audit_reports_cross_root_digest_and_ownership_matrix(self):
         with tempfile.TemporaryDirectory() as tmp:
