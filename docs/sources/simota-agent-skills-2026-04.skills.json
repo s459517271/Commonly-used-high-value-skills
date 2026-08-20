@@ -5003,7 +5003,7 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/engineering-workflow-automation/harvest/SKILL.md",
       "source": "https://github.com/simota/agent-skills/blob/6502f44cfcd8f456951a7bfdce14d0ed76d724ef/.archive/harvest/SKILL.md",
-      "notes": "Licensed immutable MIT snapshot retained from .archive/harvest at 6502f44cfcd8f456951a7bfdce14d0ed76d724ef; unique local curation remains separately owned.",
+      "notes": "Licensed immutable MIT snapshot retained from .archive/harvest at 6502f44cfcd8f456951a7bfdce14d0ed76d724ef; repository-local shell-injection and regex-denial-of-service hardening in scripts/generate-report.js, plus other unique curation, are separately owned by local-repo/curation.",
       "upstream": {
         "repo": "simota/agent-skills",
         "path": ".archive/harvest/SKILL.md",
@@ -5113,11 +5113,6 @@
             {
               "source": ".archive/harvest/reference/work-hours.md",
               "target": "skills/engineering-workflow-automation/harvest/reference/work-hours.md",
-              "type": "file"
-            },
-            {
-              "source": ".archive/harvest/scripts/generate-report.js",
-              "target": "skills/engineering-workflow-automation/harvest/scripts/generate-report.js",
               "type": "file"
             },
             {
@@ -5268,6 +5263,11 @@
             {
               "source": "skills/engineering-workflow-automation/harvest/samples/work-report-simota-2026-01-31.md",
               "target": "skills/engineering-workflow-automation/harvest/samples/work-report-simota-2026-01-31.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/engineering-workflow-automation/harvest/scripts/generate-report.js",
+              "target": "skills/engineering-workflow-automation/harvest/scripts/generate-report.js",
               "type": "file"
             }
           ],
@@ -5519,7 +5519,7 @@
         },
         {
           "path": "skills/engineering-workflow-automation/harvest/scripts/generate-report.js",
-          "sha256": "191cd0266edd13be4084ae45114117842d17427fcca276665e6692192de83f9a",
+          "sha256": "d356a7a6d5394b3b54faea8ab53ba950ed0dce32fee59d89f963ac7941bb3e47",
           "owner": "harvest",
           "mode": "100755"
         },

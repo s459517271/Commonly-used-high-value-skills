@@ -420,7 +420,7 @@
         {
           "path": "skills/growth-operations-xiaohongshu/algorithmic-art/templates/viewer.html",
           "owner": "algorithmic-art",
-          "sha256": "86c79d7ce97d2599ebe4bd9b97fdeb7295c9d3ed61ceeb513cbe1b2bb5d1ce29",
+          "sha256": "f19baf8dfb8a058da8974931946110939c2cc087325aac755a0c9b50ef32d91d",
           "mode": "100644"
         }
       ]
@@ -7007,7 +7007,7 @@
         {
           "path": "skills/developer-engineering/dependency-auditor/scripts/dep_scanner.py",
           "owner": "dependency-auditor",
-          "sha256": "309abbb1fb20df6dfcea77ac0e963bd61953cb4b46de8c1a6d10cae6d88546cd",
+          "sha256": "d45544d84c3e621af56b9b62c42b7022944399a4a2fe7891e5dea02125c97e32",
           "mode": "100644"
         },
         {
@@ -9602,7 +9602,7 @@
         {
           "path": "skills/multimodal-media/gpt-image2/scripts/gpt-image2.mjs",
           "owner": "gpt-image2",
-          "sha256": "2cd6259349404336a0c521719d793f4a45261e7a40576f5948f6025a31eff1a6",
+          "sha256": "508b5fbb9aa93a1d6db35c7038bd30093fb5fa38e1e08d41de3356a089014347",
           "mode": "100644"
         }
       ]
@@ -12049,7 +12049,7 @@
         {
           "path": "skills/developer-engineering/migration-architect/scripts/rollback_generator.py",
           "owner": "migration-architect",
-          "sha256": "5ee0ce71dbd4cd8a134ece4e5c282f7ceb860164431ca5138bfa4996eba372eb",
+          "sha256": "2b41b9087c4a51ba2f56dcbdafe4edf2539a0038ae6fc0e72ec21f7ea752d003",
           "mode": "100644"
         }
       ]
@@ -16723,13 +16723,13 @@
         {
           "path": "skills/developer-engineering/repomix-safe-mixer/scripts/safe_pack.py",
           "owner": "repomix-safe-mixer",
-          "sha256": "c4c4a3793c7cd13cfbf39252e1ae32d6026dbc76ef20037166dcd861e03fff04",
+          "sha256": "271873181539aa490833254319e4f263547cd225142095a92dd42b41b39c9652",
           "mode": "100644"
         },
         {
           "path": "skills/developer-engineering/repomix-safe-mixer/scripts/scan_secrets.py",
           "owner": "repomix-safe-mixer",
-          "sha256": "6c6bc353f303c0de57a043356bd076e36edbac0505b869e8d957edc8b4ef15cd",
+          "sha256": "cdd18c62cb9d2b741e9e8898d01b1fbdaf3cd87da66ffa2e5a053fcb8a0a8c60",
           "mode": "100644"
         }
       ]
@@ -20019,7 +20019,7 @@
         {
           "path": "skills/office-white-collar/transcript-fixer/scripts/fix_transcript_enhanced.py",
           "owner": "transcript-fixer",
-          "sha256": "d4b50704f84eed7629270515c9bb98243b25754d0500c3e6984d08a996119c0e",
+          "sha256": "4fe8bfd7034e09e7644427e2bed2dc028befa822ce721cc614c0a3fd4799145c",
           "mode": "100644"
         },
         {
