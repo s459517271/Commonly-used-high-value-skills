@@ -1,6 +1,6 @@
 ---
 name: obsidian
-description: 'Use when users need to read, search, create, edit, organize, or cross-link notes in an Obsidian vault while preserving markdown structure and knowledge-base context.'
+description: 'Read, search, create, and edit notes in the Obsidian vault.'
 zh_description: "用于读取、搜索、创建和编辑 Obsidian 知识库笔记，并维护 Markdown 结构和链接关系。"
 version: "1.0.3"
 author: "seaworld008"
@@ -12,6 +12,11 @@ created_at: "2026-04-13"
 updated_at: "2026-06-29"
 quality: 3
 complexity: "intermediate"
+platforms: '[linux, macos, windows]'
+metadata:
+  hermes:
+    tags: [Obsidian, Notes, Markdown, Vault]
+    related_skills: []
 ---
 
 # Obsidian Vault

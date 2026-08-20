@@ -2,7 +2,7 @@
   "schema_version": 2,
   "video": {
     "url": "https://github.com/Linked-API/linkedin-skills",
-    "checked_at": "2026-08-18",
+    "checked_at": "2026-08-20",
     "note": "Curated from Linked-API/linkedin-skills with exact-path upstream tracking enabled."
   },
   "official_references": [
@@ -39,10 +39,11 @@
         "repo": "Linked-API/linkedin-skills",
         "path": "linkedin/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-08-18",
-        "last_synced_at": "2026-08-18",
-        "last_synced_commit": "edd0bdbbb25776e9288186b88969b29175531995",
-        "sync_mode": "monitor"
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
+        "last_synced_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+        "sync_mode": "monitor",
+        "path_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0"
       },
       "kind": "overlay",
       "sync_mode": "monitor",
@@ -61,11 +62,19 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "edd0bdbbb25776e9288186b88969b29175531995",
-            "path_commit": "edd0bdbbb25776e9288186b88969b29175531995",
+            "resolved_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+            "path_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
             "content_sha256": "c4730e0b4874454c95fec4f83245a2fb6c3273526fec8bc8f57e4c9b6969af6d",
-            "last_checked_at": "2026-08-18",
-            "last_synced_at": "2026-08-18"
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "ceb4397c28b15dd5388ebc9537defbc527f702ff",
+              "content_sha256": "7847c051252042ad9449731b5482c9027395a2501dda2a9efa530637c5a8d4ac",
+              "spdx": "MIT",
+              "resolved_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+              "api_spdx": "MIT"
+            }
           }
         },
         {
@@ -117,10 +126,11 @@
         "repo": "Linked-API/linkedin-skills",
         "path": "linkedin-growth/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-08-18",
-        "last_synced_at": "2026-08-18",
-        "last_synced_commit": "edd0bdbbb25776e9288186b88969b29175531995",
-        "sync_mode": "monitor"
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
+        "last_synced_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+        "sync_mode": "monitor",
+        "path_commit": "945636d8b3b4f7cc6e98e5bfa397473e2557147f"
       },
       "kind": "overlay",
       "sync_mode": "monitor",
@@ -319,11 +329,19 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "edd0bdbbb25776e9288186b88969b29175531995",
-            "path_commit": "edd0bdbbb25776e9288186b88969b29175531995",
+            "resolved_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+            "path_commit": "945636d8b3b4f7cc6e98e5bfa397473e2557147f",
             "content_sha256": "d11562f2dd8887d9e5ea336c76f18118a73482e0b08bf2f76046e1f4495aff21",
-            "last_checked_at": "2026-08-18",
-            "last_synced_at": "2026-08-18"
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "ceb4397c28b15dd5388ebc9537defbc527f702ff",
+              "content_sha256": "7847c051252042ad9449731b5482c9027395a2501dda2a9efa530637c5a8d4ac",
+              "spdx": "MIT",
+              "resolved_commit": "e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+              "api_spdx": "MIT"
+            }
           }
         },
         {
@@ -454,7 +472,7 @@
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/account.mjs",
-          "sha256": "b78b006daddc9756e7e16f94ca8ebb957ccf9ef294dfee9251b1014f52fc7426",
+          "sha256": "4d6b06b0bfdc8e7005eb71cdfb8fa989f1271819f6e42e624c3fde0bc30d8e93",
           "owner": "linkedin-growth",
           "mode": "100644"
         },
@@ -595,6 +613,13 @@
       "target": "skills/*/linkedin*/SKILL.md",
       "result": "success",
       "evidence": "Verified complete frontmatter, exact source URLs, local MIT notices, category placement, quality sections, and explicit safe-authorization boundaries."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/Linked-API/linkedin-skills/compare/edd0bdbbb25776e9288186b88969b29175531995...e5e642e2bbbd839501c59a7742cdc04a9d9c66a0",
+      "result": "partial-artifact-absorb",
+      "evidence": "LinkedIn skill bodies already equal current upstream. Absorbed the one durable linkedin-growth account helper change and preserved the local authorization and quality overlays."
     }
   ]
 }

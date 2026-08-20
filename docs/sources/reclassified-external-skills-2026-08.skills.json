@@ -59,6 +59,41 @@
       "target": "vercel-labs/agent-skills react-best-practices",
       "result": "no-change",
       "evidence": "Canonical body already equals upstream and the tracked SKILL.md path has not changed since commit 805687f34e8c10b420e3d11335a0ca2c3c90d992; advanced the repository and path checkpoints without rewriting content."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/Xquik-dev/x-twitter-scraper/compare/2b0197a3dd2a97de8f183752812987636e1d987a...2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
+      "result": "absorbed",
+      "evidence": "Absorbed the substantially expanded MIT-licensed x-twitter-scraper guidance at the current path commit, preserving repository governance frontmatter."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/Xquik-dev/x-twitter-scraper/compare/2b4b169d6beaebc9e41526bc6f895df149ac8e7a...0aa909b40f341b28d8b58766e251e44e080df998",
+      "result": "no-local-change-needed",
+      "evidence": "The single upstream commit rewrites public copy without changing the API surface, safety contract, approval gates, compatibility, or version. Retained the more explicit curated operating guidance and advanced the reviewed checkpoint."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "license-lineage-review",
+      "target": "https://github.com/sickn33/agentic-awesome-skills/tree/e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
+      "result": "licensed-snapshot",
+      "evidence": "Current upstream license text is no longer machine-verifiable and the source path moved; preserved the last reviewed MIT artifact as an immutable licensed snapshot."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "immutable-readme-license-review",
+      "target": "https://github.com/vercel-labs/agent-skills/tree/b8caa260a420a73042e35521de4b5c8baf6446cc/skills/react-best-practices",
+      "result": "licensed-snapshot",
+      "evidence": "GitHub license API returns 404 because no root LICENSE file exists; the immutable README.md blob daecfea1e60f8f045a3d711c605d70edcdf9d92a explicitly states License: MIT."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "immutable-readme-license-review",
+      "target": "https://github.com/vercel-labs/agent-skills/tree/b8caa260a420a73042e35521de4b5c8baf6446cc/skills/react-view-transitions",
+      "result": "licensed-snapshot",
+      "evidence": "GitHub license API returns 404 because no root LICENSE file exists; the immutable README.md blob daecfea1e60f8f045a3d711c605d70edcdf9d92a explicitly states License: MIT."
     }
   ],
   "skills": [
@@ -889,25 +924,26 @@
       "normalized_slug": "docker-expert",
       "status": "verified_in_repo",
       "repo_skill": "skills/developer-engineering/docker-expert/SKILL.md",
-      "source": "https://skills.sh/sickn33/antigravity-awesome-skills/docker-expert",
-      "notes": "Reclassified from the in-house mapping after canonical frontmatter and upstream license/path verification; legacy fields retained for sync compatibility.",
+      "source": "https://github.com/sickn33/agentic-awesome-skills/tree/e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
+      "notes": "Current upstream license text is no longer machine-verifiable and the source path moved; preserved the last reviewed MIT artifact as an immutable licensed snapshot.",
       "upstream": {
         "repo": "sickn33/agentic-awesome-skills",
         "path": "skills/docker-expert/SKILL.md",
-        "ref": "main",
+        "ref": "e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
         "last_checked_at": "2026-08-20",
-        "last_synced_at": "2026-08-10",
+        "last_synced_at": "2026-08-20",
         "last_synced_commit": "e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
-        "sync_mode": "monitor"
+        "sync_mode": "archived",
+        "path_commit": "e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5"
       },
-      "kind": "mirror",
-      "sync_mode": "monitor",
+      "kind": "snapshot",
+      "sync_mode": "archived",
       "origins": [
         {
           "repo": "sickn33/agentic-awesome-skills",
           "path": "skills/docker-expert/SKILL.md",
-          "license": "CC-BY-4.0",
-          "sync_mode": "monitor",
+          "license": "MIT",
+          "sync_mode": "archived",
           "artifacts": [
             {
               "source": "skills/docker-expert/SKILL.md",
@@ -915,13 +951,21 @@
             }
           ],
           "tracking": {
-            "channel": "default_branch",
-            "ref": "main",
+            "channel": "fixed_ref",
+            "ref": "e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
             "resolved_commit": "e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
             "path_commit": "df08c3f9cad7dec3aff91914a3cf6fb1e810a52c",
-            "content_sha256": "17390f0f230cee1a109b5b320cf3f91d02d753c116710e0370a577d082c2f6ff",
+            "content_sha256": "ff5abc5b6a753852a48667844e00360728b875f6072b655cc31d4cc25dd7b9c4",
             "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-08-10"
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "dc38cfd7ab732a67b0f14997cfa8c9ec740a1889",
+              "content_sha256": "af98370a7edc0f00ec46979d049517833c9a7fa2ba74e3cf8cc42f7db557299d",
+              "spdx": "MIT",
+              "resolved_commit": "e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
+              "api_spdx": "NOASSERTION"
+            }
           }
         }
       ],
@@ -929,7 +973,7 @@
         {
           "path": "skills/developer-engineering/docker-expert/SKILL.md",
           "owner": "docker-expert",
-          "sha256": "17390f0f230cee1a109b5b320cf3f91d02d753c116710e0370a577d082c2f6ff",
+          "sha256": "ff5abc5b6a753852a48667844e00360728b875f6072b655cc31d4cc25dd7b9c4",
           "mode": "100644"
         }
       ]
@@ -2045,25 +2089,25 @@
       "normalized_slug": "vercel-react-best-practices",
       "status": "verified_in_repo",
       "repo_skill": "skills/developer-engineering/vercel-react-best-practices/SKILL.md",
-      "source": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "notes": "Reclassified from the in-house mapping after canonical frontmatter and upstream license/path verification; legacy fields retained for sync compatibility.",
+      "source": "https://github.com/vercel-labs/agent-skills/tree/b8caa260a420a73042e35521de4b5c8baf6446cc/skills/react-best-practices",
+      "notes": "The repository has no root LICENSE file, but the immutable upstream README explicitly declares MIT. Preserved the reviewed artifact set as a fixed licensed snapshot so automated license discovery does not report a false 404.",
       "upstream": {
         "repo": "vercel-labs/agent-skills",
         "path": "skills/react-best-practices/SKILL.md",
-        "ref": "main",
+        "ref": "b8caa260a420a73042e35521de4b5c8baf6446cc",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
         "last_synced_commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
-        "sync_mode": "monitor"
+        "sync_mode": "archived"
       },
-      "kind": "mirror",
-      "sync_mode": "monitor",
+      "kind": "snapshot",
+      "sync_mode": "archived",
       "origins": [
         {
           "repo": "vercel-labs/agent-skills",
           "path": "skills/react-best-practices/SKILL.md",
           "license": "MIT",
-          "sync_mode": "monitor",
+          "sync_mode": "archived",
           "artifacts": [
             {
               "source": "skills/react-best-practices/AGENTS.md",
@@ -2447,13 +2491,20 @@
             }
           ],
           "tracking": {
-            "channel": "default_branch",
-            "ref": "main",
+            "channel": "fixed_ref",
+            "ref": "b8caa260a420a73042e35521de4b5c8baf6446cc",
             "resolved_commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
             "path_commit": "805687f34e8c10b420e3d11335a0ca2c3c90d992",
-            "content_sha256": "965356ccf805f0c6af9f4e8c8cc3951ca60558504393944f87d38dd4e0179d9e",
+            "content_sha256": "ef445fb96919c893afb45ef669a2b172539fe620f0d39b5b42f3a4b9d3140660",
             "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-08-20"
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "README.md",
+              "blob_sha": "daecfea1e60f8f045a3d711c605d70edcdf9d92a",
+              "content_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a",
+              "spdx": "MIT",
+              "resolved_commit": "b8caa260a420a73042e35521de4b5c8baf6446cc"
+            }
           }
         }
       ],
@@ -2472,7 +2523,7 @@
         },
         {
           "path": "skills/developer-engineering/vercel-react-best-practices/SKILL.md",
-          "sha256": "965356ccf805f0c6af9f4e8c8cc3951ca60558504393944f87d38dd4e0179d9e",
+          "sha256": "ef445fb96919c893afb45ef669a2b172539fe620f0d39b5b42f3a4b9d3140660",
           "owner": "vercel-react-best-practices",
           "mode": "100644"
         },
@@ -2921,25 +2972,25 @@
       "normalized_slug": "vercel-react-view-transitions",
       "status": "verified_in_repo",
       "repo_skill": "skills/developer-engineering/vercel-react-view-transitions/SKILL.md",
-      "source": "https://skills.sh/vercel-labs/agent-skills/vercel-react-view-transitions",
-      "notes": "Reclassified from the in-house mapping after canonical frontmatter and upstream license/path verification; legacy fields retained for sync compatibility.",
+      "source": "https://github.com/vercel-labs/agent-skills/tree/b8caa260a420a73042e35521de4b5c8baf6446cc/skills/react-view-transitions",
+      "notes": "The repository has no root LICENSE file, but the immutable upstream README explicitly declares MIT. Preserved the reviewed artifact set as a fixed licensed snapshot so automated license discovery does not report a false 404.",
       "upstream": {
         "repo": "vercel-labs/agent-skills",
         "path": "skills/react-view-transitions/SKILL.md",
-        "ref": "main",
+        "ref": "b8caa260a420a73042e35521de4b5c8baf6446cc",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
         "last_synced_commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
-        "sync_mode": "monitor"
+        "sync_mode": "archived"
       },
-      "kind": "overlay",
-      "sync_mode": "monitor",
+      "kind": "snapshot",
+      "sync_mode": "archived",
       "origins": [
         {
           "repo": "vercel-labs/agent-skills",
           "path": "skills/react-view-transitions/SKILL.md",
           "license": "MIT",
-          "sync_mode": "monitor",
+          "sync_mode": "archived",
           "artifacts": [
             {
               "source": "skills/react-view-transitions/AGENTS.md",
@@ -2983,13 +3034,20 @@
             }
           ],
           "tracking": {
-            "channel": "default_branch",
-            "ref": "main",
+            "channel": "fixed_ref",
+            "ref": "b8caa260a420a73042e35521de4b5c8baf6446cc",
             "resolved_commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
             "path_commit": "3798a7954ee2d7bc6ff09decf6d96cd7fdd13152",
-            "content_sha256": "fcd9f463400691cd15ea52e705b7d833836c9c87c6e432c0549c08d2ed3b3ffb",
+            "content_sha256": "08118b4b881f77997b38ed21d6dc23d0c6145b8bc69c81a58e564ea877d481e0",
             "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-08-20"
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "README.md",
+              "blob_sha": "daecfea1e60f8f045a3d711c605d70edcdf9d92a",
+              "content_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a",
+              "spdx": "MIT",
+              "resolved_commit": "b8caa260a420a73042e35521de4b5c8baf6446cc"
+            }
           }
         }
       ],
@@ -3008,7 +3066,7 @@
         },
         {
           "path": "skills/developer-engineering/vercel-react-view-transitions/SKILL.md",
-          "sha256": "fcd9f463400691cd15ea52e705b7d833836c9c87c6e432c0549c08d2ed3b3ffb",
+          "sha256": "08118b4b881f77997b38ed21d6dc23d0c6145b8bc69c81a58e564ea877d481e0",
           "owner": "vercel-react-view-transitions",
           "mode": "100644"
         },
@@ -3056,9 +3114,10 @@
         "path": "skills/x-twitter-scraper/SKILL.md",
         "ref": "master",
         "last_checked_at": "2026-08-20",
-        "last_synced_at": "2026-08-10",
-        "last_synced_commit": "2b0197a3dd2a97de8f183752812987636e1d987a",
-        "sync_mode": "monitor"
+        "last_synced_at": "2026-08-20",
+        "last_synced_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
+        "sync_mode": "monitor",
+        "path_commit": "0aa909b40f341b28d8b58766e251e44e080df998"
       },
       "kind": "mirror",
       "sync_mode": "monitor",
@@ -3077,19 +3136,27 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "master",
-            "resolved_commit": "2b0197a3dd2a97de8f183752812987636e1d987a",
-            "path_commit": "6952397c16f34618f8e95687fe2a12e504f52f5d",
-            "content_sha256": "9d69d9983ee3ab07a51a905c053ddc6cec3b70cb8eabe84dced1a043cea534ef",
+            "resolved_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
+            "path_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
+            "content_sha256": "1f905b2c0bca9ab80e0fffdfc8b36fe4f335e9ffcc1586d06fe03759bdc8699a",
             "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-08-10"
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "3a5f93c8e882f8f115758ad4e7fa4e91d1c787b2",
+              "content_sha256": "591a93ca295f08caf49f4417eef0a085bb64d4b208ba8f186e0f0f027aebd4b5",
+              "spdx": "MIT",
+              "resolved_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
+              "api_spdx": "MIT"
+            }
           }
         }
       ],
       "managed_files": [
         {
           "path": "skills/growth-operations-xiaohongshu/x-twitter-scraper/SKILL.md",
+          "sha256": "1f905b2c0bca9ab80e0fffdfc8b36fe4f335e9ffcc1586d06fe03759bdc8699a",
           "owner": "x-twitter-scraper",
-          "sha256": "9d69d9983ee3ab07a51a905c053ddc6cec3b70cb8eabe84dced1a043cea534ef",
           "mode": "100644"
         }
       ]

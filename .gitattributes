@@ -3,3 +3,8 @@ openclaw-skills/** linguist-generated=true
 docs/catalog.json linguist-generated=true
 docs/TAGS-INDEX.md linguist-generated=true
 skills/*/README.md linguist-generated=true
+
+# Preserve byte-exact upstream Hermes references, including intentional EOF
+# spacing that would otherwise be rewritten by the repository whitespace gate.
+skills/ai-agent-platform/hermes-agent/references/*.md whitespace=-blank-at-eof
+openclaw-skills/hermes-agent/references/*.md whitespace=-blank-at-eof

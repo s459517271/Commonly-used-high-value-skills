@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-20",
+  "decision_rule": "Retire only after replacement coverage is proven and unique executable assets, external contracts, high-risk guardrails, and acceptance criteria have been preserved.",
+  "decisions": [
+    {
+      "name": "hermes-agent",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "18 official references",
+        "3 official templates"
+      ],
+      "external_contract": "NousResearch/hermes-agent stable release artifact set",
+      "license_lineage": "MIT at pinned v2026.8.18 commit",
+      "local_cleanup_action": "Replace incomplete local copies with the canonical managed mirror.",
+      "rationale": "The complete upstream artifact set is the canonical Hermes capability."
+    },
+    {
+      "name": "graphify",
+      "decision": "merge",
+      "replacement": "graphify",
+      "unique_assets": [
+        "official Codex skill",
+        "8 official references"
+      ],
+      "external_contract": "DeabLabs/graphify stable Codex artifact set",
+      "license_lineage": "Apache-2.0 at pinned v0.9.47 commit",
+      "local_cleanup_action": "Remove the obsolete partial Python package snapshot and keep only the official Codex artifact set.",
+      "rationale": "The old mixed snapshot is fully superseded by the maintained Codex distribution."
+    },
+    {
+      "name": "gsd-core",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "71 skills",
+        "34 agents",
+        "71 commands",
+        "556 runtime files"
+      ],
+      "external_contract": "@opengsd/gsd-core official installer bundle",
+      "license_lineage": "MIT with pinned release, npm digest, and SLSA provenance",
+      "local_cleanup_action": "Manage only through explicit --bundle gsd-core installation; never flatten into canonical skills.",
+      "rationale": "The official installer is the complete supported multi-client distribution."
+    },
+    {
+      "name": "gsd-pi",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "37 skills",
+        "13 agents",
+        "isolated .gsd state"
+      ],
+      "external_contract": "@opengsd/gsd-pi optional official bundle",
+      "license_lineage": "MIT with pinned release, npm digest, and SLSA provenance",
+      "local_cleanup_action": "Keep listable and explicit-only; do not install in this release migration.",
+      "rationale": "Pi remains useful for its native runtime but must not share Core .planning state."
+    },
+    {
+      "name": "hermes-graphify-gsd-nonintrusive-workflow",
+      "decision": "retire",
+      "replacement": "hermes-open-gsd-workflow",
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Delete unchanged installer-owned copies; archive modified or unowned copies and retain a tombstone.",
+      "rationale": "The thin router preserves the intent without duplicating upstream versions or state machines."
+    },
+    {
+      "name": "hermes-graphify-gsd-runtime-operator",
+      "decision": "retire",
+      "replacement": "hermes-open-gsd-workflow",
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Delete unchanged installer-owned copies; archive modified or unowned copies and retain a tombstone.",
+      "rationale": "Runtime ownership belongs to the official Hermes, Graphify, and GSD distributions."
+    },
+    {
+      "name": "hermes-graphify-gsd-project-integration",
+      "decision": "retire",
+      "replacement": "hermes-open-gsd-workflow",
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Delete unchanged installer-owned copies; archive modified or unowned copies and retain a tombstone.",
+      "rationale": "The new router covers selection and delegates implementation to complete official artifacts."
+    },
+    {
+      "name": "gsd-graphify-brownfield-bootstrap",
+      "decision": "retire",
+      "replacement": "open-gsd-core-migration",
+      "unique_assets": [
+        "legacy installation migration intent"
+      ],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Archive user-modified copies; migrate the unique backup and rollback behavior before removing active copies.",
+      "rationale": "The dedicated migration skill retains the only unique intent without duplicating GSD orchestration."
+    },
+    {
+      "name": "lore",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "upstream-specific knowledge capture workflow"
+      ],
+      "external_contract": "Simota/lore current upstream path",
+      "license_lineage": "permissive upstream license at reviewed checkpoint",
+      "local_cleanup_action": "Follow the moved upstream path and preserve the canonical install.",
+      "rationale": "The path moved, but the skill retains distinct value."
+    }
+  ]
+}

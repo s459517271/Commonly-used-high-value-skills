@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "video": {
+    "url": "https://github.com/open-gsd/gsd-pi/releases/tag/v1.16.0",
+    "checked_at": "2026-08-20",
+    "note": "Verified stable Open GSD Pi release and optional npm bundle."
+  },
+  "official_references": [
+    {
+      "name": "Open GSD Pi v1.16.0 release",
+      "url": "https://github.com/open-gsd/gsd-pi/releases/tag/v1.16.0",
+      "purpose": "Immutable source release and tag checkpoint."
+    },
+    {
+      "name": "@opengsd/gsd-pi 1.16.0",
+      "url": "https://www.npmjs.com/package/@opengsd/gsd-pi/v/1.16.0",
+      "purpose": "Official optional Pi distribution."
+    },
+    {
+      "name": "npm SLSA provenance",
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@opengsd%2fgsd-pi@1.16.0",
+      "purpose": "SLSA v1 build provenance and package subject digest."
+    }
+  ],
+  "verification_attempts": [
+    {
+      "date": "2026-08-20",
+      "method": "release-npm-slsa-license-inventory",
+      "target": "open-gsd/gsd-pi@v1.16.0 and @opengsd/gsd-pi@1.16.0",
+      "result": "success",
+      "evidence": "The release tag, npm gitHead, tarball digests, registry integrity, SLSA source commit, MIT license checkpoint, and package inventory were recorded. The npm gitHead is an accepted descendant-by-1 of the release tag."
+    }
+  ],
+  "bundle": {
+    "id": "gsd-pi",
+    "optional": true,
+    "state_root": ".gsd",
+    "isolated_from": [
+      {
+        "bundle": "gsd-core",
+        "state_root": ".planning"
+      }
+    ]
+  },
+  "install_policy": {
+    "mode": "explicit_only",
+    "default_install": false
+  },
+  "bundle_inventory": {
+    "package_files": 9289,
+    "skills": 37,
+    "agents": 13,
+    "commands": 0,
+    "runtime_files": 4448,
+    "runtime_scope": "package/dist/**",
+    "installed_in_repository": false
+  },
+  "installer": {
+    "registry": "npm",
+    "package": "@opengsd/gsd-pi",
+    "version": "1.16.0",
+    "spec": "@opengsd/gsd-pi@1.16.0",
+    "command": "npx @opengsd/gsd-pi@1.16.0",
+    "tarball_url": "https://registry.npmjs.org/@opengsd/gsd-pi/-/gsd-pi-1.16.0.tgz",
+    "tarball_sha256": "16165f4b80211b9e3aa3801e68e04de2f5599ab9a0c247307b1712aa5a9b5df5",
+    "integrity": "sha512-4ndqwTaRCv+O8LMhNHuaKOvLjNyI3Szw62vutN6Nswfjd1iALvUeUFbQemR3ogx7x4V9gnsgsrouN7eUlhGZuA==",
+    "npm_shasum": "d8104aaddfa366e474a6dedc25219bb5d31cf821",
+    "package_files": 9289,
+    "unpacked_size": 230560075,
+    "git_head": "450e46e2df4275e3edc8e6bd8af98e5832e3c0ad",
+    "tag_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+    "git_head_matches_tag": false
+  },
+  "slsa_provenance": {
+    "attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/@opengsd%2fgsd-pi@1.16.0",
+    "predicate_type": "https://slsa.dev/provenance/v1",
+    "build_type": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+    "subject_name": "pkg:npm/%40opengsd/gsd-pi@1.16.0",
+    "subject_sha512": "e2776ac136910aff8ef0b321347b9a28ebcb8cdc88dd2cf0eb6beeb4de8db307e37758802ef51e5056d07a6477a20c7bc7857d827b20b2ba2e37b794961199b8",
+    "source_repository": "https://github.com/open-gsd/gsd-pi",
+    "source_ref": "refs/heads/main",
+    "workflow_path": ".github/workflows/npm-publish.yml",
+    "attested_source_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+    "builder_id": "https://github.com/actions/runner/github-hosted",
+    "invocation_id": "https://github.com/open-gsd/gsd-pi/actions/runs/31990917871/attempts/1"
+  },
+  "commit_coherence": {
+    "npm_git_head_relative_to_tag": {
+      "relation": "descendant_by",
+      "distance": 1,
+      "base_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+      "merge_base_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "compare_url": "https://github.com/open-gsd/gsd-pi/compare/09ae3c22c3286d3e988ccb94cee27279e026b329...450e46e2df4275e3edc8e6bd8af98e5832e3c0ad"
+    },
+    "attested_source_relative_to_tag": {
+      "relation": "equal",
+      "distance": 0,
+      "base_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+      "merge_base_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+      "ahead_by": 0,
+      "behind_by": 0,
+      "compare_url": "https://github.com/open-gsd/gsd-pi/commit/09ae3c22c3286d3e988ccb94cee27279e026b329"
+    }
+  },
+  "skills": [
+    {
+      "video_name": "Open GSD Pi v1.16.0 optional managed bundle",
+      "normalized_slug": "open-gsd-pi-bundle",
+      "status": "verified_not_in_repo",
+      "repo_skill": null,
+      "source": "https://github.com/open-gsd/gsd-pi/releases/tag/v1.16.0",
+      "notes": "Optional official Pi bundle. It is never part of normal canonical installation and may only be installed by an explicit --bundle gsd-pi request. Its .gsd state is isolated from GSD Core .planning state.",
+      "upstream": {
+        "repo": "open-gsd/gsd-pi",
+        "path": null,
+        "ref": "v1.16.0",
+        "sync_mode": "replace",
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
+        "last_synced_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329"
+      },
+      "kind": "bundle",
+      "sync_mode": "replace",
+      "origins": [
+        {
+          "repo": "open-gsd/gsd-pi",
+          "path": null,
+          "license": "MIT",
+          "sync_mode": "replace",
+          "artifacts": [],
+          "tracking": {
+            "channel": "latest_release",
+            "ref": "v1.16.0",
+            "resolved_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+            "path_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+            "content_sha256": "16165f4b80211b9e3aa3801e68e04de2f5599ab9a0c247307b1712aa5a9b5df5",
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d47f8ea21c0c46de01da7f0f61f92d4bee44631b",
+              "content_sha256": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+              "spdx": "MIT",
+              "resolved_commit": "09ae3c22c3286d3e988ccb94cee27279e026b329",
+              "api_spdx": "MIT"
+            }
+          }
+        }
+      ],
+      "managed_files": []
+    }
+  ]
+}

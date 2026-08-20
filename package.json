@@ -1,6 +1,6 @@
 {
   "name": "common-high-value-skills",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "Cross-agent installer for the Commonly Used High-Value Skills repository.",
   "license": "MIT",
   "type": "commonjs",
@@ -12,12 +12,17 @@
     "bin/",
     "skills/",
     "docs/client-install-guides.md",
+    "docs/sources/open-gsd-core-2026-08.bundle.json",
+    "docs/sources/open-gsd-pi-2026-08.bundle.json",
+    "docs/sources/portfolio-policy.json",
+    "docs/sources/portfolio-decisions-2026-08.json",
+    "docs/releases/v2.0.0.json",
     "README.md",
     "README.en.md",
     "LICENSE"
   ],
   "scripts": {
-    "test": "node --check bin/install-skills.js && node bin/install-skills.js --help && npm pack --dry-run --silent"
+    "test": "node --check bin/install-skills.js && node bin/install-skills.js --help && node bin/install-skills.js list-bundles && npm pack --dry-run --silent"
   },
   "engines": {
     "node": ">=18"

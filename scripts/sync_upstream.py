@@ -387,6 +387,22 @@ def _normalized_frontmatter_block(lines: list[str]) -> str:
     normalized = [line.rstrip() for line in lines]
     while normalized and not normalized[-1]:
         normalized.pop()
+    if len(normalized) == 1 and ":" in normalized[0]:
+        key, _, raw_value = normalized[0].partition(":")
+        value = raw_value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            quote = value[0]
+            if quote == "'":
+                decoded = value[1:-1].replace("''", "'")
+            else:
+                try:
+                    decoded = json.loads(value)
+                except (json.JSONDecodeError, TypeError):
+                    decoded = None
+            # Quoting a flow collection changes its YAML type, so preserve that
+            # distinction. Ordinary scalar quote-style differences are noise.
+            if isinstance(decoded, str) and not decoded.lstrip().startswith(("[", "{")):
+                return f"{key.strip()}: {decoded}"
     return "\n".join(normalized)
 
 

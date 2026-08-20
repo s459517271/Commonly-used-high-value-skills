@@ -1,0 +1,21 @@
+{
+  "tag": "v2.0.0",
+  "package_version": "2.0.0",
+  "title": "Governed Skills Portfolio v2.0.0",
+  "prerelease": false,
+  "generate_notes": true,
+  "changelog_range": "previous-tag..v2.0.0",
+  "highlights": [
+    "Provenance v2 and crash-safe artifact-set synchronization",
+    "Complete official Hermes and Graphify artifact mirrors",
+    "Explicit-only Open GSD Core managed bundle",
+    "Managed installation manifests, retirement pruning, and local conflict auditing"
+  ],
+  "release_gates": [
+    "full repository pipeline passes twice without generated drift",
+    "GitHub checks and security review pass on the final integrated branch",
+    "normal installation excludes all bundles",
+    "dry-run performs zero writes",
+    "release tag is created from the merged main commit"
+  ]
+}

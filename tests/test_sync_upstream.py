@@ -992,7 +992,7 @@ class SyncUpstreamTests(unittest.TestCase):
         ]
 
         self.assertEqual(151, len(loaded))
-        self.assertEqual(12, len(snapshots))
+        self.assertEqual(25, len(snapshots))
         self.assertTrue(
             all(skill.get("expected_skip_reason") for skill in snapshots)
         )
@@ -3466,6 +3466,35 @@ class SyncUpstreamTests(unittest.TestCase):
                     upstream.replace(b"name: demo", b"name: renamed-demo"),
                 )
             )
+
+    def test_main_artifact_equal_ignores_equivalent_scalar_quote_style(self):
+        module = load_module()
+        local = (
+            "---\n"
+            "name: demo\n"
+            "description: 'A quoted scalar.'\n"
+            "platforms: [linux, macos]\n"
+            "---\n"
+            "# Same body\n"
+        ).encode("utf-8")
+        upstream = (
+            "---\n"
+            "name: demo\n"
+            'description: "A quoted scalar."\n'
+            "platforms: [linux, macos]\n"
+            "---\n"
+            "# Same body\n"
+        ).encode("utf-8")
+
+        self.assertTrue(module._main_artifact_equal({}, local, upstream))
+
+        stringified_collection = local.replace(
+            b"platforms: [linux, macos]",
+            b"platforms: '[linux, macos]'",
+        )
+        self.assertFalse(
+            module._main_artifact_equal({}, stringified_collection, upstream)
+        )
 
     def test_v2_binary_change_on_stable_release_is_auto_syncable(self):
         module = load_module()

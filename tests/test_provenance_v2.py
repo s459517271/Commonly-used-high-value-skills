@@ -763,11 +763,15 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                         errors,
                     )
 
-    def test_inactive_bundle_with_null_repo_skill_remains_valid(self):
+    def test_inactive_bundle_requires_managed_bundle_contract(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             mapping, _ = self.make_bundle_mapping(root)
-            self.assertEqual([], validator.validate_mapping(mapping, root))
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any("bundle missing top-level keys" in error for error in errors),
+                errors,
+            )
 
     def test_v1_requires_explicit_compatibility_flag(self):
         with tempfile.TemporaryDirectory() as tmpdir:
