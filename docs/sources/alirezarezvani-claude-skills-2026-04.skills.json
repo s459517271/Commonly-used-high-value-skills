@@ -99,22 +99,26 @@
         {
           "path": "skills/ai-agent-platform/agent-hub/CLAUDE.md",
           "sha256": "002a900117ade74f8dea66bb1dca3179536c324d592527c01152b11139fc49d5",
-          "owner": "agent-hub"
+          "owner": "agent-hub",
+          "mode": "100644"
         },
         {
           "path": "skills/ai-agent-platform/agent-hub/README.md",
           "sha256": "a555836eacdc116ddb76e8bf9cb0c91466806c7b41091586f493826cdea1536c",
-          "owner": "agent-hub"
+          "owner": "agent-hub",
+          "mode": "100644"
         },
         {
           "path": "skills/ai-agent-platform/agent-hub/SKILL.md",
           "sha256": "387d7d7ea145c1779276f316313d89ac62c469f900b5dfb8e4e55aa0a765f7a3",
-          "owner": "agent-hub"
+          "owner": "agent-hub",
+          "mode": "100644"
         },
         {
           "path": "skills/ai-agent-platform/agent-hub/settings.json",
           "sha256": "1bf3fcb93594d44bbd1cc30af78ac5da4c9bb32d7cb17ad163ad6787867fb760",
-          "owner": "agent-hub"
+          "owner": "agent-hub",
+          "mode": "100644"
         }
       ]
     },
@@ -172,7 +176,8 @@
         {
           "path": "skills/security-and-reliability/security-pen-testing/SKILL.md",
           "owner": "security-pen-testing",
-          "sha256": "3d5f04c0e983706af28bab77938a3b4e0b312d74dccf1c28ff80cc805955eb57"
+          "sha256": "3d5f04c0e983706af28bab77938a3b4e0b312d74dccf1c28ff80cc805955eb57",
+          "mode": "100644"
         }
       ]
     },
@@ -230,7 +235,8 @@
         {
           "path": "skills/security-and-reliability/information-security-manager-iso27001/SKILL.md",
           "owner": "information-security-manager-iso27001",
-          "sha256": "4c4a0abe72a34ebb8c14fd70ec4e89e0028698555aa73ac4cf11103772cca2b7"
+          "sha256": "4c4a0abe72a34ebb8c14fd70ec4e89e0028698555aa73ac4cf11103772cca2b7",
+          "mode": "100644"
         }
       ]
     },
@@ -288,7 +294,8 @@
         {
           "path": "skills/product-design/landing-page-generator/SKILL.md",
           "owner": "landing-page-generator",
-          "sha256": "d39df0b84a8c5124f8d96f48a67cb4dbb282266a46fbacc699c23f0225d95d62"
+          "sha256": "d39df0b84a8c5124f8d96f48a67cb4dbb282266a46fbacc699c23f0225d95d62",
+          "mode": "100644"
         }
       ]
     },
@@ -346,7 +353,8 @@
         {
           "path": "skills/finance-investing/saas-metrics-coach/SKILL.md",
           "owner": "saas-metrics-coach",
-          "sha256": "d96b366ece56d6001694d33d6b959a9d4541230a6d82e3623b54bd88e8e9ab81"
+          "sha256": "d96b366ece56d6001694d33d6b959a9d4541230a6d82e3623b54bd88e8e9ab81",
+          "mode": "100644"
         }
       ]
     },
@@ -404,7 +412,8 @@
         {
           "path": "skills/devops-sre/senior-architect/SKILL.md",
           "owner": "senior-architect",
-          "sha256": "506b0a94794848e0ac86c5437b2fea177bafa958a60df08c2b35f050a162708d"
+          "sha256": "506b0a94794848e0ac86c5437b2fea177bafa958a60df08c2b35f050a162708d",
+          "mode": "100644"
         }
       ]
     },
@@ -462,7 +471,8 @@
         {
           "path": "skills/security-and-reliability/skill-security-auditor/SKILL.md",
           "owner": "skill-security-auditor",
-          "sha256": "2907b6beba027e9e23c6e05395eb01ad4cd5c167b9ebb925712a6195591da3c6"
+          "sha256": "2907b6beba027e9e23c6e05395eb01ad4cd5c167b9ebb925712a6195591da3c6",
+          "mode": "100644"
         }
       ]
     }

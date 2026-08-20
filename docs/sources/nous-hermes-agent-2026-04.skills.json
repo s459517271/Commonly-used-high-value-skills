@@ -63,7 +63,8 @@
         {
           "path": "skills/knowledge-and-pm-integrations/llm-wiki/SKILL.md",
           "owner": "llm-wiki",
-          "sha256": "bcec6800ff1eeef9e5a0581f5cb8fbed92322e19b1b9b2a04f4b400006963f45"
+          "sha256": "bcec6800ff1eeef9e5a0581f5cb8fbed92322e19b1b9b2a04f4b400006963f45",
+          "mode": "100644"
         }
       ]
     },
@@ -112,7 +113,8 @@
         {
           "path": "skills/ai-agent-platform/hermes-agent/SKILL.md",
           "owner": "hermes-agent",
-          "sha256": "9377be063868a904734ce45c682dcc0bfcf87d1d8244111f7e05ca6e71e7b896"
+          "sha256": "9377be063868a904734ce45c682dcc0bfcf87d1d8244111f7e05ca6e71e7b896",
+          "mode": "100644"
         }
       ]
     },
@@ -161,7 +163,8 @@
         {
           "path": "skills/openclaw-memory-and-safety/honcho/SKILL.md",
           "owner": "honcho",
-          "sha256": "cb265771e4538a9aaaa9575d48afc50ebc971b4c8345a75c1eb35f620bcff2af"
+          "sha256": "cb265771e4538a9aaaa9575d48afc50ebc971b4c8345a75c1eb35f620bcff2af",
+          "mode": "100644"
         }
       ]
     },
@@ -212,7 +215,8 @@
         {
           "path": "skills/ai-agent-platform/native-mcp/SKILL.md",
           "owner": "native-mcp",
-          "sha256": "618687b72690c0143835b6f33d7f72c5215c6f69bae4153ad0fe90c615df6f25"
+          "sha256": "618687b72690c0143835b6f33d7f72c5215c6f69bae4153ad0fe90c615df6f25",
+          "mode": "100644"
         }
       ]
     },
@@ -261,7 +265,8 @@
         {
           "path": "skills/developer-engineering/codebase-inspection/SKILL.md",
           "owner": "codebase-inspection",
-          "sha256": "fcc53e9961ad3f1fd6654f2d9fe51df1daded532a36f4292dee1564c149edf25"
+          "sha256": "fcc53e9961ad3f1fd6654f2d9fe51df1daded532a36f4292dee1564c149edf25",
+          "mode": "100644"
         }
       ]
     },
@@ -310,7 +315,8 @@
         {
           "path": "skills/knowledge-and-pm-integrations/arxiv/SKILL.md",
           "owner": "arxiv",
-          "sha256": "ea98a5d429b4f36a5aebd9356df76010c967e2174d913b8ee6155135f1938f28"
+          "sha256": "ea98a5d429b4f36a5aebd9356df76010c967e2174d913b8ee6155135f1938f28",
+          "mode": "100644"
         }
       ]
     },
@@ -359,7 +365,8 @@
         {
           "path": "skills/knowledge-and-pm-integrations/obsidian/SKILL.md",
           "owner": "obsidian",
-          "sha256": "d646bc39a70a203346707fe62bfc1fa5c311d0fa257b7d17e7d3c03e9f41856b"
+          "sha256": "d646bc39a70a203346707fe62bfc1fa5c311d0fa257b7d17e7d3c03e9f41856b",
+          "mode": "100644"
         }
       ]
     },
@@ -408,7 +415,8 @@
         {
           "path": "skills/ai-agent-platform/mcporter/SKILL.md",
           "owner": "mcporter",
-          "sha256": "c0d87c766ab8e9f8621deda3b3fe13b78ece305b0a71c063dc42c4146cf42598"
+          "sha256": "c0d87c766ab8e9f8621deda3b3fe13b78ece305b0a71c063dc42c4146cf42598",
+          "mode": "100644"
         }
       ]
     },
@@ -496,27 +504,32 @@
         {
           "path": "skills/knowledge-and-pm-integrations/linear/LICENSE.txt",
           "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
-          "owner": "linear"
+          "owner": "linear",
+          "mode": "100644"
         },
         {
           "path": "skills/knowledge-and-pm-integrations/linear/SKILL.md",
           "sha256": "edf4821482e71172b744c38272d733d56596e86e226848392cf5eb39b19422b2",
-          "owner": "linear"
+          "owner": "linear",
+          "mode": "100644"
         },
         {
           "path": "skills/knowledge-and-pm-integrations/linear/agents/openai.yaml",
           "sha256": "9e6f164960e3dd0bc56456538abdf196d9e4fd8b4273be06fe1ef0110fbab9cb",
-          "owner": "linear"
+          "owner": "linear",
+          "mode": "100644"
         },
         {
           "path": "skills/knowledge-and-pm-integrations/linear/assets/linear-small.svg",
           "sha256": "6af9dbc5e58a51e80fcbcee47e5f9bd196a997cc5985c2147a89c908831d327f",
-          "owner": "linear"
+          "owner": "linear",
+          "mode": "100644"
         },
         {
           "path": "skills/knowledge-and-pm-integrations/linear/assets/linear.png",
           "sha256": "be13bf3f97e4437e67cda80979759998fb4f4dcace3cdd6a220ba6a75e1c2a82",
-          "owner": "linear"
+          "owner": "linear",
+          "mode": "100644"
         }
       ]
     }

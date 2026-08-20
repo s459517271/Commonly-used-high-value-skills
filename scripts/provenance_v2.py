@@ -59,6 +59,7 @@ GITHUB_REPOSITORY_RE = re.compile(r"^[A-Za-z0-9._-]+$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$", re.IGNORECASE)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+GIT_FILE_MODES = frozenset({"100644", "100755"})
 
 
 def parse_frontmatter(path: Path) -> dict[str, str]:
@@ -90,6 +91,27 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def git_file_mode(path: Path) -> str | None:
+    """Return the regular-file mode representable by a Git tree.
+
+    Git persists only the executable bit for ordinary files.  Symlinks,
+    non-regular files, and special permission bits cannot be authorized by a
+    managed-file checkpoint.
+    """
+    try:
+        metadata = path.lstat()
+    except OSError:
+        return None
+    permissions = stat.S_IMODE(metadata.st_mode)
+    if (
+        stat.S_ISLNK(metadata.st_mode)
+        or not stat.S_ISREG(metadata.st_mode)
+        or permissions & 0o7000
+    ):
+        return None
+    return "100755" if permissions & 0o111 else "100644"
 
 
 def valid_github_repo(value: object) -> bool:
@@ -500,6 +522,8 @@ def _managed_file(
             if candidate.is_file() and not candidate.is_symlink()
             else None
         )
+    if refresh_hash or "mode" not in record:
+        record["mode"] = git_file_mode(candidate)
     return record
 
 
@@ -605,6 +629,7 @@ def _refresh_declared_managed_digests(
             continue
         digest = sha256_file(candidate)
         managed["sha256"] = digest
+        managed["mode"] = git_file_mode(candidate)
         if path == repo_skill:
             repo_skill_digest = digest
 

@@ -50,7 +50,7 @@
 
 所有活动 mapping 默认必须是 `schema_version: 2`。只有兼容旧 fixture 或迁移排障时才允许显式使用 `validate_skill_sources.py --allow-v1`。
 
-`managed_files` 不是“当前目录文件列表”的同义词，而是覆盖、更新和删除授权。只有以下两类文件可进入：
+`managed_files` 不是“当前目录文件列表”的同义词，而是覆盖、更新和删除授权。每条记录同时锁定 `sha256` 与 Git 可移植模式 `100644`/`100755`；仅执行位变化也属于必须复核或受管修复的状态变化。只有以下两类文件可进入：
 
 - 在锁定 commit 上与上游 blob 字节完全一致的 external artifact；
 - 明确归属于 `local-repo/curation`、永不被外部 origin 覆盖的本地 overlay。

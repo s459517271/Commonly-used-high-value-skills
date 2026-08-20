@@ -95,12 +95,14 @@
         {
           "path": "skills/operations-general/linkedin/LICENSE",
           "sha256": "7847c051252042ad9449731b5482c9027395a2501dda2a9efa530637c5a8d4ac",
-          "owner": "linkedin"
+          "owner": "linkedin",
+          "mode": "100644"
         },
         {
           "path": "skills/operations-general/linkedin/SKILL.md",
           "sha256": "c4730e0b4874454c95fec4f83245a2fb6c3273526fec8bc8f57e4c9b6969af6d",
-          "owner": "linkedin"
+          "owner": "linkedin",
+          "mode": "100644"
         }
       ]
     },
@@ -351,192 +353,230 @@
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/.gitignore",
           "sha256": "e35fd41cd0f0245a7ecd36cac93c9bf42d21634bc515ea5242031905274a4b7c",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/LICENSE",
           "sha256": "7847c051252042ad9449731b5482c9027395a2501dda2a9efa530637c5a8d4ac",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/README.md",
           "sha256": "09cf19152d2f416ec45711f83612b7bc8f1a24b44aec4326f7811c1e81594c9c",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/SKILL.md",
           "sha256": "d11562f2dd8887d9e5ea336c76f18118a73482e0b08bf2f76046e1f4495aff21",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/commands/linkedin-growth-config.md",
           "sha256": "b77e1500187245b43eca79db3637488a61ac42023552a8e696cf7e49079a0c3f",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/commands/linkedin-growth-import.md",
           "sha256": "28ff2dbf24ecaa6d589ab161e67cc7705e047b690e8fb587320f3616b6693e05",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/commands/linkedin-growth-setup.md",
           "sha256": "84170ffbffd4ef0f58ddacb73506562c688a1730d4d019b252812172998f9b8a",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/commands/linkedin-growth-status.md",
           "sha256": "394c3094d631c6c5559c650cb33cd628bc82be18d965561caa5c5113b4501997",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/config/defaults.json",
           "sha256": "716a206f648318d9e520aecd76ec964799d21d8b825a1c10ef3e2380b8137bb9",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/config/qualification-prompt.md",
           "sha256": "2cecc338a33bc02bbe7816ee43b9970376152f5a6e8939bb9e80bb726c5456c7",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/package.json",
           "sha256": "89f6233ce5dd01a546a45562ec77e1e0ae7d376f427325e80b8a5bd95370ee31",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/account.mjs",
           "sha256": "6b99344d184b0028315661759fe07b6346ad99a9acdf8780b3055b970eec2a1b",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/db.mjs",
           "sha256": "fe2a6e61f7887a0537c2a26cc99389cbb91a1df7e74ac71cd7019b0013aa85a5",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/doctor.mjs",
           "sha256": "9d69249fe42406a855ceb7931c0e2ec755c07b27c1b7ecc73d66382c0211d45c",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/export.mjs",
           "sha256": "951d0b7d49e28648831f18bfc9618cd3ed19187f289785ce5c1acb3941605755",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/import.mjs",
           "sha256": "43fb7f8865ff22b24fa92758dff3570f041869c12094635fbff07b1a62f00838",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lead.mjs",
           "sha256": "2302a6d91230d7c9eb3eab4e32aa92be70610f246e7c2630eb88a08d56dd62b4",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/account.mjs",
           "sha256": "b78b006daddc9756e7e16f94ca8ebb957ccf9ef294dfee9251b1014f52fc7426",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/args.mjs",
           "sha256": "6ed5597bec773d323bd1da7f5e016e5cbdf98c8f529c235b3e5800f12531b901",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/cli.mjs",
           "sha256": "36b7f2626d7b25cf950a4e3a894ee626255cd0445545ce69c6e5fb0cbc810c36",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/config.mjs",
           "sha256": "5a2ac410c9141d2c207b1290d9e2e8835227b17abcf0138f4c4cff37a3a9a3a4",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/db.mjs",
           "sha256": "2f662d9340c20284ce067c00f3328b2663b0f12b0a22a1db45fc326a5e774248",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/output.mjs",
           "sha256": "2437ef740f35166a95df07b231d42746ab1083d816c74d485350c844d6025dde",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/paths.mjs",
           "sha256": "5d600f1e99abeee91ee4c9f3e7cf3a94179da2a14a884ad9560af94d6953f260",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/retry.mjs",
           "sha256": "980261895a3dd591594b3c85e41998e3e68be7abcb7cbeafab23086dd8e8d162",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/runs.mjs",
           "sha256": "ca6c8511132e7c2a607d159d1f07ec3f5cdd62e47148a468cc8fe33aba6d580a",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/settings.mjs",
           "sha256": "514ec31664d3c5941b1a42b1ca4dc376326f4fcf7f7ea15c87d179fe69062ac9",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/lib/time.mjs",
           "sha256": "b31ec0ee216784c5870b5f92fc3cd5b24015699f8e51dce072de04ba53ce1dbe",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/migrate-notion.mjs",
           "sha256": "576e0a4cc2038e0264d542a1e5fc3c7c67e10c18a3674f4afb714bd410233e94",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/network-invite.mjs",
           "sha256": "d758ac42075b65b5fdd08876546a9ad0e4bce3ec40cd27e161792c9516502374",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/network-pending.mjs",
           "sha256": "656f22887f877056c173e301a2b15b529c7b67586fe86f8d6887eb899dc0ab2e",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/network-run.mjs",
           "sha256": "10101482be7f07ad7a92604488e03c3bdb78e3e989148f8edbc5a99d6cf31ae0",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/query.mjs",
           "sha256": "cb2171bce6f6dc343ec38adb61da939fee9cfd161c56668670aca6ac608d93ec",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/schedule.mjs",
           "sha256": "c915fc21052c6f29d93aebd29d127b9783d025af1f53380fe174d149b367b582",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/schema.mjs",
           "sha256": "0204fb5db8ec35d5271915b2995c77c6d41625082b6668bc47c9c57dd302b9ad",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/settings.mjs",
           "sha256": "78483cca1ee11397fc99b6c5531920f07635b69bd41e911da8987e0526101a84",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/status.mjs",
           "sha256": "604ee93730568cb3d8fb0f274166649814cc47bf3244bbc70216172a618344a2",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         },
         {
           "path": "skills/growth-operations-xiaohongshu/linkedin-growth/scripts/tick.mjs",
           "sha256": "00820ae3d533e90e76c90120a8030aa8187bcc01cb5636ca7a28c57d99f9ee71",
-          "owner": "linkedin-growth"
+          "owner": "linkedin-growth",
+          "mode": "100644"
         }
       ]
     }

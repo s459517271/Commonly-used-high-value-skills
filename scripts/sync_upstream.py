@@ -1783,6 +1783,19 @@ def _artifact_local_bytes(skill: dict, target: str) -> bytes | None:
         return None
 
 
+def _artifact_local_mode(target: str) -> str | None:
+    if not _safe_mapping_path(target):
+        return None
+    path = REPO_ROOT / target
+    try:
+        metadata = path.lstat()
+    except OSError:
+        return None
+    if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
+        return None
+    return "100755" if stat.S_IMODE(metadata.st_mode) & 0o111 else "100644"
+
+
 def _main_artifact_equal(skill: dict, local: bytes, upstream: bytes) -> bool:
     try:
         local_text = local.decode("utf-8")
@@ -1800,7 +1813,12 @@ def _main_artifact_equal(skill: dict, local: bytes, upstream: bytes) -> bool:
 def _artifact_diff(
     skill: dict,
     upstream_files: dict[str, bytes],
+    upstream_modes: dict[str, str],
 ) -> tuple[list[str], list[str], list[str]]:
+    if set(upstream_modes) != set(upstream_files) or any(
+        mode not in {"100644", "100755"} for mode in upstream_modes.values()
+    ):
+        raise RuntimeError("upstream artifact modes are incomplete or invalid")
     desired = set(upstream_files)
     previous_external_targets = _owned_targets_for_artifacts(
         skill.get("artifacts", []),
@@ -1823,10 +1841,18 @@ def _artifact_diff(
         for item in skill.get("managed_files", [])
         if isinstance(item, dict)
     }
+    manifest_modes = {
+        item.get("path"): item.get("mode")
+        for item in skill.get("managed_files", [])
+        if isinstance(item, dict)
+    }
     for path in sorted(desired & owned):
         raw = _artifact_local_bytes(skill, path)
         upstream = upstream_files[path]
         expected = manifest_hashes.get(path)
+        local_mode = _artifact_local_mode(path)
+        upstream_mode = upstream_modes[path]
+        expected_mode = manifest_modes.get(path)
         content_changed = (
             raw is None
             or (
@@ -1840,7 +1866,13 @@ def _artifact_diff(
             and isinstance(expected, str)
             and hashlib.sha256(raw).hexdigest() != expected.lower()
         )
-        if content_changed or manifest_drift:
+        mode_changed = local_mode != upstream_mode
+        mode_manifest_drift = (
+            local_mode is not None
+            and isinstance(expected_mode, str)
+            and local_mode != expected_mode
+        )
+        if content_changed or manifest_drift or mode_changed or mode_manifest_drift:
             changed.append(path)
     return changed, added, removed
 
@@ -2042,7 +2074,11 @@ def _check_v2_upstream_changes(
             "reason": str(exc),
         }
 
-    changed, added, removed = _artifact_diff(skill, inventory.files)
+    changed, added, removed = _artifact_diff(
+        skill,
+        inventory.files,
+        inventory.modes,
+    )
     artifact_changed = bool(changed or added or removed)
     checkpoint_changed = bool(
         reviewed_checkpoint
@@ -2053,6 +2089,7 @@ def _check_v2_upstream_changes(
         "upstream_path": skill.get("upstream_path"),
         "upstream_files": inventory.files,
         "source_blobs": inventory.source_blobs,
+        "upstream_modes": inventory.modes,
         "main_source_blob": inventory.source_blobs.get(
             skill.get("upstream_path")
         ),
@@ -3496,7 +3533,17 @@ def _artifact_payloads_for_engine(update: dict) -> list[dict]:
     skill = update["skill"]
     upstream_files = update.get("upstream_files")
     source_blobs = update.get("source_blobs")
-    if not isinstance(upstream_files, dict) or not isinstance(source_blobs, dict):
+    upstream_modes = update.get("upstream_modes")
+    if (
+        not isinstance(upstream_files, dict)
+        or not isinstance(source_blobs, dict)
+        or not isinstance(upstream_modes, dict)
+        or set(upstream_modes) != set(upstream_files)
+        or any(
+            mode not in {"100644", "100755"}
+            for mode in upstream_modes.values()
+        )
+    ):
         raise RuntimeError("v2 update has no materialized artifact inventory")
     payloads: list[dict] = []
     repo_skill = skill.get("repo_skill")
@@ -3535,6 +3582,7 @@ def _artifact_payloads_for_engine(update: dict) -> list[dict]:
                     "target": expanded_target,
                     "type": "file",
                     "data": raw,
+                    "mode": upstream_modes[expanded_target],
                 }
             )
     return payloads
@@ -3673,9 +3721,18 @@ def apply_v2_update(
             mapping_after = serialize_mapping_json(mapping_data)
             mapping_after_sha256 = hashlib.sha256(mapping_after).hexdigest()
             if mapping_after_sha256 == mapping_snapshot.sha256:
-                raise RuntimeError(
-                    "artifact apply produced no mapping authority transition"
-                )
+                if not sync_result.has_filesystem_changes:
+                    raise RuntimeError(
+                        "artifact apply produced neither filesystem nor "
+                        "mapping changes"
+                    )
+                # A mode-only repair can leave provenance unchanged because
+                # its managed checkpoint already declares the reviewed mode.
+                # The unchanged mapping is existing authority for the staged
+                # tree, so commit explicitly without binding an impossible
+                # same-hash mapping transition.
+                transaction.commit()
+                return sync_result
             try:
                 mapping_authority_path = (
                     mapping_path.resolve()

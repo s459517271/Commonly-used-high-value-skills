@@ -140,72 +140,86 @@
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/.gitignore",
           "sha256": "3337b5a532e15c3e79fe9bc5f00d45a0319b2d3e17a12dff9b62f416c6d6a74d",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/CONTRIBUTING.md",
           "sha256": "ed95404a4919ad6bd43f569d0416346a763f93f1bfde400ee49bcb32686cb2ff",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/LICENSE",
           "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/README.en.md",
           "sha256": "9023078e4edfd82492c1e50e71696df4301b65973506976c91cb3e7bc1b88a54",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/README.md",
           "sha256": "58360b425706e29ea79ed8bd3e26f0b322a69926e164a3d223aa24692581698f",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/SKILL.md",
           "sha256": "81b5ae2f3477b29f2e4834787859802aa7defcd46227b77bce457d3d7cf1c390",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/SPONSORS.md",
           "sha256": "11140416d492dfd1ac5dd13e9c7d96da09a310f84ca365c80b98e89f5f0aa185",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/assets/motion.min.js",
           "sha256": "45615c1e7639fb9828942d0689c897e745690b0f6df13022223c9409fc01557c",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/assets/template.html",
           "sha256": "94ca6ad9737c643398abc44133f1bc43235685af07aca6944e65f1788930fbc0",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/references/checklist.md",
           "sha256": "94acc747a73b72862742c2ef574a115dd23317bf1297ee78d30731ae34e8870b",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/references/components.md",
           "sha256": "f5f705ef7e6b3c88d2ec8c2d1d85d6e98442d48340b4a74be1b8c0f3cea3a65c",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/references/image-prompts.md",
           "sha256": "56d46a13f51765290a39f64efae7f25688e109965ddf6554bdad0e1b0c9fdaff",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/references/layouts.md",
           "sha256": "4c3743146af11b258dddca6d97a269e5ec90d446c5332b0da34327b3f6f1dca5",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/references/themes.md",
           "sha256": "a4bee3ef7b22d56fb904b0643a117368d85f0265ceccdf5111ad497fe22cc656",
-          "owner": "guizang-ppt-skill"
+          "owner": "guizang-ppt-skill",
+          "mode": "100644"
         }
       ]
     }

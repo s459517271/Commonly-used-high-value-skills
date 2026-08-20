@@ -45,6 +45,7 @@ except ImportError:  # pragma: no cover - Windows is not used by repository CI.
     fcntl = None  # type: ignore[assignment]
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
+GIT_FILE_MODES = frozenset({"100644", "100755"})
 
 
 class ArtifactSetSyncError(RuntimeError):
@@ -154,6 +155,7 @@ class ArtifactPayload:
     target: str
     type: str
     data: bytes
+    mode: str
 
 
 @dataclass(frozen=True)
@@ -164,14 +166,20 @@ class Drift:
     kind: str
     expected_sha256: str | None
     actual_sha256: str | None
+    expected_mode: str | None = None
+    actual_mode: str | None = None
 
     def to_dict(self) -> dict[str, str | None]:
-        return {
+        result: dict[str, str | None] = {
             "path": self.path,
             "kind": self.kind,
             "expected_sha256": self.expected_sha256,
             "actual_sha256": self.actual_sha256,
         }
+        if self.expected_mode is not None or self.actual_mode is not None:
+            result["expected_mode"] = self.expected_mode
+            result["actual_mode"] = self.actual_mode
+        return result
 
 
 @dataclass(frozen=True)
@@ -196,6 +204,7 @@ class SyncPlan:
     owned_targets: tuple[str, ...]
     protected_targets: tuple[str, ...]
     baseline_inventory: Mapping[str, str]
+    baseline_modes: Mapping[str, str]
     baseline_root_identity: tuple[int, int] | None
 
     @property
@@ -445,14 +454,6 @@ def _sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def _safe_relative_posix(value: object) -> bool:
     if (
         not isinstance(value, str)
@@ -500,6 +501,7 @@ def _coerce_payload(value: ArtifactPayload | Mapping[str, Any]) -> ArtifactPaylo
             target=value.get("target"),  # type: ignore[arg-type]
             type=value.get("type", "file"),  # type: ignore[arg-type]
             data=bytes(data),
+            mode=value.get("mode"),  # type: ignore[arg-type]
         )
     else:
         raise ArtifactValidationError(
@@ -523,9 +525,17 @@ def _coerce_payload(value: ArtifactPayload | Mapping[str, Any]) -> ArtifactPaylo
         raise ArtifactValidationError(
             f"unsupported artifact type {payload.type!r}{detail}"
         )
+    if payload.mode not in GIT_FILE_MODES:
+        raise ArtifactValidationError(
+            f"artifact mode must be 100644 or 100755: {payload.mode!r}"
+        )
     if not isinstance(payload.data, bytes):
         payload = ArtifactPayload(
-            payload.source, payload.target, payload.type, bytes(payload.data)
+            payload.source,
+            payload.target,
+            payload.type,
+            bytes(payload.data),
+            payload.mode,
         )
     return payload
 
@@ -551,13 +561,83 @@ def _assert_no_symlink_ancestors(repo_root: Path, path: Path) -> None:
             )
 
 
-def _inventory(repo_root: Path, skill_path: Path, skill_root: str) -> dict[str, str]:
+def _git_mode(metadata: os.stat_result) -> str:
+    return "100755" if stat.S_IMODE(metadata.st_mode) & 0o111 else "100644"
+
+
+def _file_digest_and_mode(path: Path) -> tuple[str, str]:
+    """Read content and executable mode from one pinned regular-file inode."""
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(path, flags)
+    except OSError as exc:
+        raise ArtifactValidationError(
+            f"cannot open canonical artifact safely: {path}"
+        ) from exc
+    try:
+        opened = os.fstat(descriptor)
+        try:
+            named_before = path.lstat()
+        except OSError as exc:
+            raise ArtifactValidationError(
+                f"canonical artifact changed while opening: {path}"
+            ) from exc
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or stat.S_ISLNK(named_before.st_mode)
+            or not stat.S_ISREG(named_before.st_mode)
+            or (opened.st_dev, opened.st_ino)
+            != (named_before.st_dev, named_before.st_ino)
+        ):
+            raise ArtifactValidationError(
+                f"canonical artifact is not a pinned regular file: {path}"
+            )
+
+        digest = hashlib.sha256()
+        for chunk in iter(lambda: os.read(descriptor, 1024 * 1024), b""):
+            digest.update(chunk)
+
+        after = os.fstat(descriptor)
+        try:
+            named_after = path.lstat()
+        except OSError as exc:
+            raise ArtifactValidationError(
+                f"canonical artifact changed while reading: {path}"
+            ) from exc
+        stable_fields = (
+            "st_dev",
+            "st_ino",
+            "st_mode",
+            "st_size",
+            "st_mtime_ns",
+            "st_ctime_ns",
+        )
+        if any(
+            getattr(opened, field) != getattr(after, field)
+            for field in stable_fields
+        ) or any(
+            getattr(after, field) != getattr(named_after, field)
+            for field in stable_fields
+        ):
+            raise ArtifactValidationError(
+                f"canonical artifact changed while reading: {path}"
+            )
+        return digest.hexdigest(), _git_mode(after)
+    finally:
+        os.close(descriptor)
+
+
+def _inventory_with_modes(
+    repo_root: Path,
+    skill_path: Path,
+    skill_root: str,
+) -> tuple[dict[str, str], dict[str, str]]:
     if not skill_path.exists():
-        return {}
+        return {}, {}
     try:
         root_mode = skill_path.lstat().st_mode
     except FileNotFoundError:
-        return {}
+        return {}, {}
     if stat.S_ISLNK(root_mode):
         raise ArtifactValidationError(f"skill root is a symlink: {skill_path}")
     if not stat.S_ISDIR(root_mode):
@@ -566,6 +646,7 @@ def _inventory(repo_root: Path, skill_path: Path, skill_root: str) -> dict[str, 
         )
 
     inventory: dict[str, str] = {}
+    modes: dict[str, str] = {}
     for current, dirs, files in os.walk(skill_path, followlinks=False):
         current_path = Path(current)
         for name in tuple(dirs):
@@ -592,8 +673,28 @@ def _inventory(repo_root: Path, skill_path: Path, skill_root: str) -> dict[str, 
                 )
             suffix = candidate.relative_to(skill_path).as_posix()
             target = f"{skill_root}/{suffix}"
-            inventory[target] = _sha256_file(candidate)
-    return dict(sorted(inventory.items()))
+            digest, git_mode = _file_digest_and_mode(candidate)
+            inventory[target] = digest
+            modes[target] = git_mode
+    return dict(sorted(inventory.items())), dict(sorted(modes.items()))
+
+
+def _inventory(repo_root: Path, skill_path: Path, skill_root: str) -> dict[str, str]:
+    return _inventory_with_modes(repo_root, skill_path, skill_root)[0]
+
+
+def _state_inventory(
+    inventory: Mapping[str, str],
+    modes: Mapping[str, str],
+) -> dict[str, str]:
+    if set(inventory) != set(modes):
+        raise ArtifactValidationError("artifact inventory modes are incomplete")
+    return {
+        path: hashlib.sha256(
+            f"{modes[path]}\0{inventory[path]}".encode("ascii")
+        ).hexdigest()
+        for path in sorted(inventory)
+    }
 
 
 def _directory_identity(path: Path) -> tuple[int, int] | None:
@@ -627,6 +728,7 @@ def _validate_managed_manifest(
         path = item.get("path")
         digest = item.get("sha256")
         declared_owner = item.get("owner")
+        mode = item.get("mode")
         if not _safe_relative_posix(path) or not _inside(str(path), skill_root):
             raise ArtifactValidationError(
                 f"managed_files[{index}].path is outside the skill root: {path!r}"
@@ -640,6 +742,10 @@ def _validate_managed_manifest(
                 f"managed_files[{index}] owner {declared_owner!r} "
                 f"does not match entry owner {owner!r}"
             )
+        if mode not in GIT_FILE_MODES:
+            raise ArtifactValidationError(
+                f"managed_files[{index}].mode must be 100644 or 100755"
+            )
         if path in managed:
             raise ArtifactValidationError(f"duplicate managed path: {path}")
         managed[str(path)] = MappingProxyType(
@@ -647,6 +753,7 @@ def _validate_managed_manifest(
                 "path": str(path),
                 "sha256": digest.lower(),
                 "owner": owner,
+                "mode": str(mode),
             }
         )
     return managed
@@ -979,6 +1086,9 @@ def plan_artifact_set_sync(
     old_managed = {
         path: record["sha256"] for path, record in old_managed_records.items()
     }
+    old_managed_modes = {
+        path: record["mode"] for path, record in old_managed_records.items()
+    }
 
     skill_path = root.joinpath(*PurePosixPath(skill_root).parts)
     _assert_no_symlink_ancestors(root, skill_path)
@@ -986,7 +1096,9 @@ def plan_artifact_set_sync(
         _assert_no_symlink_ancestors(
             root, root.joinpath(*PurePosixPath(payload.target).parts)
         )
-    baseline = _inventory(root, skill_path, skill_root)
+    baseline, baseline_modes = _inventory_with_modes(
+        root, skill_path, skill_root
+    )
     baseline_root_identity = _directory_identity(skill_path)
 
     drift: list[Drift] = []
@@ -998,7 +1110,9 @@ def plan_artifact_set_sync(
     for target, payload in target_by_path.items():
         new_digest = _sha256_bytes(payload.data)
         current_digest = baseline.get(target)
+        current_mode = baseline_modes.get(target)
         expected_digest = old_managed.get(target)
+        expected_mode = old_managed_modes.get(target)
         if target in protected:
             unowned_conflicts.add(target)
             continue
@@ -1018,7 +1132,22 @@ def plan_artifact_set_sync(
             )
             if current_digest != new_digest:
                 user_modified.add(target)
-        if current_digest != new_digest:
+        if current_mode != expected_mode:
+            drift.append(
+                Drift(
+                    target,
+                    "mode_mismatch",
+                    expected_digest,
+                    current_digest,
+                    expected_mode,
+                    current_mode,
+                )
+            )
+            # For a retained target, executable mode is managed metadata and
+            # the reviewed payload explicitly declares its desired value.
+            # Content drift remains ownership-protected above; mode-only drift
+            # may therefore be repaired without treating bytes as modified.
+        if current_digest != new_digest or current_mode != payload.mode:
             changed.add(target)
 
     for path in selected_owned:
@@ -1026,11 +1155,24 @@ def plan_artifact_set_sync(
             continue
         expected_digest = old_managed[path]
         current_digest = baseline.get(path)
+        expected_mode = old_managed_modes[path]
+        current_mode = baseline_modes.get(path)
         if current_digest is None:
             drift.append(Drift(path, "missing", expected_digest, None))
-        elif current_digest != expected_digest:
+        elif current_digest != expected_digest or current_mode != expected_mode:
             drift.append(
-                Drift(path, "hash_mismatch", expected_digest, current_digest)
+                Drift(
+                    path,
+                    (
+                        "hash_mismatch"
+                        if current_digest != expected_digest
+                        else "mode_mismatch"
+                    ),
+                    expected_digest,
+                    current_digest,
+                    expected_mode,
+                    current_mode,
+                )
             )
             user_modified.add(path)
         else:
@@ -1060,6 +1202,7 @@ def plan_artifact_set_sync(
                 "path": payload.target,
                 "sha256": _sha256_bytes(payload.data),
                 "owner": owner,
+                "mode": payload.mode,
             }
         )
     managed_files: tuple[Mapping[str, str], ...] = tuple(
@@ -1092,6 +1235,7 @@ def plan_artifact_set_sync(
         owned_targets=tuple(sorted(selected_owned)),
         protected_targets=tuple(sorted(protected)),
         baseline_inventory=MappingProxyType(baseline),
+        baseline_modes=MappingProxyType(baseline_modes),
         baseline_root_identity=baseline_root_identity,
     )
 
@@ -1129,15 +1273,18 @@ def _remove_empty_parents(path: Path, boundary: Path) -> None:
 
 
 def _validate_staged_tree(plan: SyncPlan, stage_skill: Path) -> None:
-    inventory = _inventory(plan.repo_root, stage_skill, plan.skill_root)
+    inventory, modes = _inventory_with_modes(
+        plan.repo_root, stage_skill, plan.skill_root
+    )
     desired = {
         payload.target: _sha256_bytes(payload.data)
         for payload in plan.payloads
     }
     for path, digest in desired.items():
-        if inventory.get(path) != digest:
+        payload = next(item for item in plan.payloads if item.target == path)
+        if inventory.get(path) != digest or modes.get(path) != payload.mode:
             raise ArtifactValidationError(
-                f"staged artifact digest mismatch: {path}"
+                f"staged artifact digest or mode mismatch: {path}"
             )
     for path in plan.pruned:
         if path in inventory:
@@ -1145,7 +1292,10 @@ def _validate_staged_tree(plan: SyncPlan, stage_skill: Path) -> None:
                 f"pruned artifact remains in staged tree: {path}"
             )
     for path in plan.preserved:
-        if inventory.get(path) != plan.baseline_inventory.get(path):
+        if (
+            inventory.get(path) != plan.baseline_inventory.get(path)
+            or modes.get(path) != plan.baseline_modes.get(path)
+        ):
             raise ArtifactValidationError(
                 f"preserved artifact changed in staged tree: {path}"
             )
@@ -1191,6 +1341,10 @@ def _build_stage(plan: SyncPlan, stage_skill: Path) -> None:
         with candidate.open("wb") as handle:
             handle.write(payload.data)
             handle.flush()
+            os.fchmod(
+                handle.fileno(),
+                0o755 if payload.mode == "100755" else 0o644,
+            )
             os.fsync(handle.fileno())
 
     _validate_staged_tree(plan, stage_skill)
@@ -1208,10 +1362,14 @@ def _cleanup_tree(path: Path | None) -> None:
         return
 
 
-def _current_inventory(plan: SyncPlan) -> dict[str, str]:
+def _current_inventory_with_modes(
+    plan: SyncPlan,
+) -> tuple[dict[str, str], dict[str, str]]:
     skill_path = plan.repo_root.joinpath(*PurePosixPath(plan.skill_root).parts)
     _assert_no_symlink_ancestors(plan.repo_root, skill_path)
-    return _inventory(plan.repo_root, skill_path, plan.skill_root)
+    return _inventory_with_modes(
+        plan.repo_root, skill_path, plan.skill_root
+    )
 
 
 def _path_lexists(path: Path) -> bool:
@@ -1227,7 +1385,26 @@ def _expected_installed_inventory(plan: SyncPlan) -> dict[str, str]:
     return dict(sorted(expected.items()))
 
 
-JOURNAL_VERSION = 1
+def _expected_installed_modes(plan: SyncPlan) -> dict[str, str]:
+    expected = dict(plan.baseline_modes)
+    for path in plan.pruned:
+        expected.pop(path, None)
+    for payload in plan.payloads:
+        expected[payload.target] = payload.mode
+    return dict(sorted(expected.items()))
+
+
+def _expected_installed_state_inventory(plan: SyncPlan) -> dict[str, str]:
+    return _state_inventory(
+        _expected_installed_inventory(plan),
+        _expected_installed_modes(plan),
+    )
+
+
+# Version 2 binds both bytes and executable mode into journal inventories.
+# Older byte-only journals are intentionally rejected for manual recovery:
+# treating them as authoritative could erase an unreviewed mode change.
+JOURNAL_VERSION = 2
 JOURNAL_STATES = {
     "staged",
     "old_moved",
@@ -1809,12 +1986,15 @@ def _tree_inventory_kind(
         return "missing"
     metadata = _owned_directory_metadata(candidate)
     identity = (metadata.st_dev, metadata.st_ino)
-    inventory = _inventory(repo_root, candidate, skill_root)
+    inventory, modes = _inventory_with_modes(
+        repo_root, candidate, skill_root
+    )
+    state_inventory = _state_inventory(inventory, modes)
     if _directory_identity(candidate) != identity:
         return "other"
-    if inventory == dict(baseline) and identity == baseline_identity:
+    if state_inventory == dict(baseline) and identity == baseline_identity:
         return "baseline"
-    if inventory == dict(installed) and identity == new_identity:
+    if state_inventory == dict(installed) and identity == new_identity:
         return "new"
     return "other"
 
@@ -2290,14 +2470,17 @@ class ArtifactTransaction:
         if not self._new_installed or not _path_lexists(candidate):
             return False
         try:
-            current = _inventory(
+            current, modes = _inventory_with_modes(
                 self.plan.repo_root,
                 candidate,
                 self.plan.skill_root,
             )
         except ArtifactValidationError:
             return False
-        return current == _expected_installed_inventory(self.plan)
+        return _state_inventory(
+            current,
+            modes,
+        ) == _expected_installed_state_inventory(self.plan)
 
     def _preserve_path(self, source: Path) -> None:
         if not _path_lexists(source):
@@ -2505,8 +2688,19 @@ def _validate_plan_for_apply(plan: SyncPlan) -> None:
             user_modified=plan.user_modified,
             unowned_conflicts=plan.unowned_conflicts,
         )
-    current = _current_inventory(plan)
+    current, current_modes = _current_inventory_with_modes(plan)
     changed_since_plan = _changed_inventory_paths(plan.baseline_inventory, current)
+    changed_since_plan = tuple(
+        sorted(
+            set(changed_since_plan)
+            | set(
+                _changed_inventory_paths(
+                    plan.baseline_modes,
+                    current_modes,
+                )
+            )
+        )
+    )
     skill_path = plan.repo_root.joinpath(*PurePosixPath(plan.skill_root).parts)
     if _directory_identity(skill_path) != plan.baseline_root_identity:
         changed_since_plan = tuple(
@@ -2596,8 +2790,11 @@ def prepare_artifact_set_sync(
                 plan.repo_root,
                 backup_container,
             ),
-            "baseline_inventory": dict(plan.baseline_inventory),
-            "new_inventory": _expected_installed_inventory(plan),
+            "baseline_inventory": _state_inventory(
+                plan.baseline_inventory,
+                plan.baseline_modes,
+            ),
+            "new_inventory": _expected_installed_state_inventory(plan),
             "baseline_root_identity": (
                 list(plan.baseline_root_identity)
                 if plan.baseline_root_identity is not None
@@ -2645,9 +2842,20 @@ def prepare_artifact_set_sync(
 
         # Recheck the entire directory immediately before the first rename.
         pre_rename_identity = _directory_identity(skill_path)
-        current = _current_inventory(plan)
+        current, current_modes = _current_inventory_with_modes(plan)
         changed_since_plan = _changed_inventory_paths(
             plan.baseline_inventory, current
+        )
+        changed_since_plan = tuple(
+            sorted(
+                set(changed_since_plan)
+                | set(
+                    _changed_inventory_paths(
+                        plan.baseline_modes,
+                        current_modes,
+                    )
+                )
+            )
         )
         if pre_rename_identity != plan.baseline_root_identity:
             changed_since_plan = tuple(
@@ -2664,7 +2872,7 @@ def prepare_artifact_set_sync(
             transaction._old_moved = True
             transaction._persist_journal(state="old_moved")
             moved_identity = _directory_identity(backup_skill)
-            moved_inventory = _inventory(
+            moved_inventory, moved_modes = _inventory_with_modes(
                 plan.repo_root,
                 backup_skill,
                 plan.skill_root,
@@ -2672,6 +2880,17 @@ def prepare_artifact_set_sync(
             moved_changes = _changed_inventory_paths(
                 plan.baseline_inventory,
                 moved_inventory,
+            )
+            moved_changes = tuple(
+                sorted(
+                    set(moved_changes)
+                    | set(
+                        _changed_inventory_paths(
+                            plan.baseline_modes,
+                            moved_modes,
+                        )
+                    )
+                )
             )
             if moved_identity != pre_rename_identity:
                 moved_changes = tuple(

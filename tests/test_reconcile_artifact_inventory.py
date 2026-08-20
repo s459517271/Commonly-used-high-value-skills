@@ -112,6 +112,7 @@ def make_entry(root: Path, slug: str = "demo") -> dict:
                 "path": repo_skill,
                 "sha256": content_hash,
                 "owner": slug,
+                "mode": "100644",
             }
         ],
     }
@@ -130,6 +131,14 @@ def write_tree_fixture(
     cache: inventory.GitHubObjectCache,
     entries: list[dict],
 ) -> None:
+    normalized_entries = [
+        (
+            {**entry, "mode": entry.get("mode", "100644")}
+            if entry.get("type") == "blob"
+            else dict(entry)
+        )
+        for entry in entries
+    ]
     path = cache.tree_cache_path("owner/upstream", COMMIT)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -137,7 +146,7 @@ def write_tree_fixture(
             {
                 "sha": COMMIT,
                 "truncated": False,
-                "tree": entries,
+                "tree": normalized_entries,
             }
         ),
         encoding="utf-8",
@@ -155,6 +164,15 @@ def write_blob_fixture(
 
 
 def online_tree_responder(entries: list[dict]):
+    normalized_entries = [
+        (
+            {**entry, "mode": entry.get("mode", "100644")}
+            if entry.get("type") == "blob"
+            else dict(entry)
+        )
+        for entry in entries
+    ]
+
     def respond(endpoint: str, *, fields: dict[str, str] | None = None):
         if endpoint == f"repos/owner/upstream/git/commits/{COMMIT}":
             return {"sha": COMMIT, "tree": {"sha": ROOT_TREE}}
@@ -164,7 +182,7 @@ def online_tree_responder(entries: list[dict]):
             return {
                 "sha": ROOT_TREE,
                 "truncated": False,
-                "tree": entries,
+                "tree": normalized_entries,
             }
         raise AssertionError(f"unexpected GitHub endpoint: {endpoint}")
 
@@ -360,6 +378,31 @@ class ArtifactInventoryTests(unittest.TestCase):
                 "offline_authority_forbidden",
                 proposal["checked_sources"][0]["result"],
             )
+
+    def test_tree_rejects_symlink_git_mode_120000(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            content = b"references/outside.md"
+            object_sha = inventory._git_blob_oid(content, "sha1")
+            cache = inventory.GitHubObjectCache(root / "cache", offline=True)
+            write_tree_fixture(
+                cache,
+                [
+                    {
+                        "path": "upstream/demo/link.md",
+                        "type": "blob",
+                        "mode": "120000",
+                        "sha": object_sha,
+                        "size": len(content),
+                    }
+                ],
+            )
+
+            with self.assertRaisesRegex(
+                inventory.SourceUnavailable,
+                "non-regular.*120000",
+            ):
+                cache.get_tree("owner/upstream", COMMIT)
 
     def test_online_tree_ignores_forged_disk_cache_and_binds_commit_root(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -564,6 +607,7 @@ class ArtifactInventoryTests(unittest.TestCase):
                 "external_exact",
                 by_target[exact_target]["classification"],
             )
+            self.assertEqual("100644", by_target[exact_target]["mode"])
             self.assertEqual(
                 "upstream/demo/references/exact.bin",
                 by_target[exact_target]["source"],
@@ -572,8 +616,87 @@ class ArtifactInventoryTests(unittest.TestCase):
                 "local_overlay",
                 by_target[overlay_target]["classification"],
             )
+            self.assertEqual("100644", by_target[overlay_target]["mode"])
             self.assertEqual(overlay_target, by_target[overlay_target]["source"])
             self.assertIn(repo_skill, report["actual_files"])
+
+    def test_external_exact_requires_matching_blob_bytes_and_tree_mode(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            write_skill(root)
+            entry = make_entry(root)
+            target = "skills/category/demo/references/executable.sh"
+            content = b"#!/bin/sh\nexit 0\n"
+            target_path = root / target
+            target_path.parent.mkdir(parents=True)
+            target_path.write_bytes(content)
+            target_path.chmod(0o755)
+            object_sha = inventory._git_blob_oid(content, "sha1")
+            source = "upstream/demo/references/executable.sh"
+
+            mismatched_cache = inventory.GitHubObjectCache(
+                root / "mismatch-cache",
+                offline=False,
+            )
+            with mock.patch.object(
+                mismatched_cache,
+                "_gh_json",
+                side_effect=online_tree_responder(
+                    [
+                        {
+                            "path": source,
+                            "type": "blob",
+                            "mode": "100644",
+                            "sha": object_sha,
+                            "size": len(content),
+                        }
+                    ]
+                ),
+            ):
+                mismatched = inventory.inspect_entry(
+                    entry,
+                    repo_root=root,
+                    cache=mismatched_cache,
+                )
+            proposal = next(
+                item for item in mismatched["unowned"] if item["target"] == target
+            )
+            self.assertEqual("local_overlay", proposal["classification"])
+            self.assertEqual("100755", proposal["mode"])
+            self.assertEqual(
+                "mode_mismatch",
+                proposal["checked_sources"][0]["result"],
+            )
+
+            matching_cache = inventory.GitHubObjectCache(
+                root / "matching-cache",
+                offline=False,
+            )
+            with mock.patch.object(
+                matching_cache,
+                "_gh_json",
+                side_effect=online_tree_responder(
+                    [
+                        {
+                            "path": source,
+                            "type": "blob",
+                            "mode": "100755",
+                            "sha": object_sha,
+                            "size": len(content),
+                        }
+                    ]
+                ),
+            ):
+                matching = inventory.inspect_entry(
+                    entry,
+                    repo_root=root,
+                    cache=matching_cache,
+                )
+            proposal = next(
+                item for item in matching["unowned"] if item["target"] == target
+            )
+            self.assertEqual("external_exact", proposal["classification"])
+            self.assertEqual("100755", proposal["mode"])
 
     def test_blob_404_is_unavailable_instead_of_becoming_local_overlay(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -671,6 +794,7 @@ class ArtifactInventoryTests(unittest.TestCase):
                     "path": "skills/category/demo/linked.txt",
                     "sha256": "f" * 64,
                     "owner": "demo",
+                    "mode": "100644",
                 }
             )
             mapping = root / "docs/sources/example.skills.json"
@@ -843,6 +967,7 @@ class ArtifactInventoryTests(unittest.TestCase):
                     "path": "skills/category/demo/removed.txt",
                     "sha256": "e" * 64,
                     "owner": "demo",
+                    "mode": "100644",
                 }
             )
             mapping = root / "docs/sources/example.skills.json"
@@ -915,7 +1040,7 @@ class ArtifactInventoryTests(unittest.TestCase):
 
             with mock.patch.object(
                 inventory,
-                "_sha256_regular_file",
+                "_regular_file_snapshot",
                 side_effect=PermissionError("read denied"),
             ):
                 report = inventory.reconcile_mappings(
@@ -931,6 +1056,77 @@ class ArtifactInventoryTests(unittest.TestCase):
             self.assertEqual("hash_managed_file", issue["operation"])
             self.assertIn("read denied", issue["detail"])
             self.assertEqual(1, report["summary"]["write_blocked_entries"])
+
+    def test_managed_mode_drift_is_reported_and_blocks_write(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            repo_skill = write_skill(root)
+            entry = make_entry(root)
+            (root / repo_skill).chmod(0o755)
+            mapping = root / "docs/sources/example.skills.json"
+            mapping.parent.mkdir(parents=True)
+            mapping.write_text(
+                json.dumps(make_payload(entry), indent=2) + "\n",
+                encoding="utf-8",
+            )
+            before = mapping.read_bytes()
+
+            report = inventory.reconcile_mappings(
+                [mapping],
+                repo_root=root,
+                cache=inventory.GitHubObjectCache(
+                    root / "cache",
+                    offline=True,
+                ),
+                write=True,
+            )
+
+            self.assertEqual(before, mapping.read_bytes())
+            self.assertEqual([repo_skill], report["entries"][0]["mode_mismatches"])
+            self.assertEqual(1, report["summary"]["mode_mismatches"])
+            self.assertEqual(1, report["summary"]["write_blocked_entries"])
+            self.assertIn(
+                "managed mode mismatch",
+                report["entries"][0]["write_blocked_reason"],
+            )
+
+    def test_mode_change_during_secure_read_is_a_toctou_scan_error(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            repo_skill = write_skill(root)
+            entry = make_entry(root)
+            skill_path = root / repo_skill
+            changed = False
+            real_read = inventory.os.read
+
+            def chmod_during_read(descriptor: int, size: int) -> bytes:
+                nonlocal changed
+                chunk = real_read(descriptor, size)
+                if chunk and not changed:
+                    skill_path.chmod(0o755)
+                    changed = True
+                return chunk
+
+            with mock.patch.object(
+                inventory.os,
+                "read",
+                side_effect=chmod_during_read,
+            ):
+                inspection = inventory.inspect_entry(
+                    entry,
+                    repo_root=root,
+                    cache=inventory.GitHubObjectCache(
+                        root / "cache",
+                        offline=True,
+                    ),
+                )
+
+            self.assertTrue(changed)
+            self.assertTrue(inspection["scan_errors"])
+            self.assertIn(
+                "changed while reading",
+                inspection["scan_errors"][0]["detail"],
+            )
 
     def test_dry_run_is_read_only_and_write_is_atomic_and_idempotent(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1071,6 +1267,13 @@ class ArtifactInventoryTests(unittest.TestCase):
                 {repo_skill, exact_target, overlay_target},
                 {
                     managed["path"]
+                    for managed in written_entry["managed_files"]
+                },
+            )
+            self.assertEqual(
+                {"100644"},
+                {
+                    managed["mode"]
                     for managed in written_entry["managed_files"]
                 },
             )
@@ -1648,6 +1851,7 @@ inventory.reconcile_mappings(
                     "path": overlay_target,
                     "sha256": provenance.sha256_file(root / overlay_target),
                     "owner": "demo",
+                    "mode": "100644",
                 }
             )
             mapping = root / "docs/sources/example.skills.json"
@@ -1739,6 +1943,7 @@ inventory.reconcile_mappings(
                     "path": overlay_target,
                     "sha256": provenance.sha256_file(root / overlay_target),
                     "owner": "demo",
+                    "mode": "100644",
                 }
             )
 
@@ -1795,6 +2000,7 @@ inventory.reconcile_mappings(
                     "path": missing_target,
                     "sha256": "f" * 64,
                     "owner": "demo",
+                    "mode": "100644",
                 }
             )
             entry["origins"].append(

@@ -80,6 +80,7 @@ class ArtifactInventory:
 
     files: dict[str, bytes]
     source_blobs: dict[str, str]
+    modes: dict[str, str]
     resolved: ResolvedRef
 
 
@@ -588,6 +589,7 @@ class GitHubArtifactProvider:
         tree = self.tree(repo, resolved.commit)
         pending_files: list[tuple[str, str, str]] = []
         source_blobs: dict[str, str] = {}
+        modes: dict[str, str] = {}
         missing: list[str] = []
         claimed_targets: set[str] = set()
 
@@ -622,6 +624,7 @@ class GitHubArtifactProvider:
                 claimed_targets.add(target)
                 pending_files.append((source, target, blob_sha))
                 source_blobs[source] = blob_sha
+                modes[target] = str(item["mode"])
                 continue
 
             if artifact_type != "directory":
@@ -665,6 +668,7 @@ class GitHubArtifactProvider:
                 claimed_targets.add(mapped_target)
                 pending_files.append((path, mapped_target, blob_sha))
                 source_blobs[path] = blob_sha
+                modes[mapped_target] = str(item["mode"])
 
         if missing:
             raise ArtifactNotFound(missing)
@@ -672,7 +676,7 @@ class GitHubArtifactProvider:
             target: self.blob(repo, blob_sha)
             for _source, target, blob_sha in pending_files
         }
-        return ArtifactInventory(files, source_blobs, resolved)
+        return ArtifactInventory(files, source_blobs, modes, resolved)
 
     def compare(self, repo: str, base: str, head: str) -> dict[str, Any]:
         repo = self._validate_repo(repo)

@@ -63,6 +63,7 @@ except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
 
 REPORT_SCHEMA_VERSION = 1
 LOCAL_OVERLAY_REPO = LOCAL_CURATION_REPO
+VALID_GIT_FILE_MODES = {"100644", "100755"}
 IGNORED_DIRECTORY_NAMES = {
     "__pycache__",
     ".cache",
@@ -485,6 +486,12 @@ class GitHubObjectCache:
             path = entry.get("path")
             object_sha = entry.get("sha")
             size = entry.get("size")
+            git_mode = entry.get("mode")
+            if git_mode not in VALID_GIT_FILE_MODES:
+                raise SourceUnavailable(
+                    "tree response contains a non-regular or unknown blob mode "
+                    f"for {repo}@{commit}: {entry.get('path')}: {git_mode!r}"
+                )
             if not isinstance(path, str) or not safe_relative_path(path):
                 raise SourceUnavailable(
                     f"tree response contains an unsafe blob path for {repo}@{commit}"
@@ -510,6 +517,7 @@ class GitHubObjectCache:
                 **entry,
                 "sha": object_sha.lower(),
                 "size": size,
+                "mode": git_mode,
             }
         self._trees[key] = normalized
         if not self.offline:
@@ -659,8 +667,15 @@ def _display_path(path: Path, repo_root: Path) -> str:
         return str(path)
 
 
-def _read_regular_file(path: Path) -> bytes:
-    """Read one regular file while refusing a final-component symlink."""
+def _git_mode_from_stat(metadata: os.stat_result) -> str:
+    """Project one regular worktree inode into Git's portable file modes."""
+    if not stat.S_ISREG(metadata.st_mode):
+        raise OSError("file mode cannot be projected from a non-regular inode")
+    return "100755" if stat.S_IMODE(metadata.st_mode) & 0o111 else "100644"
+
+
+def _regular_file_snapshot(path: Path) -> tuple[bytes, dict[str, int | str]]:
+    """Bind bytes and portable mode to one stable, nofollow descriptor."""
     before = path.lstat()
     if stat.S_ISLNK(before.st_mode) or not stat.S_ISREG(before.st_mode):
         raise OSError(f"not a regular non-symlink file: {path}")
@@ -680,13 +695,40 @@ def _read_regular_file(path: Path) -> bytes:
             if not chunk:
                 break
             chunks.append(chunk)
-        return b"".join(chunks)
+        content = b"".join(chunks)
+        after = os.fstat(descriptor)
+        named = path.lstat()
+        if (
+            after.st_dev != opened.st_dev
+            or after.st_ino != opened.st_ino
+            or after.st_size != opened.st_size
+            or after.st_mtime_ns != opened.st_mtime_ns
+            or after.st_ctime_ns != opened.st_ctime_ns
+            or after.st_mode != opened.st_mode
+            or named.st_dev != opened.st_dev
+            or named.st_ino != opened.st_ino
+            or stat.S_ISLNK(named.st_mode)
+        ):
+            raise OSError(f"file changed while reading: {path}")
+        return content, {
+            "dev": opened.st_dev,
+            "ino": opened.st_ino,
+            "size": len(content),
+            "mtime_ns": opened.st_mtime_ns,
+            "ctime_ns": opened.st_ctime_ns,
+            "sha256": hashlib.sha256(content).hexdigest(),
+            "mode": _git_mode_from_stat(opened),
+        }
     finally:
         os.close(descriptor)
 
 
+def _read_regular_file(path: Path) -> bytes:
+    return _regular_file_snapshot(path)[0]
+
+
 def _sha256_regular_file(path: Path) -> str:
-    return hashlib.sha256(_read_regular_file(path)).hexdigest()
+    return str(_regular_file_snapshot(path)[1]["sha256"])
 
 
 def _scan_issue(
@@ -846,6 +888,8 @@ def _scan_regular_skill_files(
                             or after.st_ino != opened.st_ino
                             or after.st_size != opened.st_size
                             or after.st_mtime_ns != opened.st_mtime_ns
+                            or after.st_ctime_ns != opened.st_ctime_ns
+                            or after.st_mode != opened.st_mode
                         ):
                             raise OSError(f"file changed while reading: {item_path}")
                         data = b"".join(chunks)
@@ -859,7 +903,9 @@ def _scan_regular_skill_files(
                         "ino": opened.st_ino,
                         "size": len(data),
                         "mtime_ns": opened.st_mtime_ns,
+                        "ctime_ns": opened.st_ctime_ns,
                         "sha256": digest,
+                        "mode": _git_mode_from_stat(opened),
                     }
                     if capture_bytes:
                         contents[target] = data
@@ -1007,9 +1053,12 @@ def _classify_unowned_file(
     entry: dict[str, Any],
     target: str,
     local_bytes: bytes,
+    local_mode: str,
     cache: GitHubObjectCache,
     origin_indexes: set[int] | None = None,
 ) -> dict[str, Any]:
+    if local_mode not in VALID_GIT_FILE_MODES:
+        raise ValueError(f"invalid local Git file mode: {local_mode!r}")
     repo_skill = PurePosixPath(str(entry["repo_skill"]))
     skill_root = repo_skill.parent
     checked_sources: list[dict[str, Any]] = []
@@ -1065,6 +1114,20 @@ def _classify_unowned_file(
                 continue
             object_sha = str(tree_entry["sha"]).lower()
             declared_size = tree_entry.get("size")
+            upstream_mode = tree_entry.get("mode")
+            if upstream_mode != local_mode:
+                checked_sources.append(
+                    {
+                        "origin_index": origin_index,
+                        "repo": repo,
+                        "resolved_commit": commit,
+                        "source": source,
+                        "result": "mode_mismatch",
+                        "local_mode": local_mode,
+                        "upstream_mode": upstream_mode,
+                    }
+                )
+                continue
             algorithm = (
                 "sha1"
                 if len(object_sha) == 40
@@ -1109,6 +1172,7 @@ def _classify_unowned_file(
                 return {
                     "target": target,
                     "sha256": hashlib.sha256(local_bytes).hexdigest(),
+                    "mode": local_mode,
                     "classification": "external_exact",
                     "origin_index": origin_index,
                     "repo": repo,
@@ -1156,9 +1220,25 @@ def _classify_unowned_file(
                 )
                 continue
             if upstream_bytes == local_bytes:
+                if cache.offline:
+                    unavailable.append(
+                        "offline tree/blob cache cannot authorize new external "
+                        f"ownership for {repo}@{commit}:{source}"
+                    )
+                    checked_sources.append(
+                        {
+                            "origin_index": origin_index,
+                            "repo": repo,
+                            "resolved_commit": commit,
+                            "source": source,
+                            "result": "offline_authority_forbidden",
+                        }
+                    )
+                    continue
                 return {
                     "target": target,
                     "sha256": hashlib.sha256(local_bytes).hexdigest(),
+                    "mode": local_mode,
                     "classification": "external_exact",
                     "origin_index": origin_index,
                     "repo": repo,
@@ -1180,6 +1260,7 @@ def _classify_unowned_file(
     result = {
         "target": target,
         "sha256": hashlib.sha256(local_bytes).hexdigest(),
+        "mode": local_mode,
         "checked_sources": checked_sources,
     }
     if unavailable:
@@ -1256,14 +1337,24 @@ def inspect_entry(
         if owners and target in managed_set:
             continue
         local_bytes = local_contents.get(target)
-        if local_bytes is None:
+        local_snapshot = filesystem_checkpoint.get(target)
+        local_mode = (
+            local_snapshot.get("mode")
+            if isinstance(local_snapshot, dict)
+            else None
+        )
+        if local_bytes is None or local_mode not in VALID_GIT_FILE_MODES:
             unowned.append(
                 {
                     "target": target,
                     "sha256": None,
+                    "mode": local_mode,
                     "classification": "unavailable",
                     "source": None,
-                    "reason": "cannot read local file from secure scan checkpoint",
+                    "reason": (
+                        "cannot bind local bytes and regular Git mode from "
+                        "secure scan checkpoint"
+                    ),
                 }
             )
             continue
@@ -1280,6 +1371,7 @@ def inspect_entry(
                 classified = {
                     "target": target,
                     "sha256": hashlib.sha256(local_bytes).hexdigest(),
+                    "mode": local_mode,
                     "classification": "local_overlay",
                     "origin_index": owner_index,
                     "repo": owner_origin.get("repo"),
@@ -1294,6 +1386,7 @@ def inspect_entry(
                     entry=entry,
                     target=target,
                     local_bytes=local_bytes,
+                    local_mode=local_mode,
                     cache=cache,
                     origin_indexes={owner_index},
                 )
@@ -1302,6 +1395,7 @@ def inspect_entry(
                 entry=entry,
                 target=target,
                 local_bytes=local_bytes,
+                local_mode=local_mode,
                 cache=cache,
             )
         if declared_owner is not None:
@@ -1322,9 +1416,12 @@ def inspect_entry(
                 stale_artifact_targets.append(str(artifact["target"]))
 
     hash_mismatches: list[str] = []
+    mode_mismatches: list[str] = []
     for target in sorted(actual_set & managed_set):
         try:
-            current_hash = _sha256_regular_file(repo_root / target)
+            _current_bytes, current_snapshot = _regular_file_snapshot(
+                repo_root / target
+            )
         except OSError as exc:
             scan_errors.append(
                 _scan_issue(
@@ -1336,8 +1433,19 @@ def inspect_entry(
                 )
             )
             continue
-        checkpoint_hash = filesystem_checkpoint.get(target, {}).get("sha256")
-        if current_hash != checkpoint_hash:
+        checkpoint = filesystem_checkpoint.get(target, {})
+        if any(
+            current_snapshot.get(field) != checkpoint.get(field)
+            for field in (
+                "dev",
+                "ino",
+                "size",
+                "mtime_ns",
+                "ctime_ns",
+                "sha256",
+                "mode",
+            )
+        ):
             scan_errors.append(
                 _scan_issue(
                     path=repo_root / target,
@@ -1348,8 +1456,10 @@ def inspect_entry(
                 )
             )
             continue
-        if managed[target].get("sha256") != current_hash:
+        if managed[target].get("sha256") != current_snapshot["sha256"]:
             hash_mismatches.append(target)
+        if managed[target].get("mode") != current_snapshot["mode"]:
+            mode_mismatches.append(target)
 
     return {
         "slug": slug,
@@ -1360,6 +1470,7 @@ def inspect_entry(
         "stale_managed": sorted(managed_set - actual_set),
         "stale_artifact_targets": sorted(set(stale_artifact_targets)),
         "hash_mismatches": hash_mismatches,
+        "mode_mismatches": mode_mismatches,
         "scan_errors": scan_errors,
         "ownership_conflicts": ownership_conflicts,
         "unowned": unowned,
@@ -1408,6 +1519,7 @@ def apply_entry_reconciliation(
     ]
     conflicts = inspection["ownership_conflicts"]
     hash_mismatches = inspection.get("hash_mismatches", [])
+    mode_mismatches = inspection.get("mode_mismatches", [])
     stale_managed = inspection.get("stale_managed", [])
     stale_artifact_targets = inspection.get("stale_artifact_targets", [])
     scan_errors = inspection.get("scan_errors", [])
@@ -1422,6 +1534,7 @@ def apply_entry_reconciliation(
         unavailable
         or conflicts
         or hash_mismatches
+        or mode_mismatches
         or stale_managed
         or stale_artifact_targets
         or scan_errors
@@ -1434,6 +1547,8 @@ def apply_entry_reconciliation(
             reasons.append(f"{len(conflicts)} ownership conflict(s)")
         if hash_mismatches:
             reasons.append(f"{len(hash_mismatches)} managed hash mismatch(es)")
+        if mode_mismatches:
+            reasons.append(f"{len(mode_mismatches)} managed mode mismatch(es)")
         if stale_managed:
             reasons.append(f"{len(stale_managed)} stale managed file(s)")
         if stale_artifact_targets:
@@ -1545,7 +1660,8 @@ def apply_entry_reconciliation(
     for target in inspection["actual_files"]:
         snapshot = filesystem_checkpoint.get(target)
         digest = snapshot.get("sha256") if isinstance(snapshot, dict) else None
-        if not isinstance(digest, str):
+        mode = snapshot.get("mode") if isinstance(snapshot, dict) else None
+        if not isinstance(digest, str) or mode not in VALID_GIT_FILE_MODES:
             return (
                 deepcopy(entry),
                 False,
@@ -1556,6 +1672,7 @@ def apply_entry_reconciliation(
                 "path": target,
                 "sha256": digest,
                 "owner": owner,
+                "mode": mode,
             }
         )
     updated["managed_files"] = managed_files
@@ -1587,7 +1704,15 @@ def _verify_inspection_checkpoint(
         after = current.get(target)
         if not isinstance(before, dict) or not isinstance(after, dict):
             return f"filesystem checkpoint is incomplete for {target}"
-        for field in ("dev", "ino", "size", "mtime_ns", "sha256"):
+        for field in (
+            "dev",
+            "ino",
+            "size",
+            "mtime_ns",
+            "ctime_ns",
+            "sha256",
+            "mode",
+        ):
             if before.get(field) != after.get(field):
                 return (
                     f"canonical skill changed after classification: "
@@ -2074,6 +2199,9 @@ def _reconcile_mappings_locked(
         "hash_mismatches": sum(
             len(entry["hash_mismatches"]) for entry in report_entries
         ),
+        "mode_mismatches": sum(
+            len(entry.get("mode_mismatches", [])) for entry in report_entries
+        ),
         "scan_errors": sum(
             len(entry.get("scan_errors", [])) for entry in report_entries
         ),
@@ -2127,7 +2255,7 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help=(
             "Exit non-zero unless the dry-run inventory has no ownership, "
-            "hash, availability, or scan debt"
+            "hash, mode, availability, or scan debt"
         ),
     )
     parser.add_argument(
@@ -2180,6 +2308,7 @@ def main(argv: list[str] | None = None) -> int:
             "stale_managed",
             "stale_artifact_targets",
             "hash_mismatches",
+            "mode_mismatches",
             "scan_errors",
             "ownership_conflicts",
             "write_blocked_entries",

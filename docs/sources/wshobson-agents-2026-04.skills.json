@@ -73,7 +73,8 @@
         {
           "path": "skills/engineering-workflow-automation/billing-automation/SKILL.md",
           "owner": "billing-automation",
-          "sha256": "f197cebea2d295528dbaf5c7c6fb0830c4d72e95f527c325a638a88a49c66188"
+          "sha256": "f197cebea2d295528dbaf5c7c6fb0830c4d72e95f527c325a638a88a49c66188",
+          "mode": "100644"
         }
       ]
     },

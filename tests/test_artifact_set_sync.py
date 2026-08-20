@@ -61,14 +61,31 @@ def _entry(
             }
         ],
         "managed_files": [
-            {"path": path, "sha256": _digest(data), "owner": slug}
+            {
+                "path": path,
+                "sha256": _digest(data),
+                "owner": slug,
+                "mode": "100644",
+            }
             for path, data in sorted(files.items())
         ],
     }
 
 
-def _payload(source: str, target: str, data: bytes, kind: str = "file") -> dict:
-    return {"source": source, "target": target, "type": kind, "data": data}
+def _payload(
+    source: str,
+    target: str,
+    data: bytes,
+    kind: str = "file",
+    mode: str = "100644",
+) -> dict:
+    return {
+        "source": source,
+        "target": target,
+        "type": kind,
+        "data": data,
+        "mode": mode,
+    }
 
 
 def _temp_artifacts(root: Path) -> list[Path]:
@@ -113,12 +130,13 @@ entry = {
         "path": skill,
         "sha256": hashlib.sha256(old).hexdigest(),
         "owner": "demo",
+        "mode": "100644",
     }],
 }
 plan = plan_artifact_set_sync(
     root,
     entry,
-    [{"source": "release/SKILL.md", "target": skill, "type": "file", "data": b"new body"}],
+    [{"source": "release/SKILL.md", "target": skill, "type": "file", "data": b"new body", "mode": "100644"}],
     {"ref": "v2"},
 )
 
@@ -217,6 +235,7 @@ def test_successful_multisidecar_sync_returns_json_ready_metadata(tmp_path: Path
             "package/skills/demo/scripts/check.sh",
             "skills/ai-workflow/demo/scripts/check.sh",
             b"#!/bin/sh\nexit 0\n",
+            mode="100755",
         ),
         _payload(
             "package/skills/demo/SKILL.md",
@@ -248,7 +267,71 @@ def test_successful_multisidecar_sync_returns_json_ready_metadata(tmp_path: Path
         item["path"] for item in patch["managed_files"]
     ]
     assert all(item["owner"] == "demo" for item in patch["managed_files"])
+    script = tmp_path / "skills/ai-workflow/demo/scripts/check.sh"
+    assert script.stat().st_mode & 0o777 == 0o755
+    assert next(
+        item
+        for item in patch["managed_files"]
+        if item["path"].endswith("/scripts/check.sh")
+    )["mode"] == "100755"
     assert _temp_artifacts(tmp_path) == []
+
+
+@pytest.mark.parametrize(
+    ("old_mode", "new_mode"),
+    [("100644", "100755"), ("100755", "100644")],
+)
+def test_mode_only_change_is_planned_and_applied(
+    tmp_path: Path,
+    old_mode: str,
+    new_mode: str,
+):
+    skill = "skills/ai-workflow/demo/SKILL.md"
+    body = b"same body\n"
+    _write(tmp_path, skill, body)
+    path = tmp_path / skill
+    path.chmod(0o755 if old_mode == "100755" else 0o644)
+    entry = _entry({skill: body})
+    entry["managed_files"][0]["mode"] = old_mode
+
+    plan = plan_artifact_set_sync(
+        tmp_path,
+        entry,
+        [_payload("release/SKILL.md", skill, body, mode=new_mode)],
+        {"ref": "v2"},
+    )
+
+    assert plan.changed == (skill,)
+    result = apply_artifact_set_sync(plan)
+    assert result.applied
+    assert path.read_bytes() == body
+    assert path.stat().st_mode & 0o777 == (
+        0o755 if new_mode == "100755" else 0o644
+    )
+    assert result.managed_files[0]["mode"] == new_mode
+
+
+@pytest.mark.parametrize("mode", [None, "100600", 0o755])
+def test_managed_manifest_requires_canonical_git_file_mode(
+    tmp_path: Path,
+    mode,
+):
+    skill = "skills/ai-workflow/demo/SKILL.md"
+    body = b"body"
+    _write(tmp_path, skill, body)
+    entry = _entry({skill: body})
+    if mode is None:
+        entry["managed_files"][0].pop("mode")
+    else:
+        entry["managed_files"][0]["mode"] = mode
+
+    with pytest.raises(ArtifactValidationError, match=r"\.mode"):
+        plan_artifact_set_sync(
+            tmp_path,
+            entry,
+            [_payload("release/SKILL.md", skill, body)],
+            {"ref": "v2"},
+        )
 
 
 def test_binary_bytes_and_cross_directory_source_mapping_are_exact(tmp_path: Path):
@@ -268,6 +351,7 @@ def test_binary_bytes_and_cross_directory_source_mapping_are_exact(tmp_path: Pat
             "target": "skills/ai-workflow/demo/assets/logo.bin",
             "type": "binary",
             "bytes": binary,
+            "mode": "100644",
         },
     ]
 
@@ -882,7 +966,12 @@ def test_fault_after_rename_rolls_back_and_removes_all_transaction_dirs(
         tmp_path,
         _entry(old),
         [
-            _payload("upstream/SKILL.md", skill, b"new body"),
+            _payload(
+                "upstream/SKILL.md",
+                skill,
+                b"new body",
+                mode="100755",
+            ),
             _payload(
                 "upstream/new.md",
                 "skills/ai-workflow/demo/references/new.md",
@@ -901,6 +990,7 @@ def test_fault_after_rename_rolls_back_and_removes_all_transaction_dirs(
 
     assert raised.value.rollback_succeeded
     assert (tmp_path / skill).read_bytes() == b"old body"
+    assert (tmp_path / skill).stat().st_mode & 0o777 == 0o644
     assert (tmp_path / sidecar).read_bytes() == b"old ref"
     assert (
         tmp_path / "skills/ai-workflow/demo/local.txt"
@@ -1437,6 +1527,40 @@ def test_tampered_journal_path_and_symlink_are_fail_closed(tmp_path: Path):
             pass
 
     journal.unlink()
+    journal.write_bytes(original)
+    with skill_advisory_lock(tmp_path, skill_root):
+        pass
+    assert (tmp_path / skill).read_bytes() == b"old body"
+    assert not journal.exists()
+
+
+def test_byte_only_v1_journal_is_rejected_for_manual_recovery(
+    tmp_path: Path,
+):
+    skill = "skills/ai-workflow/demo/SKILL.md"
+    skill_root = "skills/ai-workflow/demo"
+    _write(tmp_path, skill, b"old body")
+    completed = _run_hard_exit_worker(tmp_path, mode="prepared-unbound")
+    assert completed.returncode == 72, completed.stderr
+    journal = skill_transaction_journal_path(tmp_path, skill_root)
+    original = journal.read_bytes()
+    payload = json.loads(original)
+    assert payload["version"] == 2
+    payload["version"] = 1
+    payload["journal_sha256"] = artifact_sync._computed_journal_integrity(
+        payload
+    )
+    journal.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(
+        ArtifactRecoveryError,
+        match="unsupported transaction journal version",
+    ) as raised:
+        with skill_advisory_lock(tmp_path, skill_root):
+            pass
+
+    assert journal in raised.value.recovery_paths
+    assert journal.exists()
     journal.write_bytes(original)
     with skill_advisory_lock(tmp_path, skill_root):
         pass

@@ -17,6 +17,7 @@ try:
         COMMIT_RE,
         DATE_RE as V2_DATE_RE,
         EXTERNAL_KINDS,
+        GIT_FILE_MODES,
         LOCAL_CURATION_REPO,
         SCHEMA_VERSION,
         SHA256_RE,
@@ -26,6 +27,7 @@ try:
         VALID_SYNC_MODES,
         discover_source_mappings,
         github_repo,
+        git_file_mode,
         infer_channel,
         is_local_repo,
         is_local_source,
@@ -41,6 +43,7 @@ except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
         COMMIT_RE,
         DATE_RE as V2_DATE_RE,
         EXTERNAL_KINDS,
+        GIT_FILE_MODES,
         LOCAL_CURATION_REPO,
         SCHEMA_VERSION,
         SHA256_RE,
@@ -50,6 +53,7 @@ except ModuleNotFoundError:  # pragma: no cover - import path used by unit tests
         VALID_SYNC_MODES,
         discover_source_mappings,
         github_repo,
+        git_file_mode,
         infer_channel,
         is_local_repo,
         is_local_source,
@@ -936,9 +940,14 @@ def _validate_v2_entry(
             if not isinstance(managed, dict):
                 errors.append(f"{label} must be an object")
                 continue
-            missing = {"path", "sha256", "owner"} - set(managed)
+            missing = {"path", "sha256", "owner", "mode"} - set(managed)
             if missing:
                 errors.append(f"{label} missing keys: {sorted(missing)}")
+            declared_mode = managed.get("mode")
+            if declared_mode not in GIT_FILE_MODES:
+                errors.append(
+                    f"{label}.mode must be one of {sorted(GIT_FILE_MODES)}"
+                )
             path_value = managed.get("path")
             if not safe_relative_path(path_value):
                 errors.append(f"{label}.path must be a safe relative path")
@@ -962,6 +971,18 @@ def _validate_v2_entry(
                             f"{mapping}: skills[{idx}] managed file "
                             f"{path_value!r} sha256 does not match "
                             "repository content"
+                        )
+                    current_mode = git_file_mode(candidate)
+                    if current_mode is None:
+                        errors.append(
+                            f"{mapping}: skills[{idx}] managed file "
+                            f"{path_value!r} has a mode Git cannot represent"
+                        )
+                    elif declared_mode != current_mode:
+                        errors.append(
+                            f"{mapping}: skills[{idx}] managed file "
+                            f"{path_value!r} mode {declared_mode!r} does not "
+                            f"match repository mode {current_mode!r}"
                         )
             content_hash = managed.get("sha256")
             if (

@@ -127,57 +127,68 @@
         {
           "path": "skills/security-and-reliability/security-audit/AI-AND-LLM.md",
           "sha256": "e3f1f732de2bdd469023a6ac591849a1285abe9b0d12de11fb7d9fd13f6c108e",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/ATTACK-CLASSES.md",
           "sha256": "f3fab5e6a113553f357e3586f488b9c7e047d48c2ee5443c77724ec1d1d5fdb0",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/CLIENT-SIDE.md",
           "sha256": "14a0bef183b95e62de4945b886fbfd677c53c68d77f8fdf4c7e2d42e9815f883",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/HUNTING.md",
           "sha256": "735caebbc3bfed31d2c9fbbf61f383060305774708e0d0ac38050a7eac7ac679",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/MEMORY-SAFETY-AND-BINARY.md",
           "sha256": "8e1f8e8d9029941083fd5739fec493de7f2699a13fec23d0d0a9a3aae85f7e55",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/RECONNAISSANCE.md",
           "sha256": "89e2f899107335467716f06bc0bb175e87ccfb662dd9878b9a0f155d8005343f",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/SKILL.md",
           "sha256": "f534330a3098552529d9d8a4d3edde15bd7545db42b4af955b469d72592e8710",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/VALIDATION-AND-REPORTING.md",
           "sha256": "049dea0289689c66fd913aafa7d6d6df3d5b38d5d9d8e571825ba58f4308c2bd",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/WEB-PROTOCOL-AND-AUTH.md",
           "sha256": "b8f9a0e29ad6685a3d96cf42a538be7012c4a18925a4871a475291aae497ed04",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/report-schema.json",
           "sha256": "05c24d50f3314b025dbfb28dfee550d9dec9775602d51fc5c891013a3ab8b273",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100644"
         },
         {
           "path": "skills/security-and-reliability/security-audit/validate-findings.cjs",
           "sha256": "36d445209703d838c320c6366935f6476823e96e6b76d99a64f3aaf9beb51f2e",
-          "owner": "security-audit"
+          "owner": "security-audit",
+          "mode": "100755"
         }
       ]
     }

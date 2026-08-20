@@ -633,21 +633,23 @@ entry = {
         "target": "skills/category/demo",
         "type": "directory",
     }]}],
-    "managed_files": [{
-        "path": skill,
-        "sha256": hashlib.sha256(old).hexdigest(),
-        "owner": "demo",
-    }],
+        "managed_files": [{
+            "path": skill,
+            "sha256": hashlib.sha256(old).hexdigest(),
+            "owner": "demo",
+            "mode": "100644",
+        }],
 }
 plan = plan_artifact_set_sync(
     root,
     entry,
     [{
         "source": "release/SKILL.md",
-        "target": skill,
-        "type": "file",
-        "data": b"new body",
-    }],
+            "target": skill,
+            "type": "file",
+            "data": b"new body",
+            "mode": "100644",
+        }],
     {"ref": "v2"},
 )
 prepare_artifact_set_sync(plan)

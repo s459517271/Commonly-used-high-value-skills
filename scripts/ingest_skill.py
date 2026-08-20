@@ -345,7 +345,37 @@ def classify_github_artifacts(
             used_targets.add(target)
         item = tree.get(source_path)
         upstream_bytes: bytes | None = None
-        if isinstance(item, dict) and item.get("type") == "blob":
+        upstream_mode: str | None = None
+        if isinstance(item, dict):
+            item_type = item.get("type")
+            upstream_mode = item.get("mode")
+            if item_type == "blob" and upstream_mode not in {
+                "100644",
+                "100755",
+            }:
+                raise ValueError(
+                    "declared upstream artifact is not a regular Git blob: "
+                    f"{source_path} ({item_type}/{upstream_mode})"
+                )
+        if (
+            isinstance(item, dict)
+            and item.get("type") == "blob"
+            and upstream_mode in {"100644", "100755"}
+        ):
+            local_metadata = local_path.lstat()
+            if stat.S_ISLNK(local_metadata.st_mode) or not stat.S_ISREG(
+                local_metadata.st_mode
+            ):
+                raise ValueError(
+                    f"canonical artifact is not a regular file: {target}"
+                )
+            local_mode = _git_file_mode(local_metadata)
+            if upstream_mode != local_mode:
+                raise ValueError(
+                    "declared upstream artifact mode does not match the "
+                    f"canonical file: {source_path} -> {target} "
+                    f"({upstream_mode} != {local_mode})"
+                )
             blob_sha = item.get("sha")
             if not isinstance(blob_sha, str):
                 raise ValueError(f"upstream artifact has no blob SHA: {source_path}")
@@ -842,6 +872,8 @@ def build_external_provenance_payload(
         if kind != "snapshot":
             kind = "overlay"
             sync_mode = "monitor"
+    managed_paths = regular_skill_files(skill_dir)
+    _assert_tracked_modes_clean(repo_root, managed_paths)
     entry = {
         "video_name": skill_name,
         "normalized_slug": skill_name,
@@ -870,8 +902,9 @@ def build_external_provenance_payload(
                     if path == skill_md
                     else sha256_file(path)
                 ),
+                "mode": _git_file_mode(path.lstat()),
             }
-            for path in regular_skill_files(skill_dir)
+            for path in managed_paths
         ],
     }
 
@@ -978,6 +1011,7 @@ class IngestPlan:
         skill_md: Path,
         before_skill: bytes | None,
         after_skill: bytes,
+        after_mode: int | None = None,
         mapping_path: Path | None = None,
         before_mapping: bytes | None = None,
         after_mapping: bytes | None = None,
@@ -993,6 +1027,7 @@ class IngestPlan:
         self.skill_md = skill_md
         self.before_skill = before_skill
         self.after_skill = after_skill
+        self.after_mode = after_mode
         self.mapping_path = mapping_path
         self.before_mapping = before_mapping
         self.after_mapping = after_mapping
@@ -1279,7 +1314,121 @@ def _path_state(path: Path) -> dict[str, str]:
         return {"type": "symlink", "sha256": os.readlink(path)}
     if not stat.S_ISREG(metadata.st_mode):
         return {"type": "other", "sha256": str(metadata.st_mode)}
-    return {"type": "file", "sha256": sha256_file(path)}
+    return {
+        "type": "file",
+        "sha256": sha256_file(path),
+        "mode": _git_file_mode(metadata),
+    }
+
+
+def _git_file_mode(metadata: os.stat_result) -> str:
+    """Normalize a regular filesystem mode to the two Git blob modes."""
+    return "100755" if stat.S_IMODE(metadata.st_mode) & 0o111 else "100644"
+
+
+def _assert_tracked_modes_clean(repo_root: Path, paths: list[Path]) -> None:
+    """Reject chmod drift from the Git index before it becomes ownership state.
+
+    New, untracked skill files have no index authority yet and are allowed.
+    Existing tracked files must retain the executable bit recorded by Git.
+    Nested test repositories are deliberately not compared against an outer
+    worktree's index.
+    """
+    if not paths:
+        return
+    try:
+        top_level = subprocess.run(
+            ["git", "-C", str(repo_root), "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            check=False,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError(f"cannot inspect Git index modes: {exc}") from exc
+    if top_level.returncode != 0:
+        return
+    try:
+        git_root = Path(top_level.stdout.strip()).resolve(strict=True)
+        resolved_repo = repo_root.resolve(strict=True)
+    except (FileNotFoundError, RuntimeError) as exc:
+        raise ValueError(f"cannot resolve Git worktree for mode audit: {exc}") from exc
+    if git_root != resolved_repo:
+        return
+
+    relative_paths: list[str] = []
+    by_relative: dict[str, Path] = {}
+    for path in paths:
+        try:
+            relative = path.resolve(strict=True).relative_to(resolved_repo).as_posix()
+        except (FileNotFoundError, RuntimeError, ValueError) as exc:
+            raise ValueError(f"managed skill file escapes repository: {path}") from exc
+        relative_paths.append(relative)
+        by_relative[relative] = path
+    try:
+        completed = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(resolved_repo),
+                "ls-files",
+                "--stage",
+                "-z",
+                "--",
+                *relative_paths,
+            ],
+            capture_output=True,
+            check=False,
+            timeout=10,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError(f"cannot read Git index modes: {exc}") from exc
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise ValueError(
+            "cannot read Git index modes"
+            + (f": {detail}" if detail else "")
+        )
+
+    index_modes: dict[str, str] = {}
+    for record in completed.stdout.split(b"\0"):
+        if not record:
+            continue
+        metadata, separator, raw_path = record.partition(b"\t")
+        fields = metadata.split()
+        if not separator or len(fields) != 3:
+            raise ValueError("Git index returned a malformed stage record")
+        try:
+            mode = fields[0].decode("ascii")
+            relative = raw_path.decode("utf-8", errors="surrogateescape")
+        except UnicodeDecodeError as exc:
+            raise ValueError("Git index returned an invalid mode") from exc
+        if fields[2] != b"0":
+            raise ValueError(
+                f"Git index contains an unmerged managed file: {relative}"
+            )
+        if mode not in {"100644", "100755"}:
+            raise ValueError(
+                f"Git index managed file is not a regular blob: {relative}: {mode}"
+            )
+        index_modes[relative] = mode
+
+    dirty: list[str] = []
+    for relative, expected in index_modes.items():
+        path = by_relative.get(relative)
+        if path is None:
+            continue
+        metadata = path.lstat()
+        if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
+            raise ValueError(f"managed skill file is not regular: {relative}")
+        actual = _git_file_mode(metadata)
+        if actual != expected:
+            dirty.append(f"{relative} ({expected} -> {actual})")
+    if dirty:
+        raise ValueError(
+            "refusing to authorize dirty executable-mode changes: "
+            + ", ".join(sorted(dirty))
+        )
 
 
 def capture_ingest_fingerprint(
@@ -1298,7 +1447,7 @@ def capture_ingest_fingerprint(
         raise ValueError("skill directory escapes repository root") from exc
     repository_files = _walk_repository_regular_files(repo_absolute)
     skill_prefix = skill_relative.rstrip("/") + "/"
-    for relative, (content, _mode) in repository_files.items():
+    for relative, (content, mode) in repository_files.items():
         is_skill_input = (
             relative == f"{skill_relative}/SKILL.md"
             or relative.startswith(skill_prefix)
@@ -1312,6 +1461,7 @@ def capture_ingest_fingerprint(
             inventory[relative] = {
                 "type": "file",
                 "sha256": sha256_bytes(content),
+                "mode": str(mode),
             }
     if mapping_path is not None:
         mapping_absolute = Path(os.path.abspath(mapping_path))
@@ -1539,6 +1689,7 @@ def prepare_ingest(
     skill_md = skill_dir / "SKILL.md"
     if not skill_md.is_file() or skill_md.is_symlink():
         raise ValueError(f"{skill_md} must be a regular file")
+    _assert_tracked_modes_clean(repo_root, regular_skill_files(skill_dir))
     fingerprint_mapping = external_mapping or (
         repo_root / "docs" / "sources" / "ingested-external.skills.json"
     )
@@ -1729,6 +1880,7 @@ def prepare_ingest(
         skill_md=skill_md,
         before_skill=before_skill,
         after_skill=updated.encode("utf-8"),
+        after_mode=stat.S_IMODE(skill_md.lstat().st_mode),
         mapping_path=mapping_path,
         before_mapping=mapping_before,
         after_mapping=mapping_after,
@@ -1763,7 +1915,15 @@ def _write_atomic_bytes(
     repo_root: Path | None = None,
     expected_checkpoint: dict[str, Any] | None = None,
     expected_parent_checkpoint: list[dict[str, Any]] | None = None,
+    desired_mode: int | None = None,
 ) -> None:
+    if desired_mode is not None and (
+        isinstance(desired_mode, bool)
+        or not isinstance(desired_mode, int)
+        or desired_mode < 0
+        or desired_mode > 0o777
+    ):
+        raise ValueError(f"invalid desired file mode for {path}: {desired_mode!r}")
     if repo_root is not None and expected_checkpoint is not None:
         _write_atomic_bytes_secure(
             path,
@@ -1771,6 +1931,7 @@ def _write_atomic_bytes(
             repo_root=repo_root,
             expected_checkpoint=expected_checkpoint,
             expected_parent_checkpoint=expected_parent_checkpoint,
+            desired_mode=desired_mode,
         )
         return
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1797,8 +1958,14 @@ def _write_atomic_bytes(
         created_stat = os.fstat(fd)
         if not stat.S_ISREG(created_stat.st_mode):
             raise RuntimeError(f"temporary path is not regular: {temp_path}")
-        if original_mode is not None:
-            os.fchmod(fd, original_mode)
+        installed_mode = (
+            desired_mode
+            if desired_mode is not None
+            else original_mode
+            if original_mode is not None
+            else 0o644
+        )
+        os.fchmod(fd, installed_mode)
         with os.fdopen(fd, "wb") as handle:
             fd = -1
             handle.write(content)
@@ -1817,6 +1984,15 @@ def _write_atomic_bytes(
             os.fsync(directory_fd)
         finally:
             os.close(directory_fd)
+        installed = path.lstat()
+        if (
+            not stat.S_ISREG(installed.st_mode)
+            or stat.S_IMODE(installed.st_mode) != installed_mode
+            or path.read_bytes() != content
+        ):
+            raise RuntimeError(
+                f"installed target failed byte/mode verification: {path}"
+            )
     finally:
         if fd >= 0:
             os.close(fd)
@@ -1830,6 +2006,7 @@ def _write_atomic_bytes_secure(
     repo_root: Path,
     expected_checkpoint: dict[str, Any],
     expected_parent_checkpoint: list[dict[str, Any]] | None = None,
+    desired_mode: int | None = None,
 ) -> None:
     """Replace one target through stable dirfds after checkpoint revalidation."""
     if expected_parent_checkpoint is not None:
@@ -1874,7 +2051,9 @@ def _write_atomic_bytes_secure(
                     f"transaction temporary is not regular: {path}"
                 )
             mode = (
-                int(expected_checkpoint["mode"])
+                desired_mode
+                if desired_mode is not None
+                else int(expected_checkpoint["mode"])
                 if expected_checkpoint.get("exists")
                 else 0o644
             )
@@ -2089,6 +2268,7 @@ def _materialize_transaction_parents(
 def _apply_ingest_output_batch(
     *,
     outputs: dict[Path, bytes],
+    after_modes: dict[Path, int],
     before: dict[Path, bytes | None],
     checkpoints: dict[Path, dict[str, Any]],
     parent_checkpoints: dict[Path, list[dict[str, Any]]],
@@ -2118,6 +2298,7 @@ def _apply_ingest_output_batch(
                 repo_root=roots[path],
                 expected_checkpoint=checkpoints[path],
                 expected_parent_checkpoint=writer_parent_checkpoints.get(path),
+                desired_mode=after_modes[path],
             )
             if fault_injector is not None:
                 fault_injector("after_replace", path)
@@ -2135,8 +2316,10 @@ def _apply_ingest_output_batch(
                 )
                 if prior is None:
                     if current_checkpoint["exists"]:
-                        if current_checkpoint["sha256"] != sha256_bytes(
-                            outputs[path]
+                        if (
+                            current_checkpoint["sha256"]
+                            != sha256_bytes(outputs[path])
+                            or current_checkpoint["mode"] != after_modes[path]
                         ):
                             raise RuntimeError(
                                 f"rollback target changed concurrently: {path}"
@@ -2152,6 +2335,7 @@ def _apply_ingest_output_batch(
                 elif (
                     current_checkpoint["exists"]
                     and current_checkpoint["sha256"] == sha256_bytes(prior)
+                    and current_checkpoint["mode"] == checkpoints[path]["mode"]
                 ):
                     continue
                 else:
@@ -2159,6 +2343,7 @@ def _apply_ingest_output_batch(
                         not current_checkpoint["exists"]
                         or current_checkpoint["sha256"]
                         != sha256_bytes(outputs[path])
+                        or current_checkpoint["mode"] != after_modes[path]
                     ):
                         raise RuntimeError(
                             f"rollback target changed concurrently: {path}"
@@ -2171,6 +2356,7 @@ def _apply_ingest_output_batch(
                         expected_parent_checkpoint=(
                             writer_parent_checkpoints.get(path)
                         ),
+                        desired_mode=int(checkpoints[path]["mode"]),
                     )
             except Exception as rollback_exc:  # pragma: no cover - catastrophic I/O
                 rollback_errors.append(f"{path}: {rollback_exc}")
@@ -2265,19 +2451,35 @@ def commit_ingest_plans(
     checkpoints: dict[Path, dict[str, Any]] = {}
     parent_checkpoints: dict[Path, list[dict[str, Any]]] = {}
     roots: dict[Path, Path | None] = {}
+    after_modes: dict[Path, int] = {}
     for plan in plans:
-        if plan.before_skill != plan.after_skill:
+        skill_checkpoint = (
+            plan.before_checkpoint
+            or capture_target_checkpoint(
+                plan.skill_md,
+                repo_root=plan.repo_root,
+            )
+        )
+        skill_after_mode = (
+            int(plan.after_mode)
+            if plan.after_mode is not None
+            else int(skill_checkpoint["mode"])
+            if skill_checkpoint.get("exists")
+            else 0o644
+        )
+        if (
+            plan.before_skill != plan.after_skill
+            or not skill_checkpoint.get("exists")
+            or skill_checkpoint.get("mode") != skill_after_mode
+        ):
             outputs[plan.skill_md] = plan.after_skill
             before.setdefault(plan.skill_md, plan.before_skill)
             roots.setdefault(plan.skill_md, plan.repo_root)
             checkpoints.setdefault(
                 plan.skill_md,
-                plan.before_checkpoint
-                or capture_target_checkpoint(
-                    plan.skill_md,
-                    repo_root=plan.repo_root,
-                ),
+                skill_checkpoint,
             )
+            after_modes[plan.skill_md] = skill_after_mode
             if plan.repo_root is not None:
                 parent_checkpoints.setdefault(
                     plan.skill_md,
@@ -2302,6 +2504,12 @@ def commit_ingest_plans(
                     plan.mapping_path,
                     repo_root=plan.repo_root,
                 ),
+            )
+            mapping_checkpoint = checkpoints[plan.mapping_path]
+            after_modes[plan.mapping_path] = (
+                int(mapping_checkpoint["mode"])
+                if mapping_checkpoint.get("exists")
+                else 0o644
             )
             if plan.repo_root is not None:
                 parent_checkpoints.setdefault(
@@ -2331,18 +2539,11 @@ def commit_ingest_plans(
             repo_root=roots[path],
         )
 
-    after_modes = {
-        path: (
-            int(checkpoints[path]["mode"])
-            if checkpoints[path].get("exists")
-            else 0o644
-        )
-        for path in outputs
-    }
     durable_guard.commit_batch(
         outputs,
         lambda: _apply_ingest_output_batch(
             outputs=outputs,
+            after_modes=after_modes,
             before=before,
             checkpoints=checkpoints,
             parent_checkpoints=parent_checkpoints,
@@ -2730,6 +2931,7 @@ def _translate_plan_to_stage(
         skill_md=stage_root / skill_relative,
         before_skill=(stage_root / skill_relative).read_bytes(),
         after_skill=plan.after_skill,
+        after_mode=plan.after_mode,
         mapping_path=stage_root / mapping_relative if mapping_relative else None,
         before_mapping=(
             (stage_root / mapping_relative).read_bytes()
@@ -2787,6 +2989,19 @@ def validate_ingest_plans(
         repo_root,
         set(baseline),
     )
+    baseline_modes: dict[str, int] = {}
+    for relative, content in baseline.items():
+        checkpoint = baseline_checkpoints[relative]
+        if (
+            not checkpoint.get("exists")
+            or checkpoint.get("sha256") != sha256_bytes(content)
+            or not isinstance(checkpoint.get("mode"), int)
+        ):
+            raise RuntimeError(
+                "repository changed while capturing ingest baseline: "
+                f"{relative}"
+            )
+        baseline_modes[relative] = int(checkpoint["mode"])
     # macOS exposes /var as a symlink to /private/var. Resolve the OS-provided
     # temporary root first, then validate and use its symlink-free absolute
     # path so the secure dirfd traversal applies inside staging as well.
@@ -2824,6 +3039,23 @@ def validate_ingest_plans(
             stage_root,
             tracked_reports=tracked_reports,
         )
+        staged_checkpoints = repository_checkpoint_snapshot(
+            stage_root,
+            set(staged),
+        )
+        staged_modes: dict[str, int] = {}
+        for relative, content in staged.items():
+            checkpoint = staged_checkpoints[relative]
+            if (
+                not checkpoint.get("exists")
+                or checkpoint.get("sha256") != sha256_bytes(content)
+                or not isinstance(checkpoint.get("mode"), int)
+            ):
+                raise RuntimeError(
+                    "staged repository changed while capturing pipeline output: "
+                    f"{relative}"
+                )
+            staged_modes[relative] = int(checkpoint["mode"])
         if (
             transactional_repository_bytes_snapshot(
                 repo_root,
@@ -2846,7 +3078,9 @@ def validate_ingest_plans(
         for relative in sorted(staged):
             before = baseline.get(relative)
             after = staged[relative]
-            if before == after:
+            before_mode = baseline_modes.get(relative)
+            after_mode = staged_modes[relative]
+            if before == after and before_mode == after_mode:
                 continue
             target = repo_root / relative
             mutations.append(
@@ -2855,6 +3089,7 @@ def validate_ingest_plans(
                     skill_md=target,
                     before_skill=before,
                     after_skill=after,
+                    after_mode=after_mode,
                     repo_root=repo_root,
                     before_checkpoint=(
                         baseline_checkpoints[relative]

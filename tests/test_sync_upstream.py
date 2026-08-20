@@ -98,6 +98,7 @@ def complete_v2_entry(entry: dict, content: bytes) -> dict:
                 "path": entry["repo_skill"],
                 "sha256": hashlib.sha256(content).hexdigest(),
                 "owner": slug,
+                "mode": "100644",
             }
         ],
     )
@@ -2188,6 +2189,13 @@ class SyncUpstreamTests(unittest.TestCase):
             b"\x00\xff\x10",
             first.files["skills/ai/demo/static/logo.bin"],
         )
+        self.assertEqual(
+            {
+                "skills/ai/demo/SKILL.md": "100644",
+                "skills/ai/demo/static/logo.bin": "100755",
+            },
+            first.modes,
+        )
         self.assertEqual(first, second)
         self.assertTrue(all(count == 1 for count in calls.values()), calls)
 
@@ -2414,6 +2422,9 @@ class SyncUpstreamTests(unittest.TestCase):
 
         self.assertEqual(
             b"# Skill\n", inventory.files["skills/ai/demo/SKILL.md"]
+        )
+        self.assertEqual(
+            "100644", inventory.modes["skills/ai/demo/SKILL.md"]
         )
 
     def test_github_provider_truncated_walk_preserves_but_does_not_descend_special_objects(self):
@@ -2864,6 +2875,12 @@ class SyncUpstreamTests(unittest.TestCase):
                                 ): upstream
                             },
                             {"upstream/SKILL.md": "1" * 40},
+                            {
+                                (
+                                    "skills/ai-workflow/curated-demo/"
+                                    "SKILL.md"
+                                ): "100644"
+                            },
                             ResolvedRef(
                                 channel, "reviewed-ref", checkpoint
                             ),
@@ -3090,6 +3107,7 @@ class SyncUpstreamTests(unittest.TestCase):
                         return ArtifactInventory(
                             {target: local},
                             {"upstream/SKILL.md": "1" * 40},
+                            {target: "100644"},
                             ResolvedRef(
                                 "default_branch", "main", "b" * 40
                             ),
@@ -3178,6 +3196,10 @@ class SyncUpstreamTests(unittest.TestCase):
                             side_target: b"\x00new",
                         },
                         {"upstream/SKILL.md": "1" * 40, "upstream/guide.bin": "2" * 40},
+                        {
+                            main_target: "100644",
+                            side_target: "100644",
+                        },
                         ResolvedRef("default_branch", "main", "b" * 40),
                     )
 
@@ -3325,6 +3347,7 @@ class SyncUpstreamTests(unittest.TestCase):
                     return ArtifactInventory(
                         {repo_skill: upstream},
                         {upstream_path: "f" * 40},
+                        {repo_skill: "100644"},
                         ResolvedRef(
                             "latest_release", "v2.0.0", "b" * 40
                         ),
@@ -3409,6 +3432,10 @@ class SyncUpstreamTests(unittest.TestCase):
                             binary_target: b"\x00\xffnew",
                         },
                         {"src/SKILL.md": "1" * 40, "src/data.bin": "2" * 40},
+                        {
+                            main_target: "100644",
+                            binary_target: "100644",
+                        },
                         ResolvedRef("latest_release", "v2", "a" * 40),
                     )
 
@@ -3488,6 +3515,7 @@ class SyncUpstreamTests(unittest.TestCase):
             changed, added, removed = module._artifact_diff(
                 skill,
                 {main_target: b"# Same\n"},
+                {main_target: "100644"},
             )
 
             self.assertEqual([], changed)
@@ -3543,12 +3571,56 @@ class SyncUpstreamTests(unittest.TestCase):
                     main_target: b"# Same\n",
                     newly_desired: b"# Existing identical bytes\n",
                 },
+                {
+                    main_target: "100644",
+                    newly_desired: "100644",
+                },
             )
 
             self.assertEqual([], changed)
             self.assertEqual([newly_desired], added)
             # Removed remains an inventory delta even though disk is missing.
             self.assertEqual([formerly_owned], removed)
+
+    def test_artifact_diff_reports_mode_only_change(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            module.REPO_ROOT = root
+            target = "skills/ai-workflow/demo/SKILL.md"
+            body = b"# Same\n"
+            path = root / target
+            path.parent.mkdir(parents=True)
+            path.write_bytes(body)
+            path.chmod(0o644)
+            skill = {
+                "repo_skill": target,
+                "artifacts": [
+                    {
+                        "source": "upstream/SKILL.md",
+                        "target": target,
+                        "type": "file",
+                    }
+                ],
+                "other_origin_artifacts": [],
+                "managed_files": [
+                    {
+                        "path": target,
+                        "sha256": hashlib.sha256(body).hexdigest(),
+                        "mode": "100644",
+                    }
+                ],
+            }
+
+            changed, added, removed = module._artifact_diff(
+                skill,
+                {target: body},
+                {target: "100755"},
+            )
+
+            self.assertEqual([target], changed)
+            self.assertEqual([], added)
+            self.assertEqual([], removed)
 
     def test_v2_missing_source_reports_exact_blob_move_candidates_without_guessing(self):
         module = load_module()
@@ -4069,6 +4141,7 @@ entry = {
         "path": skill,
         "sha256": hashlib.sha256(old).hexdigest(),
         "owner": "demo",
+        "mode": "100644",
     }],
 }
 plan = plan_artifact_set_sync(
@@ -4079,6 +4152,7 @@ plan = plan_artifact_set_sync(
         "target": skill,
         "type": "file",
         "data": new,
+        "mode": "100644",
     }],
     {"resolved_commit": "c" * 40},
 )
@@ -4514,6 +4588,11 @@ os._exit(73)
                     "package/references/curated.md": "2" * 40,
                     "package/templates/nested/config.bin": "3" * 40,
                 },
+                "upstream_modes": {
+                    main_target: "100644",
+                    exact_target: "100644",
+                    nested_target: "100644",
+                },
             }
             plan_calls = []
             original_engine_loader = module._load_artifact_engine
@@ -4674,6 +4753,7 @@ os._exit(73)
                     "path": side_target,
                     "sha256": hashlib.sha256(old_side).hexdigest(),
                     "owner": "demo",
+                    "mode": "100644",
                 }
             )
             mapping.write_text(
@@ -4721,6 +4801,10 @@ os._exit(73)
                     "package/SKILL.md": "1" * 40,
                     "package/assets/data.bin": "2" * 40,
                 },
+                "upstream_modes": {
+                    main_target: "100644",
+                    side_target: "100755",
+                },
             }
 
             result = module.apply_v2_update(update)
@@ -4728,6 +4812,7 @@ os._exit(73)
             self.assertTrue(result.applied)
             self.assertIn("# New", main_path.read_text(encoding="utf-8"))
             self.assertEqual(b"\x00\xffnew", side_path.read_bytes())
+            self.assertEqual(0o755, side_path.stat().st_mode & 0o777)
             recorded = json.loads(mapping.read_text(encoding="utf-8"))
             entry = recorded["skills"][0]
             tracking = entry["origins"][0]["tracking"]
@@ -4746,8 +4831,131 @@ os._exit(73)
                 {main_target, side_target},
                 {item["path"] for item in entry["managed_files"]},
             )
+            self.assertEqual(
+                "100755",
+                next(
+                    item
+                    for item in entry["managed_files"]
+                    if item["path"] == side_target
+                )["mode"],
+            )
             self.assertEqual(artifacts, entry["origins"][0]["artifacts"])
             self.assertEqual("v2.0.0", entry["upstream"]["ref"])
+
+    def test_v2_apply_commits_mode_repair_when_mapping_is_already_authoritative(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            module.REPO_ROOT = root
+            module.SKILLS_DIR = root / "skills"
+            module.SOURCE_MAPPINGS_DIR = root / "docs" / "sources"
+            target = "skills/ai-workflow/demo/SKILL.md"
+            local = root / target
+            local.parent.mkdir(parents=True)
+            content = external_skill_content("demo", "owner/repo")
+            local.write_bytes(content)
+            local.chmod(0o644)
+            commit = "a" * 40
+            today = module.date.today().isoformat()
+            artifacts = [
+                {
+                    "source": "package/SKILL.md",
+                    "target": target,
+                    "type": "file",
+                }
+            ]
+            entry = complete_v2_entry(
+                {
+                    "normalized_slug": "demo",
+                    "kind": "mirror",
+                    "sync_mode": "replace",
+                    "repo_skill": target,
+                    "origins": [
+                        {
+                            "repo": "owner/repo",
+                            "path": "package/SKILL.md",
+                            "license": "MIT",
+                            "sync_mode": "replace",
+                            "artifacts": artifacts,
+                            "tracking": {
+                                "channel": "latest_release",
+                                "ref": "v1.0.0",
+                                "resolved_commit": commit,
+                                "path_commit": commit,
+                                "content_sha256": hashlib.sha256(
+                                    content
+                                ).hexdigest(),
+                                "last_checked_at": today,
+                                "last_synced_at": today,
+                                "license_checkpoint": (
+                                    mock_license_checkpoint(commit)
+                                ),
+                            },
+                        }
+                    ],
+                },
+                content,
+            )
+            entry["managed_files"][0]["mode"] = "100755"
+            entry["upstream"].update(
+                {
+                    "ref": "v1.0.0",
+                    "path_commit": commit,
+                    "last_checked_at": today,
+                    "last_synced_at": today,
+                    "last_synced_commit": commit,
+                }
+            )
+            payload = {
+                "schema_version": 2,
+                "video": {"checked_at": today},
+                "official_references": [],
+                "skills": [entry],
+            }
+            mapping = module.SOURCE_MAPPINGS_DIR / "source.skills.json"
+            mapping.parent.mkdir(parents=True)
+            mapping.write_bytes(module.serialize_mapping_json(payload))
+            before = mapping.read_bytes()
+            skill = {
+                "name": "demo",
+                "schema_version": 2,
+                "repo": "owner/repo",
+                "repo_skill": target,
+                "sync_mode": "replace",
+                "tracking": {
+                    "channel": "latest_release",
+                    "ref": "v1.0.0",
+                },
+                "artifacts": artifacts,
+                "mapping_path": mapping,
+                "mapping_entry_index": 0,
+                "origin_index": 0,
+                "local_path": local,
+                "mapping_fingerprint": module._entry_origin_fingerprint(
+                    entry, 0
+                ),
+            }
+            update = {
+                "skill": skill,
+                "changes": "artifact_changed",
+                "current_commit": commit,
+                "path_commit": commit,
+                "resolved_ref": "v1.0.0",
+                "license_evidence": mock_license_checkpoint(commit),
+                "upstream_files": {target: content},
+                "source_blobs": {"package/SKILL.md": "1" * 40},
+                "upstream_modes": {target: "100755"},
+            }
+            original_merge = module.merge_frontmatter
+            module.merge_frontmatter = lambda local_text, _upstream: local_text
+            try:
+                result = module.apply_v2_update(update)
+            finally:
+                module.merge_frontmatter = original_merge
+
+            self.assertTrue(result.applied)
+            self.assertEqual(0o755, local.stat().st_mode & 0o777)
+            self.assertEqual(before, mapping.read_bytes())
 
     def test_v2_mapping_write_failure_rolls_back_prepared_artifact_tree(self):
         module = load_module()
@@ -4839,6 +5047,7 @@ os._exit(73)
                     main_target: b"---\nname: demo\n---\n# New\n"
                 },
                 "source_blobs": {"package/SKILL.md": "1" * 40},
+                "upstream_modes": {main_target: "100644"},
             }
             original_writer = module.atomic_write_json
             def fail_before_replace(path, data, **kwargs):

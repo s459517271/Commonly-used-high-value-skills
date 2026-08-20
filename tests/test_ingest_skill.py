@@ -1,6 +1,8 @@
 import importlib.util
 import contextlib
 import json
+import stat
+import subprocess
 import sys
 import tempfile
 import types
@@ -89,6 +91,7 @@ class IngestSkillTests(unittest.TestCase):
                 root,
                 "---\nname: sample-skill\ndescription: Sample\n---",
             )
+            (skill_dir / "SKILL.md").chmod(0o755)
             mapping = root / "docs" / "sources" / "ingested-external.skills.json"
             license_checkpoint = mock_license_checkpoint()
             with (
@@ -134,6 +137,75 @@ class IngestSkillTests(unittest.TestCase):
             self.assertTrue(ok)
             self.assertIn("license: MIT", content)
             self.assertIn('source: "github:owner/repo"', content)
+            self.assertEqual(
+                0o755,
+                stat.S_IMODE((skill_dir / "SKILL.md").stat().st_mode),
+            )
+            payload = json.loads(mapping.read_text(encoding="utf-8"))
+            managed = payload["skills"][0]["managed_files"]
+            self.assertEqual(
+                "100755",
+                next(
+                    item["mode"]
+                    for item in managed
+                    if item["path"].endswith("/SKILL.md")
+                ),
+            )
+
+    def test_dry_run_rejects_dirty_tracked_executable_mode(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory(dir="/private/tmp") as tmpdir:
+            root = Path(tmpdir)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            skill_dir = self.write_skill(
+                root,
+                "---\nname: sample-skill\ndescription: Sample\n---",
+            )
+            skill_md = skill_dir / "SKILL.md"
+            skill_md.chmod(0o644)
+            subprocess.run(
+                ["git", "-C", str(root), "add", "skills"],
+                check=True,
+            )
+            skill_md.chmod(0o755)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "dirty executable-mode changes",
+            ):
+                module.prepare_ingest(
+                    skill_dir,
+                    "in-house",
+                    "",
+                    repo_root=root,
+                )
+
+            self.assertEqual(
+                0o755,
+                stat.S_IMODE(skill_md.stat().st_mode),
+            )
+
+    def test_ingest_fingerprint_changes_on_mode_only_mutation(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+            root = Path(tmpdir)
+            skill_dir = self.write_skill(
+                root,
+                "---\nname: sample-skill\ndescription: Sample\n---",
+            )
+            mapping = root / "docs" / "sources" / "external.skills.json"
+            before = module.capture_ingest_fingerprint(
+                skill_dir=skill_dir,
+                mapping_path=mapping,
+                repo_root=root,
+            )
+            (skill_dir / "SKILL.md").chmod(0o755)
+            after = module.capture_ingest_fingerprint(
+                skill_dir=skill_dir,
+                mapping_path=mapping,
+                repo_root=root,
+            )
+            self.assertNotEqual(before, after)
 
     def test_in_house_ingest_does_not_require_license(self):
         module = load_module()
@@ -365,8 +437,16 @@ class IngestSkillTests(unittest.TestCase):
 
             def tree(self, _repo, _commit):
                 return {
-                    "upstream/SKILL.md": {"type": "blob", "sha": "skill-blob"},
-                    "upstream/data.bin": {"type": "blob", "sha": "data-blob"},
+                    "upstream/SKILL.md": {
+                        "type": "blob",
+                        "mode": "100644",
+                        "sha": "skill-blob",
+                    },
+                    "upstream/data.bin": {
+                        "type": "blob",
+                        "mode": "100644",
+                        "sha": "data-blob",
+                    },
                 }
 
             def blob(self, _repo, blob_sha):
@@ -431,6 +511,98 @@ class IngestSkillTests(unittest.TestCase):
                 ],
                 [artifact["target"] for artifact in local],
             )
+
+    def test_github_artifact_classification_requires_exact_regular_git_mode(self):
+        module = load_module()
+        cases = (
+            ("skill-644-vs-755", "skill", 0o644, "100755"),
+            ("skill-755-vs-644", "skill", 0o755, "100644"),
+            ("sidecar-644-vs-755", "sidecar", 0o644, "100755"),
+            ("sidecar-755-vs-644", "sidecar", 0o755, "100644"),
+            ("skill-symlink-mode", "skill", 0o644, "120000"),
+            ("sidecar-symlink-mode", "sidecar", 0o644, "120000"),
+        )
+
+        for label, mismatched_target, local_mode, upstream_mode in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+                    root = Path(tmpdir)
+                    skill_dir = self.write_skill(
+                        root,
+                        "---\nname: sample-skill\ndescription: Sample\n---",
+                    )
+                    skill_path = skill_dir / "SKILL.md"
+                    sidecar_path = skill_dir / "data.bin"
+                    sidecar_path.write_bytes(b"\x00\x01")
+                    skill_path.chmod(
+                        local_mode if mismatched_target == "skill" else 0o644
+                    )
+                    sidecar_path.chmod(
+                        local_mode if mismatched_target == "sidecar" else 0o644
+                    )
+                    skill_bytes = skill_path.read_bytes()
+                    tree = {
+                        "upstream/SKILL.md": {
+                            "type": "blob",
+                            "mode": (
+                                upstream_mode
+                                if mismatched_target == "skill"
+                                else "100644"
+                            ),
+                            "sha": "skill-blob",
+                        },
+                        "upstream/data.bin": {
+                            "type": "blob",
+                            "mode": (
+                                upstream_mode
+                                if mismatched_target == "sidecar"
+                                else "100644"
+                            ),
+                            "sha": "data-blob",
+                        },
+                    }
+
+                    class FakeProvider:
+                        def __init__(self, _token):
+                            pass
+
+                        def tree(self, _repo, _commit):
+                            return tree
+
+                        def blob(self, _repo, blob_sha):
+                            return {
+                                "skill-blob": skill_bytes,
+                                "data-blob": b"\x00\x01",
+                            }[blob_sha]
+
+                    fake_module = types.SimpleNamespace(
+                        GitHubArtifactProvider=FakeProvider,
+                        GitHubProviderError=RuntimeError,
+                    )
+                    with mock.patch.dict(
+                        sys.modules,
+                        {"github_artifact_provider": fake_module},
+                    ):
+                        with self.assertRaisesRegex(
+                            ValueError,
+                            "regular Git blob|mode does not match",
+                        ):
+                            module.classify_github_artifacts(
+                                skill_dir=skill_dir,
+                                repo_root=root,
+                                repo="owner/repo",
+                                resolved_commit="a" * 40,
+                                upstream_skill_path="upstream/SKILL.md",
+                                artifact_maps=[
+                                    (
+                                        "upstream/data.bin",
+                                        (
+                                            "skills/developer-engineering/"
+                                            "sample-skill/data.bin"
+                                        ),
+                                    )
+                                ],
+                            )
 
     def test_commit_license_overrides_default_branch_and_must_match_frontmatter(self):
         module = load_module()
@@ -870,6 +1042,116 @@ class IngestSkillTests(unittest.TestCase):
             )
             self.assertEqual(b"before", target.read_bytes())
 
+    def test_staged_mode_only_mutation_is_materialized_and_applied(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+            root = Path(tmpdir)
+            (root / "docs" / "sources").mkdir(parents=True)
+            skill_dir = root / "skills" / "category" / "demo"
+            skill_dir.mkdir(parents=True)
+            target = skill_dir / "SKILL.md"
+            target.write_bytes(b"same bytes")
+            target.chmod(0o644)
+            checkpoint = module.capture_target_checkpoint(
+                target,
+                repo_root=root,
+            )
+            plan = module.IngestPlan(
+                skill_name="demo",
+                skill_md=target,
+                before_skill=b"same bytes",
+                after_skill=b"same bytes",
+                repo_root=root,
+                before_checkpoint=checkpoint,
+            )
+
+            def chmod_in_stage(_dry_run, *, repo_root):
+                staged_target = (
+                    repo_root / "skills" / "category" / "demo" / "SKILL.md"
+                )
+                staged_target.chmod(0o755)
+                return True
+
+            with mock.patch.object(
+                module,
+                "run_pipeline",
+                side_effect=chmod_in_stage,
+            ):
+                validated = module.validate_ingest_plans(
+                    [plan],
+                    repo_root=root,
+                )
+
+            self.assertIsNotNone(validated)
+            mutations, _baseline, _checkpoints, _tracked_reports = validated
+            mutation = next(
+                item for item in mutations if item.skill_md == target
+            )
+            self.assertEqual(b"same bytes", mutation.before_skill)
+            self.assertEqual(b"same bytes", mutation.after_skill)
+            self.assertEqual(0o755, mutation.after_mode)
+            self.assertEqual(0o644, stat.S_IMODE(target.stat().st_mode))
+
+            module.commit_ingest_plans(mutations, locks_held=True)
+            self.assertEqual(b"same bytes", target.read_bytes())
+            self.assertEqual(0o755, stat.S_IMODE(target.stat().st_mode))
+
+    def test_failed_mode_only_batch_restores_original_mode(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+            root = Path(tmpdir)
+            first = root / "first.txt"
+            second = root / "second.txt"
+            first.write_bytes(b"same")
+            second.write_bytes(b"before")
+            first.chmod(0o644)
+            plans = [
+                module.IngestPlan(
+                    skill_name="first",
+                    skill_md=first,
+                    before_skill=b"same",
+                    after_skill=b"same",
+                    after_mode=0o755,
+                    repo_root=root,
+                    before_checkpoint=module.capture_target_checkpoint(
+                        first,
+                        repo_root=root,
+                    ),
+                ),
+                module.IngestPlan(
+                    skill_name="second",
+                    skill_md=second,
+                    before_skill=b"before",
+                    after_skill=b"after",
+                    repo_root=root,
+                    before_checkpoint=module.capture_target_checkpoint(
+                        second,
+                        repo_root=root,
+                    ),
+                ),
+            ]
+            real_write = module._write_atomic_bytes
+            calls = 0
+
+            def fail_second(path, content, **kwargs):
+                nonlocal calls
+                calls += 1
+                if calls == 2:
+                    raise OSError("second target failed")
+                return real_write(path, content, **kwargs)
+
+            with mock.patch.object(
+                module,
+                "_write_atomic_bytes",
+                side_effect=fail_second,
+            ):
+                with self.assertRaisesRegex(OSError, "second target failed"):
+                    module.commit_ingest_plans(plans, locks_held=True)
+
+            self.assertEqual(b"same", first.read_bytes())
+            self.assertEqual(0o644, stat.S_IMODE(first.stat().st_mode))
+            self.assertEqual(b"before", second.read_bytes())
+
     def test_noop_validation_ignores_generated_reports_but_copies_them(self):
         module = load_module()
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
@@ -1136,6 +1418,35 @@ class IngestSkillTests(unittest.TestCase):
 
             self.assertEqual(b"first-before", first.read_bytes())
             self.assertEqual(b"second-before", second.read_bytes())
+
+    def test_mode_race_is_rejected_before_first_write(self):
+        module = load_module()
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+            root = Path(tmpdir)
+            target = root / "target.txt"
+            target.write_bytes(b"before")
+            target.chmod(0o644)
+            plan = module.IngestPlan(
+                skill_name="target",
+                skill_md=target,
+                before_skill=b"before",
+                after_skill=b"after",
+                repo_root=root,
+                before_checkpoint=module.capture_target_checkpoint(
+                    target,
+                    repo_root=root,
+                ),
+            )
+            target.chmod(0o755)
+
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "changed after staging",
+            ):
+                module.commit_ingest_plans([plan], locks_held=True)
+
+            self.assertEqual(b"before", target.read_bytes())
+            self.assertEqual(0o755, stat.S_IMODE(target.stat().st_mode))
 
     def test_atomic_commit_securely_creates_missing_target_parents(self):
         module = load_module()

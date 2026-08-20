@@ -125,6 +125,11 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             schema["$defs"]["managedFile"]["properties"]["sha256"]["$ref"],
         )
         self.assertEqual(
+            ["100644", "100755"],
+            schema["$defs"]["managedFile"]["properties"]["mode"]["enum"],
+        )
+        self.assertIn("mode", schema["$defs"]["managedFile"]["required"])
+        self.assertEqual(
             "#/$defs/sha256",
             schema["$defs"]["composition"]["properties"]["dependency_lock"][
                 "additionalProperties"
@@ -191,6 +196,7 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
                         "path": rel,
                         "sha256": provenance.sha256_file(root / rel),
                         "owner": "example",
+                        "mode": "100644",
                     }
                 ],
                 entry["managed_files"],
@@ -525,6 +531,7 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
                     "path": rel,
                     "sha256": provenance.sha256_file(root / rel),
                     "owner": "example",
+                    "mode": "100644",
                 },
                 migrated["skills"][0]["managed_files"][0],
             )
@@ -785,6 +792,7 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                     "path": sidecar,
                     "sha256": provenance.sha256_file(root / sidecar),
                     "owner": "example",
+                    "mode": "100644",
                 }
             )
             skill_path = root / entry["repo_skill"]
@@ -1120,6 +1128,36 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                 any("owner must match normalized_slug" in error for error in errors)
             )
 
+    def test_managed_file_mode_must_match_repository_executable_bit(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            mapping, data = self.make_migrated_mapping(root)
+            entry = data["skills"][0]
+            skill_path = root / entry["repo_skill"]
+
+            skill_path.chmod(0o755)
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any(
+                    "mode '100644' does not match repository mode '100755'"
+                    in error
+                    for error in errors
+                ),
+                errors,
+            )
+
+            entry["managed_files"][0]["mode"] = "100755"
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual([], validator.validate_mapping(mapping, root))
+
+            skill_path.chmod(0o4755)
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any("mode Git cannot represent" in error for error in errors),
+                errors,
+            )
+
     def test_directory_artifact_covers_only_explicit_managed_descendants(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
@@ -1142,6 +1180,7 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                     "path": guide,
                     "sha256": provenance.sha256_file(guide_path),
                     "owner": "example",
+                    "mode": "100644",
                 }
             )
             mapping.write_text(json.dumps(data), encoding="utf-8")
