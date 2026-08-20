@@ -9710,33 +9710,32 @@
       ]
     },
     {
-      "video_name": "gsd-graphify-brownfield-bootstrap",
-      "normalized_slug": "gsd-graphify-brownfield-bootstrap",
+      "video_name": "hermes-open-gsd-workflow",
+      "normalized_slug": "hermes-open-gsd-workflow",
       "status": "in_house",
-      "repo_skill": "skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap/SKILL.md",
+      "repo_skill": "skills/ai-agent-platform/hermes-open-gsd-workflow/SKILL.md",
       "source": "https://github.com/seaworld008/Commonly-used-high-value-skills",
       "notes": "In-house canonical skill (local repository source of truth).",
       "upstream": {
         "repo": "local-repo/in-house",
-        "path": "skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap",
+        "path": "skills/ai-agent-platform/hermes-open-gsd-workflow",
         "ref": "main",
         "last_checked_at": "2026-08-20",
-        "last_synced_at": "2026-04-16",
+        "last_synced_at": "2026-08-20",
         "last_synced_commit": null,
         "sync_mode": "local-only"
       },
       "kind": "composite",
-      "sync_mode": "local-only",
       "origins": [
         {
           "repo": "local-repo/in-house",
-          "path": "skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap",
-          "license": "MIT",
+          "path": "skills/ai-agent-platform/hermes-open-gsd-workflow",
+          "license": null,
           "sync_mode": "local-only",
           "artifacts": [
             {
-              "source": "skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap/SKILL.md",
-              "target": "skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap/SKILL.md",
+              "source": "skills/ai-agent-platform/hermes-open-gsd-workflow/SKILL.md",
+              "target": "skills/ai-agent-platform/hermes-open-gsd-workflow/SKILL.md",
               "type": "file"
             }
           ],
@@ -9745,17 +9744,18 @@
             "ref": "main",
             "resolved_commit": null,
             "path_commit": null,
-            "content_sha256": "3562c7b3f89c2b8cf8d91e2ca129e8d8a46a6b498c6c973433be2d0d6fe61704",
+            "content_sha256": "8fec7b1bac1c7d8a3bdbdfa66eca6b213abe324ad6e49569d88762c6aaf27a83",
             "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-04-16"
+            "last_synced_at": "2026-08-20"
           }
         }
       ],
+      "sync_mode": "local-only",
       "managed_files": [
         {
-          "path": "skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap/SKILL.md",
-          "owner": "gsd-graphify-brownfield-bootstrap",
-          "sha256": "3562c7b3f89c2b8cf8d91e2ca129e8d8a46a6b498c6c973433be2d0d6fe61704",
+          "path": "skills/ai-agent-platform/hermes-open-gsd-workflow/SKILL.md",
+          "owner": "hermes-open-gsd-workflow",
+          "sha256": "8fec7b1bac1c7d8a3bdbdfa66eca6b213abe324ad6e49569d88762c6aaf27a83",
           "mode": "100644"
         }
       ],
@@ -9771,625 +9771,18 @@
           },
           {
             "source_package": "open-gsd/gsd-core",
-            "role": "planning-runtime"
+            "role": "default-planning-runtime"
+          },
+          {
+            "source_package": "open-gsd/gsd-pi",
+            "role": "explicit-optional-planning-runtime"
           }
         ],
         "dependency_lock": {
           "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
           "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
-          "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
-        }
-      }
-    },
-    {
-      "video_name": "hermes-graphify-gsd-nonintrusive-workflow",
-      "normalized_slug": "hermes-graphify-gsd-nonintrusive-workflow",
-      "status": "in_house",
-      "repo_skill": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/SKILL.md",
-      "source": "https://github.com/seaworld008/Commonly-used-high-value-skills",
-      "notes": "In-house canonical skill (local repository source of truth).",
-      "upstream": {
-        "repo": "local-repo/in-house",
-        "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow",
-        "ref": "main",
-        "last_checked_at": "2026-08-20",
-        "last_synced_at": "2026-04-15",
-        "last_synced_commit": null,
-        "sync_mode": "local-only"
-      },
-      "kind": "composite",
-      "sync_mode": "local-only",
-      "origins": [
-        {
-          "repo": "local-repo/in-house",
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow",
-          "license": "MIT",
-          "sync_mode": "local-only",
-          "artifacts": [
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/SKILL.md",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/SKILL.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/ai-workflow-auto-continue-snippet.md",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/ai-workflow-auto-continue-snippet.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/auto-continue-best-practices.md",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/auto-continue-best-practices.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/first-install.md",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/first-install.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/upgrade-contract.md",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/upgrade-contract.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/ai-workflow.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/ai-workflow.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/bootstrap-toolchain.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/bootstrap-toolchain.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/graphify-wrapper.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/graphify-wrapper.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/gsd-sdk-wrapper.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/gsd-sdk-wrapper.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-checkpoint.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-checkpoint.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-config.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-config.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-learnings.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-learnings.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-mark-complete.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-mark-complete.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-notify.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-notify.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-resume-if-ready.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-resume-if-ready.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-status.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-status.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-summary.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-summary.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-complete-if-ready.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-complete-if-ready.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-init.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-init.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-status.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-status.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-sync-docs.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-sync-docs.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-update.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-update.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-trigger.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-trigger.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-graphify-strategy-hints.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-graphify-strategy-hints.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-next-state.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-next-state.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-phase-engine-status.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-phase-engine-status.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-sync-runtime-mirror.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-sync-runtime-mirror.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/husky-post-commit-auto-continue.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/husky-post-commit-auto-continue.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/husky-post-merge-auto-continue.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/husky-post-merge-auto-continue.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/install-hermes-auto-continue-cron.sh",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/install-hermes-auto-continue-cron.sh",
-              "type": "file"
-            }
-          ],
-          "tracking": {
-            "channel": "local",
-            "ref": "main",
-            "resolved_commit": null,
-            "path_commit": null,
-            "content_sha256": "f85a3954cc73bbfc759556e13aa84fe9676b5c8d98d5e0925c204340370d3a19",
-            "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-04-15"
-          }
-        }
-      ],
-      "managed_files": [
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/SKILL.md",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "f85a3954cc73bbfc759556e13aa84fe9676b5c8d98d5e0925c204340370d3a19",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/ai-workflow-auto-continue-snippet.md",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "fae899961d3dc08aec0847e99b14643f8d7a6f575883ff63d5f36ecce61a59ea",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/auto-continue-best-practices.md",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "7b7599991be1efd31975a52350800cf4a3d1803dc1a3b7c81b471490ae259339",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/first-install.md",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "76fccad901a6084f6e3b3318bd854ed14ad8754d6ac852e80eb0feae586d0fbf",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/references/upgrade-contract.md",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "770edc4b68511955ea5e2a379f1b0cd6e52b300b508d1167e023b75ad458698c",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/ai-workflow.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "104d847dc397eb45d667101c70aa454cf7d4e578a2dfbfa809c1887e8f399062",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/bootstrap-toolchain.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "421f548f5c5041a195a6d573fc9b92f02e11d552e27f76ba60bee7ba9155d1ae",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/graphify-wrapper.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "6285a37f0ffece8c6a76a356acb1a333f7b2901e2ea399f023c0f89af31eb29d",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/gsd-sdk-wrapper.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "dfa8a8d69f16a11735cfe69973e9ff3ad4586dd3654c8dc11e86b1ac58757d3c",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-checkpoint.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "151fcec2daa1056fb0869460158d6accd3a1ba33a586cd10217608d684be2f13",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-config.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "4df4672571eb4506c8650dfa82b53eb8f02cdda8bbd96e1bea23d401dc4ef292",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-learnings.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "f24a381d97c0bd82ff41f85d38b53f53b4dccee12dcb31bea20a4bbc9eb8fe23",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-mark-complete.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "bf5ecaf1722952460cc6b645f668faf608a2926af16462fa7c110d87deef8ad1",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-notify.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "090a4b6871dd5ff5a7a7f4b1d4c3c46bbc72079b0d1bc6106a0c9832abe9b8e7",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-resume-if-ready.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "63c43ce2492f599a0bdcc804868cb5cdb12a0f2d7949eb57bf002844587218fe",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-status.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "c7fa427eb4cc4cbfee092a63b56bda32c4964492e91c8d8549632002b9f0bea2",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-summary.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "c325877b746e847c64ba59fbfc31c0ebf5aa4a2594feb47f6d13929707b65a0e",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-complete-if-ready.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "b1607272e4dd77625add0cdb4e9ce1012bb476c2472dfd282a4320997656bb6f",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-init.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "910be512c17e6c1aeda2b5114d7cb7aa17b929a1bf82be8833d32c6bee448a11",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-status.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "ea380f67ea5cd7926ad8453e95c73bca413795a8c09a329b6cccb9b3ac62f1f2",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-sync-docs.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "fcccee7462f59eccfe4e130ce6b94590ca427541ae2c3959c26b1eadf81e2fb4",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-task-board-update.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "7abbca4807d2e19e9e5af89811918c1caa3d60f228030d5674ec844114ff6424",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-auto-continue-trigger.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "6e20d2e37d60038a4f08097d66fd45c720a0e5feceeaa4e32c0e0fc616e411de",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-graphify-strategy-hints.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "194bd62fb34378a3e1f4f13d9c9dacfdaa6ab0b651e2d29c33e135d336946fab",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-next-state.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "e97d47497af184384f89df5325483a81aa83103ed928b59f29a0025faade15b4",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-phase-engine-status.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "b49c5876cfb3ab42a1b04da6325b60a8c5a38e41c9a8b6e6e3a04ecb93ac9ba4",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/hermes-gsd-sync-runtime-mirror.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "a33d266184167f23b55fc6cd0e10b1c8e96d90d72b04226c5b7039298d124d50",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/husky-post-commit-auto-continue.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "e4ee447692f4f87b37aaa30a62c9890fc2164c321cbc38d3f02429c69e9d0ccb",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/husky-post-merge-auto-continue.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "88acbe23a1fc6fbf3360f142ea34970840ffca304bfd78fe818b20224a8a442f",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow/templates/install-hermes-auto-continue-cron.sh",
-          "owner": "hermes-graphify-gsd-nonintrusive-workflow",
-          "sha256": "a57c6a7f2c8596e8be367093954e9f21509be8468b2b0054784254fe9852ddfa",
-          "mode": "100644"
-        }
-      ],
-      "composition": {
-        "depends_on": [
-          {
-            "skill": "hermes-agent",
-            "role": "runtime"
-          },
-          {
-            "skill": "graphify",
-            "role": "code-graph"
-          },
-          {
-            "source_package": "open-gsd/gsd-core",
-            "role": "planning-runtime"
-          }
-        ],
-        "dependency_lock": {
-          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
-          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
-          "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
-        }
-      }
-    },
-    {
-      "video_name": "hermes-graphify-gsd-project-integration",
-      "normalized_slug": "hermes-graphify-gsd-project-integration",
-      "status": "in_house",
-      "repo_skill": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/SKILL.md",
-      "source": "https://github.com/seaworld008/Commonly-used-high-value-skills",
-      "notes": "In-house canonical skill (local repository source of truth).",
-      "upstream": {
-        "repo": "local-repo/in-house",
-        "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration",
-        "ref": "main",
-        "last_checked_at": "2026-08-20",
-        "last_synced_at": "2026-04-15",
-        "last_synced_commit": null,
-        "sync_mode": "local-only"
-      },
-      "kind": "composite",
-      "sync_mode": "local-only",
-      "origins": [
-        {
-          "repo": "local-repo/in-house",
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration",
-          "license": "MIT",
-          "sync_mode": "local-only",
-          "artifacts": [
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/SKILL.md",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/SKILL.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/references/first-install.md",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/references/first-install.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/references/integration-checklist.md",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/references/integration-checklist.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/agents-section.md",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/agents-section.md",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/ai-workflow.sh",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/ai-workflow.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/bootstrap-toolchain.sh",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/bootstrap-toolchain.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/graphify-sync.sh",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/graphify-sync.sh",
-              "type": "file"
-            },
-            {
-              "source": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/readme-section.md",
-              "target": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/readme-section.md",
-              "type": "file"
-            }
-          ],
-          "tracking": {
-            "channel": "local",
-            "ref": "main",
-            "resolved_commit": null,
-            "path_commit": null,
-            "content_sha256": "cfae8f9afec337fb13abb97000d23c1b9b558c0ab09a3fb1540728bbc1f21f6a",
-            "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-04-15"
-          }
-        }
-      ],
-      "managed_files": [
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/SKILL.md",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "cfae8f9afec337fb13abb97000d23c1b9b558c0ab09a3fb1540728bbc1f21f6a",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/references/first-install.md",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "e2578f8eba3de569025c26691c693276235a36d0cd9f03a42f6bcb07d0d481fb",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/references/integration-checklist.md",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "5f72a9b1bcb47401b7c8a35e52956b54dd18ac6609a89c12d9234567901cf063",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/agents-section.md",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "cebbc7743ba2b7f030f2b32a52dd41b156acae6bf12d7344fdf2f4fac01567b0",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/ai-workflow.sh",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "3f04964ce25835943f6b81d2e4bc85d897efc2ba9460ce6b359f449ad1746e99",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/bootstrap-toolchain.sh",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "f2b41452c96adc5f4e21170a561de6c5a33544f16f63440e437e53c5ed798e3a",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/graphify-sync.sh",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "d4d4ab91673534a67100350e53943d3da5a25f2a60200fea0f0ebbb0f94626ff",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration/templates/readme-section.md",
-          "owner": "hermes-graphify-gsd-project-integration",
-          "sha256": "8b4c2c9cc48d85771971f3d8900f3729188395a37ef1711df8b20a2dc4e1cc9e",
-          "mode": "100644"
-        }
-      ],
-      "composition": {
-        "depends_on": [
-          {
-            "skill": "hermes-agent",
-            "role": "runtime"
-          },
-          {
-            "skill": "graphify",
-            "role": "code-graph"
-          },
-          {
-            "source_package": "open-gsd/gsd-core",
-            "role": "planning-runtime"
-          }
-        ],
-        "dependency_lock": {
-          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
-          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
-          "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
-        }
-      }
-    },
-    {
-      "video_name": "hermes-graphify-gsd-runtime-operator",
-      "normalized_slug": "hermes-graphify-gsd-runtime-operator",
-      "status": "in_house",
-      "repo_skill": "skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator/SKILL.md",
-      "source": "https://github.com/seaworld008/Commonly-used-high-value-skills",
-      "notes": "In-house canonical skill (local repository source of truth).",
-      "upstream": {
-        "repo": "local-repo/in-house",
-        "path": "skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator",
-        "ref": "main",
-        "last_checked_at": "2026-08-20",
-        "last_synced_at": "2026-04-16",
-        "last_synced_commit": null,
-        "sync_mode": "local-only"
-      },
-      "kind": "composite",
-      "sync_mode": "local-only",
-      "origins": [
-        {
-          "repo": "local-repo/in-house",
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator",
-          "license": "MIT",
-          "sync_mode": "local-only",
-          "artifacts": [
-            {
-              "source": "skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator/SKILL.md",
-              "target": "skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator/SKILL.md",
-              "type": "file"
-            }
-          ],
-          "tracking": {
-            "channel": "local",
-            "ref": "main",
-            "resolved_commit": null,
-            "path_commit": null,
-            "content_sha256": "89de43d96332f8f7e47409d473c15486da3bb3efde4b7d5079b2c87aafa6fab1",
-            "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-04-16"
-          }
-        }
-      ],
-      "managed_files": [
-        {
-          "path": "skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator/SKILL.md",
-          "owner": "hermes-graphify-gsd-runtime-operator",
-          "sha256": "89de43d96332f8f7e47409d473c15486da3bb3efde4b7d5079b2c87aafa6fab1",
-          "mode": "100644"
-        }
-      ],
-      "composition": {
-        "depends_on": [
-          {
-            "skill": "hermes-agent",
-            "role": "runtime"
-          },
-          {
-            "skill": "graphify",
-            "role": "code-graph"
-          },
-          {
-            "source_package": "open-gsd/gsd-core",
-            "role": "planning-runtime"
-          }
-        ],
-        "dependency_lock": {
-          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
-          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
-          "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
+          "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d",
+          "open-gsd/gsd-pi": "16165f4b80211b9e3aa3801e68e04de2f5599ab9a0c247307b1712aa5a9b5df5"
         }
       }
     },
@@ -14051,6 +13444,68 @@
           "mode": "100644"
         }
       ]
+    },
+    {
+      "video_name": "open-gsd-core-migration",
+      "normalized_slug": "open-gsd-core-migration",
+      "status": "in_house",
+      "repo_skill": "skills/engineering-workflow-automation/open-gsd-core-migration/SKILL.md",
+      "source": "https://github.com/seaworld008/Commonly-used-high-value-skills",
+      "notes": "In-house canonical skill (local repository source of truth).",
+      "upstream": {
+        "repo": "local-repo/in-house",
+        "path": "skills/engineering-workflow-automation/open-gsd-core-migration",
+        "ref": "main",
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
+        "last_synced_commit": null,
+        "sync_mode": "local-only"
+      },
+      "kind": "composite",
+      "origins": [
+        {
+          "repo": "local-repo/in-house",
+          "path": "skills/engineering-workflow-automation/open-gsd-core-migration",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/engineering-workflow-automation/open-gsd-core-migration/SKILL.md",
+              "target": "skills/engineering-workflow-automation/open-gsd-core-migration/SKILL.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "main",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": "c0592e652eccb877553f4cb9abebf1eff92fbd2b0e2b12dd794107d7a6b7a182",
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "sync_mode": "local-only",
+      "managed_files": [
+        {
+          "path": "skills/engineering-workflow-automation/open-gsd-core-migration/SKILL.md",
+          "owner": "open-gsd-core-migration",
+          "sha256": "c0592e652eccb877553f4cb9abebf1eff92fbd2b0e2b12dd794107d7a6b7a182",
+          "mode": "100644"
+        }
+      ],
+      "composition": {
+        "depends_on": [
+          {
+            "source_package": "open-gsd/gsd-core",
+            "role": "migration-target"
+          }
+        ],
+        "dependency_lock": {
+          "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
+        }
+      }
     },
     {
       "video_name": "openai-docs",
@@ -22841,6 +22296,13 @@
       "target": "skills/*/*/SKILL.md",
       "result": "success",
       "evidence": "Merged provenance for 134 local skills"
+    },
+    {
+      "date": "2026-08-20",
+      "method": "local-scan",
+      "target": "skills/*/*/SKILL.md",
+      "result": "success",
+      "evidence": "Merged provenance for 132 local skills"
     }
   ],
   "schema_version": 2

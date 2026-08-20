@@ -155,9 +155,8 @@ python3 scripts/sync_codex_skills.py \
 
 - `skills/ai-agent-platform/hermes-agent`
 - `skills/ai-agent-platform/native-mcp`
-- `skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow`
-- `skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator`
-- `skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration`
+- `skills/ai-agent-platform/hermes-open-gsd-workflow`
+- `skills/engineering-workflow-automation/open-gsd-core-migration`
 
 ### 推荐起步方式
 
@@ -175,7 +174,7 @@ python3 scripts/sync_codex_skills.py \
 
 - `skills/ai-agent-platform/hermes-agent`
 - `skills/ai-agent-platform/native-mcp`
-- `skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow`
+- `skills/ai-agent-platform/hermes-open-gsd-workflow`
 
 ---
 
@@ -217,7 +216,7 @@ openclaw skills check
 
 - `openclaw-skills/codebase-onboarding`
 - `openclaw-skills/skill-vetter`
-- `openclaw-skills/hermes-graphify-gsd-runtime-operator`
+- `openclaw-skills/hermes-open-gsd-workflow`
 - `openclaw-skills/nlpm-audit`
 
 ---
@@ -262,6 +261,7 @@ python3 scripts/export_openclaw_skills.py
 - 想快速开始：看根目录 `README.md` / `README.en.md`
 - 想按客户端接入：看本文件
 - 想看治理与维护：看 `docs/repo-maintenance-runbook.md`
-- 想看 Hermes 自动开发工作流：看
-  - `skills/ai-agent-platform/README.md`
-  - `skills/engineering-workflow-automation/README.md`
+- 想做 Hermes / Graphify / Open GSD 能力选择：看
+  - `skills/ai-agent-platform/hermes-open-gsd-workflow/SKILL.md`
+  - `skills/engineering-workflow-automation/open-gsd-core-migration/SKILL.md`
+- 想确认受管 bundle 的当前版本、摘要和安装策略：看 `docs/sources/open-gsd-*.bundle.json`
