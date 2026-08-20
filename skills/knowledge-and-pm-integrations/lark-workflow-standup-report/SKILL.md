@@ -1,22 +1,21 @@
 ---
 name: lark-workflow-standup-report
-description: '日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的安排。'
+description: "日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的安排。"
 zh_description: "日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与。"
-version: "1.0.2"
+version: "1.0.3"
 author: larksuite
 source: "github:larksuite/cli"
 source_url: "https://github.com/larksuite/cli/tree/main/skills/lark-workflow-standup-report"
 license: MIT
 tags: '[feishu, lark, lark-cli, standup, reporting]'
 created_at: "2026-05-19"
-updated_at: "2026-05-28"
+updated_at: "2026-08-20"
 quality: 4
 complexity: intermediate
 metadata:
   requires:
     bins: ["lark-cli"]
 ---
-
 # 日程待办摘要工作流
 
 **CRITICAL — 开始前 MUST 先用 Read 工具读取 [`../lark-shared/SKILL.md`](../lark-shared/SKILL.md)，其中包含认证、权限处理**
@@ -155,4 +154,6 @@ source is intentionally concise.
   unavailable.
 - Stop and ask for clarification when the next action could overwrite user work,
   expose private data, or change production state.
+- Treat skill selection as routing, not ceremony: invoke only the narrowest
+  applicable workflow and keep user or repository instructions authoritative.
 <!-- LOCAL-QUALITY-SUPPLEMENT:END -->
