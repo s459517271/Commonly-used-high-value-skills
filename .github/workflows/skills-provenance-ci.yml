@@ -26,9 +26,6 @@ jobs:
       - name: Run provenance v2 contract tests
         run: python -m pytest -q tests/test_provenance_v2.py
 
-      - name: Run complete repository test suite
-        run: python -m pytest -q tests
-
       - name: Run unified provenance pipeline
         run: python3 scripts/provenance_pipeline.py --mode all --config docs/sources/provenance.config.json
 

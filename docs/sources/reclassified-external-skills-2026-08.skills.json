@@ -69,6 +69,13 @@
     },
     {
       "date": "2026-08-20",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/Xquik-dev/x-twitter-scraper/compare/2b4b169d6beaebc9e41526bc6f895df149ac8e7a...0aa909b40f341b28d8b58766e251e44e080df998",
+      "result": "no-local-change-needed",
+      "evidence": "The single upstream commit rewrites public copy without changing the API surface, safety contract, approval gates, compatibility, or version. Retained the more explicit curated operating guidance and advanced the reviewed checkpoint."
+    },
+    {
+      "date": "2026-08-20",
       "method": "license-lineage-review",
       "target": "https://github.com/sickn33/agentic-awesome-skills/tree/e2b6ad15c704e47819b0e2393d04b42a9dcf4fc5",
       "result": "licensed-snapshot",
@@ -3108,9 +3115,9 @@
         "ref": "master",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
+        "last_synced_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
         "sync_mode": "monitor",
-        "path_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a"
+        "path_commit": "0aa909b40f341b28d8b58766e251e44e080df998"
       },
       "kind": "mirror",
       "sync_mode": "monitor",
@@ -3129,8 +3136,8 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "master",
-            "resolved_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
-            "path_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
+            "resolved_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
+            "path_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
             "content_sha256": "1f905b2c0bca9ab80e0fffdfc8b36fe4f335e9ffcc1586d06fe03759bdc8699a",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
@@ -3139,7 +3146,7 @@
               "blob_sha": "3a5f93c8e882f8f115758ad4e7fa4e91d1c787b2",
               "content_sha256": "591a93ca295f08caf49f4417eef0a085bb64d4b208ba8f186e0f0f027aebd4b5",
               "spdx": "MIT",
-              "resolved_commit": "2b4b169d6beaebc9e41526bc6f895df149ac8e7a",
+              "resolved_commit": "0aa909b40f341b28d8b58766e251e44e080df998",
               "api_spdx": "MIT"
             }
           }

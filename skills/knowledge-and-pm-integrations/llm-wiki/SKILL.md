@@ -12,14 +12,12 @@ created_at: "2026-04-13"
 updated_at: "2026-08-10"
 quality: 4
 complexity: "intermediate"
+platforms: '[linux, macos, windows]'
 metadata:
-hermes:
-category: research
-related_skills: '[obsidian, arxiv, agentic-research-ideas]'
-config:
-- key: wiki.path
-default: "~/wiki"
-prompt: Wiki directory path
+  hermes:
+    tags: [wiki, knowledge-base, research, notes, markdown, rag-alternative]
+    category: research
+    related_skills: [obsidian, arxiv]
 ---
 
 # Karpathy's LLM Wiki

@@ -6,7 +6,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MAPPING_PATH = REPO_ROOT / "docs/sources/larksuite-cli-2026-05.skills.json"
-RELEASE_COMMIT = "755daa4de3ea12785c43a15244ffb8f012122c13"
+REVIEWED_COMMIT = "ca35f6061616d4f47681368bbbef03be28193dc9"
+PREVIOUS_REVIEWED_COMMIT = "755daa4de3ea12785c43a15244ffb8f012122c13"
 EXPECTED_COUNTS = {
     "lark-approval": 17,
     "lark-attendance": 1,
@@ -58,7 +59,7 @@ EXPECTED_PATH_COMMITS = {
     "lark-vc-agent": "841953496b41a06bb670396f3d9f8fba943766ed",
     "lark-whiteboard": "27ab8fbea3e6f2b07e93a26bc635e0e52023d7a0",
     "lark-wiki": "6e2cad7221755d3668b350f186b862d64e0cba97",
-    "lark-workflow-meeting-summary": RELEASE_COMMIT,
+    "lark-workflow-meeting-summary": PREVIOUS_REVIEWED_COMMIT,
     "lark-workflow-standup-report": "049ddf771b435e86a4f5a71e616336ec44341160",
 }
 LOCAL_OVERLAYS = {
@@ -161,7 +162,9 @@ def test_lark_complete_directory_mirrors_are_exact_and_owned() -> None:
             ]
         assert origin["tracking"]["channel"] == "default_branch"
         assert origin["tracking"]["ref"] == "main"
-        assert origin["tracking"]["resolved_commit"] == RELEASE_COMMIT
+        assert entry["upstream"]["last_synced_commit"] == REVIEWED_COMMIT
+        assert entry["upstream"]["path_commit"] == EXPECTED_PATH_COMMITS[slug]
+        assert origin["tracking"]["resolved_commit"] == REVIEWED_COMMIT
         assert origin["tracking"]["path_commit"] == EXPECTED_PATH_COMMITS[slug]
 
         actual = {
@@ -188,7 +191,7 @@ def test_lark_license_lineage_is_locked_to_reviewed_commit() -> None:
             "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee"
         ),
         "spdx": "MIT",
-        "resolved_commit": RELEASE_COMMIT,
+        "resolved_commit": REVIEWED_COMMIT,
         "api_spdx": "MIT",
     }
     for entry in mapping["skills"]:
@@ -210,6 +213,13 @@ def test_lark_whitespace_adaptations_are_scoped_and_clean() -> None:
 
     mapping = json.loads(MAPPING_PATH.read_text(encoding="utf-8"))
     attempts = mapping["verification_attempts"]
-    assert len(attempts) == 1
-    assert attempts[0]["target"] == f"larksuite/cli@{RELEASE_COMMIT}"
+    assert len(attempts) == 2
+    assert attempts[0]["target"] == (
+        f"larksuite/cli@{PREVIOUS_REVIEWED_COMMIT}"
+    )
     assert "whitespace-only" in attempts[0]["evidence"]
+    assert attempts[1]["target"] == (
+        "larksuite/cli@"
+        f"{PREVIOUS_REVIEWED_COMMIT}..{REVIEWED_COMMIT}"
+    )
+    assert "outside the 25 declared artifact sets" in attempts[1]["evidence"]

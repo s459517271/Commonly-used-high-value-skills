@@ -9779,7 +9779,7 @@
           }
         ],
         "dependency_lock": {
-          "hermes-agent": "567e5b24ddd1642dae78b6d64c65a1f89864c84f02806db2357faef8a03594cc",
+          "hermes-agent": "25980723b3411619873f4afc1a016297c46fa7c72e5a00186eb18c641a07f3d1",
           "graphify": "565a103f9c5848004139c51ecfc5676f36629bd828d1f9f610136c5a46fdcd36",
           "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d",
           "open-gsd/gsd-pi": "16165f4b80211b9e3aa3801e68e04de2f5599ab9a0c247307b1712aa5a9b5df5"

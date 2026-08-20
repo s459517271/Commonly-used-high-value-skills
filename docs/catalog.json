@@ -250,7 +250,7 @@
     {
       "name": "mcporter",
       "category": "ai-agent-platform",
-      "description": "Use when users need to operate MCP servers or tools with the mcporter CLI: list servers, configure auth, call HTTP/stdio tools, edit config, or generate CLI/type bindings.",
+      "description": "List, auth, and call MCP servers/tools from the terminal.",
       "version": "1.0.1",
       "author": "community",
       "source": "github:NousResearch/hermes-agent",
@@ -266,7 +266,7 @@
       "complexity": "intermediate",
       "created_at": "2026-04-13",
       "updated_at": "2026-06-29",
-      "line_count": 129,
+      "line_count": 131,
       "path": "skills/ai-agent-platform/mcporter/SKILL.md"
     },
     {
@@ -1638,7 +1638,7 @@
     {
       "name": "codebase-inspection",
       "category": "developer-engineering",
-      "description": "Inspect and analyze codebases using pygount for LOC counting, language breakdown, and code-vs-comment ratios. Use when asked to check lines of code, repo size, language composition, or codebase stats.",
+      "description": "Inspect codebases w/ pygount: LOC, languages, ratios.",
       "version": "1.0.0",
       "author": "Hermes Agent",
       "source": "github:NousResearch/hermes-agent",
@@ -1655,7 +1655,7 @@
       "complexity": "intermediate",
       "created_at": "2026-04-13",
       "updated_at": "2026-06-29",
-      "line_count": 122,
+      "line_count": 124,
       "path": "skills/developer-engineering/codebase-inspection/SKILL.md"
     },
     {
@@ -3704,7 +3704,7 @@
       "complexity": "intermediate",
       "created_at": "2026-04-13",
       "updated_at": "2026-08-17",
-      "line_count": 288,
+      "line_count": 290,
       "path": "skills/knowledge-and-pm-integrations/arxiv/SKILL.md"
     },
     {
@@ -4319,7 +4319,7 @@
       "complexity": "intermediate",
       "created_at": "2026-04-13",
       "updated_at": "2026-08-10",
-      "line_count": 543,
+      "line_count": 541,
       "path": "skills/knowledge-and-pm-integrations/llm-wiki/SKILL.md"
     },
     {
@@ -4424,21 +4424,22 @@
     {
       "name": "obsidian",
       "category": "knowledge-and-pm-integrations",
-      "description": "Use when users need to read, search, create, edit, organize, or cross-link notes in an Obsidian vault while preserving markdown structure and knowledge-base context.",
+      "description": "Read, search, create, and edit notes in the Obsidian vault.",
       "version": "1.0.3",
       "author": "seaworld008",
       "source": "github:NousResearch/hermes-agent",
       "source_url": "https://github.com/NousResearch/hermes-agent/blob/main/skills/note-taking/obsidian/SKILL.md",
       "tags": [
-        "obsidian",
-        "notes",
-        "knowledge-base"
+        "Obsidian",
+        "Notes",
+        "Markdown",
+        "Vault"
       ],
       "quality": 3,
       "complexity": "intermediate",
       "created_at": "2026-04-13",
       "updated_at": "2026-06-29",
-      "line_count": 97,
+      "line_count": 102,
       "path": "skills/knowledge-and-pm-integrations/obsidian/SKILL.md"
     },
     {
@@ -4881,7 +4882,7 @@
     {
       "name": "honcho",
       "category": "openclaw-memory-and-safety",
-      "description": "Configure and use Honcho memory with Hermes -- cross-session user modeling, multi-profile peer isolation, observation config, dialectic reasoning, session summaries, and context budget enforcement. Use when setting up Honcho, troubleshooting memory, managing profiles with Honcho peers, or tuning observation, recall, and dialectic settings.",
+      "description": "Configure and troubleshoot Honcho memory for Hermes.",
       "version": "1.0.2",
       "author": "Hermes Agent",
       "source": "github:NousResearch/hermes-agent",
@@ -4892,13 +4893,14 @@
         "Profiles",
         "Observation",
         "Dialectic",
-        "User-Modeling"
+        "User-Modeling",
+        "Session-Summary"
       ],
       "quality": 4,
       "complexity": "intermediate",
       "created_at": "2026-04-13",
       "updated_at": "2026-06-01",
-      "line_count": 437,
+      "line_count": 439,
       "path": "skills/openclaw-memory-and-safety/honcho/SKILL.md"
     },
     {

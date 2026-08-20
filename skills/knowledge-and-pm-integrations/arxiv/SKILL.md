@@ -12,9 +12,11 @@ created_at: "2026-04-13"
 updated_at: "2026-08-17"
 quality: 4
 complexity: "intermediate"
+platforms: '[linux, macos, windows]'
 metadata:
-hermes:
-related_skills: '[ocr-and-documents]'
+  hermes:
+    tags: [Research, Arxiv, Papers, Academic, Science, API]
+    related_skills: [ocr-and-documents]
 ---
 
 # arXiv Research

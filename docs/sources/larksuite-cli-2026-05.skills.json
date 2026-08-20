@@ -3,7 +3,7 @@
   "video": {
     "url": "https://github.com/larksuite/cli",
     "checked_at": "2026-08-20",
-    "note": "Official Lark/Feishu CLI AI Agent Skills complete-directory mirrors, manually reviewed and locked to commit 755daa4de3ea12785c43a15244ffb8f012122c13 while retaining default-branch monitor policy."
+    "note": "Official Lark/Feishu CLI AI Agent Skills complete-directory mirrors, manually reviewed through commit ca35f6061616d4f47681368bbbef03be28193dc9 while retaining default-branch monitor policy. The 755daa4..ca35f60 range changed only the unclaimed lark-apps skill and application runtime/tests, so the 25 declared artifact sets retain their existing path commits and content hashes."
   },
   "official_references": [
     {
@@ -24,14 +24,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-approval/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-approval",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-approval/SKILL.md",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "1efe2dfb3304a7cac2a70e4adecfb1dc888ebe06"
       },
@@ -128,7 +128,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "1efe2dfb3304a7cac2a70e4adecfb1dc888ebe06",
             "content_sha256": "281c950dc8dd2cf5d0d86b3e7e35c76687765f7c97a84a8a05018a5b3491f39a",
             "last_checked_at": "2026-08-20",
@@ -138,7 +138,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -277,14 +277,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-attendance/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-attendance",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-attendance",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "69ae326d01a9163ca22408c746e052003cf0af2c"
       },
@@ -306,7 +306,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "69ae326d01a9163ca22408c746e052003cf0af2c",
             "content_sha256": "73ec85309143ab38520b3c4cc2845e5012e3dac22c64f1491e3dd02b851801df",
             "last_checked_at": "2026-08-20",
@@ -316,7 +316,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -337,14 +337,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-base/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-base",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-base",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "9b231d98253710219e26b902f5683d3e7f32bc92"
       },
@@ -366,7 +366,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "9b231d98253710219e26b902f5683d3e7f32bc92",
             "content_sha256": "34ef06cb092eb80b8fb5e21b19c1febfa9e44f24b135d060d1719ebe42dacf2d",
             "last_checked_at": "2026-08-20",
@@ -376,7 +376,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -571,14 +571,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-calendar/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-calendar",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. The upstream SKILL trailing-space defect is normalized locally; main-artifact comparison is whitespace-insensitive.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. The upstream SKILL trailing-space defect is normalized locally; main-artifact comparison is whitespace-insensitive.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-calendar",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "b75632e78a78e0b32b762bba659efaf72c797d4e"
       },
@@ -600,7 +600,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "b75632e78a78e0b32b762bba659efaf72c797d4e",
             "content_sha256": "33f2418b38caf35930aad49d1c0eb65d8eeda66521658ccde444b4077104c83f",
             "last_checked_at": "2026-08-20",
@@ -610,7 +610,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -691,14 +691,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-contact/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-contact",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-contact",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "87be09ef5f227c7b63d5eba40649544b5bec0133"
       },
@@ -720,7 +720,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "87be09ef5f227c7b63d5eba40649544b5bec0133",
             "content_sha256": "21fc8955c73edb32bc0a055fcf9bf0ac905eddaa6ed97b66f15d8c47bd153e77",
             "last_checked_at": "2026-08-20",
@@ -730,7 +730,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -769,14 +769,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-doc/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-doc",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-doc",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "525a98270f80693bdaf3c0a6006e9f3f94820851"
       },
@@ -798,7 +798,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "525a98270f80693bdaf3c0a6006e9f3f94820851",
             "content_sha256": "ca8c3fecdd145bd624a5de0dfeaf4bc11a4d6fadb8b514dc9b4f08e451955f20",
             "last_checked_at": "2026-08-20",
@@ -808,7 +808,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -1087,14 +1087,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-drive/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-drive",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-drive",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "5028c2e6ffb9e2ed8e56fed688f1a1dd74e6b11a"
       },
@@ -1116,7 +1116,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "5028c2e6ffb9e2ed8e56fed688f1a1dd74e6b11a",
             "content_sha256": "28166781d1d31acf4c312af57c300eb5d823720211689e06e1d0d0ca18848175",
             "last_checked_at": "2026-08-20",
@@ -1126,7 +1126,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -1507,14 +1507,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-event/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-event",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-event",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "fcdef499bb23739b720c665d49875a9957c97d48"
       },
@@ -1536,7 +1536,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "fcdef499bb23739b720c665d49875a9957c97d48",
             "content_sha256": "3c22f5041c170e34f01f8b467fbb53a22553065a9aef451e50bc3e38e3a36178",
             "last_checked_at": "2026-08-20",
@@ -1546,7 +1546,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -1609,14 +1609,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-im/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-im",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-im",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "f98db395d8520e4a431ed714261ab899e562aa45"
       },
@@ -1638,7 +1638,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "f98db395d8520e4a431ed714261ab899e562aa45",
             "content_sha256": "f1f7f06445350a4914c700118fdcaecfaff2884adbab5f69920d4ef4436a2254",
             "last_checked_at": "2026-08-20",
@@ -1648,7 +1648,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -2017,14 +2017,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-mail/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-mail",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-mail/SKILL.md",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "2a1613484ad6cbf4057b044f5ee2138f34314bbb"
       },
@@ -2206,7 +2206,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "2a1613484ad6cbf4057b044f5ee2138f34314bbb",
             "content_sha256": "2462749edc82ae66c395eb89006c3a0bb984ed56de82fa9872938c41e605c257",
             "last_checked_at": "2026-08-20",
@@ -2216,7 +2216,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -2457,14 +2457,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-markdown/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-markdown",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-markdown",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "f98dbfe247c6ec172715ce578b67ac6fa22655db"
       },
@@ -2486,7 +2486,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "f98dbfe247c6ec172715ce578b67ac6fa22655db",
             "content_sha256": "828ba06754f953ffd1903ed4ff14252cc669345109acd4969801648986285d91",
             "last_checked_at": "2026-08-20",
@@ -2496,7 +2496,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -2547,14 +2547,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-minutes/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-minutes",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-minutes/SKILL.md",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a"
       },
@@ -2616,7 +2616,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
             "content_sha256": "1a716d7b5e0989016de34e27d864f0f6fa2cf9bbd3a3f6b7bd2c766654bd15ef",
             "last_checked_at": "2026-08-20",
@@ -2626,7 +2626,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -2723,14 +2723,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-okr/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-okr",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 3 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 3 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-okr/SKILL.md",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "409a3172da5d43c98bbb637557f3d10403febaf0"
       },
@@ -2827,7 +2827,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "409a3172da5d43c98bbb637557f3d10403febaf0",
             "content_sha256": "7da576aae1254015cee1b34e27004e8393b5a35c3ae79df8f82655c088febc16",
             "last_checked_at": "2026-08-20",
@@ -2837,7 +2837,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -2998,14 +2998,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-openapi-explorer/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-openapi-explorer",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-openapi-explorer",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "83dfb068ad8bb4052787d80ca415118a20849b85"
       },
@@ -3027,7 +3027,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "83dfb068ad8bb4052787d80ca415118a20849b85",
             "content_sha256": "0cd0ca30f2e7015173dab1e1442ef7c9c10b3f0b10ae2b51aaf42346a5323e49",
             "last_checked_at": "2026-08-20",
@@ -3037,7 +3037,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -3058,14 +3058,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-shared/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-shared",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-shared",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a"
       },
@@ -3087,7 +3087,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
             "content_sha256": "d36e236eb9687cf10d9ad86043605d27f0544e55a25bf6574d5e30dc77718ace",
             "last_checked_at": "2026-08-20",
@@ -3097,7 +3097,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -3154,14 +3154,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-sheets/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-sheets",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-sheets",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "be2a96f490b5356a004bafffcaa39daab6179d76"
       },
@@ -3183,7 +3183,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "be2a96f490b5356a004bafffcaa39daab6179d76",
             "content_sha256": "a68dd63e88644e869c2c46b0ef927f5fa6be9b7d0b4a79efc24da84f2ac7bd45",
             "last_checked_at": "2026-08-20",
@@ -3193,7 +3193,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -3370,14 +3370,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-skill-maker/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-skill-maker",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-skill-maker",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "83dfb068ad8bb4052787d80ca415118a20849b85"
       },
@@ -3399,7 +3399,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "83dfb068ad8bb4052787d80ca415118a20849b85",
             "content_sha256": "bb8f6015b6ea8fc0eb4dd29260db6b9839249b96680b8f1d7a07405c3e9e7bbb",
             "last_checked_at": "2026-08-20",
@@ -3409,7 +3409,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -3430,14 +3430,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-slides/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-slides",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 1 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-slides/SKILL.md",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "0c5530dc63b65b3fda86f667f5725b1a08f0c4dc"
       },
@@ -3699,7 +3699,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "0c5530dc63b65b3fda86f667f5725b1a08f0c4dc",
             "content_sha256": "719ecfe9023b22c8e2d645aaf797bf2696b49d8930b7a3bae8aa6e62b76a8e79",
             "last_checked_at": "2026-08-20",
@@ -3709,7 +3709,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4046,14 +4046,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-task/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-task",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-task",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "b9cced677a89fd42317b386daff41a9f62b473c3"
       },
@@ -4075,7 +4075,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "b9cced677a89fd42317b386daff41a9f62b473c3",
             "content_sha256": "ab6cc9266d789418c83ef2ee276db07be56981aea7f1a2df9e8f95fa70c903d1",
             "last_checked_at": "2026-08-20",
@@ -4085,7 +4085,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4208,14 +4208,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-vc/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-vc",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 2 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned. 2 upstream whitespace-only sidecar defect(s) are normalized by an explicit local curation overlay.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-vc/SKILL.md",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a"
       },
@@ -4262,7 +4262,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
             "content_sha256": "af4f6ea2c4d58460cbaf1ed6434374e3a41b5000a39eed31635eeba5f18a3cfe",
             "last_checked_at": "2026-08-20",
@@ -4272,7 +4272,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4362,14 +4362,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-vc-agent/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-vc-agent",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-vc-agent",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "841953496b41a06bb670396f3d9f8fba943766ed"
       },
@@ -4391,7 +4391,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "841953496b41a06bb670396f3d9f8fba943766ed",
             "content_sha256": "0eef29d2c76df4a2023f146e503fbc1ec3da7415a475ee55d332eace13fd08da",
             "last_checked_at": "2026-08-20",
@@ -4401,7 +4401,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4434,14 +4434,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-whiteboard/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-whiteboard",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-whiteboard",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "27ab8fbea3e6f2b07e93a26bc635e0e52023d7a0"
       },
@@ -4463,7 +4463,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "27ab8fbea3e6f2b07e93a26bc635e0e52023d7a0",
             "content_sha256": "ffc395206ae954d561e9a9ecce3430b3f8e353c0ead93866a088fc68d1edeedb",
             "last_checked_at": "2026-08-20",
@@ -4473,7 +4473,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4674,14 +4674,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-wiki/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-wiki",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-wiki",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "6e2cad7221755d3668b350f186b862d64e0cba97"
       },
@@ -4703,7 +4703,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "6e2cad7221755d3668b350f186b862d64e0cba97",
             "content_sha256": "647f13efc8ec8b60b4229a43526866878796e84d118fd4c96bdd74600f09fb88",
             "last_checked_at": "2026-08-20",
@@ -4713,7 +4713,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4812,14 +4812,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-workflow-meeting-summary",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-workflow-meeting-summary",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "755daa4de3ea12785c43a15244ffb8f012122c13"
       },
@@ -4841,7 +4841,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
             "content_sha256": "e474b08bd980c18cedc5d29179234df455fedc4974d96dc7f95679a4d0d99033",
             "last_checked_at": "2026-08-20",
@@ -4851,7 +4851,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4872,14 +4872,14 @@
       "status": "verified_in_repo",
       "repo_skill": "skills/knowledge-and-pm-integrations/lark-workflow-standup-report/SKILL.md",
       "source": "https://github.com/larksuite/cli/tree/main/skills/lark-workflow-standup-report",
-      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit 755daa4; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
+      "notes": "Reviewed complete-directory mirror of the official Lark CLI skill at commit ca35f60; historical upstream files removed by that tree had no local-only ownership and were safely pruned.",
       "upstream": {
         "repo": "larksuite/cli",
         "path": "skills/lark-workflow-standup-report",
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+        "last_synced_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
         "sync_mode": "monitor",
         "path_commit": "049ddf771b435e86a4f5a71e616336ec44341160"
       },
@@ -4901,7 +4901,7 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+            "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
             "path_commit": "049ddf771b435e86a4f5a71e616336ec44341160",
             "content_sha256": "40cd000097988878f3c4d5dcae5a4ff611fc8e9d208f151d0efed94c9caa7535",
             "last_checked_at": "2026-08-20",
@@ -4911,7 +4911,7 @@
               "blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968",
               "content_sha256": "c969fc7e3af68e6bf40b0d8dd9c3dcc377eb685a2139535b203b39fdcad739ee",
               "spdx": "MIT",
-              "resolved_commit": "755daa4de3ea12785c43a15244ffb8f012122c13",
+              "resolved_commit": "ca35f6061616d4f47681368bbbef03be28193dc9",
               "api_spdx": "MIT"
             }
           }
@@ -4934,6 +4934,13 @@
       "target": "larksuite/cli@755daa4de3ea12785c43a15244ffb8f012122c13",
       "result": "success",
       "evidence": "Reviewed 25 complete skill directories and 466 artifacts. Pruned only previously managed upstream files removed by the locked tree. Normalized ten upstream whitespace-only defects: nine sidecars are explicit local curation overlays, while the calendar SKILL remains the required external main artifact under whitespace-insensitive body comparison."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "default-branch-range-artifact-audit",
+      "target": "larksuite/cli@755daa4de3ea12785c43a15244ffb8f012122c13..ca35f6061616d4f47681368bbbef03be28193dc9",
+      "result": "success",
+      "evidence": "Reviewed the complete one-commit range. All six changed paths are outside the 25 declared artifact sets: four application runtime/test files plus skills/lark-apps/SKILL.md and skills/lark-apps/references/lark-apps-cache.md. The MIT license blob, 466 managed artifact hashes and modes, and ten scoped whitespace curation contracts remain unchanged; advanced only the reviewed repository and license checkpoints."
     }
   ]
 }

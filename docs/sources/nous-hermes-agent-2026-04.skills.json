@@ -31,7 +31,7 @@
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+        "last_synced_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
         "sync_mode": "monitor",
         "path_commit": "1c9433897c7b8a3b2754a84875e8f86d0a42991a"
       },
@@ -52,9 +52,9 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+            "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
             "path_commit": "1c9433897c7b8a3b2754a84875e8f86d0a42991a",
-            "content_sha256": "bcec6800ff1eeef9e5a0581f5cb8fbed92322e19b1b9b2a04f4b400006963f45",
+            "content_sha256": "67cf6265c59eb1bb31b778c85a9735afa4c1a7a3f4e7d6c894a5c84580b5a4e4",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -62,7 +62,7 @@
               "blob_sha": "75410e73319c72cd3e991a501c5455eb78f38375",
               "content_sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
               "spdx": "MIT",
-              "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+              "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
               "api_spdx": "MIT"
             }
           }
@@ -72,7 +72,7 @@
         {
           "path": "skills/knowledge-and-pm-integrations/llm-wiki/SKILL.md",
           "owner": "llm-wiki",
-          "sha256": "bcec6800ff1eeef9e5a0581f5cb8fbed92322e19b1b9b2a04f4b400006963f45",
+          "sha256": "67cf6265c59eb1bb31b778c85a9735afa4c1a7a3f4e7d6c894a5c84580b5a4e4",
           "mode": "100644"
         }
       ]
@@ -124,7 +124,7 @@
             "ref": "v2026.8.18",
             "resolved_commit": "e624e9fde561e1add9388384012b295fde669ade",
             "path_commit": "59b1c40cdfb5f62c863df4e7667c91f008c70cd2",
-            "content_sha256": "567e5b24ddd1642dae78b6d64c65a1f89864c84f02806db2357faef8a03594cc",
+            "content_sha256": "25980723b3411619873f4afc1a016297c46fa7c72e5a00186eb18c641a07f3d1",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -141,7 +141,7 @@
       "managed_files": [
         {
           "path": "skills/ai-agent-platform/hermes-agent/SKILL.md",
-          "sha256": "567e5b24ddd1642dae78b6d64c65a1f89864c84f02806db2357faef8a03594cc",
+          "sha256": "25980723b3411619873f4afc1a016297c46fa7c72e5a00186eb18c641a07f3d1",
           "owner": "hermes-agent",
           "mode": "100644"
         },
@@ -286,7 +286,7 @@
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+        "last_synced_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
         "sync_mode": "monitor",
         "path_commit": "b0ef72a8a0a20fb9dd85d1e74b85edabc0c80813"
       },
@@ -307,9 +307,9 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+            "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
             "path_commit": "b0ef72a8a0a20fb9dd85d1e74b85edabc0c80813",
-            "content_sha256": "cb265771e4538a9aaaa9575d48afc50ebc971b4c8345a75c1eb35f620bcff2af",
+            "content_sha256": "43e95dc0e4c847ade2bbddf4c934cecbe24777e439cdb2099c62914c1e0c9571",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -317,7 +317,7 @@
               "blob_sha": "75410e73319c72cd3e991a501c5455eb78f38375",
               "content_sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
               "spdx": "MIT",
-              "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+              "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
               "api_spdx": "MIT"
             }
           }
@@ -327,7 +327,7 @@
         {
           "path": "skills/openclaw-memory-and-safety/honcho/SKILL.md",
           "owner": "honcho",
-          "sha256": "cb265771e4538a9aaaa9575d48afc50ebc971b4c8345a75c1eb35f620bcff2af",
+          "sha256": "43e95dc0e4c847ade2bbddf4c934cecbe24777e439cdb2099c62914c1e0c9571",
           "mode": "100644"
         }
       ]
@@ -397,7 +397,7 @@
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+        "last_synced_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
         "sync_mode": "monitor",
         "path_commit": "98db898c0bd4df0b09a5830b6a18a069c771e67c"
       },
@@ -418,9 +418,9 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+            "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
             "path_commit": "98db898c0bd4df0b09a5830b6a18a069c771e67c",
-            "content_sha256": "fcc53e9961ad3f1fd6654f2d9fe51df1daded532a36f4292dee1564c149edf25",
+            "content_sha256": "5b2db9c2192ec9a2564e80ebc14a31e5d83ab7210ca4aacf16f451d075ac6bb2",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -428,7 +428,7 @@
               "blob_sha": "75410e73319c72cd3e991a501c5455eb78f38375",
               "content_sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
               "spdx": "MIT",
-              "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+              "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
               "api_spdx": "MIT"
             }
           }
@@ -438,7 +438,7 @@
         {
           "path": "skills/developer-engineering/codebase-inspection/SKILL.md",
           "owner": "codebase-inspection",
-          "sha256": "fcc53e9961ad3f1fd6654f2d9fe51df1daded532a36f4292dee1564c149edf25",
+          "sha256": "5b2db9c2192ec9a2564e80ebc14a31e5d83ab7210ca4aacf16f451d075ac6bb2",
           "mode": "100644"
         }
       ]
@@ -456,7 +456,7 @@
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+        "last_synced_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
         "sync_mode": "monitor",
         "path_commit": "4a2198bf5124f0c4d915cb958f141116ae8607f0"
       },
@@ -477,9 +477,9 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+            "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
             "path_commit": "4a2198bf5124f0c4d915cb958f141116ae8607f0",
-            "content_sha256": "ea98a5d429b4f36a5aebd9356df76010c967e2174d913b8ee6155135f1938f28",
+            "content_sha256": "da745088560e7f3fe41b1bfc29d0670113db2bc87b393492f42d5ff904c8e024",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -487,7 +487,7 @@
               "blob_sha": "75410e73319c72cd3e991a501c5455eb78f38375",
               "content_sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
               "spdx": "MIT",
-              "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+              "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
               "api_spdx": "MIT"
             }
           }
@@ -497,7 +497,7 @@
         {
           "path": "skills/knowledge-and-pm-integrations/arxiv/SKILL.md",
           "owner": "arxiv",
-          "sha256": "ea98a5d429b4f36a5aebd9356df76010c967e2174d913b8ee6155135f1938f28",
+          "sha256": "da745088560e7f3fe41b1bfc29d0670113db2bc87b393492f42d5ff904c8e024",
           "mode": "100644"
         }
       ]
@@ -515,7 +515,7 @@
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+        "last_synced_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
         "sync_mode": "monitor",
         "path_commit": "1c9433897c7b8a3b2754a84875e8f86d0a42991a"
       },
@@ -536,9 +536,9 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+            "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
             "path_commit": "1c9433897c7b8a3b2754a84875e8f86d0a42991a",
-            "content_sha256": "d646bc39a70a203346707fe62bfc1fa5c311d0fa257b7d17e7d3c03e9f41856b",
+            "content_sha256": "8f2a4772140658e7fc5c07012e1fc82dff064315783e206ba7faac55c3447582",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -546,7 +546,7 @@
               "blob_sha": "75410e73319c72cd3e991a501c5455eb78f38375",
               "content_sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
               "spdx": "MIT",
-              "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+              "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
               "api_spdx": "MIT"
             }
           }
@@ -556,7 +556,7 @@
         {
           "path": "skills/knowledge-and-pm-integrations/obsidian/SKILL.md",
           "owner": "obsidian",
-          "sha256": "d646bc39a70a203346707fe62bfc1fa5c311d0fa257b7d17e7d3c03e9f41856b",
+          "sha256": "8f2a4772140658e7fc5c07012e1fc82dff064315783e206ba7faac55c3447582",
           "mode": "100644"
         }
       ]
@@ -574,7 +574,7 @@
         "ref": "main",
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
-        "last_synced_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+        "last_synced_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
         "sync_mode": "monitor",
         "path_commit": "b0ef72a8a0a20fb9dd85d1e74b85edabc0c80813"
       },
@@ -595,9 +595,9 @@
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
-            "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+            "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
             "path_commit": "b0ef72a8a0a20fb9dd85d1e74b85edabc0c80813",
-            "content_sha256": "c0d87c766ab8e9f8621deda3b3fe13b78ece305b0a71c063dc42c4146cf42598",
+            "content_sha256": "c7d1697f01c6da2a464020a263fe5b13b7cc64436db1eba490a7319bcd5e1cc3",
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20",
             "license_checkpoint": {
@@ -605,7 +605,7 @@
               "blob_sha": "75410e73319c72cd3e991a501c5455eb78f38375",
               "content_sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
               "spdx": "MIT",
-              "resolved_commit": "fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+              "resolved_commit": "1647d030cf1002dd3728c2d6c7fd402c8cb12470",
               "api_spdx": "MIT"
             }
           }
@@ -615,7 +615,7 @@
         {
           "path": "skills/ai-agent-platform/mcporter/SKILL.md",
           "owner": "mcporter",
-          "sha256": "c0d87c766ab8e9f8621deda3b3fe13b78ece305b0a71c063dc42c4146cf42598",
+          "sha256": "c7d1697f01c6da2a464020a263fe5b13b7cc64436db1eba490a7319bcd5e1cc3",
           "mode": "100644"
         }
       ]
@@ -752,9 +752,16 @@
     {
       "date": "2026-08-20",
       "method": "commit-aware-manual-monitor-review",
-      "target": "https://github.com/NousResearch/hermes-agent/compare/3636f64540a3d80c8425f195f46e53e940956cba...fa2601c2f5df58dc33bde47ce1c9cb2f92a75011",
+      "target": "https://github.com/NousResearch/hermes-agent/compare/3636f64540a3d80c8425f195f46e53e940956cba...1647d030cf1002dd3728c2d6c7fd402c8cb12470",
       "result": "no-local-change-needed",
       "evidence": "Reviewed llm-wiki, honcho, codebase-inspection, arxiv, obsidian, and mcporter; their curated canonical bodies already equal the current default-branch artifacts. Hermes itself remains governed by the separately pinned stable release artifact set."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "path-scoped-monitor-review-and-frontmatter-recovery",
+      "target": "https://github.com/NousResearch/hermes-agent/compare/fa2601c2f5df58dc33bde47ce1c9cb2f92a75011...1647d030cf1002dd3728c2d6c7fd402c8cb12470",
+      "result": "success",
+      "evidence": "The six monitored skill paths had no commits in this range. Restored their authoritative structured metadata after a prior local enrichment pass had flattened YAML indentation, then advanced the reviewed repository checkpoint. Hermes remains pinned to v2026.8.18."
     }
   ]
 }
