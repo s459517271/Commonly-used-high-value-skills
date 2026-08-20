@@ -100,6 +100,8 @@ Revision range / 变更范围：`v1.2.0..HEAD`
   Managed cleanup deletes only owned, unchanged files; modified or unowned files are archived before leaving active discovery paths.
 - 许可证审计升级为 lineage-aware 门禁，外部 artifact set 的许可证 checkpoint 与不可变 commit 一并记录。
   License auditing is now lineage-aware and records external artifact-set license checkpoints at immutable commits.
+- 故意脆弱的依赖审计教学样本改用非 manifest 扩展名，避免 Dependabot 将测试夹具误判为仓库运行依赖。
+  Intentionally vulnerable dependency-auditor fixtures now use non-manifest file names so Dependabot does not treat teaching samples as repository runtime dependencies.
 
 ### Compatibility and migration / 兼容与迁移
 

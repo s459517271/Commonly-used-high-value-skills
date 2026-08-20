@@ -1,3 +1,4 @@
+# Intentionally vulnerable teaching fixture; copy to requirements.txt only in an isolated test directory.
 # Core web framework
 Django==4.1.7
 djangorestframework==3.14.0

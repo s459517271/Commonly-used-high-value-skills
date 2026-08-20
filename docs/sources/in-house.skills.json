@@ -6866,8 +6866,8 @@
               "type": "file"
             },
             {
-              "source": "skills/developer-engineering/dependency-auditor/assets/sample_requirements.txt",
-              "target": "skills/developer-engineering/dependency-auditor/assets/sample_requirements.txt",
+              "source": "skills/developer-engineering/dependency-auditor/assets/sample_requirements.fixture",
+              "target": "skills/developer-engineering/dependency-auditor/assets/sample_requirements.fixture",
               "type": "file"
             },
             {
@@ -6921,8 +6921,8 @@
               "type": "file"
             },
             {
-              "source": "skills/developer-engineering/dependency-auditor/test-project/package.json",
-              "target": "skills/developer-engineering/dependency-auditor/test-project/package.json",
+              "source": "skills/developer-engineering/dependency-auditor/test-project/package.vulnerable.fixture.json",
+              "target": "skills/developer-engineering/dependency-auditor/test-project/package.vulnerable.fixture.json",
               "type": "file"
             }
           ],
@@ -6941,7 +6941,7 @@
         {
           "path": "skills/developer-engineering/dependency-auditor/README.md",
           "owner": "dependency-auditor",
-          "sha256": "023b2506b44dd23c791664e91f1836f9795450333565762cf86267adee8cddbb",
+          "sha256": "a79b2d14a1efbde777c90d99c4bc60fa475349ee283a7641d23432317307e6c7",
           "mode": "100644"
         },
         {
@@ -6960,12 +6960,6 @@
           "path": "skills/developer-engineering/dependency-auditor/assets/sample_package.json",
           "owner": "dependency-auditor",
           "sha256": "0ba6fc01364589a5e6030a05e1283038bf3a944135b46a9a5eaaaf1dbdf6a032",
-          "mode": "100644"
-        },
-        {
-          "path": "skills/developer-engineering/dependency-auditor/assets/sample_requirements.txt",
-          "owner": "dependency-auditor",
-          "sha256": "85ee24f99830b71a59419a181efa52e4f6f5ace9ad92e30d2fb6489d21bb0198",
           "mode": "100644"
         },
         {
@@ -7029,9 +7023,15 @@
           "mode": "100644"
         },
         {
-          "path": "skills/developer-engineering/dependency-auditor/test-project/package.json",
+          "path": "skills/developer-engineering/dependency-auditor/assets/sample_requirements.fixture",
           "owner": "dependency-auditor",
-          "sha256": "0ba6fc01364589a5e6030a05e1283038bf3a944135b46a9a5eaaaf1dbdf6a032",
+          "sha256": "378601721e9911a43b033da6257487d6fe01821df8fe65e929c2c69b1cc13b8e",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/developer-engineering/dependency-auditor/test-project/package.vulnerable.fixture.json",
+          "owner": "dependency-auditor",
+          "sha256": "7914a65e84bc383cf39c0046a42ba86f4c4a5f754950fe58c1a7541f6288c7a7",
           "mode": "100644"
         }
       ]
