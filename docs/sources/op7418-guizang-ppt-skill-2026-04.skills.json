@@ -2,7 +2,7 @@
   "schema_version": 2,
   "video": {
     "url": "https://github.com/op7418/guizang-ppt-skill",
-    "checked_at": "2026-08-18",
+    "checked_at": "2026-08-20",
     "note": "Curated from op7418/guizang-ppt-skill with upstream tracking enabled."
   },
   "official_references": [
@@ -18,25 +18,26 @@
       "normalized_slug": "guizang-ppt-skill",
       "status": "verified_in_repo",
       "repo_skill": "skills/office-white-collar/guizang-ppt-skill/SKILL.md",
-      "source": "https://github.com/op7418/guizang-ppt-skill",
-      "notes": "Imported as a high-quality HTML presentation workflow with template assets, layout references, theme presets, and quality checklist.",
+      "source": "https://github.com/op7418/guizang-ppt-skill/tree/72837a8513d1145d800095fc3909d6d3057994b8",
+      "notes": "Current upstream changed to AGPL-3.0; preserved the last reviewed MIT artifact set as an immutable licensed snapshot.",
       "upstream": {
         "repo": "op7418/guizang-ppt-skill",
         "path": "SKILL.md",
-        "ref": "main",
-        "last_checked_at": "2026-08-18",
-        "last_synced_at": "2026-08-18",
+        "ref": "72837a8513d1145d800095fc3909d6d3057994b8",
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
         "last_synced_commit": "72837a8513d1145d800095fc3909d6d3057994b8",
-        "sync_mode": "monitor"
+        "sync_mode": "archived",
+        "path_commit": "72837a8513d1145d800095fc3909d6d3057994b8"
       },
-      "kind": "overlay",
-      "sync_mode": "monitor",
+      "kind": "snapshot",
+      "sync_mode": "archived",
       "origins": [
         {
           "repo": "op7418/guizang-ppt-skill",
           "path": "SKILL.md",
           "license": "MIT",
-          "sync_mode": "monitor",
+          "sync_mode": "archived",
           "artifacts": [
             {
               "source": "SKILL.md",
@@ -79,13 +80,21 @@
             }
           ],
           "tracking": {
-            "channel": "default_branch",
-            "ref": "main",
+            "channel": "fixed_ref",
+            "ref": "72837a8513d1145d800095fc3909d6d3057994b8",
             "resolved_commit": "72837a8513d1145d800095fc3909d6d3057994b8",
             "path_commit": "72837a8513d1145d800095fc3909d6d3057994b8",
-            "content_sha256": "81b5ae2f3477b29f2e4834787859802aa7defcd46227b77bce457d3d7cf1c390",
-            "last_checked_at": "2026-08-18",
-            "last_synced_at": "2026-08-18"
+            "content_sha256": "c8329981348ccf3df68ff7e3b6565e98c2dec4ed38148ffa0a097e3de7962d97",
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "a638b33c53c25fb7c32d81ab52257f47b726b16f",
+              "content_sha256": "2b33f1f1d11c7bc2dc2985f4a7f014338323ff58a1cd6ae91c16b727275a3df3",
+              "spdx": "MIT",
+              "resolved_commit": "72837a8513d1145d800095fc3909d6d3057994b8",
+              "api_spdx": "MIT"
+            }
           }
         },
         {
@@ -169,7 +178,7 @@
         },
         {
           "path": "skills/office-white-collar/guizang-ppt-skill/SKILL.md",
-          "sha256": "81b5ae2f3477b29f2e4834787859802aa7defcd46227b77bce457d3d7cf1c390",
+          "sha256": "c8329981348ccf3df68ff7e3b6565e98c2dec4ed38148ffa0a097e3de7962d97",
           "owner": "guizang-ppt-skill",
           "mode": "100644"
         },
@@ -238,6 +247,13 @@
       "target": "op7418/guizang-ppt-skill",
       "result": "success",
       "evidence": "Validated upstream HEAD commit 72837a8513d1145d800095fc3909d6d3057994b8."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "license-lineage-review",
+      "target": "https://github.com/op7418/guizang-ppt-skill/tree/72837a8513d1145d800095fc3909d6d3057994b8",
+      "result": "licensed-snapshot",
+      "evidence": "Current upstream changed to AGPL-3.0; preserved the last reviewed MIT artifact set as an immutable licensed snapshot."
     }
   ]
 }
