@@ -6,6 +6,8 @@ Default behavior validates all `docs/sources/*.skills.json` mappings.
 from __future__ import annotations
 
 import argparse
+import base64
+import binascii
 import json
 import re
 import stat
@@ -215,6 +217,394 @@ def _validate_verification_attempts(data: dict, mapping: Path, errors: list[str]
         d = item.get("date")
         if d and not DATE_RE.match(str(d)):
             errors.append(f"{mapping}: verification_attempts[{i}].date must be YYYY-MM-DD")
+
+
+def _validate_commit_relation(
+    relation: object,
+    *,
+    label: str,
+    candidate_commit: object,
+    tag_commit: object,
+    errors: list[str],
+) -> None:
+    """Validate an offline GitHub compare checkpoint relative to a release tag."""
+    if not isinstance(relation, dict):
+        errors.append(f"{label} must be an object")
+        return
+    required = {
+        "relation",
+        "distance",
+        "base_commit",
+        "merge_base_commit",
+        "ahead_by",
+        "behind_by",
+        "compare_url",
+    }
+    missing = required - set(relation)
+    if missing:
+        errors.append(f"{label} missing keys: {sorted(missing)}")
+        return
+
+    relation_name = relation.get("relation")
+    distance = relation.get("distance")
+    ahead_by = relation.get("ahead_by")
+    behind_by = relation.get("behind_by")
+    base_commit = relation.get("base_commit")
+    merge_base_commit = relation.get("merge_base_commit")
+    compare_url = relation.get("compare_url")
+
+    if relation_name not in {"equal", "ancestor_by", "descendant_by"}:
+        errors.append(f"{label}.relation is invalid: {relation_name!r}")
+        return
+    if not isinstance(distance, int) or isinstance(distance, bool) or not 0 <= distance <= 2:
+        errors.append(f"{label}.distance must be an integer from 0 through 2")
+        return
+    for field_name, field_value in (
+        ("ahead_by", ahead_by),
+        ("behind_by", behind_by),
+    ):
+        if (
+            not isinstance(field_value, int)
+            or isinstance(field_value, bool)
+            or not 0 <= field_value <= 2
+        ):
+            errors.append(
+                f"{label}.{field_name} must be an integer from 0 through 2"
+            )
+    for field_name, field_value in (
+        ("base_commit", base_commit),
+        ("merge_base_commit", merge_base_commit),
+    ):
+        if not isinstance(field_value, str) or not COMMIT_RE.fullmatch(
+            field_value
+        ):
+            errors.append(f"{label}.{field_name} must be a full Git commit")
+    if not isinstance(compare_url, str) or not URL_RE.match(compare_url):
+        errors.append(f"{label}.compare_url must be an http/https URL")
+
+    if not (
+        isinstance(candidate_commit, str)
+        and COMMIT_RE.fullmatch(candidate_commit)
+        and isinstance(tag_commit, str)
+        and COMMIT_RE.fullmatch(tag_commit)
+    ):
+        return
+
+    candidate_commit = candidate_commit.lower()
+    tag_commit = tag_commit.lower()
+    base = str(base_commit).lower()
+    merge_base = str(merge_base_commit).lower()
+    if relation_name == "equal":
+        if candidate_commit != tag_commit:
+            errors.append(
+                f"{label} declares equal but the candidate and tag differ"
+            )
+        if any(value != 0 for value in (distance, ahead_by, behind_by)):
+            errors.append(
+                f"{label} equal relation requires zero distance/ahead/behind"
+            )
+        if base != tag_commit or merge_base != tag_commit:
+            errors.append(
+                f"{label} equal relation must pin base and merge-base to the tag"
+            )
+        return
+
+    if candidate_commit == tag_commit:
+        errors.append(
+            f"{label} declares {relation_name} but the candidate equals the tag"
+        )
+    if distance not in {1, 2}:
+        errors.append(
+            f"{label} {relation_name} requires a distance of one or two"
+        )
+    if ahead_by != distance or behind_by != 0:
+        errors.append(
+            f"{label} {relation_name} requires ahead_by=distance and behind_by=0"
+        )
+    expected_base = (
+        candidate_commit if relation_name == "ancestor_by" else tag_commit
+    )
+    if base != expected_base or merge_base != expected_base:
+        errors.append(
+            f"{label} {relation_name} has inconsistent base/merge-base evidence"
+        )
+
+
+def _validate_bundle_contract(
+    data: dict,
+    mapping: Path,
+    errors: list[str],
+) -> None:
+    """Validate installer-only bundle metadata and supply-chain coherence."""
+    entries = data.get("skills")
+    bundle_entries = (
+        [
+            entry
+            for entry in entries
+            if isinstance(entry, dict) and entry.get("kind") == "bundle"
+        ]
+        if isinstance(entries, list)
+        else []
+    )
+    if not bundle_entries:
+        return
+    label = f"{mapping}: bundle"
+    if len(bundle_entries) != 1:
+        errors.append(f"{label} mappings must contain exactly one bundle entry")
+        return
+    entry = bundle_entries[0]
+
+    required = {
+        "bundle",
+        "install_policy",
+        "bundle_inventory",
+        "installer",
+        "slsa_provenance",
+        "commit_coherence",
+    }
+    missing = required - set(data)
+    if missing:
+        errors.append(f"{label} missing top-level keys: {sorted(missing)}")
+        return
+
+    identity = data.get("bundle")
+    if not isinstance(identity, dict):
+        errors.append(f"{label} identity must be an object")
+    else:
+        bundle_id = identity.get("id")
+        if not isinstance(bundle_id, str) or not re.fullmatch(
+            r"[a-z0-9]+(?:-[a-z0-9]+)*", bundle_id
+        ):
+            errors.append(f"{label}.id must be a lowercase kebab-case id")
+        if not isinstance(identity.get("optional"), bool):
+            errors.append(f"{label}.optional must be boolean")
+        state_root = identity.get("state_root")
+        if not isinstance(state_root, str) or not re.fullmatch(
+            r"\.[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*", state_root
+        ):
+            errors.append(f"{label}.state_root must be a dot-prefixed path")
+        isolated = identity.get("isolated_from")
+        if not isinstance(isolated, list):
+            errors.append(f"{label}.isolated_from must be an array")
+        else:
+            for isolated_idx, item in enumerate(isolated, 1):
+                item_label = f"{label}.isolated_from[{isolated_idx}]"
+                if not isinstance(item, dict):
+                    errors.append(f"{item_label} must be an object")
+                    continue
+                if (
+                    not isinstance(item.get("bundle"), str)
+                    or not isinstance(item.get("state_root"), str)
+                ):
+                    errors.append(
+                        f"{item_label} must name a bundle and its state_root"
+                    )
+
+    install_policy = data.get("install_policy")
+    if not isinstance(install_policy, dict) or (
+        install_policy.get("mode") != "explicit_only"
+        or install_policy.get("default_install") is not False
+    ):
+        errors.append(
+            f"{label}.install_policy must be explicit_only with default_install=false"
+        )
+
+    inventory = data.get("bundle_inventory")
+    inventory_fields = {
+        "package_files",
+        "skills",
+        "agents",
+        "commands",
+        "runtime_files",
+    }
+    if not isinstance(inventory, dict):
+        errors.append(f"{label}_inventory must be an object")
+    else:
+        for field_name in inventory_fields:
+            value = inventory.get(field_name)
+            if (
+                not isinstance(value, int)
+                or isinstance(value, bool)
+                or value < 0
+            ):
+                errors.append(
+                    f"{label}_inventory.{field_name} must be a non-negative integer"
+                )
+        if not isinstance(inventory.get("runtime_scope"), str):
+            errors.append(f"{label}_inventory.runtime_scope must be a string")
+        if inventory.get("installed_in_repository") is not False:
+            errors.append(
+                f"{label}_inventory.installed_in_repository must be false"
+            )
+
+    installer = data.get("installer")
+    if not isinstance(installer, dict):
+        errors.append(f"{label}.installer must be an object")
+        return
+    installer_required = {
+        "registry",
+        "package",
+        "version",
+        "spec",
+        "command",
+        "tarball_url",
+        "tarball_sha256",
+        "integrity",
+        "npm_shasum",
+        "package_files",
+        "unpacked_size",
+        "git_head",
+        "tag_commit",
+        "git_head_matches_tag",
+    }
+    installer_missing = installer_required - set(installer)
+    if installer_missing:
+        errors.append(
+            f"{label}.installer missing keys: {sorted(installer_missing)}"
+        )
+        return
+    package = installer.get("package")
+    version = installer.get("version")
+    spec = installer.get("spec")
+    if installer.get("registry") != "npm":
+        errors.append(f"{label}.installer.registry must be npm")
+    if spec != f"{package}@{version}":
+        errors.append(f"{label}.installer.spec must pin package@version")
+    if installer.get("command") != f"npx {spec}":
+        errors.append(f"{label}.installer.command must be the pinned npx spec")
+    for field_name in ("tarball_sha256",):
+        value = installer.get(field_name)
+        if not isinstance(value, str) or not SHA256_RE.fullmatch(value):
+            errors.append(f"{label}.installer.{field_name} must be SHA-256")
+    npm_shasum = installer.get("npm_shasum")
+    if not isinstance(npm_shasum, str) or not re.fullmatch(
+        r"[0-9a-fA-F]{40}", npm_shasum
+    ):
+        errors.append(f"{label}.installer.npm_shasum must be SHA-1")
+    for field_name in ("git_head", "tag_commit"):
+        value = installer.get(field_name)
+        if not isinstance(value, str) or not COMMIT_RE.fullmatch(value):
+            errors.append(f"{label}.installer.{field_name} must be a full commit")
+    if (
+        isinstance(installer.get("git_head"), str)
+        and isinstance(installer.get("tag_commit"), str)
+        and installer.get("git_head_matches_tag")
+        != (
+            installer["git_head"].lower() == installer["tag_commit"].lower()
+        )
+    ):
+        errors.append(
+            f"{label}.installer.git_head_matches_tag conflicts with commits"
+        )
+    if isinstance(inventory, dict) and (
+        installer.get("package_files") != inventory.get("package_files")
+    ):
+        errors.append(
+            f"{label}.installer.package_files must match bundle_inventory"
+        )
+
+    origins = entry.get("origins")
+    origin = origins[0] if isinstance(origins, list) and len(origins) == 1 else None
+    tracking = origin.get("tracking") if isinstance(origin, dict) else None
+    if not isinstance(origin, dict):
+        errors.append(f"{label} entry must have exactly one origin")
+    elif isinstance(tracking, dict):
+        if tracking.get("ref") != f"v{version}":
+            errors.append(f"{label} origin ref must match installer version")
+        if tracking.get("resolved_commit") != installer.get("tag_commit"):
+            errors.append(
+                f"{label} origin resolved_commit must match installer tag_commit"
+            )
+        if tracking.get("content_sha256") != installer.get("tarball_sha256"):
+            errors.append(
+                f"{label} origin content hash must match npm tarball SHA-256"
+            )
+        checkpoint = tracking.get("license_checkpoint")
+        if not isinstance(checkpoint, dict):
+            errors.append(f"{label} origin requires a license checkpoint")
+        else:
+            if checkpoint.get("spdx") != origin.get("license"):
+                errors.append(
+                    f"{label} license checkpoint SPDX must match origin license"
+                )
+            if checkpoint.get("resolved_commit") != installer.get("tag_commit"):
+                errors.append(
+                    f"{label} license checkpoint must resolve at the release tag"
+                )
+
+    slsa = data.get("slsa_provenance")
+    if not isinstance(slsa, dict):
+        errors.append(f"{label}.slsa_provenance must be an object")
+        return
+    slsa_required = {
+        "attestation_url",
+        "predicate_type",
+        "build_type",
+        "subject_name",
+        "subject_sha512",
+        "source_repository",
+        "source_ref",
+        "workflow_path",
+        "attested_source_commit",
+        "builder_id",
+        "invocation_id",
+    }
+    slsa_missing = slsa_required - set(slsa)
+    if slsa_missing:
+        errors.append(
+            f"{label}.slsa_provenance missing keys: {sorted(slsa_missing)}"
+        )
+        return
+    if slsa.get("predicate_type") != "https://slsa.dev/provenance/v1":
+        errors.append(f"{label}.slsa_provenance predicate must be SLSA v1")
+    expected_subject = (
+        f"pkg:npm/{str(package).replace('@', '%40', 1)}@{version}"
+    )
+    if slsa.get("subject_name") != expected_subject:
+        errors.append(
+            f"{label}.slsa_provenance subject must match package@version"
+        )
+    integrity = installer.get("integrity")
+    try:
+        integrity_digest = base64.b64decode(
+            str(integrity).removeprefix("sha512-"),
+            validate=True,
+        ).hex()
+    except (binascii.Error, ValueError):
+        integrity_digest = None
+        errors.append(f"{label}.installer.integrity is not valid sha512 SRI")
+    if integrity_digest is not None and (
+        slsa.get("subject_sha512") != integrity_digest
+    ):
+        errors.append(
+            f"{label}.slsa_provenance subject digest must match npm integrity"
+        )
+    if isinstance(origin, dict) and (
+        slsa.get("source_repository")
+        != f"https://github.com/{origin.get('repo')}"
+    ):
+        errors.append(
+            f"{label}.slsa_provenance source repository must match origin"
+        )
+
+    coherence = data.get("commit_coherence")
+    if not isinstance(coherence, dict):
+        errors.append(f"{label}.commit_coherence must be an object")
+        return
+    _validate_commit_relation(
+        coherence.get("npm_git_head_relative_to_tag"),
+        label=f"{label}.commit_coherence.npm_git_head_relative_to_tag",
+        candidate_commit=installer.get("git_head"),
+        tag_commit=installer.get("tag_commit"),
+        errors=errors,
+    )
+    _validate_commit_relation(
+        coherence.get("attested_source_relative_to_tag"),
+        label=f"{label}.commit_coherence.attested_source_relative_to_tag",
+        candidate_commit=slsa.get("attested_source_commit"),
+        tag_commit=installer.get("tag_commit"),
+        errors=errors,
+    )
 
 
 
@@ -1093,6 +1483,7 @@ def validate_mapping(
 
     _validate_top(data, mapping_path, errors, allow_v1=allow_v1)
     _validate_verification_attempts(data, mapping_path, errors)
+    _validate_bundle_contract(data, mapping_path, errors)
 
     skills = data.get("skills", [])
     if not isinstance(skills, list) or not skills:
@@ -1303,6 +1694,7 @@ def validate_repository_mappings(
     unavailable_bundle_origins_by_repo: dict[
         str, list[tuple[dict, dict, Path, int]]
     ] = {}
+    bundle_identities: dict[str, list[tuple[dict, Path]]] = {}
     v2_composites: list[tuple[str, dict, Path, int]] = []
 
     for mapping_path in mapping_paths:
@@ -1316,6 +1708,18 @@ def validate_repository_mappings(
         skills = data.get("skills")
         if not isinstance(skills, list):
             continue
+        if is_v2 and any(
+            isinstance(item, dict) and item.get("kind") == "bundle"
+            for item in skills
+        ):
+            identity = data.get("bundle")
+            bundle_id = (
+                identity.get("id") if isinstance(identity, dict) else None
+            )
+            if isinstance(bundle_id, str) and bundle_id:
+                bundle_identities.setdefault(bundle_id, []).append(
+                    (identity, mapping_path)
+                )
         for idx, item in enumerate(skills, 1):
             if not isinstance(item, dict):
                 continue
@@ -1387,6 +1791,60 @@ def validate_repository_mappings(
                 f"duplicate active managed file claim {managed_file!r}: "
                 + ", ".join(claims)
             )
+    for bundle_id, claims in sorted(bundle_identities.items()):
+        if len(claims) > 1:
+            errors.append(
+                f"duplicate bundle id {bundle_id!r}: "
+                + ", ".join(str(mapping) for _, mapping in claims)
+            )
+
+    unique_bundles = {
+        bundle_id: claims[0]
+        for bundle_id, claims in bundle_identities.items()
+        if len(claims) == 1
+    }
+    state_roots: dict[str, list[str]] = {}
+    for bundle_id, (identity, _) in unique_bundles.items():
+        state_root = identity.get("state_root")
+        if isinstance(state_root, str):
+            state_roots.setdefault(state_root, []).append(bundle_id)
+    for state_root, bundle_ids in sorted(state_roots.items()):
+        if len(bundle_ids) > 1:
+            errors.append(
+                f"bundle state root {state_root!r} is shared by: "
+                + ", ".join(sorted(bundle_ids))
+            )
+    for bundle_id, (identity, mapping_path) in unique_bundles.items():
+        isolated_from = identity.get("isolated_from")
+        if not isinstance(isolated_from, list):
+            continue
+        for isolation in isolated_from:
+            if not isinstance(isolation, dict):
+                continue
+            other_id = isolation.get("bundle")
+            declared_root = isolation.get("state_root")
+            if other_id not in unique_bundles:
+                # A targeted --mapping validation intentionally sees only one
+                # manifest. Cross-bundle reciprocity is enforced whenever both
+                # managed bundles are present in the validation scope.
+                continue
+            other_identity, other_mapping = unique_bundles[str(other_id)]
+            if other_identity.get("state_root") != declared_root:
+                errors.append(
+                    f"{mapping_path}: bundle {bundle_id} isolation target "
+                    f"{other_id} state root conflicts with {other_mapping}"
+                )
+            reciprocal = other_identity.get("isolated_from")
+            if not isinstance(reciprocal, list) or not any(
+                isinstance(item, dict)
+                and item.get("bundle") == bundle_id
+                and item.get("state_root") == identity.get("state_root")
+                for item in reciprocal
+            ):
+                errors.append(
+                    f"{mapping_path}: bundle {bundle_id} isolation from "
+                    f"{other_id} must be reciprocal"
+                )
 
     graph: dict[str, list[str]] = {}
     for slug, item, mapping_path, idx in v2_composites:

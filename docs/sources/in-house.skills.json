@@ -9775,8 +9775,8 @@
           }
         ],
         "dependency_lock": {
-          "hermes-agent": "9377be063868a904734ce45c682dcc0bfcf87d1d8244111f7e05ca6e71e7b896",
-          "graphify": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951",
+          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
+          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
           "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
         }
       }
@@ -10166,8 +10166,8 @@
           }
         ],
         "dependency_lock": {
-          "hermes-agent": "9377be063868a904734ce45c682dcc0bfcf87d1d8244111f7e05ca6e71e7b896",
-          "graphify": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951",
+          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
+          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
           "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
         }
       }
@@ -10315,8 +10315,8 @@
           }
         ],
         "dependency_lock": {
-          "hermes-agent": "9377be063868a904734ce45c682dcc0bfcf87d1d8244111f7e05ca6e71e7b896",
-          "graphify": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951",
+          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
+          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
           "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
         }
       }
@@ -10387,8 +10387,8 @@
           }
         ],
         "dependency_lock": {
-          "hermes-agent": "9377be063868a904734ce45c682dcc0bfcf87d1d8244111f7e05ca6e71e7b896",
-          "graphify": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951",
+          "hermes-agent": "ae9c57648fa79313fa6f5f4ddbe6b60ac56310761cdb2837ee0401e680593e9f",
+          "graphify": "2c466e37133b4a4c8a37d37fd74ac98296702389b4811983a69393e4db286bc2",
           "open-gsd/gsd-core": "b7ed2186d397b270a52db5e9816a9fd88a240466b356b1f4a28823f93cb8fd9d"
         }
       }
