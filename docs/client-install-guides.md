@@ -56,6 +56,12 @@ npx github:seaworld008/Commonly-used-high-value-skills install --target codex --
 
 # 只安装指定技能；与 --category 同时使用时取交集
 npx github:seaworld008/Commonly-used-high-value-skills install --target codex --skill docx,xlsx,pdf,pptx
+
+# 先计算完整计划；不会创建目录、写 manifest 或调用外部安装器
+npx github:seaworld008/Commonly-used-high-value-skills install --target codex --dry-run
+
+# 清理组合治理账本中已退役的技能
+npx github:seaworld008/Commonly-used-high-value-skills install --target codex --prune-retired
 ```
 
 查看所有目标：
@@ -63,6 +69,34 @@ npx github:seaworld008/Commonly-used-high-value-skills install --target codex --
 ```bash
 npx github:seaworld008/Commonly-used-high-value-skills list-targets
 npx github:seaworld008/Commonly-used-high-value-skills list-skills
+npx github:seaworld008/Commonly-used-high-value-skills list-bundles
+```
+
+普通安装会在每个目标根目录写入 `.high-value-skills-manifest.json`，逐文件记录
+`owner`、来源树摘要、文件 SHA-256 和 mode。重复 dry-run 会准确报告
+`Unchanged`，并保持零写入。`--prune-retired` 只直接删除由本安装器拥有且
+摘要未变化的旧技能；用户改动过或无法证明所有权的目录会先移动到同级
+`.high-value-skills-backups/<timestamp>/`，不会静默丢弃。
+
+Open GSD Core 是官方安装器管理的 bundle，不属于仓库普通技能集合，也不会被
+默认安装。必须显式指定目标，并建议先 dry-run：
+
+```bash
+npx github:seaworld008/Commonly-used-high-value-skills install \
+  --bundle gsd-core --target codex --dry-run
+npx github:seaworld008/Commonly-used-high-value-skills install \
+  --bundle gsd-core --target codex
+```
+
+安装器从仓库内锁定的 bundle manifest 读取官方 npm 版本和 skills/agents/runtime
+验收计数，并以无 shell 的参数数组调用官方 installer。`gsd-pi` 仅列入可选、
+显式使用的治理清单，本版本不开放安装，避免与 Core 的 `.planning/` 状态混用。
+
+如需排查多个客户端根目录中的同名不同内容技能：
+
+```bash
+npx github:seaworld008/Commonly-used-high-value-skills audit-conflicts \
+  --roots ~/.codex/skills,~/.agents/skills
 ```
 
 如果你已经使用 `skills.sh`，也可以用它的通用入口安装：

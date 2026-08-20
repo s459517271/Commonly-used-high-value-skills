@@ -8,6 +8,7 @@ import subprocess
 from collections import defaultdict
 from pathlib import Path
 
+
 def run_git_command(args: list[str]) -> str:
     try:
         result = subprocess.run(
@@ -22,6 +23,23 @@ def run_git_command(args: list[str]) -> str:
         print(f"Error running git command: {' '.join(args)}")
         print(e.stderr)
         return ""
+
+
+def resolve_log_args(since: str, to_ref: str) -> tuple[list[str], str]:
+    """Return git-log revision arguments and a human-readable revision range."""
+    if since == "last-tag":
+        tag = run_git_command(["describe", "--tags", "--abbrev=0", to_ref])
+        if not tag:
+            raise ValueError("Cannot resolve --since last-tag: repository has no reachable tag")
+        revision = f"{tag}..{to_ref}"
+        return [revision], revision
+
+    verified = run_git_command(["rev-parse", "--verify", "--quiet", f"{since}^{{commit}}"])
+    if verified:
+        revision = f"{since}..{to_ref}"
+        return [revision], revision
+    return [to_ref, f"--since={since}"], f"{since}..{to_ref} (date range)"
+
 
 def get_skill_info(skill_path_str: str) -> tuple[str, str, str]:
     """Extract category, skill_id and basic info from SKILL.md path."""
@@ -50,13 +68,25 @@ def get_skill_info(skill_path_str: str) -> tuple[str, str, str]:
 
 def main():
     parser = argparse.ArgumentParser(description="Generate CHANGELOG.md from git log.")
-    parser.add_argument("--since", default="1 month ago", help="Starting commit/tag/date (default: '1 month ago')")
+    parser.add_argument(
+        "--since",
+        default="last-tag",
+        help="Starting tag/ref/date; 'last-tag' resolves the latest reachable tag (default)",
+    )
+    parser.add_argument("--to", default="HEAD", help="Ending revision (default: HEAD)")
     parser.add_argument("--output", default="CHANGELOG.md", help="Output file (default: CHANGELOG.md)")
     parser.add_argument("--dry-run", action="store_true", help="Only output to console, don't write to file.")
     args = parser.parse_args()
 
-    # Get commit log: date|subject|hash
-    log_output = run_git_command(["log", f"--since={args.since}", "--pretty=format:%as|%s|%H"])
+    try:
+        revisions, revision_label = resolve_log_args(args.since, args.to)
+    except ValueError as error:
+        parser.error(str(error))
+
+    # Use a real ref range for release changelogs so older history cannot leak in.
+    log_output = run_git_command(
+        ["log", *revisions, "--pretty=format:%as|%s|%H"]
+    )
     if not log_output:
         print("No commits found.")
         return
@@ -102,6 +132,7 @@ def main():
         "# Changelog",
         "",
         "All notable changes to this repository are documented here.",
+        f"Revision range: `{revision_label}`.",
         ""
     ]
 
