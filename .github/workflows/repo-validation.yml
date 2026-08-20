@@ -48,6 +48,7 @@ jobs:
       - name: Validate provenance v2 after normalization
         run: |
           python scripts/validate_skill_sources.py
+          python scripts/reconcile_artifact_inventory.py --offline --check-clean --quiet
           python scripts/check_source_coverage.py --min-percent 100
 
       - name: Check README sync

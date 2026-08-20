@@ -2,7 +2,7 @@
   "schema_version": 2,
   "video": {
     "url": "https://github.com/cloudflare/security-audit-skill",
-    "checked_at": "2026-08-18",
+    "checked_at": "2026-08-20",
     "note": "Cloudflare security audit skill imported with companion methodology files under MIT."
   },
   "official_references": [
@@ -34,10 +34,11 @@
         "repo": "cloudflare/security-audit-skill",
         "path": "skills/security-audit/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-08-18",
-        "last_synced_at": "2026-08-18",
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
         "last_synced_commit": "8bac42001ddd90a4dcd8d5a5045199283a8eba75",
-        "sync_mode": "monitor"
+        "sync_mode": "monitor",
+        "path_commit": "c1239b903704f5ea063b6dc0de3ba905f4cca3e4"
       },
       "kind": "mirror",
       "sync_mode": "monitor",
@@ -49,26 +50,134 @@
           "sync_mode": "monitor",
           "artifacts": [
             {
+              "source": "skills/security-audit/AI-AND-LLM.md",
+              "target": "skills/security-and-reliability/security-audit/AI-AND-LLM.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/ATTACK-CLASSES.md",
+              "target": "skills/security-and-reliability/security-audit/ATTACK-CLASSES.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/CLIENT-SIDE.md",
+              "target": "skills/security-and-reliability/security-audit/CLIENT-SIDE.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/HUNTING.md",
+              "target": "skills/security-and-reliability/security-audit/HUNTING.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/MEMORY-SAFETY-AND-BINARY.md",
+              "target": "skills/security-and-reliability/security-audit/MEMORY-SAFETY-AND-BINARY.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/RECONNAISSANCE.md",
+              "target": "skills/security-and-reliability/security-audit/RECONNAISSANCE.md",
+              "type": "file"
+            },
+            {
               "source": "skills/security-audit/SKILL.md",
               "target": "skills/security-and-reliability/security-audit/SKILL.md"
+            },
+            {
+              "source": "skills/security-audit/VALIDATION-AND-REPORTING.md",
+              "target": "skills/security-and-reliability/security-audit/VALIDATION-AND-REPORTING.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/WEB-PROTOCOL-AND-AUTH.md",
+              "target": "skills/security-and-reliability/security-audit/WEB-PROTOCOL-AND-AUTH.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/report-schema.json",
+              "target": "skills/security-and-reliability/security-audit/report-schema.json",
+              "type": "file"
+            },
+            {
+              "source": "skills/security-audit/validate-findings.cjs",
+              "target": "skills/security-and-reliability/security-audit/validate-findings.cjs",
+              "type": "file"
             }
           ],
           "tracking": {
             "channel": "default_branch",
             "ref": "main",
             "resolved_commit": "8bac42001ddd90a4dcd8d5a5045199283a8eba75",
-            "path_commit": "8bac42001ddd90a4dcd8d5a5045199283a8eba75",
+            "path_commit": "c1239b903704f5ea063b6dc0de3ba905f4cca3e4",
             "content_sha256": "f534330a3098552529d9d8a4d3edde15bd7545db42b4af955b469d72592e8710",
-            "last_checked_at": "2026-08-18",
-            "last_synced_at": "2026-08-18"
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "6dbc9ecb3a5b9080e95b962869e8c7ab16cfdc20",
+              "content_sha256": "e598e694aa506650c7192d5ea3be0e50aca0d356ea00551c53429f0b01eb6391",
+              "spdx": "MIT",
+              "resolved_commit": "8bac42001ddd90a4dcd8d5a5045199283a8eba75",
+              "api_spdx": "MIT"
+            }
           }
         }
       ],
       "managed_files": [
         {
+          "path": "skills/security-and-reliability/security-audit/AI-AND-LLM.md",
+          "sha256": "e3f1f732de2bdd469023a6ac591849a1285abe9b0d12de11fb7d9fd13f6c108e",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/ATTACK-CLASSES.md",
+          "sha256": "f3fab5e6a113553f357e3586f488b9c7e047d48c2ee5443c77724ec1d1d5fdb0",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/CLIENT-SIDE.md",
+          "sha256": "14a0bef183b95e62de4945b886fbfd677c53c68d77f8fdf4c7e2d42e9815f883",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/HUNTING.md",
+          "sha256": "735caebbc3bfed31d2c9fbbf61f383060305774708e0d0ac38050a7eac7ac679",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/MEMORY-SAFETY-AND-BINARY.md",
+          "sha256": "8e1f8e8d9029941083fd5739fec493de7f2699a13fec23d0d0a9a3aae85f7e55",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/RECONNAISSANCE.md",
+          "sha256": "89e2f899107335467716f06bc0bb175e87ccfb662dd9878b9a0f155d8005343f",
+          "owner": "security-audit"
+        },
+        {
           "path": "skills/security-and-reliability/security-audit/SKILL.md",
-          "owner": "security-audit",
-          "sha256": "f534330a3098552529d9d8a4d3edde15bd7545db42b4af955b469d72592e8710"
+          "sha256": "f534330a3098552529d9d8a4d3edde15bd7545db42b4af955b469d72592e8710",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/VALIDATION-AND-REPORTING.md",
+          "sha256": "049dea0289689c66fd913aafa7d6d6df3d5b38d5d9d8e571825ba58f4308c2bd",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/WEB-PROTOCOL-AND-AUTH.md",
+          "sha256": "b8f9a0e29ad6685a3d96cf42a538be7012c4a18925a4871a475291aae497ed04",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/report-schema.json",
+          "sha256": "05c24d50f3314b025dbfb28dfee550d9dec9775602d51fc5c891013a3ab8b273",
+          "owner": "security-audit"
+        },
+        {
+          "path": "skills/security-and-reliability/security-audit/validate-findings.cjs",
+          "sha256": "36d445209703d838c320c6366935f6476823e96e6b76d99a64f3aaf9beb51f2e",
+          "owner": "security-audit"
         }
       ]
     }

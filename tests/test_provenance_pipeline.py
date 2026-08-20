@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 class ProvenancePipelineTests(unittest.TestCase):
@@ -79,6 +80,20 @@ class ProvenancePipelineTests(unittest.TestCase):
         cmd = module.resolve_python_cmd()
         self.assertTrue(cmd)
         self.assertEqual(Path(sys.executable).name.lower(), Path(cmd[0]).name.lower())
+
+    def test_run_is_fail_fast_but_can_accept_explicit_report_state(self):
+        module = self.load_module()
+        degraded = subprocess.CompletedProcess(["checker"], 2)
+        with mock.patch.object(
+            module.subprocess, "run", return_value=degraded
+        ):
+            module.run(
+                ["checker"],
+                self.root,
+                accepted_codes=frozenset({0, 2}),
+            )
+            with self.assertRaises(subprocess.CalledProcessError):
+                module.run(["checker"], self.root)
 
 
 if __name__ == "__main__":

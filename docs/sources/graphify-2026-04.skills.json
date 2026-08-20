@@ -2,7 +2,7 @@
   "schema_version": 2,
   "video": {
     "url": "https://github.com/Graphify-Labs/graphify",
-    "checked_at": "2026-08-18",
+    "checked_at": "2026-08-20",
     "note": "Curated from graphify as a codebase-and-corpus knowledge graph workflow aligned with the Karpathy-style wiki pattern. Updated from the graphifyy 0.5.0 PyPI wheel Codex skill variant."
   },
   "official_references": [
@@ -28,13 +28,14 @@
       "upstream": {
         "repo": "Graphify-Labs/graphify",
         "path": "graphify/skill-codex.md",
-        "ref": "v8",
-        "last_checked_at": "2026-08-18",
-        "last_synced_at": "2026-08-18",
+        "ref": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
+        "last_checked_at": "2026-08-20",
+        "last_synced_at": "2026-08-20",
         "last_synced_commit": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
-      "sync_mode": "monitor"
+        "sync_mode": "monitor",
+        "path_commit": "8658cc31059111dd914d247301e3d999b4935cf0"
       },
-      "kind": "mirror",
+      "kind": "overlay",
       "sync_mode": "monitor",
       "origins": [
         {
@@ -50,20 +51,685 @@
           ],
           "tracking": {
             "channel": "fixed_ref",
-            "ref": "v8",
+            "ref": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
             "resolved_commit": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
-            "path_commit": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
+            "path_commit": "8658cc31059111dd914d247301e3d999b4935cf0",
             "content_sha256": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951",
-            "last_checked_at": "2026-08-18",
-            "last_synced_at": "2026-08-18"
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+              "content_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+              "spdx": "Apache-2.0",
+              "resolved_commit": "62b1d4370b8f8d61dea9a1d952393ae63ad53fa4",
+              "api_spdx": "NOASSERTION"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/developer-engineering/graphify",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/developer-engineering/graphify/__init__.py",
+              "target": "skills/developer-engineering/graphify/__init__.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/__main__.py",
+              "target": "skills/developer-engineering/graphify/__main__.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/_minhash.py",
+              "target": "skills/developer-engineering/graphify/_minhash.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/affected.py",
+              "target": "skills/developer-engineering/graphify/affected.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/analyze.py",
+              "target": "skills/developer-engineering/graphify/analyze.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/benchmark.py",
+              "target": "skills/developer-engineering/graphify/benchmark.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/build.py",
+              "target": "skills/developer-engineering/graphify/build.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/cache.py",
+              "target": "skills/developer-engineering/graphify/cache.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/callflow_html.py",
+              "target": "skills/developer-engineering/graphify/callflow_html.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/cargo_introspect.py",
+              "target": "skills/developer-engineering/graphify/cargo_introspect.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/cli.py",
+              "target": "skills/developer-engineering/graphify/cli.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/cluster.py",
+              "target": "skills/developer-engineering/graphify/cluster.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/command-kilo.md",
+              "target": "skills/developer-engineering/graphify/command-kilo.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/dedup.py",
+              "target": "skills/developer-engineering/graphify/dedup.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/detect.py",
+              "target": "skills/developer-engineering/graphify/detect.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/diagnostics.py",
+              "target": "skills/developer-engineering/graphify/diagnostics.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/export.py",
+              "target": "skills/developer-engineering/graphify/export.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/extract.py",
+              "target": "skills/developer-engineering/graphify/extract.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/file_slice.py",
+              "target": "skills/developer-engineering/graphify/file_slice.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/global_graph.py",
+              "target": "skills/developer-engineering/graphify/global_graph.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/google_workspace.py",
+              "target": "skills/developer-engineering/graphify/google_workspace.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/hooks.py",
+              "target": "skills/developer-engineering/graphify/hooks.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/ids.py",
+              "target": "skills/developer-engineering/graphify/ids.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/ingest.py",
+              "target": "skills/developer-engineering/graphify/ingest.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/install.py",
+              "target": "skills/developer-engineering/graphify/install.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/llm.py",
+              "target": "skills/developer-engineering/graphify/llm.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/manifest.py",
+              "target": "skills/developer-engineering/graphify/manifest.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/manifest_ingest.py",
+              "target": "skills/developer-engineering/graphify/manifest_ingest.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/mcp_ingest.py",
+              "target": "skills/developer-engineering/graphify/mcp_ingest.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/multigraph_compat.py",
+              "target": "skills/developer-engineering/graphify/multigraph_compat.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/pascal_resolution.py",
+              "target": "skills/developer-engineering/graphify/pascal_resolution.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/paths.py",
+              "target": "skills/developer-engineering/graphify/paths.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/pg_introspect.py",
+              "target": "skills/developer-engineering/graphify/pg_introspect.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/prs.py",
+              "target": "skills/developer-engineering/graphify/prs.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/querylog.py",
+              "target": "skills/developer-engineering/graphify/querylog.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/reflect.py",
+              "target": "skills/developer-engineering/graphify/reflect.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/report.py",
+              "target": "skills/developer-engineering/graphify/report.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/resolver_registry.py",
+              "target": "skills/developer-engineering/graphify/resolver_registry.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/ruby_resolution.py",
+              "target": "skills/developer-engineering/graphify/ruby_resolution.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/scip_ingest.py",
+              "target": "skills/developer-engineering/graphify/scip_ingest.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/security.py",
+              "target": "skills/developer-engineering/graphify/security.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/semantic_cleanup.py",
+              "target": "skills/developer-engineering/graphify/semantic_cleanup.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/serve.py",
+              "target": "skills/developer-engineering/graphify/serve.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-agents.md",
+              "target": "skills/developer-engineering/graphify/skill-agents.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-aider.md",
+              "target": "skills/developer-engineering/graphify/skill-aider.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-amp.md",
+              "target": "skills/developer-engineering/graphify/skill-amp.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-claw.md",
+              "target": "skills/developer-engineering/graphify/skill-claw.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-codex.md",
+              "target": "skills/developer-engineering/graphify/skill-codex.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-copilot.md",
+              "target": "skills/developer-engineering/graphify/skill-copilot.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-devin.md",
+              "target": "skills/developer-engineering/graphify/skill-devin.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-droid.md",
+              "target": "skills/developer-engineering/graphify/skill-droid.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-kilo.md",
+              "target": "skills/developer-engineering/graphify/skill-kilo.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-kiro.md",
+              "target": "skills/developer-engineering/graphify/skill-kiro.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-opencode.md",
+              "target": "skills/developer-engineering/graphify/skill-opencode.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-pi.md",
+              "target": "skills/developer-engineering/graphify/skill-pi.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-trae.md",
+              "target": "skills/developer-engineering/graphify/skill-trae.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-vscode.md",
+              "target": "skills/developer-engineering/graphify/skill-vscode.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/skill-windows.md",
+              "target": "skills/developer-engineering/graphify/skill-windows.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/symbol_resolution.py",
+              "target": "skills/developer-engineering/graphify/symbol_resolution.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/transcribe.py",
+              "target": "skills/developer-engineering/graphify/transcribe.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/tree_html.py",
+              "target": "skills/developer-engineering/graphify/tree_html.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/validate.py",
+              "target": "skills/developer-engineering/graphify/validate.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/watch.py",
+              "target": "skills/developer-engineering/graphify/watch.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/developer-engineering/graphify/wiki.py",
+              "target": "skills/developer-engineering/graphify/wiki.py",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
           }
         }
       ],
       "managed_files": [
         {
           "path": "skills/developer-engineering/graphify/SKILL.md",
-          "owner": "graphify",
-          "sha256": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951"
+          "sha256": "9b82b9b92e7144d5bce26f83d2a20ffba20930285f312c2c6851eaa566bd8951",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/__init__.py",
+          "sha256": "5afcd670aa65337ae49735582a9bc482a721abdfbfc063fcad1d0ccc90b0838a",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/__main__.py",
+          "sha256": "a388ae6c903eb8b753ed6afdd63e4258df3980e347b3441669f3d402e7ca7ccf",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/_minhash.py",
+          "sha256": "eea373a21d8f9c97beecb08ca06f0e2d273cd40e2e91dfbcaec4972bd45fdf0c",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/affected.py",
+          "sha256": "f772e52e3fc6919042919d89ad67d0407679721a8850955253ebc6a538a91c53",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/analyze.py",
+          "sha256": "8b2bd5cb4c1ee1174265361d3a746877ab4dc65f3b25334d54c98f62e4755ef2",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/benchmark.py",
+          "sha256": "6bf7084c9a7da62c7b5ec46e2ca8280fded842d8c23a023aaaa4a62dfea61829",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/build.py",
+          "sha256": "77c56872ccff475dcb39707f621958019f50e8bacef49c2c10c50ac9dfdeadfd",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/cache.py",
+          "sha256": "0955b389fb0a57e004990f812b6badc67b1bfd0d7a8905efb8bf458e87068a0b",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/callflow_html.py",
+          "sha256": "83d0667c3fd4d2a981a2b9b30fea340f3773b61a4aa0e44b7f68652c0ab4785c",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/cargo_introspect.py",
+          "sha256": "a5b97dd1df4b364354b2cb5a7eb7b1e756e487216d03ac6a0fca00b80bcfbf9b",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/cli.py",
+          "sha256": "d68072b4de385662c90560c87a5e424cb2a059397b9b8146468cbb0078bb4401",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/cluster.py",
+          "sha256": "a3920a33cb72c013c355d1a89e304ea90ff4c82e1e0ddaf25c7af3b0cbe6cacd",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/command-kilo.md",
+          "sha256": "5c2332f9e9d9f90e807cff0043f21a05e98e31cfc88777e968eb2249eed80aed",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/dedup.py",
+          "sha256": "39ea5274ac6ea081364c64dc2200afadd1e8f1946a2fa702065bd0ff7178f386",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/detect.py",
+          "sha256": "38696a6498cdb9b320e6c5cca169470de0fac8ab13f4e09e312a2560e35b80a0",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/diagnostics.py",
+          "sha256": "4cab48ec7db79a703498f6b3c8f936a52b804dba249893b9383a6bece04ed6e8",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/export.py",
+          "sha256": "12996202aae38157e74f6066de655ba8dedb60f59ed768292136d6ad07604a90",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/extract.py",
+          "sha256": "1554c1d054d063782c0d9e99ba433c92f0fafcacb08dd357ea8b5859a78bc29d",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/file_slice.py",
+          "sha256": "82f05c6b9963de72fa9295ce85e8305a4430ee63800b4dd1000eb429b6d9544e",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/global_graph.py",
+          "sha256": "f1efb88ad523dbc7f0c6c44d575da056ccbbb202c2951095ba0671779b923563",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/google_workspace.py",
+          "sha256": "f5563580450aea0830159ebed58316594161b6bcb9539cd97d161ff529ceae9a",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/hooks.py",
+          "sha256": "538d55085e9da0f14e372a54e303d7ab85bbffae1f1772fbcb9b1a96b0fdf52e",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/ids.py",
+          "sha256": "ac9138fccaa369adf0fd110cb2775f77bf6244d6b833d417d5551759a4439f4c",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/ingest.py",
+          "sha256": "34a5103d469774f0981ba741e7b3e883d35d2023e16dbf0c90287f2ac4e775ad",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/install.py",
+          "sha256": "f473bc446ede308e36f74ebb306eff3da12c9dcbf45e87133576dcf7f99e2526",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/llm.py",
+          "sha256": "9c5a1541fa3102369a31266f2ed606f3452b24f46dc2e214ac753d1c658e29d4",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/manifest.py",
+          "sha256": "c865a2c577d4bf618d19d512d1f687ea0c961b8c09879b40d414536f184f7da2",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/manifest_ingest.py",
+          "sha256": "1f79a52f3c7f7a47d3a5006204bc00310c52d72c0b021200d9d5c477cbdc7f7f",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/mcp_ingest.py",
+          "sha256": "7553845a7cae7c310803bf37d992b695b27d21e1b827c1c33dbed2b15971be61",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/multigraph_compat.py",
+          "sha256": "73abcd5293c91f2584ea29539774a126fe99a783e3672887d69b5d70033c798b",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/pascal_resolution.py",
+          "sha256": "e4e9400ee20e6b410e521ad24bfe4c7e09742590ba1b0964cc84b49158d9318f",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/paths.py",
+          "sha256": "98b99e4de7290c6ed4511338ccfb118b15a15304aa00e759b3c186e4776dc705",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/pg_introspect.py",
+          "sha256": "9b31b4759289794407084e226d960aaea7936518dadc9da051e51136aa8b3af6",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/prs.py",
+          "sha256": "0ca28d7af2186c640ce7501b10d501b3498e3a50e14e62964bacedf78a73c30a",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/querylog.py",
+          "sha256": "953ad5fece9d380795a70e7dda4b72069ed7a57f56d8648fd339fea959a150a4",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/reflect.py",
+          "sha256": "1133f73a98fda37bcaa7c18e21741a518f855947210a55b90f6bad79c3878497",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/report.py",
+          "sha256": "6bda48f7f1387610b0a68f27a42ed0f1c967baed94737cc15a9bf563db8e30c8",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/resolver_registry.py",
+          "sha256": "bd5904412417ead6104852c1d79c3e8d1aebb7ab3f80a13330f19be7c18f307b",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/ruby_resolution.py",
+          "sha256": "10e799b3605125841740ef71734ac3f4aa9cecefc627669c9aac2b5253a7a897",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/scip_ingest.py",
+          "sha256": "4de62f7da456e5dc28f78a0dc5d97200e036cfb01318a806539582d53e288aa5",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/security.py",
+          "sha256": "26effec8aec27935da8cb60ee060924aa1a1965644a4c9f7dd61f4ae6b90a516",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/semantic_cleanup.py",
+          "sha256": "cae3cc75d203ffc2a23e01d8fedff40ed1316ded1767698bc31b5b59e64673aa",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/serve.py",
+          "sha256": "8b3ea9065bc1aaa7f686162ac9830592a09a147e9cde995b143175f8a5ca889d",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-agents.md",
+          "sha256": "7a6d60d8c3fd4384252c23c69c1c82643c6a86dee967f5dfa9f23169fea2cb1a",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-aider.md",
+          "sha256": "482ca401af014b01cc64e8fbe5389515753c792664f955291dd4dc2be470c291",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-amp.md",
+          "sha256": "7a6d60d8c3fd4384252c23c69c1c82643c6a86dee967f5dfa9f23169fea2cb1a",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-claw.md",
+          "sha256": "3e4d30df5a936965acaa25117230a6f3ff44353c137e63030e85e3bc3a391fb7",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-codex.md",
+          "sha256": "3898b1042721cad27d6f87ca44f638415a7f763203aefd86b90f9358ffea3a43",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-copilot.md",
+          "sha256": "3e4d30df5a936965acaa25117230a6f3ff44353c137e63030e85e3bc3a391fb7",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-devin.md",
+          "sha256": "254dafb67b53b4657815ab53383fa88dd6f4f8a19eb7be6f7c83c927ca7e0576",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-droid.md",
+          "sha256": "06b8b1592469d3605953ce77e9f49dfa08a8d6f39511bed40f6687b465dab49c",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-kilo.md",
+          "sha256": "43b43d22b206cf867fd9e3fdb64f5f4cee190decd69153a6d41e86d61bcaf4af",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-kiro.md",
+          "sha256": "3e4d30df5a936965acaa25117230a6f3ff44353c137e63030e85e3bc3a391fb7",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-opencode.md",
+          "sha256": "8664d0684e7fa14c47c8cce312a964c1669e44f8c8eea89a5b4fdb593f62ed66",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-pi.md",
+          "sha256": "3e4d30df5a936965acaa25117230a6f3ff44353c137e63030e85e3bc3a391fb7",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-trae.md",
+          "sha256": "fe5d7ed45cd9260ebe5694275a2d67bb0457bc71bbf85091790a98d4b6ffe405",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-vscode.md",
+          "sha256": "ab190cc8333d30f02692e7b63b0e4dd3140c00f087e5f26e3693feb176cd91cf",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/skill-windows.md",
+          "sha256": "43011be551529ba70b2c3962bece090c591ce1fdc8d05026837ae337972a431a",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/symbol_resolution.py",
+          "sha256": "1da5a99cf41c511102fead3fedefbc42f0dfdbe70b01962c8520652fc2313153",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/transcribe.py",
+          "sha256": "b01c127af5a7bf44865e517848dbb2d3dd88af0b146674c87ea56079cd926d55",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/tree_html.py",
+          "sha256": "dbd109d344de6a9bbfd3b20c62c91c6e5e7dceaf672d1695ae2985e58892d789",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/validate.py",
+          "sha256": "be068c6b2ff4e514f31663e0155a9d63f35096d154b98ab6c9c467a23febd6f7",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/watch.py",
+          "sha256": "d91f6bbcba9e5a58b22655182f2dfc890bbda6f8c1bc27b2e73231d480e2e4c7",
+          "owner": "graphify"
+        },
+        {
+          "path": "skills/developer-engineering/graphify/wiki.py",
+          "sha256": "53a2f7d3b2ea6b573bb8aaf28bf256bfeac3ac05c251f381a0531474abf22325",
+          "owner": "graphify"
         }
       ]
     }

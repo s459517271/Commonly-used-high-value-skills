@@ -453,13 +453,70 @@
             "last_checked_at": "2026-05-19",
             "last_synced_at": "2026-05-19"
           }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/knowledge-and-pm-integrations/linear",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/knowledge-and-pm-integrations/linear/LICENSE.txt",
+              "target": "skills/knowledge-and-pm-integrations/linear/LICENSE.txt",
+              "type": "file"
+            },
+            {
+              "source": "skills/knowledge-and-pm-integrations/linear/agents/openai.yaml",
+              "target": "skills/knowledge-and-pm-integrations/linear/agents/openai.yaml",
+              "type": "file"
+            },
+            {
+              "source": "skills/knowledge-and-pm-integrations/linear/assets/linear-small.svg",
+              "target": "skills/knowledge-and-pm-integrations/linear/assets/linear-small.svg",
+              "type": "file"
+            },
+            {
+              "source": "skills/knowledge-and-pm-integrations/linear/assets/linear.png",
+              "target": "skills/knowledge-and-pm-integrations/linear/assets/linear.png",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
         }
       ],
       "managed_files": [
         {
+          "path": "skills/knowledge-and-pm-integrations/linear/LICENSE.txt",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "owner": "linear"
+        },
+        {
           "path": "skills/knowledge-and-pm-integrations/linear/SKILL.md",
-          "owner": "linear",
-          "sha256": "edf4821482e71172b744c38272d733d56596e86e226848392cf5eb39b19422b2"
+          "sha256": "edf4821482e71172b744c38272d733d56596e86e226848392cf5eb39b19422b2",
+          "owner": "linear"
+        },
+        {
+          "path": "skills/knowledge-and-pm-integrations/linear/agents/openai.yaml",
+          "sha256": "9e6f164960e3dd0bc56456538abdf196d9e4fd8b4273be06fe1ef0110fbab9cb",
+          "owner": "linear"
+        },
+        {
+          "path": "skills/knowledge-and-pm-integrations/linear/assets/linear-small.svg",
+          "sha256": "6af9dbc5e58a51e80fcbcee47e5f9bd196a997cc5985c2147a89c908831d327f",
+          "owner": "linear"
+        },
+        {
+          "path": "skills/knowledge-and-pm-integrations/linear/assets/linear.png",
+          "sha256": "be13bf3f97e4437e67cda80979759998fb4f4dcace3cdd6a220ba6a75e1c2a82",
+          "owner": "linear"
         }
       ]
     }

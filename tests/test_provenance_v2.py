@@ -2,6 +2,7 @@ import importlib.util
 import io
 import json
 import os
+import re
 import sys
 import tempfile
 import unittest
@@ -129,10 +130,31 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
                 "additionalProperties"
             ]["$ref"],
         )
+        local_tracking_contract = (
+            schema["$defs"]["origin"]["allOf"][0]["then"]["properties"][
+                "tracking"
+            ]["allOf"][1]
+        )
+        self.assertEqual(
+            ["license_checkpoint"],
+            local_tracking_contract["not"]["required"],
+        )
         self.assertEqual(
             "#/$defs/nullableSha256",
             schema["$defs"]["tracking"]["properties"]["content_sha256"]["$ref"],
         )
+        relative_pattern = schema["$defs"]["relativePath"]["pattern"]
+        self.assertIsNotNone(re.fullmatch(relative_pattern, "references/guide.md"))
+        for invalid_path in (
+            "references\\guide.md",
+            "references//guide.md",
+            "references/./guide.md",
+            "references/guide.md/",
+        ):
+            self.assertIsNone(
+                re.fullmatch(relative_pattern, invalid_path),
+                invalid_path,
+            )
 
         with tempfile.TemporaryDirectory() as tmpdir:
             sources = Path(tmpdir)
@@ -527,6 +549,29 @@ class ProvenanceV2MigrationTests(unittest.TestCase):
             with self.subTest(invalid=invalid):
                 self.assertFalse(provenance.safe_relative_path(invalid))
 
+    def test_github_repo_parser_requires_exact_host_and_canonical_repo(self):
+        self.assertEqual(
+            "owner/upstream",
+            provenance.github_repo("github:Owner/Upstream"),
+        )
+        self.assertEqual(
+            "owner/upstream",
+            provenance.github_repo(
+                "https://github.com/Owner/Upstream/blob/main/SKILL.md"
+            ),
+        )
+        for invalid in (
+            "https://evilgithub.com/owner/upstream",
+            "https://github.com.evil.test/owner/upstream",
+            "https://github.com//owner/upstream",
+            "https://user@github.com/owner/upstream",
+            "github:owner/upstream/extra",
+            "github:-owner/upstream",
+            "github:owner/..",
+        ):
+            with self.subTest(invalid=invalid):
+                self.assertIsNone(provenance.github_repo(invalid))
+
 
 class ProvenanceV2ValidationTests(unittest.TestCase):
     def make_migrated_mapping(
@@ -685,6 +730,96 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                 any("external origin license" in error for error in errors)
             )
             self.assertTrue(any("sync_mode invalid" in error for error in errors))
+
+    def test_license_checkpoint_rejects_conflicting_github_spdx(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            mapping, data = self.make_migrated_mapping(root)
+            tracking = data["skills"][0]["origins"][0]["tracking"]
+            tracking["license_checkpoint"] = {
+                "path": "LICENSE",
+                "blob_sha": "b" * 40,
+                "content_sha256": "c" * 64,
+                "spdx": "MIT",
+                "resolved_commit": "a" * 40,
+                "api_spdx": "Apache-2.0",
+            }
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+
+            errors = validator.validate_mapping(mapping, root)
+
+            self.assertTrue(
+                any(
+                    "api_spdx conflicts with detected SPDX" in error
+                    for error in errors
+                ),
+                errors,
+            )
+
+            tracking["license_checkpoint"]["api_spdx"] = "NOASSERTION"
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual([], validator.validate_mapping(mapping, root))
+
+    def test_frontmatter_license_must_cover_every_external_origin(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            mapping, data = self.make_migrated_mapping(root)
+            entry = data["skills"][0]
+            sidecar = "skills/category/example/references/apache.md"
+            (root / sidecar).parent.mkdir(parents=True)
+            (root / sidecar).write_text("apache origin\n", encoding="utf-8")
+            second = deepcopy(entry["origins"][0])
+            second["repo"] = "other/apache-source"
+            second["license"] = "Apache-2.0"
+            second["path"] = "docs/apache.md"
+            second["artifacts"] = [
+                {
+                    "source": "docs/apache.md",
+                    "target": sidecar,
+                    "type": "file",
+                }
+            ]
+            entry["origins"].append(second)
+            entry["managed_files"].append(
+                {
+                    "path": sidecar,
+                    "sha256": provenance.sha256_file(root / sidecar),
+                    "owner": "example",
+                }
+            )
+            skill_path = root / entry["repo_skill"]
+            skill_path.write_text(
+                skill_path.read_text(encoding="utf-8").replace(
+                    "license: MIT",
+                    "license: BSD-3-Clause",
+                ),
+                encoding="utf-8",
+            )
+            entry["managed_files"][0]["sha256"] = provenance.sha256_file(skill_path)
+            entry["origins"][0]["tracking"]["content_sha256"] = (
+                entry["managed_files"][0]["sha256"]
+            )
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+
+            errors = validator.validate_mapping(mapping, root)
+            self.assertTrue(
+                any("license lineage" in error for error in errors),
+                errors,
+            )
+
+            skill_path.write_text(
+                skill_path.read_text(encoding="utf-8").replace(
+                    "license: BSD-3-Clause",
+                    "license: MIT AND Apache-2.0",
+                ),
+                encoding="utf-8",
+            )
+            entry["managed_files"][0]["sha256"] = provenance.sha256_file(skill_path)
+            entry["origins"][0]["tracking"]["content_sha256"] = (
+                entry["managed_files"][0]["sha256"]
+            )
+            mapping.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual([], validator.validate_mapping(mapping, root))
 
     def test_default_and_canary_channels_reject_replace(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -850,7 +985,6 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             mapping, data = self.make_migrated_mapping(root)
-            entry = data["skills"][0]
 
             mutations = (
                 ("repo", "different/upstream", "upstream.repo"),
@@ -1664,6 +1798,54 @@ class ProvenanceV2ValidationTests(unittest.TestCase):
                 ),
                 errors,
             )
+
+    def test_dependency_hash_uses_unique_repo_skill_owner_only(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            _, data = self.make_migrated_mapping(root, "dependency")
+            entry = data["skills"][0]
+            owner_hash = entry["origins"][0]["tracking"]["content_sha256"]
+            unrelated = deepcopy(entry["origins"][0])
+            unrelated["repo"] = "other/unrelated"
+            unrelated["license"] = "Apache-2.0"
+            unrelated["path"] = "docs/other.md"
+            unrelated["artifacts"] = [
+                {
+                    "source": "docs/other.md",
+                    "target": "skills/category/dependency/references/other.md",
+                    "type": "file",
+                }
+            ]
+            unrelated["tracking"]["content_sha256"] = "f" * 64
+            entry["origins"].insert(0, unrelated)
+
+            self.assertEqual(
+                owner_hash,
+                validator._entry_content_sha256(entry, root),
+            )
+
+            duplicate_in_owner = deepcopy(entry)
+            duplicate_in_owner["origins"][1]["artifacts"].append(
+                deepcopy(duplicate_in_owner["origins"][1]["artifacts"][0])
+            )
+            self.assertIsNone(
+                validator._entry_content_sha256(duplicate_in_owner, root)
+            )
+
+            duplicate_owner = deepcopy(unrelated)
+            duplicate_owner["artifacts"] = [
+                {
+                    "source": "other/SKILL.md",
+                    "target": entry["repo_skill"],
+                    "type": "file",
+                }
+            ]
+            entry["origins"].append(duplicate_owner)
+            self.assertIsNone(validator._entry_content_sha256(entry, root))
+
+            for origin in entry["origins"]:
+                origin["artifacts"] = []
+            self.assertIsNone(validator._entry_content_sha256(entry, root))
 
     def test_dependency_lock_detects_stale_composite(self):
         with tempfile.TemporaryDirectory() as tmpdir:

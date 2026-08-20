@@ -31,6 +31,9 @@
 - `scripts/check_upstream_github_updates.py`：检查 GitHub upstream 是否有更新（支持 offline/online 模式）
 - `scripts/provenance_pipeline.py`：统一执行入口（一条命令跑完整流程）
 - `scripts/migrate_provenance_v2.py`：来源映射 v1→v2 迁移与显式受管哈希刷新
+- `scripts/reconcile_artifact_inventory.py`：逐文件判定外部 exact artifact 与本地 curation overlay
+- `scripts/artifact_set_sync.py`：受管 artifact-set 的事务式暂存、替换、回滚与安全删除
+- `scripts/github_artifact_provider.py`：按不可变 commit 读取 GitHub tree/blob 与移动候选
 - `scripts/provenance_v2.schema.json`：provenance v2 的机器可读契约
 - `docs/sources/provenance.config.json`：统一配置（阈值/输出路径）
 
@@ -47,6 +50,26 @@
 
 所有活动 mapping 默认必须是 `schema_version: 2`。只有兼容旧 fixture 或迁移排障时才允许显式使用 `validate_skill_sources.py --allow-v1`。
 
+`managed_files` 不是“当前目录文件列表”的同义词，而是覆盖、更新和删除授权。只有以下两类文件可进入：
+
+- 在锁定 commit 上与上游 blob 字节完全一致的 external artifact；
+- 明确归属于 `local-repo/curation`、永不被外部 origin 覆盖的本地 overlay。
+
+首次治理或历史目录补录时先只读盘点，再显式写入：
+
+```bash
+python scripts/reconcile_artifact_inventory.py \
+  --output /tmp/artifact-inventory.json
+python scripts/reconcile_artifact_inventory.py \
+  --write --output /tmp/artifact-inventory-write.json
+python scripts/reconcile_artifact_inventory.py \
+  --offline --output /tmp/artifact-inventory-idempotence.json
+python scripts/reconcile_artifact_inventory.py \
+  --offline --check-clean --quiet
+```
+
+只要出现 `unavailable`、所有权冲突、受管哈希漂移、symlink 或扫描错误，写入必须停止；不能通过刷新 digest 消除用户修改证据。
+
 迁移默认只读：
 
 ```bash
@@ -62,7 +85,9 @@ python scripts/migrate_provenance_v2.py --refresh-managed-digests --write
 
 ### Release channel 策略
 
-- `latest_release`：可在许可证、签名/制品和 inventory 门禁通过后自动同步。
+- `latest_release`：canonical skill 只有在解析后的不可变 commit 上通过
+  许可证与 artifact inventory 门禁后才可自动同步；包签名、SLSA 与制品
+  完整性属于 bundle-specific tooling，不能由普通 skill sync 冒充。
 - `fixed_ref`：只有不可变 ref 才可自动同步。
 - `default_branch`、`canary`：一律 `monitor`，进入人工复核，不能自动覆盖 canonical 内容。
 - `local`：仅允许 `local-only`。
@@ -109,12 +134,32 @@ python scripts/migrate_provenance_v2.py --refresh-managed-digests --write
    - 验证命令与结果
    - 是否为原创（`in_house`）或外部来源
 
-检查上游时，`--check-only` 保证零写入；只有明确需要记录检查时间时才使用 `--record-check`：
+检查上游时，普通 `--check-only` 不修改 canonical skill 或 provenance
+mapping。显式 `--report-json` 会写报告，显式 `--record-check` 会更新
+mapping 的检查 checkpoint：
 
 ```bash
 python scripts/sync_upstream.py --check-only
 python scripts/sync_upstream.py --check-only --record-check
+python scripts/sync_upstream.py --check-only \
+  --report-json /tmp/upstream-report.json
 ```
+
+机器报告采用三态：
+
+- `complete`（退出码 `0`）：检查可信完成；可能包含可自动吸收的 `changed` 或显式 `expected_skipped`。
+- `degraded`（退出码 `2`）：存在 `monitor_review` 或上游 rollback，必须人工处理。
+- `failed`（退出码 `1`）：存在未预期 unavailable、空输入、记录失败或事务失败，禁止声称“全部最新”。
+
+报告必须满足：
+
+```text
+total = equal + changed + monitor_review + unavailable + rollback + expected_skipped
+```
+
+artifact apply 只覆盖所选 external origin 已有且 digest 未被用户修改的受管目标。其他 origin 的文件受到保护；上游删除只会 prune manifest 授权且当前 hash 仍匹配的文件。技能目录和 mapping 使用两阶段事务，mapping 未成功提交时必须恢复原 artifact set。
+
+跨 mapping/skill 的写入使用仓库私有状态目录 `.hvs-transactions/` 保存崩溃恢复 journal。该目录已被 Git 忽略；固定 `batch.lock` 可以长期存在。不要手工删除 `pending/` 或其中的原始文件：下一次受管写操作会在取得全局锁后自动判定完成或回滚，无法安全判定时会保留 recovery 路径并失败关闭。`--check-only`、`--dry-run` 和 inventory 只读检查既不会创建事务状态，也不会恢复或删除已有 journal；若只读路径发现待恢复事务，应先运行相应的受管写操作完成恢复。
 
 ## 6) 定期更新策略（建议）
 
@@ -125,7 +170,12 @@ python scripts/sync_upstream.py --check-only --record-check
   - `python3 scripts/skills_refresh_planner.py --stale-days 30 --write-json docs/sources/reports/refresh-queue.json`
   - `python3 scripts/build_skills_catalog.py --write-json docs/sources/reports/catalog.json`
   - `python3 scripts/generate_sources_index.py --write-json docs/sources/index.json`
-  - `python3 scripts/check_upstream_github_updates.py --write-json docs/sources/reports/upstream-check.json`
+  - `python3 scripts/check_upstream_github_updates.py --online --write-json docs/sources/reports/upstream-check.json`
+
+不带 `--online` 的检查只用于确定性 inventory/CI 结构验证，永远不能
+返回 `complete`；有效离线盘点为 `degraded`，空输入、inventory 错误或
+unavailable 仍必须是 `failed`。它不能作为“当前上游已是最新”的新鲜度
+证据。
 - 通过 refresh queue 的 `priority` 字段批量处理最紧急条目。
 - 通过 catalog 的 `conflicts` 字段快速发现跨来源 slug 冲突。
 - 通过 sources index 快速查看全局覆盖率与状态分布。
@@ -155,6 +205,9 @@ python scripts/sync_upstream.py --check-only --record-check
 - [x] 增加来源覆盖率门禁
 - [x] provenance v2 来源、artifact、许可证与依赖 DAG 门禁
 - [x] `--check-only` 零写入与显式 `--record-check`
+- [x] artifact-set 全文件同步、二进制安全与安全 prune
+- [x] external/local overlay 唯一所有权与历史 sidecar 全量纳管
+- [x] 周期任务 `complete/degraded/failed` 三态与守恒报告
 
 
 ## 9) 阶段收敛（告一段落）

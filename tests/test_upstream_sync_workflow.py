@@ -14,6 +14,17 @@ class UpstreamSyncWorkflowTests(unittest.TestCase):
         job = data["jobs"]["discover-and-sync"]
         steps = job["steps"]
 
+        discovery = next(
+            step
+            for step in steps
+            if isinstance(step, dict)
+            and step.get("name") == "Discover new skills from external sources"
+        )
+        self.assertEqual(
+            "${{ secrets.GITHUB_TOKEN }}",
+            discovery["env"]["GITHUB_TOKEN"],
+        )
+
         reconcile = next(
             step
             for step in steps
@@ -21,19 +32,65 @@ class UpstreamSyncWorkflowTests(unittest.TestCase):
         )
         self.assertEqual("actions/github-script@v7", reconcile["uses"])
         self.assertEqual(
-            "steps.discovery.outcome == 'success' && steps.upstream.outcome == 'success'",
+            "always()",
             reconcile["if"],
+        )
+        self.assertEqual(
+            "${{ steps.report.outputs.needs_attention }}",
+            reconcile["env"]["NEEDS_ATTENTION"],
+        )
+        self.assertEqual(
+            "${{ steps.report.outputs.sync_state }}",
+            reconcile["env"]["SYNC_STATE"],
+        )
+        self.assertEqual(
+            "${{ steps.report.outcome }}",
+            reconcile["env"]["REPORT_OUTCOME"],
         )
 
         script = reconcile["with"]["script"]
         self.assertIn("github.rest.issues.create", script)
         self.assertIn("github.rest.issues.update", script)
         self.assertIn("state_reason: 'completed'", script)
-        self.assertIn("latest weekly scan found no meaningful", script)
+        self.assertIn("latest weekly scan completed with state", script)
+        self.assertIn("issue.title === title", script)
+        self.assertNotIn("issue.title.startsWith(title)", script)
+        self.assertIn("if (syncState !== 'complete')", script)
+        self.assertIn(
+            "process.env.REPORT_OUTCOME === 'success'",
+            script,
+        )
+        self.assertIn("const reportExists = fs.existsSync", script)
+        self.assertIn("const report = reportExists", script)
+        self.assertNotIn(
+            "reportSucceeded && fs.existsSync(process.env.REPORT_PATH)",
+            script,
+        )
+        self.assertIn(": 'failed'", script)
+        degraded_branch, complete_branches = script.split(
+            "} else if (needsAttention) {", 1
+        )
+        self.assertNotIn("state: 'closed'", degraded_branch)
+        self.assertIn("state: 'closed'", complete_branches)
         self.assertNotIn(
             "peter-evans/create-issue-from-file",
             WORKFLOW_PATH.read_text(encoding="utf-8"),
         )
+
+        enforce = next(
+            step
+            for step in steps
+            if isinstance(step, dict)
+            and step.get("name") == "Enforce sync automation state"
+        )
+        self.assertEqual("always()", enforce["if"])
+        self.assertEqual(
+            "${{ steps.report.outcome }}",
+            enforce["env"]["REPORT_OUTCOME"],
+        )
+        self.assertIn('REPORT_OUTCOME" != "success', enforce["run"])
+        self.assertIn("degraded)", enforce["run"])
+        self.assertIn("exit 1", enforce["run"])
 
 
 if __name__ == "__main__":

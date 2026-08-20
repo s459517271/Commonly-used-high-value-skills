@@ -76,7 +76,8 @@
         "last_checked_at": "2026-08-20",
         "last_synced_at": "2026-08-20",
         "last_synced_commit": "aa8d778811a557a2c28ccadda4cf3d0bd028a4cc",
-        "sync_mode": "monitor"
+        "sync_mode": "monitor",
+        "path_commit": "1851c8fb09ea8ff0488d48bd7c312abb1bbf5850"
       },
       "kind": "mirror",
       "sync_mode": "monitor",
@@ -140,7 +141,15 @@
             "path_commit": "1851c8fb09ea8ff0488d48bd7c312abb1bbf5850",
             "content_sha256": "8f35d3e054260a3ff45bcb6162fac6d47074c6b56a2c6f55191815754a697b92",
             "last_checked_at": "2026-08-20",
-            "last_synced_at": "2026-08-20"
+            "last_synced_at": "2026-08-20",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "c3e30bcc287d6a1ebdb4ab29c10d344fd1053639",
+              "content_sha256": "a20126646f93d32a8989c3cf4772d59194f405034f7babe7daebeac22b8ab151",
+              "spdx": "MIT",
+              "resolved_commit": "aa8d778811a557a2c28ccadda4cf3d0bd028a4cc",
+              "api_spdx": "MIT"
+            }
           }
         }
       ],
@@ -1301,7 +1310,7 @@
         "last_synced_commit": "8331f910845103c08d51f6ca1d86ebb7d1f745e3",
         "sync_mode": "monitor"
       },
-      "kind": "mirror",
+      "kind": "overlay",
       "sync_mode": "monitor",
       "origins": [
         {
@@ -1340,6 +1349,28 @@
             "last_checked_at": "2026-08-20",
             "last_synced_at": "2026-08-20"
           }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/developer-engineering/supabase",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/developer-engineering/supabase/skills/supabase/CHANGELOG.md",
+              "target": "skills/developer-engineering/supabase/skills/supabase/CHANGELOG.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
         }
       ],
       "managed_files": [
@@ -1361,6 +1392,11 @@
         {
           "path": "skills/developer-engineering/supabase/references/skill-feedback.md",
           "sha256": "09ad94c0291735dfc04c92557c8734fa259ec39e1d56bf2bd5c6a6529d838717",
+          "owner": "supabase"
+        },
+        {
+          "path": "skills/developer-engineering/supabase/skills/supabase/CHANGELOG.md",
+          "sha256": "a15c75daf614ec9b2563397d8c1367027fcb1267808e5939e99f459b33d72211",
           "owner": "supabase"
         }
       ]

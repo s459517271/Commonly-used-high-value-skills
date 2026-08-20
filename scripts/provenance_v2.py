@@ -16,6 +16,7 @@ import tempfile
 from copy import deepcopy
 from pathlib import Path, PurePosixPath
 from typing import Any
+from urllib.parse import urlsplit
 
 SCHEMA_VERSION = 2
 
@@ -40,6 +41,7 @@ VALID_CHANNELS = {
 }
 ACTIVE_STATUSES = {"verified_in_repo", "in_house"}
 LOCAL_SOURCE_VALUES = {"", "in-house", "in_house", "local"}
+LOCAL_CURATION_REPO = "local-repo/curation"
 UNKNOWN_LICENSE_VALUES = {
     "",
     "unknown",
@@ -50,9 +52,10 @@ UNKNOWN_LICENSE_VALUES = {
 }
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---(?:\s*\n|$)", re.DOTALL)
-GITHUB_REPO_RE = re.compile(
-    r"(?:github\.com/|^github:)([^/\s]+/[^/\s#?]+)", re.IGNORECASE
+GITHUB_OWNER_RE = re.compile(
+    r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$"
 )
+GITHUB_REPOSITORY_RE = re.compile(r"^[A-Za-z0-9._-]+$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$", re.IGNORECASE)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -89,17 +92,66 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def valid_github_repo(value: object) -> bool:
+    """Whether ``value`` is one canonical GitHub ``owner/repository`` id."""
+    if not isinstance(value, str) or value != value.strip():
+        return False
+    if value.count("/") != 1:
+        return False
+    owner, repository = value.split("/", 1)
+    if repository.lower().endswith(".git"):
+        return False
+    return bool(
+        GITHUB_OWNER_RE.fullmatch(owner)
+        and GITHUB_REPOSITORY_RE.fullmatch(repository)
+        and repository not in {".", ".."}
+    )
+
+
 def github_repo(value: str | None) -> str | None:
-    """Return a normalized ``owner/repo`` from a GitHub source declaration."""
-    if not value:
+    """Return a normalized GitHub repository from an exact declaration.
+
+    Substring matching is intentionally forbidden: hosts such as
+    ``evilgithub.com`` and credential-bearing URLs must never establish source
+    lineage.
+    """
+    if not isinstance(value, str) or not value or value != value.strip():
         return None
-    match = GITHUB_REPO_RE.search(value.strip())
-    if not match:
+    candidate = value
+    if candidate.lower().startswith("github:"):
+        repository = candidate[len("github:") :]
+        if repository.lower().endswith(".git"):
+            repository = repository[:-4]
+        if not valid_github_repo(repository):
+            return None
+        return repository.lower()
+
+    try:
+        parsed = urlsplit(candidate)
+        parsed_port = parsed.port
+    except ValueError:
         return None
-    result = match.group(1).rstrip("/")
-    if result.lower().endswith(".git"):
-        result = result[:-4]
-    return result.lower()
+    if (
+        parsed.scheme.lower() not in {"http", "https"}
+        or parsed.hostname is None
+        or parsed.hostname.lower() != "github.com"
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed_port is not None
+    ):
+        return None
+    raw_parts = parsed.path.split("/")
+    if (
+        len(raw_parts) < 3
+        or raw_parts[0] != ""
+        or not raw_parts[1]
+        or not raw_parts[2]
+    ):
+        return None
+    repository = f"{raw_parts[1]}/{raw_parts[2]}"
+    if repository.lower().endswith(".git"):
+        repository = repository[:-4]
+    return repository.lower() if valid_github_repo(repository) else None
 
 
 def is_local_repo(repo: str | None) -> bool:
@@ -307,24 +359,27 @@ def _requested_sync_mode(item: dict[str, Any], kind: str) -> str:
 
 
 def _normalize_entry_sync_modes(item: dict[str, Any], kind: str) -> None:
-    """Keep origin, v2 entry, and legacy upstream modes policy-identical."""
+    """Normalize entry modes while preserving mixed local-overlay semantics."""
     requested = _requested_sync_mode(item, kind)
     origins = item.get("origins")
     proposals: list[str] = []
+    origin_proposals: list[tuple[dict[str, Any], str]] = []
     if isinstance(origins, list):
         for origin in origins:
             if not isinstance(origin, dict):
                 continue
             tracking = origin.get("tracking")
-            proposals.append(
-                normalize_sync_mode(
-                    kind=kind,
-                    tracking=tracking,
-                    repo=origin.get("repo"),
-                    requested_mode=requested,
-                    status=item.get("status"),
-                )
+            proposal = normalize_sync_mode(
+                kind=kind,
+                tracking=tracking,
+                repo=origin.get("repo"),
+                requested_mode=requested,
+                status=item.get("status"),
             )
+            if origin.get("repo") == LOCAL_CURATION_REPO:
+                proposal = "local-only"
+            proposals.append(proposal)
+            origin_proposals.append((origin, proposal))
 
     if not proposals:
         upstream = (
@@ -358,10 +413,8 @@ def _normalize_entry_sync_modes(item: dict[str, Any], kind: str) -> None:
         normalized = "replace"
 
     item["sync_mode"] = normalized
-    if isinstance(origins, list):
-        for origin in origins:
-            if isinstance(origin, dict):
-                origin["sync_mode"] = normalized
+    for origin, proposal in origin_proposals:
+        origin["sync_mode"] = proposal
     upstream = item.get("upstream")
     if isinstance(upstream, dict):
         upstream["sync_mode"] = normalized
@@ -474,7 +527,18 @@ def _migrate_managed_files(
             if record is not None:
                 existing_by_path[path] = record
 
-    targets = local_targets if local_targets is not None else existing_paths
+    if local_targets is not None:
+        # Preserve the reviewed manifest order and append only newly discovered
+        # local files in the scanner's deterministic order.  Reconciliation
+        # tools may use bytewise POSIX sorting while Path sorts by components;
+        # reordering otherwise-identical ownership records is not a migration.
+        local_target_set = set(local_targets)
+        targets = [
+            path for path in existing_paths if path in local_target_set
+        ]
+        targets.extend(path for path in local_targets if path not in targets)
+    else:
+        targets = existing_paths
     if local_targets is None and not targets:
         target = _artifact_target(item)
         targets = [target] if target else []
@@ -572,8 +636,15 @@ def _refresh_local_origin(
 ) -> dict[str, Any]:
     """Refresh repository-local facts without changing external checkpoints."""
     refreshed = deepcopy(origin)
-    artifacts = _local_artifacts(item, repo_root)
-    refreshed["artifacts"] = artifacts
+    curated_overlay = refreshed.get("repo") == LOCAL_CURATION_REPO
+    if curated_overlay:
+        # A curation origin owns only the explicit supplements assigned to it.
+        # Expanding it to the whole skill directory would steal ownership of
+        # the externally sourced SKILL.md and exact sidecars.
+        artifacts = deepcopy(refreshed.get("artifacts"))
+        refreshed["artifacts"] = artifacts if isinstance(artifacts, list) else []
+    else:
+        refreshed["artifacts"] = _local_artifacts(item, repo_root)
 
     upstream = item.get("upstream") if isinstance(item.get("upstream"), dict) else {}
     target = _artifact_target(item)
@@ -584,26 +655,37 @@ def _refresh_local_origin(
     skill_target = target
     skill_path = repo_root / skill_target if skill_target else None
     tracking["channel"] = "local"
-    tracking["ref"] = str(upstream.get("ref") or tracking.get("ref") or "local")
-    tracking.setdefault("resolved_commit", None)
-    tracking.setdefault("path_commit", None)
+    tracking["ref"] = (
+        "local"
+        if curated_overlay
+        else str(upstream.get("ref") or tracking.get("ref") or "local")
+    )
+    if curated_overlay:
+        tracking["resolved_commit"] = None
+        tracking["path_commit"] = None
+    else:
+        tracking.setdefault("resolved_commit", None)
+        tracking.setdefault("path_commit", None)
     previous_content_hash = tracking.get("content_sha256")
-    current_content_hash = (
-        sha256_file(skill_path)
-        if skill_path is not None
+    if curated_overlay:
+        current_content_hash = None
+    elif (
+        skill_path is not None
         and skill_path.is_file()
         and not skill_path.is_symlink()
-        else None
-    )
+    ):
+        current_content_hash = sha256_file(skill_path)
+    else:
+        current_content_hash = None
     tracking["content_sha256"] = current_content_hash
     checked_at = (
         tracking_date
-        or upstream.get("last_checked_at")
         or tracking.get("last_checked_at")
+        or (None if curated_overlay else upstream.get("last_checked_at"))
     )
     previous_synced_at = (
-        upstream.get("last_synced_at")
-        or tracking.get("last_synced_at")
+        tracking.get("last_synced_at")
+        or (None if curated_overlay else upstream.get("last_synced_at"))
     )
     content_changed = current_content_hash != previous_content_hash
     synced_at = (
@@ -613,8 +695,9 @@ def _refresh_local_origin(
     )
     tracking["last_checked_at"] = checked_at
     tracking["last_synced_at"] = synced_at
-    upstream["last_checked_at"] = checked_at
-    upstream["last_synced_at"] = synced_at
+    if not curated_overlay:
+        upstream["last_checked_at"] = checked_at
+        upstream["last_synced_at"] = synced_at
     refreshed["tracking"] = tracking
     return refreshed
 
@@ -737,12 +820,16 @@ def migrate_entry(
 
     _normalize_entry_sync_modes(migrated, kind)
 
-    has_local_origin = any(
-        isinstance(origin, dict) and is_local_repo(origin.get("repo"))
+    has_full_local_origin = any(
+        isinstance(origin, dict)
+        and is_local_repo(origin.get("repo"))
+        and origin.get("repo") != LOCAL_CURATION_REPO
         for origin in migrated.get("origins", [])
     )
     local_targets = (
-        _skill_artifact_paths(migrated, repo_root) if has_local_origin else None
+        _skill_artifact_paths(migrated, repo_root)
+        if has_full_local_origin
+        else None
     )
     migrated["managed_files"] = _migrate_managed_files(
         migrated,
