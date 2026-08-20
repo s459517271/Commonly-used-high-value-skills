@@ -154,7 +154,7 @@ class IngestSkillTests(unittest.TestCase):
 
     def test_dry_run_rejects_dirty_tracked_executable_mode(self):
         module = load_module()
-        with tempfile.TemporaryDirectory(dir="/private/tmp") as tmpdir:
+        with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             subprocess.run(["git", "init", "-q", str(root)], check=True)
             skill_dir = self.write_skill(
