@@ -2546,6 +2546,7 @@ def atomic_write_json(
         ) from exc
     temporary_path: Path | None = None
     temporary_identity: tuple[int, int] | None = None
+    temporary_descriptor: int | None = None
     cleanup_directory_fd: int | None = None
     replaced = False
     payload = serialize_mapping_json(data)
@@ -2583,9 +2584,23 @@ def atomic_write_json(
                 temporary_path,
                 directory_fd,
             )
-            temporary_identity = (
+            temporary_descriptor, pinned_metadata = _pin_temporary_inode(
+                temporary_path,
+                directory_fd,
+            )
+            if (
+                pinned_metadata.st_dev,
+                pinned_metadata.st_ino,
+            ) != (
                 temporary_metadata.st_dev,
                 temporary_metadata.st_ino,
+            ):
+                raise RuntimeError(
+                    "mapping temporary inode changed while being pinned"
+                )
+            temporary_identity = (
+                pinned_metadata.st_dev,
+                pinned_metadata.st_ino,
             )
             installed_snapshot = MappingSnapshot(
                 content=payload,
@@ -2606,12 +2621,20 @@ def atomic_write_json(
                 temporary_path,
                 directory_fd,
             )
+            pinned_temporary = os.fstat(temporary_descriptor)
             if (
                 current_temporary.st_dev,
                 current_temporary.st_ino,
             ) != temporary_identity:
                 raise RuntimeError(
                     "mapping temporary inode changed before replace"
+                )
+            if (
+                pinned_temporary.st_dev,
+                pinned_temporary.st_ino,
+            ) != temporary_identity:
+                raise RuntimeError(
+                    "mapping pinned temporary inode changed before replace"
                 )
             if expected_snapshot is not None:
                 _validate_mapping_snapshot(path, expected_snapshot)
@@ -2648,9 +2671,17 @@ def atomic_write_json(
                     temporary_path,
                     cleanup_directory_fd,
                 )
+                pinned = (
+                    os.fstat(temporary_descriptor)
+                    if temporary_descriptor is not None
+                    else None
+                )
                 if temporary_identity is not None and (
                     current.st_dev,
                     current.st_ino,
+                ) == temporary_identity and pinned is not None and (
+                    pinned.st_dev,
+                    pinned.st_ino,
                 ) == temporary_identity:
                     os.unlink(
                         temporary_path.name,
@@ -2658,6 +2689,8 @@ def atomic_write_json(
                     )
             except (FileNotFoundError, RuntimeError):
                 pass
+        if temporary_descriptor is not None:
+            os.close(temporary_descriptor)
         if cleanup_directory_fd is not None:
             os.close(cleanup_directory_fd)
 
@@ -2741,6 +2774,43 @@ def _secure_temporary_metadata(path: Path, directory_fd: int) -> os.stat_result:
     if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
         raise RuntimeError(f"mapping temporary is unsafe: {path}")
     return metadata
+
+
+def _pin_temporary_inode(
+    path: Path,
+    directory_fd: int,
+) -> tuple[int, os.stat_result]:
+    """Open and retain a stable reference to one staged temporary inode.
+
+    Linux filesystems may immediately reuse an unlinked inode number.  Keeping
+    this descriptor open until replace/cleanup prevents a foreign file created
+    under the same temporary name from passing a dev/inode-only ABA check.
+    """
+    descriptor = os.open(
+        path.name,
+        os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+        dir_fd=directory_fd,
+    )
+    try:
+        opened = os.fstat(descriptor)
+        named = os.stat(
+            path.name,
+            dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or stat.S_ISLNK(named.st_mode)
+            or opened.st_dev != named.st_dev
+            or opened.st_ino != named.st_ino
+        ):
+            raise RuntimeError(
+                f"mapping temporary changed while being pinned: {path}"
+            )
+        return descriptor, opened
+    except BaseException:
+        os.close(descriptor)
+        raise
 
 
 def _stage_private_mapping_recovery(path: Path, payload: bytes) -> Path:
