@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import stat
 import re
@@ -61,8 +62,38 @@ def valid_app_cache(relative, fixture, events):
     return checked.returncode==0
 
 
-def assess(path):
+def valid_metrics(raw):
+    if not isinstance(raw, dict):
+        return False
+    elapsed=raw.get('elapsed_seconds')
+    calls=raw.get('completed_tool_calls')
+    usage=raw.get('usage')
+    try:
+        finite_elapsed=type(elapsed) in (int,float) and math.isfinite(elapsed)
+    except OverflowError:
+        finite_elapsed=False
+    if (not finite_elapsed or elapsed < 0
+            or type(calls) is not int or calls < 0 or not isinstance(usage,list)):
+        return False
+    return all(isinstance(item,dict) and all(type(value) is int and value >= 0 for value in item.values()) for item in usage)
+
+
+def validate_record(raw):
+    if not isinstance(raw,dict):
+        raise ValueError('Result must be an object')
+    if any(not isinstance(raw.get(key),str) or not raw[key] for key in ('run_id','case','cohort')):
+        raise ValueError('Result identity fields are missing or invalid')
+    if (not isinstance(raw.get('assertions'),dict) or not isinstance(raw.get('returncodes'),list)
+            or any(type(value) is not bool for value in raw.get('assertions',{}).values())):
+        raise ValueError('Result assertions/returncodes are missing or invalid')
+    if any(type(value) is not int for value in raw['returncodes']) or not valid_metrics(raw):
+        raise ValueError('Result metrics or returncodes are invalid')
+
+
+def _assess(path):
     result=json.loads(path.read_text())
+    validate_record(result)
+    result['metrics_available']=True
     result.setdefault('fixture_version', 1)
     original=result.get('deterministic_pass')
     checks=dict(result['assertions'])
@@ -134,11 +165,43 @@ def assess(path):
     return result
 
 
+def assess(path):
+    """One damaged model workspace must not abort the rest of the collection."""
+    try:
+        return _assess(path)
+    except (OSError, UnicodeError, ValueError, KeyError, TypeError, AttributeError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+        raw=json_artifact(path)
+        identity=re.fullmatch(r'(baseline|candidate)-(.+)-(\d+)',path.parent.name)
+        result={
+            'run_id':raw.get('run_id') if isinstance(raw.get('run_id'),str) else path.parent.name,
+            'case':raw.get('case') if isinstance(raw.get('case'),str) else identity[2] if identity else 'unknown',
+            'cohort':raw.get('cohort') if isinstance(raw.get('cohort'),str) else identity[1] if identity else 'unknown',
+            'metrics_available':valid_metrics(raw),
+            'elapsed_seconds':raw['elapsed_seconds'] if valid_metrics(raw) else None,
+            'completed_tool_calls':raw['completed_tool_calls'] if valid_metrics(raw) else 0,
+            'usage':raw['usage'] if valid_metrics(raw) else [],
+        }
+        result['assertions']={'observation_completed':False}
+        result['artifact_checks_pass']=False
+        result['deterministic_pass']=None
+        result['task_verdict']='unreviewed'
+        result['semantic_grade']='pending_review'
+        result['collection_status']='failed'
+        result['collection_error']={'kind':type(error).__name__,'returncode':getattr(error,'returncode',None)}
+        result['transcripts']=[]
+        try:
+            result['evidence_digest']=evidence_digest(path.parent,result)
+        except (OSError, ValueError, subprocess.SubprocessError):
+            result['evidence_digest']=hashlib.sha256(json.dumps(result,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+            result['collection_error']['snapshot_incomplete']=True
+        return result
+
+
 def evidence_digest(folder, assessed):
     """Bind a reviewer decision to raw logs, controller output and file state."""
     files=[]
     for parent, directories, names in os.walk(folder, followlinks=False):
-        directories[:] = sorted(d for d in directories if not (d == '.git' and Path(parent) == folder))
+        directories[:] = sorted(directories)
         for name in list(directories):
             directory=Path(parent)/name
             if directory.is_symlink():
@@ -148,6 +211,10 @@ def evidence_digest(folder, assessed):
                 files.append({'path':directory.relative_to(folder).as_posix(),'mode':stat.S_IMODE(directory.stat().st_mode),'kind':'directory'})
         for name in sorted(names):
             path=Path(parent)/name
+            # The index stat cache is volatile; its semantic entries and flags
+            # are captured below. All config, hooks and other Git files stay bound.
+            if path == folder/'.git/index':
+                continue
             if path.is_symlink():
                 value={'link':os.readlink(path)}
             elif path.is_file():
@@ -176,6 +243,10 @@ def apply_review(row, reviews):
     review=reviews.get((row['run_id'],row['evidence_digest']))
     if review is None:
         return
+    if review['verdict']=='pass' and row.get('collection_status')=='failed':
+        row['task_verdict']='unverified'
+        row['review_application_error']='incomplete_evidence_collection'
+        return
     row['task_verdict']=review['verdict']
     row['semantic_grade']=review['verdict']
     row['semantic_review']={'reviewer':review['reviewer'],'rationale':review['rationale'],'evidence_digest':review['evidence_digest']}
@@ -201,7 +272,8 @@ def load_reviews(path, run_roots):
 
 
 def aggregate(rows):
-    return {'runs':len(rows),'artifact_checks_passes':sum(r['artifact_checks_pass'] for r in rows),'accepted_passes':sum(r['task_verdict']=='pass' for r in rows),'pending_reviews':sum(r['task_verdict']=='unreviewed' for r in rows),'median_seconds':round(statistics.median(r['elapsed_seconds'] for r in rows),3) if rows else None,'recorded_tool_events':sum(r['completed_tool_calls'] for r in rows),'input_tokens':sum(u.get('input_tokens',0) for r in rows for u in r['usage']),'cached_input_tokens':sum(u.get('cached_input_tokens',0) for r in rows for u in r['usage']),'output_tokens':sum(u.get('output_tokens',0) for r in rows for u in r['usage'])}
+    measured=[r for r in rows if r.get('metrics_available',True)]
+    return {'runs':len(rows),'metrics_complete':len(measured)==len(rows),'artifact_checks_passes':sum(r['artifact_checks_pass'] for r in rows),'accepted_passes':sum(r['task_verdict']=='pass' for r in rows),'pending_reviews':sum(r['task_verdict']=='unreviewed' for r in rows),'median_seconds':round(statistics.median(r['elapsed_seconds'] for r in measured),3) if measured else None,'recorded_tool_events':sum(r['completed_tool_calls'] for r in rows),'input_tokens':sum(u.get('input_tokens',0) for r in rows for u in r['usage']),'cached_input_tokens':sum(u.get('cached_input_tokens',0) for r in rows for u in r['usage']),'output_tokens':sum(u.get('output_tokens',0) for r in rows for u in r['usage'])}
 
 
 def main():
