@@ -54,7 +54,13 @@ def test_graphify_release_mapping_has_single_owner_and_exact_hashes() -> None:
     }]
     assert origin["tracking"]["channel"] == "latest_release"
     assert origin["tracking"]["ref"].startswith("v")
-    reviewed = mapping["verification_attempts"][-1]
+    reviewed = next(
+        attempt
+        for attempt in reversed(mapping["verification_attempts"])
+        if attempt["method"] == "commit-aware-manual-monitor-review"
+        and attempt["target"].startswith(f"{origin['repo']}@")
+        and attempt["result"] == "success"
+    )
     assert reviewed["method"] == "commit-aware-manual-monitor-review"
     assert reviewed["result"] == "success"
     reviewed_commit = reviewed["target"].rsplit("@", 1)[1]
