@@ -62,6 +62,10 @@ def evaluate_item(
     priority = 0
 
     upstream = skill.get("upstream") or {}
+    sync_mode = upstream.get("sync_mode")
+    upstream_repo = str(upstream.get("repo", ""))
+    if sync_mode in {"archived", "local-only"} or upstream_repo.startswith("local-repo/"):
+        return None
     last_checked = parse_date(upstream.get("last_checked_at"))
     last_synced = parse_date(upstream.get("last_synced_at"))
 

@@ -87,6 +87,7 @@ FULL_PIPELINE_COMMANDS = [
     ["scripts/build_catalog_json.py"],
     ["scripts/check_readme_sync.py"],
     ["scripts/lint_skill_quality.py", "--min-lines", "50"],
+    ["scripts/audit_skill_portfolio.py", "--check-policy"],
     ["scripts/audit_licenses.py"],
     ["-m", "unittest", "discover", "tests", "-v"],
 ]

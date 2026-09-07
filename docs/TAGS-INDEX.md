@@ -1,80 +1,74 @@
 # Tags Index
 
-> Auto-generated from 1177 skill-tag mappings across 510 tags.
+> Auto-generated from 1094 skill-tag mappings across 487 tags.
 > Last updated: see git log.
 
 ## Quick Navigation
 
-- [`workflow`](#workflow) (61)
-- [`development`](#development) (47)
-- [`agent`](#agent) (35)
-- [`ai`](#ai) (35)
-- [`feishu`](#feishu) (25)
-- [`lark`](#lark) (25)
-- [`lark-cli`](#lark-cli) (25)
-- [`engineering`](#engineering) (22)
+- [`workflow`](#workflow) (59)
+- [`development`](#development) (45)
+- [`agent`](#agent) (37)
+- [`ai`](#ai) (37)
+- [`engineering`](#engineering) (24)
+- [`lark`](#lark) (23)
+- [`feishu`](#feishu) (22)
+- [`lark-cli`](#lark-cli) (22)
 - [`security`](#security) (21)
-- [`planning`](#planning) (19)
-- [`automation`](#automation) (17)
-- [`design`](#design) (17)
-- [`growth`](#growth) (17)
+- [`design`](#design) (16)
 - [`finance`](#finance) (16)
-- [`devops`](#devops) (15)
-- [`marketing`](#marketing) (15)
-- [`productivity`](#productivity) (15)
-- [`sre`](#sre) (15)
-- [`product`](#product) (13)
+- [`automation`](#automation) (15)
+- [`growth`](#growth) (15)
+- [`planning`](#planning) (14)
+- [`sre`](#sre) (14)
+- [`devops`](#devops) (13)
+- [`marketing`](#marketing) (13)
+- [`product`](#product) (12)
+- [`productivity`](#productivity) (10)
 - [`deployment`](#deployment) (7)
 - [`designer`](#designer) (7)
 - [`api`](#api) (6)
-- [`builder`](#builder) (6)
-- [`code-review`](#code-review) (6)
-- [`mcp`](#mcp) (6)
-- [`analysis`](#analysis) (5)
-- [`creator`](#creator) (5)
+- [`code-review`](#code-review) (5)
 - [`expert`](#expert) (5)
-- [`graphify`](#graphify) (5)
 - [`manager`](#manager) (5)
+- [`mcp`](#mcp) (5)
 - [`skill`](#skill) (5)
-- [`skills`](#skills) (5)
+- [`analysis`](#analysis) (4)
 - [`appsec`](#appsec) (4)
 - [`architect`](#architect) (4)
 - [`best`](#best) (4)
+- [`builder`](#builder) (4)
+- [`cli`](#cli) (4)
 - [`cve`](#cve) (4)
 - [`deploy`](#deploy) (4)
 - [`docs`](#docs) (4)
-- [`generator`](#generator) (4)
 - [`github`](#github) (4)
-- [`gsd`](#gsd) (4)
-- [`hermes`](#hermes) (4)
 - [`knowledge`](#knowledge) (4)
 - [`kubernetes`](#kubernetes) (4)
 - [`media`](#media) (4)
-- [`meetings`](#meetings) (4)
 - [`memory`](#memory) (4)
 - [`notion`](#notion) (4)
-- [`postgres`](#postgres) (4)
+- [`performance`](#performance) (4)
 - [`research`](#research) (4)
+- [`safety`](#safety) (4)
 - [`secrets`](#secrets) (4)
+- [`skills`](#skills) (4)
 - [`tools`](#tools) (4)
 - [`vulnerability-scanning`](#vulnerability-scanning) (4)
 - [`ci`](#ci) (3)
-- [`cli`](#cli) (3)
+- [`creator`](#creator) (3)
 - [`database`](#database) (3)
-- [`debugging`](#debugging) (3)
-- [`engineer`](#engineer) (3)
 - [`frontend`](#frontend) (3)
+- [`generator`](#generator) (3)
 - [`git`](#git) (3)
 - [`knowledge-base`](#knowledge-base) (3)
 - [`markdown`](#markdown) (3)
+- [`meeting`](#meeting) (3)
 - [`office`](#office) (3)
-- [`performance`](#performance) (3)
+- [`postgres`](#postgres) (3)
 - [`review`](#review) (3)
 - [`reviewer`](#reviewer) (3)
-- [`safety`](#safety) (3)
 - [`sbom`](#sbom) (3)
 - [`social-media`](#social-media) (3)
-- [`supabase`](#supabase) (3)
 - [`supply-chain`](#supply-chain) (3)
 - [`system`](#system) (3)
 - [`twitter`](#twitter) (3)
@@ -84,29 +78,25 @@
 - [`analyst`](#analyst) (2)
 - [`analyzer`](#analyzer) (2)
 - [`app`](#app) (2)
-- [`architecture`](#architecture) (2)
 - [`auditor`](#auditor) (2)
-- [`brownfield`](#brownfield) (2)
-- [`capture`](#capture) (2)
-- [`changelog`](#changelog) (2)
 - [`checker`](#checker) (2)
 - [`cloudflare`](#cloudflare) (2)
 - [`code-scanning`](#code-scanning) (2)
 - [`codebase`](#codebase) (2)
-- [`codex`](#codex) (2)
 - [`configuration`](#configuration) (2)
 - [`container-security`](#container-security) (2)
-- [`doc`](#doc) (2)
 - [`docker`](#docker) (2)
 - [`driven`](#driven) (2)
-- [`events`](#events) (2)
+- [`engineer`](#engineer) (2)
+- [`evaluation`](#evaluation) (2)
 - [`figma`](#figma) (2)
 - [`financial`](#financial) (2)
 - [`gateway`](#gateway) (2)
+- [`graphify`](#graphify) (2)
 - [`graphql`](#graphql) (2)
+- [`hermes`](#hermes) (2)
 - [`integrations`](#integrations) (2)
 - [`linkedin`](#linkedin) (2)
-- [`meeting`](#meeting) (2)
 - [`metrics`](#metrics) (2)
 - [`minutes`](#minutes) (2)
 - [`neon`](#neon) (2)
@@ -115,31 +105,26 @@
 - [`observability`](#observability) (2)
 - [`outreach`](#outreach) (2)
 - [`owasp`](#owasp) (2)
-- [`parallel`](#parallel) (2)
-- [`pdf`](#pdf) (2)
 - [`plans`](#plans) (2)
 - [`playwright`](#playwright) (2)
-- [`ppt`](#ppt) (2)
 - [`practices`](#practices) (2)
 - [`presentation`](#presentation) (2)
 - [`project-management`](#project-management) (2)
-- [`prompt`](#prompt) (2)
 - [`quality-gate`](#quality-gate) (2)
 - [`react`](#react) (2)
 - [`researcher`](#researcher) (2)
-- [`root-cause-analysis`](#root-cause-analysis) (2)
 - [`saas`](#saas) (2)
 - [`sast`](#sast) (2)
 - [`schema`](#schema) (2)
-- [`search`](#search) (2)
 - [`senior`](#senior) (2)
 - [`slides`](#slides) (2)
-- [`spreadsheet`](#spreadsheet) (2)
 - [`strategy`](#strategy) (2)
+- [`supabase`](#supabase) (2)
 - [`terraform`](#terraform) (2)
+- [`testing`](#testing) (2)
 - [`threat-modeling`](#threat-modeling) (2)
-- [`toolkit`](#toolkit) (2)
 - [`tracker`](#tracker) (2)
+- [`transcript`](#transcript) (2)
 - [`verification`](#verification) (2)
 - [`wiki`](#wiki) (2)
 - [`worktree`](#worktree) (2)
@@ -156,21 +141,21 @@
 - [`ai-workflow`](#ai-workflow) (1)
 - [`algorithmic`](#algorithmic) (1)
 - [`analytics`](#analytics) (1)
+- [`android`](#android) (1)
 - [`animation`](#animation) (1)
 - [`api-and-interface-design`](#api-and-interface-design) (1)
 - [`application-security`](#application-security) (1)
 - [`approval`](#approval) (1)
 - [`apps`](#apps) (1)
+- [`architecture`](#architecture) (1)
 - [`arena`](#arena) (1)
 - [`art`](#art) (1)
 - [`artifacts`](#artifacts) (1)
 - [`arxiv`](#arxiv) (1)
 - [`attendance`](#attendance) (1)
-- [`audit`](#audit) (1)
 - [`auth`](#auth) (1)
 - [`authoring`](#authoring) (1)
 - [`authorization`](#authorization) (1)
-- [`auto-continue`](#auto-continue) (1)
 - [`aws`](#aws) (1)
 - [`azure`](#azure) (1)
 - [`backend`](#backend) (1)
@@ -188,11 +173,10 @@
 - [`call`](#call) (1)
 - [`campaign`](#campaign) (1)
 - [`canvas`](#canvas) (1)
+- [`capture`](#capture) (1)
 - [`cast`](#cast) (1)
-- [`channel`](#channel) (1)
 - [`chat`](#chat) (1)
 - [`chatgpt`](#chatgpt) (1)
-- [`check`](#check) (1)
 - [`ci-cd-and-automation`](#ci-cd-and-automation) (1)
 - [`cicd`](#cicd) (1)
 - [`clay`](#clay) (1)
@@ -200,24 +184,22 @@
 - [`cloak`](#cloak) (1)
 - [`cloud-storage`](#cloud-storage) (1)
 - [`coach`](#coach) (1)
-- [`coauthoring`](#coauthoring) (1)
 - [`code analysis`](#code-analysis) (1)
 - [`code-review-and-quality`](#code-review-and-quality) (1)
 - [`code-simplification`](#code-simplification) (1)
 - [`codeql`](#codeql) (1)
+- [`codex`](#codex) (1)
 - [`coding-discipline`](#coding-discipline) (1)
 - [`collector`](#collector) (1)
 - [`color`](#color) (1)
 - [`commander`](#commander) (1)
 - [`comments`](#comments) (1)
-- [`comms`](#comms) (1)
 - [`compete`](#compete) (1)
 - [`competitive`](#competitive) (1)
 - [`competitors`](#competitors) (1)
 - [`compliance`](#compliance) (1)
 - [`comply`](#comply) (1)
 - [`comps`](#comps) (1)
-- [`confidence`](#confidence) (1)
 - [`contacts`](#contacts) (1)
 - [`content`](#content) (1)
 - [`context-engineering`](#context-engineering) (1)
@@ -228,6 +210,7 @@
 - [`data`](#data) (1)
 - [`dawn`](#dawn) (1)
 - [`debt`](#debt) (1)
+- [`debugging`](#debugging) (1)
 - [`debugging-and-error-recovery`](#debugging-and-error-recovery) (1)
 - [`deep`](#deep) (1)
 - [`delivery`](#delivery) (1)
@@ -239,24 +222,25 @@
 - [`deprecation-and-migration`](#deprecation-and-migration) (1)
 - [`design-system`](#design-system) (1)
 - [`develop`](#develop) (1)
-- [`diagnostics`](#diagnostics) (1)
 - [`diagram`](#diagram) (1)
 - [`dialectic`](#dialectic) (1)
 - [`documentation`](#documentation) (1)
 - [`documentation-and-adrs`](#documentation-and-adrs) (1)
 - [`documents`](#documents) (1)
 - [`docx`](#docx) (1)
+- [`doubt-driven-development`](#doubt-driven-development) (1)
 - [`drive`](#drive) (1)
 - [`e2e-testing`](#e2e-testing) (1)
 - [`earnings`](#earnings) (1)
+- [`eas`](#eas) (1)
 - [`editorial`](#editorial) (1)
 - [`email`](#email) (1)
 - [`env`](#env) (1)
-- [`evaluation`](#evaluation) (1)
 - [`evaluator`](#evaluator) (1)
 - [`event`](#event) (1)
-- [`excel`](#excel) (1)
+- [`events`](#events) (1)
 - [`execution`](#execution) (1)
+- [`expo`](#expo) (1)
 - [`fact`](#fact) (1)
 - [`factor`](#factor) (1)
 - [`factory`](#factory) (1)
@@ -271,12 +255,12 @@
 - [`flaky-tests`](#flaky-tests) (1)
 - [`freebsd`](#freebsd) (1)
 - [`frontend-ui-engineering`](#frontend-ui-engineering) (1)
+- [`full-stack`](#full-stack) (1)
 - [`game`](#game) (1)
 - [`gear`](#gear) (1)
 - [`gha`](#gha) (1)
 - [`gif`](#gif) (1)
 - [`git-workflow-and-versioning`](#git-workflow-and-versioning) (1)
-- [`gog`](#gog) (1)
 - [`governance`](#governance) (1)
 - [`gpt-image-2`](#gpt-image-2) (1)
 - [`grove`](#grove) (1)
@@ -305,10 +289,11 @@
 - [`incremental-implementation`](#incremental-implementation) (1)
 - [`input`](#input) (1)
 - [`intelligence`](#intelligence) (1)
-- [`internal`](#internal) (1)
 - [`interop`](#interop) (1)
 - [`interview`](#interview) (1)
+- [`interview-me`](#interview-me) (1)
 - [`investment`](#investment) (1)
+- [`ios`](#ios) (1)
 - [`isms`](#isms) (1)
 - [`iso27001`](#iso27001) (1)
 - [`issues`](#issues) (1)
@@ -330,12 +315,13 @@
 - [`magazine`](#magazine) (1)
 - [`mail`](#mail) (1)
 - [`map`](#map) (1)
+- [`meetings`](#meetings) (1)
 - [`memo`](#memo) (1)
-- [`mentoring`](#mentoring) (1)
 - [`mermaid`](#mermaid) (1)
 - [`messaging`](#messaging) (1)
 - [`migration`](#migration) (1)
 - [`mixer`](#mixer) (1)
+- [`mobile`](#mobile) (1)
 - [`model`](#model) (1)
 - [`monitor`](#monitor) (1)
 - [`monorepo`](#monorepo) (1)
@@ -347,45 +333,46 @@
 - [`netlify`](#netlify) (1)
 - [`nexus`](#nexus) (1)
 - [`nlpm`](#nlpm) (1)
-- [`non-intrusive`](#non-intrusive) (1)
 - [`notebook`](#notebook) (1)
+- [`observability-and-instrumentation`](#observability-and-instrumentation) (1)
 - [`observation`](#observation) (1)
 - [`obsidian`](#obsidian) (1)
 - [`offensive-security`](#offensive-security) (1)
 - [`okr`](#okr) (1)
 - [`omen`](#omen) (1)
 - [`onboarding`](#onboarding) (1)
+- [`open-gsd`](#open-gsd) (1)
 - [`openai`](#openai) (1)
 - [`openapi`](#openapi) (1)
 - [`openclaw`](#openclaw) (1)
-- [`operator`](#operator) (1)
+- [`operations`](#operations) (1)
 - [`ops`](#ops) (1)
 - [`optimization`](#optimization) (1)
 - [`optimizer`](#optimizer) (1)
 - [`options`](#options) (1)
 - [`oracle`](#oracle) (1)
+- [`orchestration`](#orchestration) (1)
 - [`osv`](#osv) (1)
 - [`owner`](#owner) (1)
 - [`ownership`](#ownership) (1)
 - [`page`](#page) (1)
 - [`papers`](#papers) (1)
+- [`parallel`](#parallel) (1)
 - [`patch-management`](#patch-management) (1)
+- [`pdf`](#pdf) (1)
 - [`penetration-testing`](#penetration-testing) (1)
 - [`performance-optimization`](#performance-optimization) (1)
 - [`pipe`](#pipe) (1)
-- [`pipeline`](#pipeline) (1)
 - [`planning-and-task-breakdown`](#planning-and-task-breakdown) (1)
 - [`pmm`](#pmm) (1)
 - [`portfolio`](#portfolio) (1)
-- [`post`](#post) (1)
+- [`ppt`](#ppt) (1)
 - [`pptx`](#pptx) (1)
 - [`prism`](#prism) (1)
-- [`proactive`](#proactive) (1)
 - [`process`](#process) (1)
 - [`profiler`](#profiler) (1)
 - [`profiles`](#profiles) (1)
-- [`profiling`](#profiling) (1)
-- [`project-workflow`](#project-workflow) (1)
+- [`prompt`](#prompt) (1)
 - [`prompt-engineering`](#prompt-engineering) (1)
 - [`promptfoo`](#promptfoo) (1)
 - [`promql`](#promql) (1)
@@ -396,6 +383,7 @@
 - [`rag`](#rag) (1)
 - [`rag-alternative`](#rag-alternative) (1)
 - [`rally`](#rally) (1)
+- [`react-native`](#react-native) (1)
 - [`reader`](#reader) (1)
 - [`refactoring`](#refactoring) (1)
 - [`reflect`](#reflect) (1)
@@ -403,17 +391,17 @@
 - [`regression-testing`](#regression-testing) (1)
 - [`release`](#release) (1)
 - [`render`](#render) (1)
-- [`repo-integration`](#repo-integration) (1)
 - [`repomix`](#repomix) (1)
 - [`reporting`](#reporting) (1)
 - [`repository`](#repository) (1)
 - [`responsive-design`](#responsive-design) (1)
+- [`retrieval`](#retrieval) (1)
 - [`ripple`](#ripple) (1)
 - [`risk`](#risk) (1)
 - [`risk-assessment`](#risk-assessment) (1)
 - [`router`](#router) (1)
+- [`routing`](#routing) (1)
 - [`runbook`](#runbook) (1)
-- [`runtime`](#runtime) (1)
 - [`rust`](#rust) (1)
 - [`safe`](#safe) (1)
 - [`sarif`](#sarif) (1)
@@ -424,9 +412,9 @@
 - [`science`](#science) (1)
 - [`scout`](#scout) (1)
 - [`scraper`](#scraper) (1)
-- [`screen`](#screen) (1)
 - [`screener`](#screener) (1)
 - [`screenshot`](#screenshot) (1)
+- [`search`](#search) (1)
 - [`sec`](#sec) (1)
 - [`security-and-hardening`](#security-and-hardening) (1)
 - [`security-audit`](#security-audit) (1)
@@ -434,8 +422,6 @@
 - [`self`](#self) (1)
 - [`semgrep`](#semgrep) (1)
 - [`sentry`](#sentry) (1)
-- [`seo`](#seo) (1)
-- [`server`](#server) (1)
 - [`setup`](#setup) (1)
 - [`shard`](#shard) (1)
 - [`sheets`](#sheets) (1)
@@ -455,6 +441,7 @@
 - [`spec-driven-development`](#spec-driven-development) (1)
 - [`specialist`](#specialist) (1)
 - [`speech`](#speech) (1)
+- [`spreadsheet`](#spreadsheet) (1)
 - [`stage`](#stage) (1)
 - [`standup`](#standup) (1)
 - [`stock`](#stock) (1)
@@ -462,56 +449,46 @@
 - [`strategist`](#strategist) (1)
 - [`subagent`](#subagent) (1)
 - [`suite`](#suite) (1)
-- [`summarize`](#summarize) (1)
 - [`summary`](#summary) (1)
-- [`supermemory`](#supermemory) (1)
 - [`syft`](#syft) (1)
 - [`systematic`](#systematic) (1)
 - [`tailwind`](#tailwind) (1)
 - [`taker`](#taker) (1)
 - [`tasks`](#tasks) (1)
-- [`tavily`](#tavily) (1)
-- [`teams`](#teams) (1)
 - [`teardown`](#teardown) (1)
 - [`tech`](#tech) (1)
 - [`test`](#test) (1)
 - [`test-driven-development`](#test-driven-development) (1)
 - [`tester`](#tester) (1)
-- [`testing`](#testing) (1)
 - [`theme`](#theme) (1)
 - [`threat`](#threat) (1)
 - [`tome`](#tome) (1)
 - [`tone`](#tone) (1)
+- [`toolkit`](#toolkit) (1)
 - [`trace`](#trace) (1)
 - [`transcribe`](#transcribe) (1)
-- [`transcript`](#transcript) (1)
 - [`transitions`](#transitions) (1)
 - [`triage`](#triage) (1)
 - [`troubleshooting`](#troubleshooting) (1)
 - [`typescript`](#typescript) (1)
 - [`typography`](#typography) (1)
 - [`ui`](#ui) (1)
-- [`upgrade-safe`](#upgrade-safe) (1)
 - [`user-modeling`](#user-modeling) (1)
 - [`using-agent-skills`](#using-agent-skills) (1)
 - [`ux`](#ux) (1)
 - [`validation`](#validation) (1)
 - [`valuation`](#valuation) (1)
 - [`vetter`](#vetter) (1)
-- [`video-conference`](#video-conference) (1)
 - [`visual-regression`](#visual-regression) (1)
 - [`voice`](#voice) (1)
 - [`vulnerability-research`](#vulnerability-research) (1)
 - [`vuls`](#vuls) (1)
 - [`warden`](#warden) (1)
-- [`weather`](#weather) (1)
 - [`webapp`](#webapp) (1)
 - [`webgl`](#webgl) (1)
 - [`websocket`](#websocket) (1)
 - [`whiteboard`](#whiteboard) (1)
-- [`wrappers`](#wrappers) (1)
 - [`writer`](#writer) (1)
-- [`writer-lease`](#writer-lease) (1)
 - [`writing`](#writing) (1)
 - [`xlsx`](#xlsx) (1)
 - [`yeet`](#yeet) (1)
@@ -520,334 +497,328 @@
 
 ## workflow
 
-**61 skills**
+**59 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
-| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design production-grade multi-agent orchestration systems. Covers five core patt |
-| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Guides stable API and interface design. Use when designing APIs, module boundari |
-| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Tests in real browsers via Chrome DevTools MCP. Use when building or debugging a |
+| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design agent orchestration, handoffs, state, recovery, and evaluation when a wor |
+| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Design REST/GraphQL APIs, module interfaces, and type contracts when creating en |
+| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Inspect browser DOM, network, console, screenshots, and performance with Chrome  |
 | [ci-cd-and-automation](skills/ai-workflow/ci-cd-and-automation) | ai-workflow | ★★★★★ | Automates CI/CD pipeline setup. Use when setting up or modifying build and deplo |
-| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Conducts multi-axis code review. Use before merging any change. Use when reviewi |
-| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Simplifies code for clarity. Use when refactoring code for clarity without chang |
-| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Optimizes agent context setup. Use when starting a new session, when agent outpu |
-| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Guides systematic root-cause debugging. Use when tests fail, builds break, behav |
-| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Generate format-controlled research reports with evidence tracking, citations, a |
-| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Manages deprecation and migration. Use when removing old systems, APIs, or featu |
+| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Review code changes for correctness, maintainability, security, and validation e |
+| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Refactor working code for clarity and maintainability while preserving behavior; |
+| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Diagnose missing or overloaded agent context and configure project instructions  |
+| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Diagnose failing tests, broken builds, and unexpected runtime behavior through r |
+| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Produce source-backed research reports, literature reviews, or technical and mar |
+| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Plan deprecation and migration of systems, APIs, and production schemas, includi |
 | [documentation-and-adrs](skills/ai-workflow/documentation-and-adrs) | ai-workflow | ★★★★★ | Records decisions and documentation. Use when making architectural decisions, ch |
-| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Builds production-quality UIs. Use when building or modifying user-facing interf |
-| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Structures git workflow practices. Use when making any code change. Use when com |
+| [doubt-driven-development](skills/ai-workflow/doubt-driven-development) | ai-workflow | ★★★★★ | Review high-risk or uncertain engineering decisions adversarially when independe |
+| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Build accessible, responsive interfaces and components with production UI states |
+| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Manage branches, commits, conflicts, semantic versions, and changelogs when prep |
 | [incremental-implementation](skills/ai-workflow/incremental-implementation) | ai-workflow | ★★★★★ | Delivers changes incrementally. Use when implementing any feature or change that |
-| [nexus](skills/ai-workflow/nexus) | ai-workflow | ★★★★★ | Orchestrating specialist AI agent teams as a meta-coordinator. Decomposes reques |
-| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Optimizes application performance. Use when performance requirements exist, when |
-| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Breaks work into ordered tasks. Use when you have a spec or clear requirements a |
-| [rally](skills/ai-workflow/rally) | ai-workflow | ★★★★★ | Orchestrating multi-session parallel execution using Claude Code Agent Teams API |
-| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Hardens code against vulnerabilities. Use when handling user input, authenticati |
-| [sherpa](skills/ai-workflow/sherpa) | ai-workflow | ★★★★★ | Guiding workflows by decomposing complex tasks (Epics) into Atomic Steps under 1 |
+| [interview-me](skills/ai-workflow/interview-me) | ai-workflow | ★★★★★ | Interview the user when they request guided discovery or when unresolved goals,  |
+| [nexus](skills/ai-workflow/nexus) | ai-workflow | ★★★★★ | 多智能体任务分解、链路编排、执行协调和结果整合。 |
+| [observability-and-instrumentation](skills/ai-workflow/observability-and-instrumentation) | ai-workflow | ★★★★★ | Add or improve logs, metrics, traces, and alerts when services need diagnosable  |
+| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Investigate and improve measured frontend, backend, query, or database bottlenec |
+| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Turn clear requirements into ordered tasks, dependencies, and acceptance checks; |
+| [rally](skills/ai-workflow/rally) | ai-workflow | ★★★★★ | 多会话并行执行编排，协调多个智能体共同完成任务。 |
+| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Harden authentication, input handling, storage, and integrations when implementi |
+| [sherpa](skills/ai-workflow/sherpa) | ai-workflow | ★★★★★ | 把复杂任务拆成短步骤，控制漂移并推进交付。 |
 | [shipping-and-launch](skills/ai-workflow/shipping-and-launch) | ai-workflow | ★★★★★ | Prepares production launches. Use when preparing to deploy to production. Use wh |
-| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create new skills, modify and improve existing skills, and measure skill perform |
-| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Reviews and improves Claude Code skills against official best practices. Support |
-| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Creates specs before coding. Use when starting a new project, feature, or signif |
-| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Drives development with tests. Use when implementing any logic, fixing any bug,  |
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [guardian](skills/engineering-workflow-automation/guardian) | engineering-workflow-automation | ★★★★★ | Gatekeeping Git/PR by classifying change essence and recommending granularity, n |
+| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create or improve agent skills, trigger descriptions, and evaluation cases; use  |
+| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Review and improve agent skills for clear triggers, actionable instructions, pro |
+| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Specify new features or substantial behavior changes when goals, boundaries, and |
+| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Develop testable logic or fix behavioral bugs with focused regression tests and  |
+| [guardian](skills/engineering-workflow-automation/guardian) | engineering-workflow-automation | ★★★★★ | 提交、分支、合并请求策略和变更粒度把关。 |
 | [harvest](skills/engineering-workflow-automation/harvest) | engineering-workflow-automation | ★★★★★ | Collecting GitHub PR data and generating work reports. Retrieves PR info via gh  |
 | [latch](skills/engineering-workflow-automation/latch) | engineering-workflow-automation | ★★★★★ | Proposing, configuring, debugging, and maintaining Claude Code hooks (PreToolUse |
-| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Self-improvement through conversation analysis. Extracts learnings from correcti |
+| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Review user corrections or session outcomes to propose durable workflow improvem |
 | [dispatching-parallel-agents](skills/ai-workflow/dispatching-parallel-agents) | ai-workflow | ★★★★☆ | Use when facing 2+ independent tasks that can be worked on without shared state  |
 | [find-skills](skills/ai-workflow/find-skills) | ai-workflow | ★★★★☆ | Use when users do not know which skill fits a task, need to search available ski |
 | [finishing-a-development-branch](skills/ai-workflow/finishing-a-development-branch) | ai-workflow | ★★★★☆ | Use when implementation is complete, all tests pass, and you need to decide how  |
-| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Refines raw ideas into sharp, actionable concepts through structured divergent a |
-| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Transform vague prompts into precise, well-structured specifications using EARS  |
+| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Explore alternatives and stress-test assumptions when refining a vague idea into |
+| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Refine prompts or ambiguous requirements into testable specifications when the u |
 | [receiving-code-review](skills/ai-workflow/receiving-code-review) | ai-workflow | ★★★★☆ | Use when receiving code review feedback, before implementing suggestions, especi |
 | [requesting-code-review](skills/ai-workflow/requesting-code-review) | ai-workflow | ★★★★☆ | Use when completing tasks, implementing major features, or before merging to ver |
-| [skills-search](skills/ai-workflow/skills-search) | ai-workflow | ★★★★☆ | This skill should be used when users want to search, discover, install, or manag |
-| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Grounds every implementation decision in official documentation. Use when you wa |
-| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Discovers and invokes agent skills. Use when starting a session or when you need |
+| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Verify implementation against official documentation when the task requests sour |
+| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Find the most relevant engineering skill when task routing is unclear; load only |
 | [using-git-worktrees](skills/ai-workflow/using-git-worktrees) | ai-workflow | ★★★★☆ | Use when starting feature work that needs isolation from current workspace or be |
-| [using-superpowers](skills/ai-workflow/using-superpowers) | ai-workflow | ★★★★☆ | Use when starting any conversation - establishes how to find and use skills, req |
+| [using-superpowers](skills/ai-workflow/using-superpowers) | ai-workflow | ★★★★☆ | Select relevant Superpowers workflow skills when the user requests that workflow |
 | [verification-before-completion](skills/ai-workflow/verification-before-completion) | ai-workflow | ★★★★☆ | Use when about to claim work is complete, fixed, or passing, before committing o |
-| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Use when you have a spec or requirements for a multi-step task, before touching  |
+| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Write a practical implementation plan when multi-step work needs task boundaries |
 | [writing-skills](skills/ai-workflow/writing-skills) | ai-workflow | ★★★★☆ | Use when creating new skills, editing existing skills, or verifying skills work  |
-| [changelog-automation](skills/engineering-workflow-automation/changelog-automation) | engineering-workflow-automation | ★★★★☆ | Automate changelog generation from commits, PRs, and releases following Keep a C |
 | [jupyter-notebook](skills/engineering-workflow-automation/jupyter-notebook) | engineering-workflow-automation | ★★★★☆ | Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) |
 | [playwright](skills/engineering-workflow-automation/playwright) | engineering-workflow-automation | ★★★★☆ | Use when the task requires automating a real browser from the terminal (navigati |
 | [web-scraper](skills/engineering-workflow-automation/web-scraper) | engineering-workflow-automation | ★★★★☆ | Use when users need webpage scraping, structured data extraction, crawling strat |
-| [brainstorming](skills/ai-workflow/brainstorming) | ai-workflow | ★★★☆☆ | You MUST use this before any creative work - creating features, building compone |
+| [brainstorming](skills/ai-workflow/brainstorming) | ai-workflow | ★★★☆☆ | Use before creative product or engineering work when the user wants to design a  |
 | [executing-plans](skills/ai-workflow/executing-plans) | ai-workflow | ★★★☆☆ | Use when you have a written implementation plan to execute in a separate session |
 | [subagent-driven-development](skills/ai-workflow/subagent-driven-development) | ai-workflow | ★★★☆☆ | Use when executing implementation plans with independent tasks in the current se |
 | [billing-automation](skills/engineering-workflow-automation/billing-automation) | engineering-workflow-automation | ★★★☆☆ | Build automated billing systems for recurring payments, invoicing, subscription  |
-| [gh-fix-ci](skills/engineering-workflow-automation/gh-fix-ci) | engineering-workflow-automation | ★★★☆☆ | Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub |
+| [gh-fix-ci](skills/engineering-workflow-automation/gh-fix-ci) | engineering-workflow-automation | ★★★☆☆ | Inspect and fix failing GitHub Actions PR checks using gh logs and focused valid |
 | [lark-approval](skills/knowledge-and-pm-integrations/lark-approval) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办 |
 | [agent-browser](skills/engineering-workflow-automation/agent-browser) | engineering-workflow-automation | ★★☆☆☆ | Use when an agent needs real browser automation for semantic element targeting,  |
 | [gh-address-comments](skills/engineering-workflow-automation/gh-address-comments) | engineering-workflow-automation | ★★☆☆☆ | Use when addressing GitHub PR review comments or issue comments on the current b |
 | [github](skills/engineering-workflow-automation/github) | engineering-workflow-automation | ★★☆☆☆ | Use when automating GitHub issues, pull requests, reviews, CI checks, labels, re |
 | [yeet](skills/engineering-workflow-automation/yeet) | engineering-workflow-automation | ★★☆☆☆ | Use only when the user explicitly asks to stage, commit, push, and open a GitHub |
-| [tavily-search](skills/task-understanding-decomposition/tavily-search) | task-understanding-decomposition | ★★☆☆☆ | Use when users need real-time web search, fresh facts, source-backed evidence, m |
 
 ## development
 
-**47 skills**
+**45 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [agent-designer](skills/developer-engineering/agent-designer) | developer-engineering | ★★★★★ | Tags: AI agents, architecture, system design, orchestration, multi-agent systems |
+| [agent-designer](skills/developer-engineering/agent-designer) | developer-engineering | ★★★★★ | Design AI agent responsibilities, tools, memory, orchestration, and evaluation w |
 | [api-design-reviewer](skills/developer-engineering/api-design-reviewer) | developer-engineering | ★★★★★ | Use when reviewing API designs for consistency, usability, versioning, error sem |
-| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Scans API route definitions across frameworks (Next.js App Router, Express, Fast |
-| [builder](skills/developer-engineering/builder) | developer-engineering | ★★★★★ | Implementing robust business logic, API integrations, and data models with type  |
-| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | This skill should be used when users want to create animated CLI demos, terminal |
-| [codebase-onboarding](skills/developer-engineering/codebase-onboarding) | developer-engineering | ★★★★★ | Analyze a codebase and generate comprehensive onboarding documentation tailored  |
-| [database-designer](skills/developer-engineering/database-designer) | developer-engineering | ★★★★★ | A comprehensive database design skill that provides expert-level analysis, optim |
+| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Generate API tests from routes and contracts for authentication, validation, pag |
+| [builder](skills/developer-engineering/builder) | developer-engineering | ★★★★★ | 生产级业务逻辑、接口集成和类型安全实现。 |
+| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | Create terminal recordings and animated CLI demo GIFs from command workflows or  |
+| [codebase-onboarding](skills/developer-engineering/codebase-onboarding) | developer-engineering | ★★★★★ | Create repository onboarding guides with architecture, key files, setup, debuggi |
+| [database-designer](skills/developer-engineering/database-designer) | developer-engineering | ★★★★★ | Design, review, or migrate database schemas using workload requirements, data in |
 | [database-schema-designer](skills/developer-engineering/database-schema-designer) | developer-engineering | ★★★★★ | Design relational database schemas from requirements and generate migrations, Ty |
-| [dependency-auditor](skills/developer-engineering/dependency-auditor) | developer-engineering | ★★★★★ | > Skill Type: POWERFUL > Category: Engineering > Domain: Dependency Management & |
-| [gateway](skills/developer-engineering/gateway) | developer-engineering | ★★★★★ | Designing and reviewing APIs via OpenAPI spec generation, versioning strategy, b |
-| [github-contributor](skills/developer-engineering/github-contributor) | developer-engineering | ★★★★★ | Strategic guide for becoming an effective GitHub contributor. Covers opportunity |
-| [graphify](skills/developer-engineering/graphify) | developer-engineering | ★★★★★ | Use for any question about a codebase, its architecture, file relationships, or  |
-| [mcp-builder](skills/developer-engineering/mcp-builder) | developer-engineering | ★★★★★ | Guide for creating high-quality MCP (Model Context Protocol) servers that enable |
-| [mcp-server-builder](skills/developer-engineering/mcp-server-builder) | developer-engineering | ★★★★★ | Design and implement Model Context Protocol (MCP) servers that expose any REST A |
+| [dependency-auditor](skills/developer-engineering/dependency-auditor) | developer-engineering | ★★★★★ | Audit dependency versions, vulnerabilities, licenses and upgrade risks across pa |
+| [gateway](skills/developer-engineering/gateway) | developer-engineering | ★★★★★ | 接口设计、规范生成、版本策略和破坏性变更检查。 |
+| [github-contributor](skills/developer-engineering/github-contributor) | developer-engineering | ★★★★★ | Find suitable open-source contribution opportunities and prepare focused GitHub  |
+| [graphify](skills/developer-engineering/graphify) | developer-engineering | ★★★★★ | Build, query, or refresh Graphify knowledge graphs for code and documents when g |
+| [mcp-builder](skills/developer-engineering/mcp-builder) | developer-engineering | ★★★★★ | Build MCP servers that expose external APIs or services through well-scoped tool |
 | [migration-architect](skills/developer-engineering/migration-architect) | developer-engineering | ★★★★★ | Purpose: Zero-downtime migration planning, compatibility validation, and rollbac |
-| [monorepo-navigator](skills/developer-engineering/monorepo-navigator) | developer-engineering | ★★★★★ | Navigate, manage, and optimize monorepos. Covers Turborepo, Nx, pnpm workspaces, |
-| [neon-postgres](skills/developer-engineering/neon-postgres) | developer-engineering | ★★★★★ | Guides and best practices for working with Neon Serverless Postgres. Covers setu |
-| [performance-profiler](skills/developer-engineering/performance-profiler) | developer-engineering | ★★★★★ | Systematic performance profiling for Node.js, Python, and Go applications. Ident |
-| [pr-review-expert](skills/developer-engineering/pr-review-expert) | developer-engineering | ★★★★★ | Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond st |
-| [promptfoo-evaluation](skills/developer-engineering/promptfoo-evaluation) | developer-engineering | ★★★★★ | Configures and runs LLM evaluation using Promptfoo framework. Use when setting u |
-| [qa-expert](skills/developer-engineering/qa-expert) | developer-engineering | ★★★★★ | This skill should be used when establishing comprehensive QA testing processes f |
-| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Safely package codebases with repomix by automatically detecting and removing ha |
-| [schema](skills/developer-engineering/schema) | developer-engineering | ★★★★★ | Designing database schemas, planning migrations, and authoring ER diagrams. Hand |
-| [skill-tester](skills/developer-engineering/skill-tester) | developer-engineering | ★★★★★ | Name: skill-tester Tier: POWERFUL Category: Engineering Quality Assurance Depend |
-| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Tier: POWERFUL 🔥 Category: Engineering Process Automation Expertise: Code Qualit |
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
-| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | 用于 AWS 云架构设计、服务选型、成本优化与 Well-Architected Framework 评估。来源：alirezarezvani/claude-s |
-| [docker-expert](skills/developer-engineering/docker-expert) | developer-engineering | ★★★★☆ | 用于 Docker 容器化最佳实践、多阶段构建优化与 Docker Compose 编排。来源：skills.sh 8.7K installs。 |
-| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | The Git Worktree Manager skill provides systematic management of Git worktrees f |
+| [monorepo-navigator](skills/developer-engineering/monorepo-navigator) | developer-engineering | ★★★★★ | Inspect or improve Turborepo, Nx, pnpm, or Lerna monorepos: package boundaries,  |
+| [neon-postgres](skills/developer-engineering/neon-postgres) | developer-engineering | ★★★★★ | Build or troubleshoot Neon Postgres connections, branching, pooling, scaling, Au |
+| [performance-profiler](skills/developer-engineering/performance-profiler) | developer-engineering | ★★★★★ | Profile Node.js, Python, or Go CPU, memory, I/O, and query bottlenecks; use flam |
+| [pr-review-expert](skills/developer-engineering/pr-review-expert) | developer-engineering | ★★★★★ | Review GitHub PRs or GitLab MRs for correctness, security, compatibility, and af |
+| [promptfoo-evaluation](skills/developer-engineering/promptfoo-evaluation) | developer-engineering | ★★★★★ | Configure and run Promptfoo evaluations, assertions, rubrics, and datasets when  |
+| [qa-expert](skills/developer-engineering/qa-expert) | developer-engineering | ★★★★★ | Design QA strategies, risk-based test cases, execution plans, and defect reports |
+| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Scan for hardcoded credentials, report redacted findings, and block repomix pack |
+| [schema](skills/developer-engineering/schema) | developer-engineering | ★★★★★ | 数据库模式设计、迁移规划、索引策略和关系建模。 |
+| [skill-tester](skills/developer-engineering/skill-tester) | developer-engineering | ★★★★★ | Validate skill structure, bundled scripts and expected outputs against the targe |
+| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Identify technical debt, rank remediation by impact and effort, and track progre |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
+| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | Design or review AWS architecture and infrastructure as code for serverless syst |
+| [docker-expert](skills/developer-engineering/docker-expert) | developer-engineering | ★★★★☆ | Use when containerizing an application with Docker, optimizing multi-stage build |
+| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | Create, inspect, and clean up Git worktrees for parallel development, with expli |
 | [graphql-expert](skills/developer-engineering/graphql-expert) | developer-engineering | ★★★★☆ | Use when designing GraphQL APIs, reviewing schemas and resolvers, optimizing que |
-| [i18n-expert](skills/developer-engineering/i18n-expert) | developer-engineering | ★★★★☆ | This skill should be used when setting up, auditing, or enforcing internationali |
+| [i18n-expert](skills/developer-engineering/i18n-expert) | developer-engineering | ★★★★☆ | Implement or audit UI internationalization: translation keys, locale files, plur |
 | [kubernetes-specialist](skills/developer-engineering/kubernetes-specialist) | developer-engineering | ★★★★☆ | Use when managing Kubernetes clusters, debugging Pods and workloads, designing H |
-| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | 用于 Next.js App Router 模式开发，包含 RSC、Server Actions 和路由最佳实践。来源：skills.sh 10.2K inst |
-| [python-performance](skills/developer-engineering/python-performance) | developer-engineering | ★★★★☆ | Use when profiling Python code, reducing memory usage, optimizing hot paths, cho |
+| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | Master Next.js 14+ App Router with Server Components, streaming, parallel routes |
+| [python-performance](skills/developer-engineering/python-performance) | developer-engineering | ★★★★☆ | Profile and optimize Python code using cProfile, memory profilers, and performan |
 | [rust-engineer](skills/developer-engineering/rust-engineer) | developer-engineering | ★★★★☆ | Use when writing or reviewing Rust code, designing safe APIs, debugging ownershi |
-| [supabase](skills/developer-engineering/supabase) | developer-engineering | ★★★★☆ | Use when doing ANY task involving Supabase. Triggers: Supabase products (Databas |
-| [supabase-postgres](skills/developer-engineering/supabase-postgres) | developer-engineering | ★★★★☆ | 用于 Supabase 平台开发与 PostgreSQL 最佳实践，包含 RLS、Edge Functions 和实时订阅。来源：supabase 官方 52. |
+| [supabase](skills/developer-engineering/supabase) | developer-engineering | ★★★★☆ | Build or troubleshoot Supabase Database, Auth, Storage, Realtime, Edge Functions |
 | [systematic-debugging](skills/developer-engineering/systematic-debugging) | developer-engineering | ★★★★☆ | Use when encountering any bug, test failure, or unexpected behavior, before prop |
-| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Use when building Tailwind CSS design systems, theme tokens, reusable component  |
+| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Build scalable design systems with Tailwind CSS v4, design tokens, component lib |
 | [terraform-engineer](skills/developer-engineering/terraform-engineer) | developer-engineering | ★★★★☆ | Use when designing Terraform IaC, reviewing modules, managing state, planning pr |
 | [typescript-best-practices](skills/developer-engineering/typescript-best-practices) | developer-engineering | ★★★★☆ | Use when writing or reviewing TypeScript for type safety, advanced types, API bo |
-| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | React and Next.js performance optimization guidelines from Vercel Engineering. T |
+| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | Optimize React and Next.js rendering, data fetching, bundles, and runtime perfor |
 | [subagent-driven-development](skills/ai-workflow/subagent-driven-development) | ai-workflow | ★★★☆☆ | Use when executing implementation plans with independent tasks in the current se |
-| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Postgres performance optimization and best practices from Supabase. Use this ski |
-| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts  |
+| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Use when writing or reviewing Postgres schemas, queries, indexes, RLS policies,  |
+| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Build complex interactive HTML artifacts with React, Tailwind, and shadcn/ui whe |
 | [webapp-testing](skills/developer-engineering/webapp-testing) | developer-engineering | ★★★☆☆ | Use when testing local web applications with Playwright, verifying frontend beha |
-| [frontend-design](skills/developer-engineering/frontend-design) | developer-engineering | ★★☆☆☆ | Create distinctive, production-grade frontend interfaces with high design qualit |
+| [frontend-design](skills/developer-engineering/frontend-design) | developer-engineering | ★★☆☆☆ | Design and implement polished web components, pages, and applications with a coh |
 
 ## agent
 
-**35 skills**
+**37 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [arena](skills/ai-agent-platform/arena) | ai-agent-platform | ★★★★★ | Specialist orchestrating codex exec / Antigravity CLI through dual paradigms — C |
-| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that c |
-| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Translate Figma nodes into production-ready code with 1:1 visual fidelity using  |
-| [oracle](skills/ai-agent-platform/oracle) | ai-agent-platform | ★★★★★ | Designing and evaluating AI/ML systems across prompt engineering, RAG design, LL |
-| [sigil](skills/ai-agent-platform/sigil) | ai-agent-platform | ★★★★★ | Generating, updating, auditing, and sync-repairing project-specific Claude Code  |
-| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design production-grade multi-agent orchestration systems. Covers five core patt |
-| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Guides stable API and interface design. Use when designing APIs, module boundari |
-| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Tests in real browsers via Chrome DevTools MCP. Use when building or debugging a |
+| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build or debug ChatGPT Apps SDK projects with MCP tools and widget UIs, using cu |
+| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Implement UI from Figma URLs or node IDs with visual fidelity, project conventio |
+| [oracle](skills/ai-agent-platform/oracle) | ai-agent-platform | ★★★★★ | 人工智能应用设计、评估、检索增强和安全护栏规划。 |
+| [sigil](skills/ai-agent-platform/sigil) | ai-agent-platform | ★★★★★ | 根据项目代码自动生成贴合仓库约定的技能。 |
+| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design agent orchestration, handoffs, state, recovery, and evaluation when a wor |
+| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Design REST/GraphQL APIs, module interfaces, and type contracts when creating en |
+| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Inspect browser DOM, network, console, screenshots, and performance with Chrome  |
 | [ci-cd-and-automation](skills/ai-workflow/ci-cd-and-automation) | ai-workflow | ★★★★★ | Automates CI/CD pipeline setup. Use when setting up or modifying build and deplo |
-| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Conducts multi-axis code review. Use before merging any change. Use when reviewi |
-| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Simplifies code for clarity. Use when refactoring code for clarity without chang |
-| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Optimizes agent context setup. Use when starting a new session, when agent outpu |
-| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Guides systematic root-cause debugging. Use when tests fail, builds break, behav |
-| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Manages deprecation and migration. Use when removing old systems, APIs, or featu |
+| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Review code changes for correctness, maintainability, security, and validation e |
+| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Refactor working code for clarity and maintainability while preserving behavior; |
+| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Diagnose missing or overloaded agent context and configure project instructions  |
+| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Diagnose failing tests, broken builds, and unexpected runtime behavior through r |
+| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Plan deprecation and migration of systems, APIs, and production schemas, includi |
 | [documentation-and-adrs](skills/ai-workflow/documentation-and-adrs) | ai-workflow | ★★★★★ | Records decisions and documentation. Use when making architectural decisions, ch |
-| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Builds production-quality UIs. Use when building or modifying user-facing interf |
-| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Structures git workflow practices. Use when making any code change. Use when com |
+| [doubt-driven-development](skills/ai-workflow/doubt-driven-development) | ai-workflow | ★★★★★ | Review high-risk or uncertain engineering decisions adversarially when independe |
+| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Build accessible, responsive interfaces and components with production UI states |
+| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Manage branches, commits, conflicts, semantic versions, and changelogs when prep |
 | [incremental-implementation](skills/ai-workflow/incremental-implementation) | ai-workflow | ★★★★★ | Delivers changes incrementally. Use when implementing any feature or change that |
-| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Optimizes application performance. Use when performance requirements exist, when |
-| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Breaks work into ordered tasks. Use when you have a spec or clear requirements a |
-| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Hardens code against vulnerabilities. Use when handling user input, authenticati |
+| [interview-me](skills/ai-workflow/interview-me) | ai-workflow | ★★★★★ | Interview the user when they request guided discovery or when unresolved goals,  |
+| [observability-and-instrumentation](skills/ai-workflow/observability-and-instrumentation) | ai-workflow | ★★★★★ | Add or improve logs, metrics, traces, and alerts when services need diagnosable  |
+| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Investigate and improve measured frontend, backend, query, or database bottlenec |
+| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Turn clear requirements into ordered tasks, dependencies, and acceptance checks; |
+| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Harden authentication, input handling, storage, and integrations when implementi |
 | [shipping-and-launch](skills/ai-workflow/shipping-and-launch) | ai-workflow | ★★★★★ | Prepares production launches. Use when preparing to deploy to production. Use wh |
-| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Creates specs before coding. Use when starting a new project, feature, or signif |
-| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Drives development with tests. Use when implementing any logic, fixing any bug,  |
-| [agent-designer](skills/developer-engineering/agent-designer) | developer-engineering | ★★★★★ | Tags: AI agents, architecture, system design, orchestration, multi-agent systems |
-| [agent-hub](skills/ai-agent-platform/agent-hub) | ai-agent-platform | ★★★★☆ | Multi-agent collaboration plugin that spawns N parallel subagents competing on t |
-| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Use when Codex is building or iterating on a web game (HTML/JS) and needs a reli |
-| [proactive-agent](skills/ai-agent-platform/proactive-agent) | ai-agent-platform | ★★★★☆ | Use when an agent should proactively plan, monitor progress, surface risks, sugg |
-| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Refines raw ideas into sharp, actionable concepts through structured divergent a |
-| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Grounds every implementation decision in official documentation. Use when you wa |
-| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Discovers and invokes agent skills. Use when starting a session or when you need |
-| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Use when the user asks how to build with OpenAI products or APIs and needs up-to |
-| [figma](skills/ai-agent-platform/figma) | ai-agent-platform | ★★☆☆☆ | Use the Figma MCP server to fetch design context, screenshots, variables, and as |
+| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Specify new features or substantial behavior changes when goals, boundaries, and |
+| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Develop testable logic or fix behavioral bugs with focused regression tests and  |
+| [agent-designer](skills/developer-engineering/agent-designer) | developer-engineering | ★★★★★ | Design AI agent responsibilities, tools, memory, orchestration, and evaluation w |
+| [agent-hub](skills/ai-agent-platform/agent-hub) | ai-agent-platform | ★★★★☆ | Compare independent solutions with agent-hub when parallel competition is reques |
+| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Build or iterate on HTML/JS web games with Playwright input bursts, gameplay scr |
+| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Explore alternatives and stress-test assumptions when refining a vague idea into |
+| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Verify implementation against official documentation when the task requests sour |
+| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Find the most relevant engineering skill when task routing is unclear; load only |
+| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Find current official OpenAI guidance for Codex, APIs, models, prompting, or mig |
+| [figma](skills/ai-agent-platform/figma) | ai-agent-platform | ★★☆☆☆ | Fetch Figma design context, variables, screenshots, and assets through MCP when  |
 | [self-improving-agent](skills/ai-agent-platform/self-improving-agent) | ai-agent-platform | ★★☆☆☆ | Use when building or operating agents that should learn from prior runs, capture |
 | [agent-browser](skills/engineering-workflow-automation/agent-browser) | engineering-workflow-automation | ★★☆☆☆ | Use when an agent needs real browser automation for semantic element targeting,  |
 
 ## ai
 
-**35 skills**
+**37 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [arena](skills/ai-agent-platform/arena) | ai-agent-platform | ★★★★★ | Specialist orchestrating codex exec / Antigravity CLI through dual paradigms — C |
-| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that c |
-| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Translate Figma nodes into production-ready code with 1:1 visual fidelity using  |
-| [oracle](skills/ai-agent-platform/oracle) | ai-agent-platform | ★★★★★ | Designing and evaluating AI/ML systems across prompt engineering, RAG design, LL |
-| [sigil](skills/ai-agent-platform/sigil) | ai-agent-platform | ★★★★★ | Generating, updating, auditing, and sync-repairing project-specific Claude Code  |
-| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Guides stable API and interface design. Use when designing APIs, module boundari |
-| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Tests in real browsers via Chrome DevTools MCP. Use when building or debugging a |
+| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build or debug ChatGPT Apps SDK projects with MCP tools and widget UIs, using cu |
+| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Implement UI from Figma URLs or node IDs with visual fidelity, project conventio |
+| [oracle](skills/ai-agent-platform/oracle) | ai-agent-platform | ★★★★★ | 人工智能应用设计、评估、检索增强和安全护栏规划。 |
+| [sigil](skills/ai-agent-platform/sigil) | ai-agent-platform | ★★★★★ | 根据项目代码自动生成贴合仓库约定的技能。 |
+| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Design REST/GraphQL APIs, module interfaces, and type contracts when creating en |
+| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Inspect browser DOM, network, console, screenshots, and performance with Chrome  |
 | [ci-cd-and-automation](skills/ai-workflow/ci-cd-and-automation) | ai-workflow | ★★★★★ | Automates CI/CD pipeline setup. Use when setting up or modifying build and deplo |
-| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Conducts multi-axis code review. Use before merging any change. Use when reviewi |
-| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Simplifies code for clarity. Use when refactoring code for clarity without chang |
-| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Optimizes agent context setup. Use when starting a new session, when agent outpu |
-| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Guides systematic root-cause debugging. Use when tests fail, builds break, behav |
-| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Manages deprecation and migration. Use when removing old systems, APIs, or featu |
+| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Review code changes for correctness, maintainability, security, and validation e |
+| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Refactor working code for clarity and maintainability while preserving behavior; |
+| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Diagnose missing or overloaded agent context and configure project instructions  |
+| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Diagnose failing tests, broken builds, and unexpected runtime behavior through r |
+| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Plan deprecation and migration of systems, APIs, and production schemas, includi |
 | [documentation-and-adrs](skills/ai-workflow/documentation-and-adrs) | ai-workflow | ★★★★★ | Records decisions and documentation. Use when making architectural decisions, ch |
-| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Builds production-quality UIs. Use when building or modifying user-facing interf |
-| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Structures git workflow practices. Use when making any code change. Use when com |
+| [doubt-driven-development](skills/ai-workflow/doubt-driven-development) | ai-workflow | ★★★★★ | Review high-risk or uncertain engineering decisions adversarially when independe |
+| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Build accessible, responsive interfaces and components with production UI states |
+| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Manage branches, commits, conflicts, semantic versions, and changelogs when prep |
 | [incremental-implementation](skills/ai-workflow/incremental-implementation) | ai-workflow | ★★★★★ | Delivers changes incrementally. Use when implementing any feature or change that |
-| [nexus](skills/ai-workflow/nexus) | ai-workflow | ★★★★★ | Orchestrating specialist AI agent teams as a meta-coordinator. Decomposes reques |
-| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Optimizes application performance. Use when performance requirements exist, when |
-| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Breaks work into ordered tasks. Use when you have a spec or clear requirements a |
-| [rally](skills/ai-workflow/rally) | ai-workflow | ★★★★★ | Orchestrating multi-session parallel execution using Claude Code Agent Teams API |
-| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Hardens code against vulnerabilities. Use when handling user input, authenticati |
-| [sherpa](skills/ai-workflow/sherpa) | ai-workflow | ★★★★★ | Guiding workflows by decomposing complex tasks (Epics) into Atomic Steps under 1 |
+| [interview-me](skills/ai-workflow/interview-me) | ai-workflow | ★★★★★ | Interview the user when they request guided discovery or when unresolved goals,  |
+| [nexus](skills/ai-workflow/nexus) | ai-workflow | ★★★★★ | 多智能体任务分解、链路编排、执行协调和结果整合。 |
+| [observability-and-instrumentation](skills/ai-workflow/observability-and-instrumentation) | ai-workflow | ★★★★★ | Add or improve logs, metrics, traces, and alerts when services need diagnosable  |
+| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Investigate and improve measured frontend, backend, query, or database bottlenec |
+| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Turn clear requirements into ordered tasks, dependencies, and acceptance checks; |
+| [rally](skills/ai-workflow/rally) | ai-workflow | ★★★★★ | 多会话并行执行编排，协调多个智能体共同完成任务。 |
+| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Harden authentication, input handling, storage, and integrations when implementi |
+| [sherpa](skills/ai-workflow/sherpa) | ai-workflow | ★★★★★ | 把复杂任务拆成短步骤，控制漂移并推进交付。 |
 | [shipping-and-launch](skills/ai-workflow/shipping-and-launch) | ai-workflow | ★★★★★ | Prepares production launches. Use when preparing to deploy to production. Use wh |
-| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Creates specs before coding. Use when starting a new project, feature, or signif |
-| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Drives development with tests. Use when implementing any logic, fixing any bug,  |
-| [agent-hub](skills/ai-agent-platform/agent-hub) | ai-agent-platform | ★★★★☆ | Multi-agent collaboration plugin that spawns N parallel subagents competing on t |
-| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Use when Codex is building or iterating on a web game (HTML/JS) and needs a reli |
-| [proactive-agent](skills/ai-agent-platform/proactive-agent) | ai-agent-platform | ★★★★☆ | Use when an agent should proactively plan, monitor progress, surface risks, sugg |
-| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Refines raw ideas into sharp, actionable concepts through structured divergent a |
-| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Grounds every implementation decision in official documentation. Use when you wa |
-| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Discovers and invokes agent skills. Use when starting a session or when you need |
-| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Use when the user asks how to build with OpenAI products or APIs and needs up-to |
-| [figma](skills/ai-agent-platform/figma) | ai-agent-platform | ★★☆☆☆ | Use the Figma MCP server to fetch design context, screenshots, variables, and as |
+| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Specify new features or substantial behavior changes when goals, boundaries, and |
+| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Develop testable logic or fix behavioral bugs with focused regression tests and  |
+| [agent-hub](skills/ai-agent-platform/agent-hub) | ai-agent-platform | ★★★★☆ | Compare independent solutions with agent-hub when parallel competition is reques |
+| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Build or iterate on HTML/JS web games with Playwright input bursts, gameplay scr |
+| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Explore alternatives and stress-test assumptions when refining a vague idea into |
+| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Verify implementation against official documentation when the task requests sour |
+| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Find the most relevant engineering skill when task routing is unclear; load only |
+| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Find current official OpenAI guidance for Codex, APIs, models, prompting, or mig |
+| [figma](skills/ai-agent-platform/figma) | ai-agent-platform | ★★☆☆☆ | Fetch Figma design context, variables, screenshots, and assets through MCP when  |
 | [self-improving-agent](skills/ai-agent-platform/self-improving-agent) | ai-agent-platform | ★★☆☆☆ | Use when building or operating agents that should learn from prior runs, capture |
 
-## feishu
+## engineering
 
-**25 skills**
+**24 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitabl |
-| [lark-calendar](skills/knowledge-and-pm-integrations/lark-calendar) | knowledge-and-pm-integrations | ★★★★☆ | 飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会 |
-| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 飞书云空间（云盘/云存储）：管理 Drive 文件和文件夹，包含上传/下载、创建文件夹、复制/移动/删除、查看元数据、评论/权限/订阅、标题、版本、飞书文档密级 |
-| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Lark/Feishu real-time event listening / subscribing / consuming: stream events a |
-| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急 |
-| [lark-mail](skills/knowledge-and-pm-integrations/lark-mail) | knowledge-and-pm-integrations | ★★★★☆ | 飞书邮箱：Use when user mentions 起草邮件、写邮件、草稿、发送/回复/转发邮件、查阅邮件、看邮件、搜索邮件、邮件文件夹、邮件标签、邮件联系 |
-| [lark-minutes](skills/knowledge-and-pm-integrations/lark-minutes) | knowledge-and-pm-integrations | ★★★★☆ | 飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_tok |
-| [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
-| [lark-openapi-explorer](skills/knowledge-and-pm-integrations/lark-openapi-explorer) | knowledge-and-pm-integrations | ★★★★☆ | 飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill  |
-| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★★☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
-| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替 |
-| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 飞书幻灯片：创建和编辑幻灯片。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。 |
-| [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
-| [lark-vc](skills/knowledge-and-pm-integrations/lark-vc) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。当用户查询已结束的会议、获取会议产物（纪要/妙记）、查看参会人时使用； |
-| [lark-vc-agent](skills/knowledge-and-pm-integrations/lark-vc-agent) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议会中能力：用于让应用机器人真实加入或离开正在进行的会议，并读取当前身份可见的会中事件、发送会中文本消息或会中表情。适用于用户询问正在开的会议发生了什 |
-| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或 |
-| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | Use when users need to collect Feishu/Lark meeting minutes across a time range,  |
-| [lark-workflow-standup-report](skills/knowledge-and-pm-integrations/lark-workflow-standup-report) | knowledge-and-pm-integrations | ★★★★☆ | 日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的 |
-| [lark-approval](skills/knowledge-and-pm-integrations/lark-approval) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办 |
-| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to query Feishu/Lark attendance records, audit punch-in gaps |
-| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名。当 |
-| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki 文档）：读取和编辑飞书文档内容。当用户给出文档 URL 或 token，或需要查看、创建、编辑文档、插入或下载文档图片附件时 |
-| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较 |
-| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to turn Feishu/Lark API operations into reusable agent skill |
-| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用多种格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板时使 |
+| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Design REST/GraphQL APIs, module interfaces, and type contracts when creating en |
+| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Inspect browser DOM, network, console, screenshots, and performance with Chrome  |
+| [ci-cd-and-automation](skills/ai-workflow/ci-cd-and-automation) | ai-workflow | ★★★★★ | Automates CI/CD pipeline setup. Use when setting up or modifying build and deplo |
+| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Review code changes for correctness, maintainability, security, and validation e |
+| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Refactor working code for clarity and maintainability while preserving behavior; |
+| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Diagnose missing or overloaded agent context and configure project instructions  |
+| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Diagnose failing tests, broken builds, and unexpected runtime behavior through r |
+| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Plan deprecation and migration of systems, APIs, and production schemas, includi |
+| [documentation-and-adrs](skills/ai-workflow/documentation-and-adrs) | ai-workflow | ★★★★★ | Records decisions and documentation. Use when making architectural decisions, ch |
+| [doubt-driven-development](skills/ai-workflow/doubt-driven-development) | ai-workflow | ★★★★★ | Review high-risk or uncertain engineering decisions adversarially when independe |
+| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Build accessible, responsive interfaces and components with production UI states |
+| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Manage branches, commits, conflicts, semantic versions, and changelogs when prep |
+| [incremental-implementation](skills/ai-workflow/incremental-implementation) | ai-workflow | ★★★★★ | Delivers changes incrementally. Use when implementing any feature or change that |
+| [interview-me](skills/ai-workflow/interview-me) | ai-workflow | ★★★★★ | Interview the user when they request guided discovery or when unresolved goals,  |
+| [observability-and-instrumentation](skills/ai-workflow/observability-and-instrumentation) | ai-workflow | ★★★★★ | Add or improve logs, metrics, traces, and alerts when services need diagnosable  |
+| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Investigate and improve measured frontend, backend, query, or database bottlenec |
+| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Turn clear requirements into ordered tasks, dependencies, and acceptance checks; |
+| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Harden authentication, input handling, storage, and integrations when implementi |
+| [shipping-and-launch](skills/ai-workflow/shipping-and-launch) | ai-workflow | ★★★★★ | Prepares production launches. Use when preparing to deploy to production. Use wh |
+| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Specify new features or substantial behavior changes when goals, boundaries, and |
+| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Develop testable logic or fix behavioral bugs with focused regression tests and  |
+| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Explore alternatives and stress-test assumptions when refining a vague idea into |
+| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Verify implementation against official documentation when the task requests sour |
+| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Find the most relevant engineering skill when task routing is unclear; load only |
 
 ## lark
 
-**25 skills**
+**23 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitabl |
+| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 操作飞书 Base 多维表格、字段、记录、视图、公式、仪表盘、BaseApp 页面和角色权限。处理 /base/、/app/ 链接；导入导出转 lark-dri |
 | [lark-calendar](skills/knowledge-and-pm-integrations/lark-calendar) | knowledge-and-pm-integrations | ★★★★☆ | 飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会 |
-| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 飞书云空间（云盘/云存储）：管理 Drive 文件和文件夹，包含上传/下载、创建文件夹、复制/移动/删除、查看元数据、评论/权限/订阅、标题、版本、飞书文档密级 |
-| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Lark/Feishu real-time event listening / subscribing / consuming: stream events a |
-| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急 |
+| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书 Drive 云空间文件、目录、元数据、权限和版本，以及 Word/Markdown/Excel/CSV/PPTX 导入导出。搜索文件或解析资源链接时使 |
+| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Consume Lark/Feishu events as NDJSON with lark-cli for messaging, approvals, tas |
+| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（ |
 | [lark-mail](skills/knowledge-and-pm-integrations/lark-mail) | knowledge-and-pm-integrations | ★★★★☆ | 飞书邮箱：Use when user mentions 起草邮件、写邮件、草稿、发送/回复/转发邮件、查阅邮件、看邮件、搜索邮件、邮件文件夹、邮件标签、邮件联系 |
-| [lark-minutes](skills/knowledge-and-pm-integrations/lark-minutes) | knowledge-and-pm-integrations | ★★★★☆ | 飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_tok |
+| [lark-meeting](skills/knowledge-and-pm-integrations/lark-meeting) | knowledge-and-pm-integrations | ★★★★☆ | Use Lark CLI to locate meetings, manage Minutes and AI notes, inspect transcript |
 | [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
 | [lark-openapi-explorer](skills/knowledge-and-pm-integrations/lark-openapi-explorer) | knowledge-and-pm-integrations | ★★★★☆ | 飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill  |
-| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★★☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
-| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替 |
-| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 飞书幻灯片：创建和编辑幻灯片。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。 |
+| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书电子表格，处理单元格、公式、工作表、图表、透视表和财务模型；搜索云空间文件转 lark-drive，Base 多维表格转 lark-base |
+| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书幻灯片与页面；支持飞书或 doubao.com 的 /slides/ 链接和 token。文件导入导出转 lark-drive，独立画板转  |
 | [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
-| [lark-vc](skills/knowledge-and-pm-integrations/lark-vc) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。当用户查询已结束的会议、获取会议产物（纪要/妙记）、查看参会人时使用； |
-| [lark-vc-agent](skills/knowledge-and-pm-integrations/lark-vc-agent) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议会中能力：用于让应用机器人真实加入或离开正在进行的会议，并读取当前身份可见的会中事件、发送会中文本消息或会中表情。适用于用户询问正在开的会议发生了什 |
-| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或 |
-| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | Use when users need to collect Feishu/Lark meeting minutes across a time range,  |
+| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书知识空间、成员和文档节点，查询或调整节点层级。支持飞书或 doubao.com 的 /wiki/ 链接和 token；文件上传转 lark-drive， |
+| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | 会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。 |
 | [lark-workflow-standup-report](skills/knowledge-and-pm-integrations/lark-workflow-standup-report) | knowledge-and-pm-integrations | ★★★★☆ | 日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的 |
 | [lark-approval](skills/knowledge-and-pm-integrations/lark-approval) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办 |
-| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to query Feishu/Lark attendance records, audit punch-in gaps |
-| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名。当 |
-| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki 文档）：读取和编辑飞书文档内容。当用户给出文档 URL 或 token，或需要查看、创建、编辑文档、插入或下载文档图片附件时 |
-| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较 |
-| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to turn Feishu/Lark API operations into reusable agent skill |
-| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用多种格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板时使 |
+| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying Lark attendance records, checking missing clock-ins, and prepa |
+| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名,以 |
+| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki）内容操作：读取、创建、编辑文档，插入或下载图片附件，以及操作思维笔记。用户提供文档 URL/token（包括 doubao. |
+| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 操作飞书云空间中的 Markdown 文件：读取、创建、上传、局部编辑和比较。用于飞书 Markdown 资源操作；本地 Markdown 编辑无需此技能，导入 |
+| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★☆☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
+| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | 创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。 |
+| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying, exporting, or editing Lark whiteboards, including preview ima |
 
-## lark-cli
-
-**25 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitabl |
-| [lark-calendar](skills/knowledge-and-pm-integrations/lark-calendar) | knowledge-and-pm-integrations | ★★★★☆ | 飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会 |
-| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 飞书云空间（云盘/云存储）：管理 Drive 文件和文件夹，包含上传/下载、创建文件夹、复制/移动/删除、查看元数据、评论/权限/订阅、标题、版本、飞书文档密级 |
-| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Lark/Feishu real-time event listening / subscribing / consuming: stream events a |
-| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急 |
-| [lark-mail](skills/knowledge-and-pm-integrations/lark-mail) | knowledge-and-pm-integrations | ★★★★☆ | 飞书邮箱：Use when user mentions 起草邮件、写邮件、草稿、发送/回复/转发邮件、查阅邮件、看邮件、搜索邮件、邮件文件夹、邮件标签、邮件联系 |
-| [lark-minutes](skills/knowledge-and-pm-integrations/lark-minutes) | knowledge-and-pm-integrations | ★★★★☆ | 飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_tok |
-| [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
-| [lark-openapi-explorer](skills/knowledge-and-pm-integrations/lark-openapi-explorer) | knowledge-and-pm-integrations | ★★★★☆ | 飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill  |
-| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★★☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
-| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替 |
-| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 飞书幻灯片：创建和编辑幻灯片。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。 |
-| [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
-| [lark-vc](skills/knowledge-and-pm-integrations/lark-vc) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。当用户查询已结束的会议、获取会议产物（纪要/妙记）、查看参会人时使用； |
-| [lark-vc-agent](skills/knowledge-and-pm-integrations/lark-vc-agent) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议会中能力：用于让应用机器人真实加入或离开正在进行的会议，并读取当前身份可见的会中事件、发送会中文本消息或会中表情。适用于用户询问正在开的会议发生了什 |
-| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或 |
-| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | Use when users need to collect Feishu/Lark meeting minutes across a time range,  |
-| [lark-workflow-standup-report](skills/knowledge-and-pm-integrations/lark-workflow-standup-report) | knowledge-and-pm-integrations | ★★★★☆ | 日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的 |
-| [lark-approval](skills/knowledge-and-pm-integrations/lark-approval) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办 |
-| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to query Feishu/Lark attendance records, audit punch-in gaps |
-| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名。当 |
-| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki 文档）：读取和编辑飞书文档内容。当用户给出文档 URL 或 token，或需要查看、创建、编辑文档、插入或下载文档图片附件时 |
-| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较 |
-| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to turn Feishu/Lark API operations into reusable agent skill |
-| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用多种格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板时使 |
-
-## engineering
+## feishu
 
 **22 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Guides stable API and interface design. Use when designing APIs, module boundari |
-| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Tests in real browsers via Chrome DevTools MCP. Use when building or debugging a |
-| [ci-cd-and-automation](skills/ai-workflow/ci-cd-and-automation) | ai-workflow | ★★★★★ | Automates CI/CD pipeline setup. Use when setting up or modifying build and deplo |
-| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Conducts multi-axis code review. Use before merging any change. Use when reviewi |
-| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Simplifies code for clarity. Use when refactoring code for clarity without chang |
-| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Optimizes agent context setup. Use when starting a new session, when agent outpu |
-| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Guides systematic root-cause debugging. Use when tests fail, builds break, behav |
-| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Manages deprecation and migration. Use when removing old systems, APIs, or featu |
-| [documentation-and-adrs](skills/ai-workflow/documentation-and-adrs) | ai-workflow | ★★★★★ | Records decisions and documentation. Use when making architectural decisions, ch |
-| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Builds production-quality UIs. Use when building or modifying user-facing interf |
-| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Structures git workflow practices. Use when making any code change. Use when com |
-| [incremental-implementation](skills/ai-workflow/incremental-implementation) | ai-workflow | ★★★★★ | Delivers changes incrementally. Use when implementing any feature or change that |
-| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Optimizes application performance. Use when performance requirements exist, when |
-| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Breaks work into ordered tasks. Use when you have a spec or clear requirements a |
-| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Hardens code against vulnerabilities. Use when handling user input, authenticati |
-| [shipping-and-launch](skills/ai-workflow/shipping-and-launch) | ai-workflow | ★★★★★ | Prepares production launches. Use when preparing to deploy to production. Use wh |
-| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Creates specs before coding. Use when starting a new project, feature, or signif |
-| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Drives development with tests. Use when implementing any logic, fixing any bug,  |
-| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Refines raw ideas into sharp, actionable concepts through structured divergent a |
-| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Grounds every implementation decision in official documentation. Use when you wa |
-| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Discovers and invokes agent skills. Use when starting a session or when you need |
-| [code-review-excellence](skills/developer-engineering/code-review-excellence) | developer-engineering | ★★★★☆ | Master effective code review practices to provide constructive feedback, catch b |
+| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 操作飞书 Base 多维表格、字段、记录、视图、公式、仪表盘、BaseApp 页面和角色权限。处理 /base/、/app/ 链接；导入导出转 lark-dri |
+| [lark-calendar](skills/knowledge-and-pm-integrations/lark-calendar) | knowledge-and-pm-integrations | ★★★★☆ | 飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会 |
+| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书 Drive 云空间文件、目录、元数据、权限和版本，以及 Word/Markdown/Excel/CSV/PPTX 导入导出。搜索文件或解析资源链接时使 |
+| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Consume Lark/Feishu events as NDJSON with lark-cli for messaging, approvals, tas |
+| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（ |
+| [lark-mail](skills/knowledge-and-pm-integrations/lark-mail) | knowledge-and-pm-integrations | ★★★★☆ | 飞书邮箱：Use when user mentions 起草邮件、写邮件、草稿、发送/回复/转发邮件、查阅邮件、看邮件、搜索邮件、邮件文件夹、邮件标签、邮件联系 |
+| [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
+| [lark-openapi-explorer](skills/knowledge-and-pm-integrations/lark-openapi-explorer) | knowledge-and-pm-integrations | ★★★★☆ | 飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill  |
+| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书电子表格，处理单元格、公式、工作表、图表、透视表和财务模型；搜索云空间文件转 lark-drive，Base 多维表格转 lark-base |
+| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书幻灯片与页面；支持飞书或 doubao.com 的 /slides/ 链接和 token。文件导入导出转 lark-drive，独立画板转  |
+| [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
+| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书知识空间、成员和文档节点，查询或调整节点层级。支持飞书或 doubao.com 的 /wiki/ 链接和 token；文件上传转 lark-drive， |
+| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | 会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。 |
+| [lark-workflow-standup-report](skills/knowledge-and-pm-integrations/lark-workflow-standup-report) | knowledge-and-pm-integrations | ★★★★☆ | 日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的 |
+| [lark-approval](skills/knowledge-and-pm-integrations/lark-approval) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办 |
+| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying Lark attendance records, checking missing clock-ins, and prepa |
+| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名,以 |
+| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki）内容操作：读取、创建、编辑文档，插入或下载图片附件，以及操作思维笔记。用户提供文档 URL/token（包括 doubao. |
+| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 操作飞书云空间中的 Markdown 文件：读取、创建、上传、局部编辑和比较。用于飞书 Markdown 资源操作；本地 Markdown 编辑无需此技能，导入 |
+| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★☆☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
+| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | 创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。 |
+| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying, exporting, or editing Lark whiteboards, including preview ima |
+
+## lark-cli
+
+**22 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 操作飞书 Base 多维表格、字段、记录、视图、公式、仪表盘、BaseApp 页面和角色权限。处理 /base/、/app/ 链接；导入导出转 lark-dri |
+| [lark-calendar](skills/knowledge-and-pm-integrations/lark-calendar) | knowledge-and-pm-integrations | ★★★★☆ | 飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会 |
+| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书 Drive 云空间文件、目录、元数据、权限和版本，以及 Word/Markdown/Excel/CSV/PPTX 导入导出。搜索文件或解析资源链接时使 |
+| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Consume Lark/Feishu events as NDJSON with lark-cli for messaging, approvals, tas |
+| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（ |
+| [lark-mail](skills/knowledge-and-pm-integrations/lark-mail) | knowledge-and-pm-integrations | ★★★★☆ | 飞书邮箱：Use when user mentions 起草邮件、写邮件、草稿、发送/回复/转发邮件、查阅邮件、看邮件、搜索邮件、邮件文件夹、邮件标签、邮件联系 |
+| [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
+| [lark-openapi-explorer](skills/knowledge-and-pm-integrations/lark-openapi-explorer) | knowledge-and-pm-integrations | ★★★★☆ | 飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill  |
+| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书电子表格，处理单元格、公式、工作表、图表、透视表和财务模型；搜索云空间文件转 lark-drive，Base 多维表格转 lark-base |
+| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书幻灯片与页面；支持飞书或 doubao.com 的 /slides/ 链接和 token。文件导入导出转 lark-drive，独立画板转  |
+| [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
+| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书知识空间、成员和文档节点，查询或调整节点层级。支持飞书或 doubao.com 的 /wiki/ 链接和 token；文件上传转 lark-drive， |
+| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | 会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。 |
+| [lark-workflow-standup-report](skills/knowledge-and-pm-integrations/lark-workflow-standup-report) | knowledge-and-pm-integrations | ★★★★☆ | 日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的 |
+| [lark-approval](skills/knowledge-and-pm-integrations/lark-approval) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办 |
+| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying Lark attendance records, checking missing clock-ins, and prepa |
+| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名,以 |
+| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki）内容操作：读取、创建、编辑文档，插入或下载图片附件，以及操作思维笔记。用户提供文档 URL/token（包括 doubao. |
+| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 操作飞书云空间中的 Markdown 文件：读取、创建、上传、局部编辑和比较。用于飞书 Markdown 资源操作；本地 Markdown 编辑无需此技能，导入 |
+| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★☆☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
+| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | 创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。 |
+| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying, exporting, or editing Lark whiteboards, including preview ima |
 
 ## security
 
@@ -855,21 +826,21 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [breach](skills/security-and-reliability/breach) | security-and-reliability | ★★★★★ | Designing red team attack scenarios, building threat models, applying MITRE ATT& |
-| [cloak](skills/security-and-reliability/cloak) | security-and-reliability | ★★★★★ | Engineering privacy and data governance via PII detection, data flow mapping, co |
+| [breach](skills/security-and-reliability/breach) | security-and-reliability | ★★★★★ | 红队场景、攻击路径、威胁建模和对抗演练设计。 |
+| [cloak](skills/security-and-reliability/cloak) | security-and-reliability | ★★★★★ | 隐私工程、敏感信息流、同意管理和数据治理。 |
 | [comply](skills/security-and-reliability/comply) | security-and-reliability | ★★★★★ | Regulatory compliance and audit agent. Maps business regulatory requirements (SO |
 | [security-ownership-map](skills/security-and-reliability/security-ownership-map) | security-and-reliability | ★★★★★ | 用于基于 Git 历史分析安全所有权、敏感代码归属、bus factor、CODEOWNERS 现实差距和风险热点。 |
-| [security-review](skills/security-and-reliability/security-review) | security-and-reliability | ★★★★★ | Security code review for vulnerabilities. Use when asked to \"security review\", |
+| [security-review](skills/security-and-reliability/security-review) | security-and-reliability | ★★★★★ | Review code changes for injection, XSS, authentication, authorization, cryptogra |
 | [codeql-security-scanner](skills/security-and-reliability/codeql-security-scanner) | security-and-reliability | ★★★★☆ | 用于通过 CodeQL 执行语义代码扫描、安全查询、自定义规则、SARIF 报告和 GitHub Code Scanning 集成。 |
-| [gha-security-review](skills/security-and-reliability/gha-security-review) | security-and-reliability | ★★★★☆ | GitHub Actions security review for workflow exploitation vulnerabilities. Use wh |
+| [gha-security-review](skills/security-and-reliability/gha-security-review) | security-and-reliability | ★★★★☆ | Audit GitHub Actions workflows for unsafe triggers, expression injection, creden |
 | [grype-syft-sbom-scanner](skills/security-and-reliability/grype-syft-sbom-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Syft 生成 SBOM，并用 Grype 扫描容器镜像、文件系统、软件包、归档和 SBOM 漏洞。 |
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
 | [osv-scanner](skills/security-and-reliability/osv-scanner) | security-and-reliability | ★★★★☆ | 用于通过 OSV-Scanner 检查锁文件、清单、SBOM、Git 历史和源码树中的开源依赖漏洞。 |
 | [security-auditor](skills/security-and-reliability/security-auditor) | security-and-reliability | ★★★★☆ | Security audit workflow for AI-generated application code, APIs, infrastructure  |
-| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Use when the user asks to perform security audits, penetration testing, vulnerab |
+| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Perform authorized security assessments, vulnerability scans, and penetration te |
 | [semgrep-appsec-scanner](skills/security-and-reliability/semgrep-appsec-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Semgrep 执行应用安全 SAST、源码扫描、自定义规则、密钥流程和供应链依赖分析。 |
 | [sentry](skills/security-and-reliability/sentry) | security-and-reliability | ★★★★☆ | 用于只读查询 Sentry issues、events 和服务健康数据，汇总线上错误并辅助生产问题排查。 |
-| [skill-security-auditor](skills/security-and-reliability/skill-security-auditor) | security-and-reliability | ★★★★☆ | Security audit and vulnerability scanner for AI agent skills before installation |
+| [skill-security-auditor](skills/security-and-reliability/skill-security-auditor) | security-and-reliability | ★★★★☆ | Audit external agent skills before installation for malicious instructions, unsa |
 | [trivy-vulnerability-scanner](skills/security-and-reliability/trivy-vulnerability-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Trivy 扫描仓库、容器镜像、文件系统、rootfs、SBOM、Kubernetes、IaC、密钥、许可证和系统 CVE。 |
 | [vuls-linux-cve-scanner](skills/security-and-reliability/vuls-linux-cve-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Vuls 对 Linux、FreeBSD、容器、WordPress、库和网络设备执行 Agentless CVE 扫描。 |
 | [security-best-practices](skills/security-and-reliability/security-best-practices) | security-and-reliability | ★★★☆☆ | Use when checking language or framework security best practices, producing secur |
@@ -877,103 +848,28 @@
 | [link-checker](skills/security-and-reliability/link-checker) | security-and-reliability | ★★☆☆☆ | Use when checking URL availability, dead links, redirect chains, suspicious doma |
 | [skill-vetter](skills/security-and-reliability/skill-vetter) | security-and-reliability | ★★☆☆☆ | Use before installing or trusting an external skill to inspect instructions, scr |
 
-## planning
-
-**19 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
-| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design production-grade multi-agent orchestration systems. Covers five core patt |
-| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Generate format-controlled research reports with evidence tracking, citations, a |
-| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create new skills, modify and improve existing skills, and measure skill perform |
-| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Reviews and improves Claude Code skills against official best practices. Support |
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
-| [lens](skills/task-understanding-decomposition/lens) | task-understanding-decomposition | ★★★★★ | Comprehending and investigating codebases. Systematically performs structure map |
-| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Self-improvement through conversation analysis. Extracts learnings from correcti |
-| [ripple](skills/task-understanding-decomposition/ripple) | task-understanding-decomposition | ★★★★★ | Analyzing pre-change impact by evaluating risk across vertical (dependency chain |
-| [scout](skills/task-understanding-decomposition/scout) | task-understanding-decomposition | ★★★★★ | Investigating bugs via root cause analysis (RCA), reproduction steps, and impact |
-| [find-skills](skills/ai-workflow/find-skills) | ai-workflow | ★★★★☆ | Use when users do not know which skill fits a task, need to search available ski |
-| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Transform vague prompts into precise, well-structured specifications using EARS  |
-| [skills-search](skills/ai-workflow/skills-search) | ai-workflow | ★★★★☆ | This skill should be used when users want to search, discover, install, or manag |
-| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Use when you have a spec or requirements for a multi-step task, before touching  |
-| [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
-| [brainstorming](skills/ai-workflow/brainstorming) | ai-workflow | ★★★☆☆ | You MUST use this before any creative work - creating features, building compone |
-| [subagent-driven-development](skills/ai-workflow/subagent-driven-development) | ai-workflow | ★★★☆☆ | Use when executing implementation plans with independent tasks in the current se |
-| [tavily-search](skills/task-understanding-decomposition/tavily-search) | task-understanding-decomposition | ★★☆☆☆ | Use when users need real-time web search, fresh facts, source-backed evidence, m |
-
-## automation
-
-**17 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [guardian](skills/engineering-workflow-automation/guardian) | engineering-workflow-automation | ★★★★★ | Gatekeeping Git/PR by classifying change essence and recommending granularity, n |
-| [harvest](skills/engineering-workflow-automation/harvest) | engineering-workflow-automation | ★★★★★ | Collecting GitHub PR data and generating work reports. Retrieves PR info via gh  |
-| [latch](skills/engineering-workflow-automation/latch) | engineering-workflow-automation | ★★★★★ | Proposing, configuring, debugging, and maintaining Claude Code hooks (PreToolUse |
-| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Two-phase LinkedIn lead pipeline driven by linkedin-cli. Phase A imports leads f |
-| [excel-automation](skills/office-white-collar/excel-automation) | office-white-collar | ★★★★★ | Create, parse, and control Excel files on macOS. Professional formatting with op |
-| [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
-| [changelog-automation](skills/engineering-workflow-automation/changelog-automation) | engineering-workflow-automation | ★★★★☆ | Automate changelog generation from commits, PRs, and releases following Keep a C |
-| [jupyter-notebook](skills/engineering-workflow-automation/jupyter-notebook) | engineering-workflow-automation | ★★★★☆ | Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) |
-| [playwright](skills/engineering-workflow-automation/playwright) | engineering-workflow-automation | ★★★★☆ | Use when the task requires automating a real browser from the terminal (navigati |
-| [web-scraper](skills/engineering-workflow-automation/web-scraper) | engineering-workflow-automation | ★★★★☆ | Use when users need webpage scraping, structured data extraction, crawling strat |
-| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitabl |
-| [billing-automation](skills/engineering-workflow-automation/billing-automation) | engineering-workflow-automation | ★★★☆☆ | Build automated billing systems for recurring payments, invoicing, subscription  |
-| [gh-fix-ci](skills/engineering-workflow-automation/gh-fix-ci) | engineering-workflow-automation | ★★★☆☆ | Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub |
-| [agent-browser](skills/engineering-workflow-automation/agent-browser) | engineering-workflow-automation | ★★☆☆☆ | Use when an agent needs real browser automation for semantic element targeting,  |
-| [gh-address-comments](skills/engineering-workflow-automation/gh-address-comments) | engineering-workflow-automation | ★★☆☆☆ | Use when addressing GitHub PR review comments or issue comments on the current b |
-| [github](skills/engineering-workflow-automation/github) | engineering-workflow-automation | ★★☆☆☆ | Use when automating GitHub issues, pull requests, reviews, CI checks, labels, re |
-| [yeet](skills/engineering-workflow-automation/yeet) | engineering-workflow-automation | ★★☆☆☆ | Use only when the user explicitly asks to stage, commit, push, and open a GitHub |
-
 ## design
 
-**17 skills**
+**16 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Translate Figma nodes into production-ready code with 1:1 visual fidelity using  |
+| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Implement UI from Figma URLs or node IDs with visual fidelity, project conventio |
 | [api-design-reviewer](skills/developer-engineering/api-design-reviewer) | developer-engineering | ★★★★★ | Use when reviewing API designs for consistency, usability, versioning, error sem |
-| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Agile product ownership for backlog management and sprint execution. Covers user |
-| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Run a structured competitive analysis on any product or company. Synthesizes dat |
-| [product-analysis](skills/product-design/product-analysis) | product-design | ★★★★★ | Multi-path parallel product analysis with cross-model test-time compute scaling. |
-| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Comprehensive toolkit for product managers including RICE prioritization, custom |
+| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Manage product backlogs and sprints: user stories, acceptance criteria, epic bre |
+| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Analyze competitors from product, pricing, reviews, SEO, and hiring evidence to  |
+| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Prioritize features, synthesize customer research, and write PRDs or go-to-marke |
 | [product-strategist](skills/product-design/product-strategist) | product-design | ★★★★★ | Strategic product leadership toolkit for Head of Product including OKR cascade g |
 | [researcher](skills/product-design/researcher) | product-design | ★★★★★ | User research specialist. Designs interview guides, usability test plans, qualit |
-| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Generate complete, production-ready SaaS projects from a product brief. Outputs  |
-| [trace](skills/product-design/trace) | product-design | ★★★★★ | Analyzing session replays, extracting persona-based behavioral patterns, and sto |
-| [ui-design-system](skills/product-design/ui-design-system) | product-design | ★★★★★ | UI design system toolkit for Senior UI Designer including design token generatio |
-| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | UX research and design toolkit for Senior UX Designer/Researcher including data- |
-| [voice](skills/product-design/voice) | product-design | ★★★★★ | Collecting user feedback via NPS surveys, review analysis, sentiment analysis, f |
-| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Use when building Tailwind CSS design systems, theme tokens, reusable component  |
-| [canvas-design](skills/product-design/canvas-design) | product-design | ★★★★☆ | Create beautiful visual art in .png and .pdf documents using design philosophy.  |
-| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Generates high-converting landing pages as complete Next.js/React (TSX) componen |
-| [frontend-design](skills/developer-engineering/frontend-design) | developer-engineering | ★★☆☆☆ | Create distinctive, production-grade frontend interfaces with high design qualit |
-
-## growth
-
-**17 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Creating algorithmic art using p5.js with seeded randomness and interactive para |
-| [app-store-optimization](skills/growth-operations-xiaohongshu/app-store-optimization) | growth-operations-xiaohongshu | ★★★★★ | App Store Optimization toolkit for researching keywords, optimizing metadata, an |
-| [campaign-analytics](skills/growth-operations-xiaohongshu/campaign-analytics) | growth-operations-xiaohongshu | ★★★★★ | Analyzes campaign performance with multi-touch attribution, funnel conversion, a |
-| [compete](skills/growth-operations-xiaohongshu/compete) | growth-operations-xiaohongshu | ★★★★★ | Researching competitors, analyzing differentiation, and shaping strategic positi |
-| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Analyze competitor repositories with evidence-based approach. Use when tracking  |
-| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create SEO-optimized marketing content with consistent brand voice. Includes bra |
-| [growth](skills/growth-operations-xiaohongshu/growth) | growth-operations-xiaohongshu | ★★★★★ | Optimizing SEO (meta/OGP/JSON-LD/heading hierarchy), SMO (social sharing), CRO ( |
-| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Two-phase LinkedIn lead pipeline driven by linkedin-cli. Phase A imports leads f |
-| [marketing-demand-acquisition](skills/growth-operations-xiaohongshu/marketing-demand-acquisition) | growth-operations-xiaohongshu | ★★★★★ | Multi-channel demand generation, paid media optimization, SEO strategy, and part |
-| [marketing-strategy-pmm](skills/growth-operations-xiaohongshu/marketing-strategy-pmm) | growth-operations-xiaohongshu | ★★★★★ | Product marketing skill for positioning, GTM strategy, competitive intelligence, |
-| [prompt-engineer-toolkit](skills/growth-operations-xiaohongshu/prompt-engineer-toolkit) | growth-operations-xiaohongshu | ★★★★★ | Systematic prompt engineering from first principles. Build, test, version, and o |
-| [pulse](skills/growth-operations-xiaohongshu/pulse) | growth-operations-xiaohongshu | ★★★★★ | Defining KPIs, designing tracking events, and specifying dashboards. Covers Nort |
-| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Social media campaign analysis and performance tracking. Calculates engagement r |
-| [seo-audit](skills/growth-operations-xiaohongshu/seo-audit) | growth-operations-xiaohongshu | ★★★★☆ | Use when users need a comprehensive SEO audit, on-page optimization review, tech |
-| [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
-| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★☆ | Use Xquik for authorized X/Twitter data workflows, including tweet search, profi |
-| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Fetch Twitter/X post content by URL using jina.ai API to bypass JavaScript restr |
+| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Build a SaaS application or vertical slice from a validated brief, covering auth |
+| [trace](skills/product-design/trace) | product-design | ★★★★★ | 会话回放分析、行为模式提取和体验问题叙事。 |
+| [ui-design-system](skills/product-design/ui-design-system) | product-design | ★★★★★ | Create or maintain UI design tokens, component documentation, responsive rules,  |
+| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | Plan and synthesize UX research, personas, journey maps, and usability studies w |
+| [voice](skills/product-design/voice) | product-design | ★★★★★ | 用户反馈收集、满意度调研、评论分析和洞察提炼。 |
+| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Build scalable design systems with Tailwind CSS v4, design tokens, component lib |
+| [canvas-design](skills/product-design/canvas-design) | product-design | ★★★★☆ | Create original static visual designs such as posters, artwork, and compositions |
+| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Build React/Next.js landing pages with Tailwind, focused copy, accessible sectio |
+| [frontend-design](skills/developer-engineering/frontend-design) | developer-engineering | ★★☆☆☆ | Design and implement polished web components, pages, and applications with a coh |
 
 ## finance
 
@@ -982,7 +878,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [helm](skills/finance-investing/helm) | finance-investing | ★★★★★ | Simulating business strategy via short/mid/long-term scenario planning from fina |
-| [ledger](skills/finance-investing/ledger) | finance-investing | ★★★★★ | Optimizing FinOps and cloud costs. Cost estimation from IaC, right-sizing, RI/SP |
+| [ledger](skills/finance-investing/ledger) | finance-investing | ★★★★★ | 云成本、预算告警、资源规格和人工智能工作负载成本优化。 |
 | [levy](skills/finance-investing/levy) | finance-investing | ★★★★★ | Domain knowledge agent for Japanese income tax filing (kakutei shinkoku). Guides |
 | [financial-analyst](skills/finance-investing/financial-analyst) | finance-investing | ★★★★☆ | Performs financial ratio analysis, DCF valuation, budget variance analysis, and  |
 | [financial-data-collector](skills/finance-investing/financial-data-collector) | finance-investing | ★★★★☆ | Use when collecting financial data for a US public company, assembling DCF input |
@@ -998,113 +894,167 @@
 | [sec-filing-reviewer](skills/finance-investing/sec-filing-reviewer) | finance-investing | ★★☆☆☆ | Use when reviewing SEC filings, extracting material risk disclosures, scanning 1 |
 | [stock-screener-builder](skills/finance-investing/stock-screener-builder) | finance-investing | ★★☆☆☆ | Use when building a stock screen, filtering a universe by valuation, growth, qua |
 
-## devops
+## automation
 
 **15 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [beacon](skills/devops-sre/beacon) | devops-sre | ★★★★★ | Engineering observability and reliability through SLO/SLI design, distributed tr |
-| [changelog-generator](skills/devops-sre/changelog-generator) | devops-sre | ★★★★★ | Parse conventional commits, determine semantic version bumps, and generate struc |
-| [ci-cd-pipeline-builder](skills/devops-sre/ci-cd-pipeline-builder) | devops-sre | ★★★★★ | Analyzes your project stack and generates production-ready CI/CD pipeline config |
-| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Investigate and resolve Cloudflare configuration issues using API-driven evidenc |
-| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Complete environment and secrets management workflow: .env file lifecycle across |
-| [gear](skills/devops-sre/gear) | devops-sre | ★★★★★ | Managing dependencies, CI/CD optimization, Docker configuration, and operational |
-| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Provides comprehensive GitHub operations using gh CLI and GitHub API. Activates  |
-| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Use during incidents to coordinate triage, assign roles, manage communications,  |
-| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Description: Design comprehensive observability strategies for production system |
-| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | The Release Manager skill provides comprehensive tools and knowledge for managin |
-| [senior-devops](skills/devops-sre/senior-devops) | devops-sre | ★★★★★ | Comprehensive DevOps skill for CI/CD, infrastructure automation, containerizatio |
-| [triage](skills/devops-sre/triage) | devops-sre | ★★★★★ | Responding to incidents, identifying impact scope, formulating recovery procedur |
-| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan, create, and configure production-ready Azure Kubernetes Service (AKS) clus |
-| [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
-| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | This skill should be used when the user asks to \"design system architecture\",  |
+| [guardian](skills/engineering-workflow-automation/guardian) | engineering-workflow-automation | ★★★★★ | 提交、分支、合并请求策略和变更粒度把关。 |
+| [harvest](skills/engineering-workflow-automation/harvest) | engineering-workflow-automation | ★★★★★ | Collecting GitHub PR data and generating work reports. Retrieves PR info via gh  |
+| [latch](skills/engineering-workflow-automation/latch) | engineering-workflow-automation | ★★★★★ | Proposing, configuring, debugging, and maintaining Claude Code hooks (PreToolUse |
+| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Manage LinkedIn lead qualification and follow-up workflows through linkedin-cli  |
+| [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
+| [jupyter-notebook](skills/engineering-workflow-automation/jupyter-notebook) | engineering-workflow-automation | ★★★★☆ | Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) |
+| [playwright](skills/engineering-workflow-automation/playwright) | engineering-workflow-automation | ★★★★☆ | Use when the task requires automating a real browser from the terminal (navigati |
+| [web-scraper](skills/engineering-workflow-automation/web-scraper) | engineering-workflow-automation | ★★★★☆ | Use when users need webpage scraping, structured data extraction, crawling strat |
+| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 操作飞书 Base 多维表格、字段、记录、视图、公式、仪表盘、BaseApp 页面和角色权限。处理 /base/、/app/ 链接；导入导出转 lark-dri |
+| [billing-automation](skills/engineering-workflow-automation/billing-automation) | engineering-workflow-automation | ★★★☆☆ | Build automated billing systems for recurring payments, invoicing, subscription  |
+| [gh-fix-ci](skills/engineering-workflow-automation/gh-fix-ci) | engineering-workflow-automation | ★★★☆☆ | Inspect and fix failing GitHub Actions PR checks using gh logs and focused valid |
+| [agent-browser](skills/engineering-workflow-automation/agent-browser) | engineering-workflow-automation | ★★☆☆☆ | Use when an agent needs real browser automation for semantic element targeting,  |
+| [gh-address-comments](skills/engineering-workflow-automation/gh-address-comments) | engineering-workflow-automation | ★★☆☆☆ | Use when addressing GitHub PR review comments or issue comments on the current b |
+| [github](skills/engineering-workflow-automation/github) | engineering-workflow-automation | ★★☆☆☆ | Use when automating GitHub issues, pull requests, reviews, CI checks, labels, re |
+| [yeet](skills/engineering-workflow-automation/yeet) | engineering-workflow-automation | ★★☆☆☆ | Use only when the user explicitly asks to stage, commit, push, and open a GitHub |
 
-## marketing
+## growth
 
 **15 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Creating algorithmic art using p5.js with seeded randomness and interactive para |
+| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Create original generative art with p5.js, seeded randomness, flow fields, parti |
 | [app-store-optimization](skills/growth-operations-xiaohongshu/app-store-optimization) | growth-operations-xiaohongshu | ★★★★★ | App Store Optimization toolkit for researching keywords, optimizing metadata, an |
 | [campaign-analytics](skills/growth-operations-xiaohongshu/campaign-analytics) | growth-operations-xiaohongshu | ★★★★★ | Analyzes campaign performance with multi-touch attribution, funnel conversion, a |
-| [compete](skills/growth-operations-xiaohongshu/compete) | growth-operations-xiaohongshu | ★★★★★ | Researching competitors, analyzing differentiation, and shaping strategic positi |
-| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Analyze competitor repositories with evidence-based approach. Use when tracking  |
-| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create SEO-optimized marketing content with consistent brand voice. Includes bra |
-| [growth](skills/growth-operations-xiaohongshu/growth) | growth-operations-xiaohongshu | ★★★★★ | Optimizing SEO (meta/OGP/JSON-LD/heading hierarchy), SMO (social sharing), CRO ( |
+| [compete](skills/growth-operations-xiaohongshu/compete) | growth-operations-xiaohongshu | ★★★★★ | 竞品研究、差异化定位、矩阵对比和竞争战卡。 |
+| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Compare competitor repositories using verified code and source evidence when tec |
+| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create or revise marketing content with a consistent brand voice, audience inten |
+| [growth](skills/growth-operations-xiaohongshu/growth) | growth-operations-xiaohongshu | ★★★★★ | 搜索、社交、转化和人工智能引用优化的一体化增长。 |
+| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Manage LinkedIn lead qualification and follow-up workflows through linkedin-cli  |
 | [marketing-demand-acquisition](skills/growth-operations-xiaohongshu/marketing-demand-acquisition) | growth-operations-xiaohongshu | ★★★★★ | Multi-channel demand generation, paid media optimization, SEO strategy, and part |
 | [marketing-strategy-pmm](skills/growth-operations-xiaohongshu/marketing-strategy-pmm) | growth-operations-xiaohongshu | ★★★★★ | Product marketing skill for positioning, GTM strategy, competitive intelligence, |
-| [prompt-engineer-toolkit](skills/growth-operations-xiaohongshu/prompt-engineer-toolkit) | growth-operations-xiaohongshu | ★★★★★ | Systematic prompt engineering from first principles. Build, test, version, and o |
-| [pulse](skills/growth-operations-xiaohongshu/pulse) | growth-operations-xiaohongshu | ★★★★★ | Defining KPIs, designing tracking events, and specifying dashboards. Covers Nort |
-| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Social media campaign analysis and performance tracking. Calculates engagement r |
-| [seo-audit](skills/growth-operations-xiaohongshu/seo-audit) | growth-operations-xiaohongshu | ★★★★☆ | Use when users need a comprehensive SEO audit, on-page optimization review, tech |
+| [pulse](skills/growth-operations-xiaohongshu/pulse) | growth-operations-xiaohongshu | ★★★★★ | 关键指标、埋点、漏斗、留存和仪表盘规格设计。 |
+| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Analyze social campaign engagement, ROI, audience behavior, and platform compari |
+| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★★ | Use Xquik for X/Twitter research and connected-account actions; Radar and suppor |
 | [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
-| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Fetch Twitter/X post content by URL using jina.ai API to bypass JavaScript restr |
+| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Read Twitter/X posts and threads from supplied URLs, including author, text, tim |
 
-## productivity
+## planning
 
-**15 skills**
+**14 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [crest](skills/operations-general/crest) | operations-general | ★★★★★ | Building engineer self-branding by transforming technical contributions into a p |
-| [dawn](skills/operations-general/dawn) | operations-general | ★★★★★ | Proposes exactly one personal side-project idea per invocation, sized to a 1-3 d |
-| [fact-checker](skills/operations-general/fact-checker) | operations-general | ★★★★★ | Verifies factual claims in documents using web search and official sources, then |
-| [hearth](skills/operations-general/hearth) | operations-general | ★★★★★ | Generating, optimizing, and auditing personal development environment config fil |
-| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | This skill should be used when the user asks to "design interview processes", "c |
-| [slack-gif-creator](skills/operations-general/slack-gif-creator) | operations-general | ★★★★★ | Knowledge and utilities for creating animated GIFs optimized for Slack. Provides |
-| [linear](skills/knowledge-and-pm-integrations/linear) | knowledge-and-pm-integrations | ★★★★☆ | 用于管理 Linear issues、项目、团队和协作状态。 |
-| [confidence-check](skills/operations-general/confidence-check) | operations-general | ★★★★☆ | Use when users need structured self-review before final answers: validate assump |
-| [teams-channel-post-writer](skills/operations-general/teams-channel-post-writer) | operations-general | ★★★★☆ | Creates educational Teams channel posts for internal knowledge sharing about Cla |
-| [brand-guidelines](skills/operations-general/brand-guidelines) | operations-general | ★★★☆☆ | Applies Anthropic''s official brand colors and typography to any sort of artifac |
-| [docs-cleaner](skills/operations-general/docs-cleaner) | operations-general | ★★★☆☆ | Consolidates redundant documentation while preserving all valuable content. This |
-| [supermemory](skills/operations-general/supermemory) | operations-general | ★★★☆☆ | Use when users need durable memory management, preference capture, contradiction |
-| [theme-factory](skills/operations-general/theme-factory) | operations-general | ★★★☆☆ | Use when styling artifacts with reusable themes, applying preset color/font syst |
-| [internal-comms](skills/operations-general/internal-comms) | operations-general | ★★☆☆☆ | Use when users need internal communications such as status reports, leadership u |
-| [weather](skills/operations-general/weather) | operations-general | ★★☆☆☆ | Use when users ask for current weather, forecasts, severe-weather context, trave |
+| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design agent orchestration, handoffs, state, recovery, and evaluation when a wor |
+| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Produce source-backed research reports, literature reviews, or technical and mar |
+| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create or improve agent skills, trigger descriptions, and evaluation cases; use  |
+| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Review and improve agent skills for clear triggers, actionable instructions, pro |
+| [lens](skills/task-understanding-decomposition/lens) | task-understanding-decomposition | ★★★★★ | 代码库理解、功能发现、数据流追踪和上下文调查。 |
+| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Review user corrections or session outcomes to propose durable workflow improvem |
+| [ripple](skills/task-understanding-decomposition/ripple) | task-understanding-decomposition | ★★★★★ | 变更前影响分析，评估依赖链和一致性风险。 |
+| [scout](skills/task-understanding-decomposition/scout) | task-understanding-decomposition | ★★★★★ | 缺陷调查、复现步骤、根因分析和影响评估。 |
+| [find-skills](skills/ai-workflow/find-skills) | ai-workflow | ★★★★☆ | Use when users do not know which skill fits a task, need to search available ski |
+| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Refine prompts or ambiguous requirements into testable specifications when the u |
+| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Write a practical implementation plan when multi-step work needs task boundaries |
+| [lark-okr](skills/knowledge-and-pm-integrations/lark-okr) | knowledge-and-pm-integrations | ★★★★☆ | 飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看 |
+| [brainstorming](skills/ai-workflow/brainstorming) | ai-workflow | ★★★☆☆ | Use before creative product or engineering work when the user wants to design a  |
+| [subagent-driven-development](skills/ai-workflow/subagent-driven-development) | ai-workflow | ★★★☆☆ | Use when executing implementation plans with independent tasks in the current se |
 
 ## sre
 
-**15 skills**
+**14 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [beacon](skills/devops-sre/beacon) | devops-sre | ★★★★★ | Engineering observability and reliability through SLO/SLI design, distributed tr |
-| [changelog-generator](skills/devops-sre/changelog-generator) | devops-sre | ★★★★★ | Parse conventional commits, determine semantic version bumps, and generate struc |
-| [ci-cd-pipeline-builder](skills/devops-sre/ci-cd-pipeline-builder) | devops-sre | ★★★★★ | Analyzes your project stack and generates production-ready CI/CD pipeline config |
-| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Investigate and resolve Cloudflare configuration issues using API-driven evidenc |
-| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Complete environment and secrets management workflow: .env file lifecycle across |
-| [gear](skills/devops-sre/gear) | devops-sre | ★★★★★ | Managing dependencies, CI/CD optimization, Docker configuration, and operational |
-| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Provides comprehensive GitHub operations using gh CLI and GitHub API. Activates  |
-| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Use during incidents to coordinate triage, assign roles, manage communications,  |
-| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Description: Design comprehensive observability strategies for production system |
-| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | The Release Manager skill provides comprehensive tools and knowledge for managin |
-| [senior-devops](skills/devops-sre/senior-devops) | devops-sre | ★★★★★ | Comprehensive DevOps skill for CI/CD, infrastructure automation, containerizatio |
-| [triage](skills/devops-sre/triage) | devops-sre | ★★★★★ | Responding to incidents, identifying impact scope, formulating recovery procedur |
-| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan, create, and configure production-ready Azure Kubernetes Service (AKS) clus |
+| [beacon](skills/devops-sre/beacon) | devops-sre | ★★★★★ | 可观测性、服务目标、告警、容量和可靠性设计。 |
+| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Diagnose Cloudflare DNS, TLS, redirects, and configuration issues using live API |
+| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Manage environment files, required-variable validation, secret storage, leak det |
+| [gear](skills/devops-sre/gear) | devops-sre | ★★★★★ | 依赖、构建、容器、监控和开发环境运维优化。 |
+| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Operate GitHub repositories, PRs, issues, and Actions through gh CLI and GitHub  |
+| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Coordinate active incidents through severity assessment, roles, mitigation, comm |
+| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Design production observability with SLI/SLO definitions, actionable alerts, tel |
+| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | Prepare software releases with version selection, changelogs, artifacts, validat |
+| [senior-devops](skills/devops-sre/senior-devops) | devops-sre | ★★★★★ | Design and operate CI/CD, infrastructure as code, containers, and cloud deployme |
+| [triage](skills/devops-sre/triage) | devops-sre | ★★★★★ | 事故首响、影响范围识别、恢复步骤和复盘整理。 |
+| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Write or review operational runbooks for deployment, rollback, incidents, recove |
+| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan and configure Azure Kubernetes Service clusters, including SKU, networking, |
 | [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
-| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | This skill should be used when the user asks to \"design system architecture\",  |
+| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | Design or review system architecture, technical tradeoffs, dependencies, and sca |
 
-## product
+## devops
 
 **13 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Agile product ownership for backlog management and sprint execution. Covers user |
-| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Run a structured competitive analysis on any product or company. Synthesizes dat |
-| [product-analysis](skills/product-design/product-analysis) | product-design | ★★★★★ | Multi-path parallel product analysis with cross-model test-time compute scaling. |
-| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Comprehensive toolkit for product managers including RICE prioritization, custom |
+| [beacon](skills/devops-sre/beacon) | devops-sre | ★★★★★ | 可观测性、服务目标、告警、容量和可靠性设计。 |
+| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Diagnose Cloudflare DNS, TLS, redirects, and configuration issues using live API |
+| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Manage environment files, required-variable validation, secret storage, leak det |
+| [gear](skills/devops-sre/gear) | devops-sre | ★★★★★ | 依赖、构建、容器、监控和开发环境运维优化。 |
+| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Operate GitHub repositories, PRs, issues, and Actions through gh CLI and GitHub  |
+| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Coordinate active incidents through severity assessment, roles, mitigation, comm |
+| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Design production observability with SLI/SLO definitions, actionable alerts, tel |
+| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | Prepare software releases with version selection, changelogs, artifacts, validat |
+| [senior-devops](skills/devops-sre/senior-devops) | devops-sre | ★★★★★ | Design and operate CI/CD, infrastructure as code, containers, and cloud deployme |
+| [triage](skills/devops-sre/triage) | devops-sre | ★★★★★ | 事故首响、影响范围识别、恢复步骤和复盘整理。 |
+| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan and configure Azure Kubernetes Service clusters, including SKU, networking, |
+| [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
+| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | Design or review system architecture, technical tradeoffs, dependencies, and sca |
+
+## marketing
+
+**13 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Create original generative art with p5.js, seeded randomness, flow fields, parti |
+| [app-store-optimization](skills/growth-operations-xiaohongshu/app-store-optimization) | growth-operations-xiaohongshu | ★★★★★ | App Store Optimization toolkit for researching keywords, optimizing metadata, an |
+| [campaign-analytics](skills/growth-operations-xiaohongshu/campaign-analytics) | growth-operations-xiaohongshu | ★★★★★ | Analyzes campaign performance with multi-touch attribution, funnel conversion, a |
+| [compete](skills/growth-operations-xiaohongshu/compete) | growth-operations-xiaohongshu | ★★★★★ | 竞品研究、差异化定位、矩阵对比和竞争战卡。 |
+| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Compare competitor repositories using verified code and source evidence when tec |
+| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create or revise marketing content with a consistent brand voice, audience inten |
+| [growth](skills/growth-operations-xiaohongshu/growth) | growth-operations-xiaohongshu | ★★★★★ | 搜索、社交、转化和人工智能引用优化的一体化增长。 |
+| [marketing-demand-acquisition](skills/growth-operations-xiaohongshu/marketing-demand-acquisition) | growth-operations-xiaohongshu | ★★★★★ | Multi-channel demand generation, paid media optimization, SEO strategy, and part |
+| [marketing-strategy-pmm](skills/growth-operations-xiaohongshu/marketing-strategy-pmm) | growth-operations-xiaohongshu | ★★★★★ | Product marketing skill for positioning, GTM strategy, competitive intelligence, |
+| [pulse](skills/growth-operations-xiaohongshu/pulse) | growth-operations-xiaohongshu | ★★★★★ | 关键指标、埋点、漏斗、留存和仪表盘规格设计。 |
+| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Analyze social campaign engagement, ROI, audience behavior, and platform compari |
+| [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
+| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Read Twitter/X posts and threads from supplied URLs, including author, text, tim |
+
+## product
+
+**12 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Manage product backlogs and sprints: user stories, acceptance criteria, epic bre |
+| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Analyze competitors from product, pricing, reviews, SEO, and hiring evidence to  |
+| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Prioritize features, synthesize customer research, and write PRDs or go-to-marke |
 | [product-strategist](skills/product-design/product-strategist) | product-design | ★★★★★ | Strategic product leadership toolkit for Head of Product including OKR cascade g |
 | [researcher](skills/product-design/researcher) | product-design | ★★★★★ | User research specialist. Designs interview guides, usability test plans, qualit |
-| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Generate complete, production-ready SaaS projects from a product brief. Outputs  |
-| [trace](skills/product-design/trace) | product-design | ★★★★★ | Analyzing session replays, extracting persona-based behavioral patterns, and sto |
-| [ui-design-system](skills/product-design/ui-design-system) | product-design | ★★★★★ | UI design system toolkit for Senior UI Designer including design token generatio |
-| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | UX research and design toolkit for Senior UX Designer/Researcher including data- |
-| [voice](skills/product-design/voice) | product-design | ★★★★★ | Collecting user feedback via NPS surveys, review analysis, sentiment analysis, f |
-| [canvas-design](skills/product-design/canvas-design) | product-design | ★★★★☆ | Create beautiful visual art in .png and .pdf documents using design philosophy.  |
-| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Generates high-converting landing pages as complete Next.js/React (TSX) componen |
+| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Build a SaaS application or vertical slice from a validated brief, covering auth |
+| [trace](skills/product-design/trace) | product-design | ★★★★★ | 会话回放分析、行为模式提取和体验问题叙事。 |
+| [ui-design-system](skills/product-design/ui-design-system) | product-design | ★★★★★ | Create or maintain UI design tokens, component documentation, responsive rules,  |
+| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | Plan and synthesize UX research, personas, journey maps, and usability studies w |
+| [voice](skills/product-design/voice) | product-design | ★★★★★ | 用户反馈收集、满意度调研、评论分析和洞察提炼。 |
+| [canvas-design](skills/product-design/canvas-design) | product-design | ★★★★☆ | Create original static visual designs such as posters, artwork, and compositions |
+| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Build React/Next.js landing pages with Tailwind, focused copy, accessible sectio |
+
+## productivity
+
+**10 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [crest](skills/operations-general/crest) | operations-general | ★★★★★ | Building engineer self-branding by turning technical contributions into a profes |
+| [dawn](skills/operations-general/dawn) | operations-general | ★★★★★ | Propose one personal side-project idea scoped to a 1-3 day MVP when the user req |
+| [fact-checker](skills/operations-general/fact-checker) | operations-general | ★★★★★ | Verify factual claims against current authoritative sources and apply requested  |
+| [hearth](skills/operations-general/hearth) | operations-general | ★★★★★ | Generating and auditing personal dev environment configs (zsh/tmux/neovim/ghostt |
+| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | Design hiring interviews, competency matrices, question banks, scoring rubrics,  |
+| [slack-gif-creator](skills/operations-general/slack-gif-creator) | operations-general | ★★★★★ | Knowledge and utilities for creating animated GIFs optimized for Slack. Provides |
+| [linear](skills/knowledge-and-pm-integrations/linear) | knowledge-and-pm-integrations | ★★★★☆ | 用于管理 Linear issues、项目、团队和协作状态。 |
+| [brand-guidelines](skills/operations-general/brand-guidelines) | operations-general | ★★★☆☆ | Apply Anthropic brand colors and typography when the user requests Anthropic vis |
+| [docs-cleaner](skills/operations-general/docs-cleaner) | operations-general | ★★★☆☆ | Consolidate overlapping documentation and remove repetition while preserving use |
+| [theme-factory](skills/operations-general/theme-factory) | operations-general | ★★★☆☆ | Use when styling artifacts with reusable themes, applying preset color/font syst |
 
 ## deployment
 
@@ -1114,9 +1064,9 @@
 |-------|----------|---------|-------------|
 | [cloudflare-deploy](skills/deployment-platforms/cloudflare-deploy) | deployment-platforms | ★★★★★ | Deploy applications and infrastructure to Cloudflare using Workers, Pages, and r |
 | [netlify-deploy](skills/deployment-platforms/netlify-deploy) | deployment-platforms | ★★★★★ | Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when t |
-| [pipe](skills/deployment-platforms/pipe) | deployment-platforms | ★★★★★ | Designing GitHub Actions workflows in depth — covering trigger strategy, securit |
+| [pipe](skills/deployment-platforms/pipe) | deployment-platforms | ★★★★★ | Designing GitHub Actions workflows in depth: trigger strategy, security hardenin |
 | [render-deploy](skills/deployment-platforms/render-deploy) | deployment-platforms | ★★★★★ | Deploy applications to Render by analyzing codebases, generating render.yaml Blu |
-| [scaffold](skills/deployment-platforms/scaffold) | deployment-platforms | ★★★★★ | Provisioning infrastructure via cloud IaC (Terraform/OpenTofu/CloudFormation/Pul |
+| [scaffold](skills/deployment-platforms/scaffold) | deployment-platforms | ★★★★★ | 云基础设施、环境配置和本地开发部署脚手架。 |
 | [shard](skills/deployment-platforms/shard) | deployment-platforms | ★★★★★ | Designing multi-tenant architectures with tenant isolation strategies, RLS, rout |
 | [vercel-deploy](skills/deployment-platforms/vercel-deploy) | deployment-platforms | ★★★☆☆ | Deploy applications and websites to Vercel. Use when the user requests deploymen |
 
@@ -1126,13 +1076,13 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design production-grade multi-agent orchestration systems. Covers five core patt |
-| [agent-designer](skills/developer-engineering/agent-designer) | developer-engineering | ★★★★★ | Tags: AI agents, architecture, system design, orchestration, multi-agent systems |
-| [database-designer](skills/developer-engineering/database-designer) | developer-engineering | ★★★★★ | A comprehensive database design skill that provides expert-level analysis, optim |
+| [agent-workflow-designer](skills/ai-workflow/agent-workflow-designer) | ai-workflow | ★★★★★ | Design agent orchestration, handoffs, state, recovery, and evaluation when a wor |
+| [agent-designer](skills/developer-engineering/agent-designer) | developer-engineering | ★★★★★ | Design AI agent responsibilities, tools, memory, orchestration, and evaluation w |
+| [database-designer](skills/developer-engineering/database-designer) | developer-engineering | ★★★★★ | Design, review, or migrate database schemas using workload requirements, data in |
 | [database-schema-designer](skills/developer-engineering/database-schema-designer) | developer-engineering | ★★★★★ | Design relational database schemas from requirements and generate migrations, Ty |
-| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Description: Design comprehensive observability strategies for production system |
-| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | This skill should be used when the user asks to "design interview processes", "c |
-| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | UX research and design toolkit for Senior UX Designer/Researcher including data- |
+| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Design production observability with SLI/SLO definitions, actionable alerts, tel |
+| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | Design hiring interviews, competency matrices, question banks, scoring rubrics,  |
+| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | Plan and synthesize UX research, personas, journey maps, and usability studies w |
 
 ## api
 
@@ -1141,74 +1091,23 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [api-design-reviewer](skills/developer-engineering/api-design-reviewer) | developer-engineering | ★★★★★ | Use when reviewing API designs for consistency, usability, versioning, error sem |
-| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Scans API route definitions across frameworks (Next.js App Router, Express, Fast |
-| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when users need to operate MCP servers or tools with the mcporter CLI: list  |
-| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★☆ | Use Xquik for authorized X/Twitter data workflows, including tweet search, profi |
-| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | 用于按关键词、作者、分类或编号检索 arXiv 论文。 |
+| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Generate API tests from routes and contracts for authentication, validation, pag |
+| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★★ | Use Xquik for X/Twitter research and connected-account actions; Radar and suppor |
+| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when a user explicitly needs terminal-based MCP discovery, schema inspection |
+| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | Search arXiv papers by keyword, author, category, or ID. |
 | [lark-openapi-explorer](skills/knowledge-and-pm-integrations/lark-openapi-explorer) | knowledge-and-pm-integrations | ★★★★☆ | 飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill  |
-
-## builder
-
-**6 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [builder](skills/developer-engineering/builder) | developer-engineering | ★★★★★ | Implementing robust business logic, API integrations, and data models with type  |
-| [mcp-builder](skills/developer-engineering/mcp-builder) | developer-engineering | ★★★★★ | Guide for creating high-quality MCP (Model Context Protocol) servers that enable |
-| [mcp-server-builder](skills/developer-engineering/mcp-server-builder) | developer-engineering | ★★★★★ | Design and implement Model Context Protocol (MCP) servers that expose any REST A |
-| [ci-cd-pipeline-builder](skills/devops-sre/ci-cd-pipeline-builder) | devops-sre | ★★★★★ | Analyzes your project stack and generates production-ready CI/CD pipeline config |
-| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts  |
-| [stock-screener-builder](skills/finance-investing/stock-screener-builder) | finance-investing | ★★☆☆☆ | Use when building a stock screen, filtering a universe by valuation, growth, qua |
 
 ## code-review
 
-**6 skills**
+**5 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [andrej-karpathy-skills](skills/ai-workflow/andrej-karpathy-skills) | ai-workflow | ★★★★☆ | Karpathy-inspired coding discipline for AI agents: think before coding, keep cha |
 | [receiving-code-review](skills/ai-workflow/receiving-code-review) | ai-workflow | ★★★★☆ | Use when receiving code review feedback, before implementing suggestions, especi |
 | [requesting-code-review](skills/ai-workflow/requesting-code-review) | ai-workflow | ★★★★☆ | Use when completing tasks, implementing major features, or before merging to ver |
-| [code-review-excellence](skills/developer-engineering/code-review-excellence) | developer-engineering | ★★★★☆ | Master effective code review practices to provide constructive feedback, catch b |
-| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Security audit of a codebase — web apps, APIs, services, CLI tools, libraries, d |
+| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Audit codebases for exploitable security vulnerabilities with concrete attack pa |
 | [security-auditor](skills/security-and-reliability/security-auditor) | security-and-reliability | ★★★★☆ | Security audit workflow for AI-generated application code, APIs, infrastructure  |
-
-## mcp
-
-**6 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [mcp-builder](skills/developer-engineering/mcp-builder) | developer-engineering | ★★★★★ | Guide for creating high-quality MCP (Model Context Protocol) servers that enable |
-| [mcp-server-builder](skills/developer-engineering/mcp-server-builder) | developer-engineering | ★★★★★ | Design and implement Model Context Protocol (MCP) servers that expose any REST A |
-| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when users need to operate MCP servers or tools with the mcporter CLI: list  |
-| [native-mcp](skills/ai-agent-platform/native-mcp) | ai-agent-platform | ★★★★☆ | Built-in MCP (Model Context Protocol) client that connects to external MCP serve |
-| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★☆ | Use Xquik for authorized X/Twitter data workflows, including tweet search, profi |
-| [linear](skills/knowledge-and-pm-integrations/linear) | knowledge-and-pm-integrations | ★★★★☆ | 用于管理 Linear issues、项目、团队和协作状态。 |
-
-## analysis
-
-**5 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Analyze competitor repositories with evidence-based approach. Use when tracking  |
-| [product-analysis](skills/product-design/product-analysis) | product-design | ★★★★★ | Multi-path parallel product analysis with cross-model test-time compute scaling. |
-| [lens](skills/task-understanding-decomposition/lens) | task-understanding-decomposition | ★★★★★ | Comprehending and investigating codebases. Systematically performs structure map |
-| [ripple](skills/task-understanding-decomposition/ripple) | task-understanding-decomposition | ★★★★★ | Analyzing pre-change impact by evaluating risk across vertical (dependency chain |
-| [scout](skills/task-understanding-decomposition/scout) | task-understanding-decomposition | ★★★★★ | Investigating bugs via root cause analysis (RCA), reproduction steps, and impact |
-
-## creator
-
-**5 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create new skills, modify and improve existing skills, and measure skill perform |
-| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create SEO-optimized marketing content with consistent brand voice. Includes bra |
-| [slack-gif-creator](skills/operations-general/slack-gif-creator) | operations-general | ★★★★★ | Knowledge and utilities for creating animated GIFs optimized for Slack. Provides |
-| [ppt-creator](skills/office-white-collar/ppt-creator) | office-white-collar | ★★★★☆ | Create professional slide decks from topics or documents. Generates structured c |
-| [pdf-creator](skills/office-white-collar/pdf-creator) | office-white-collar | ★★☆☆☆ | Create PDF documents from markdown with proper Chinese font support using weasyp |
 
 ## expert
 
@@ -1216,23 +1115,11 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [pr-review-expert](skills/developer-engineering/pr-review-expert) | developer-engineering | ★★★★★ | Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond st |
-| [qa-expert](skills/developer-engineering/qa-expert) | developer-engineering | ★★★★★ | This skill should be used when establishing comprehensive QA testing processes f |
-| [docker-expert](skills/developer-engineering/docker-expert) | developer-engineering | ★★★★☆ | 用于 Docker 容器化最佳实践、多阶段构建优化与 Docker Compose 编排。来源：skills.sh 8.7K installs。 |
+| [pr-review-expert](skills/developer-engineering/pr-review-expert) | developer-engineering | ★★★★★ | Review GitHub PRs or GitLab MRs for correctness, security, compatibility, and af |
+| [qa-expert](skills/developer-engineering/qa-expert) | developer-engineering | ★★★★★ | Design QA strategies, risk-based test cases, execution plans, and defect reports |
+| [docker-expert](skills/developer-engineering/docker-expert) | developer-engineering | ★★★★☆ | Use when containerizing an application with Docker, optimizing multi-stage build |
 | [graphql-expert](skills/developer-engineering/graphql-expert) | developer-engineering | ★★★★☆ | Use when designing GraphQL APIs, reviewing schemas and resolvers, optimizing que |
-| [i18n-expert](skills/developer-engineering/i18n-expert) | developer-engineering | ★★★★☆ | This skill should be used when setting up, auditing, or enforcing internationali |
-
-## graphify
-
-**5 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
-| [graphify](skills/developer-engineering/graphify) | developer-engineering | ★★★★★ | Use for any question about a codebase, its architecture, file relationships, or  |
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
+| [i18n-expert](skills/developer-engineering/i18n-expert) | developer-engineering | ★★★★☆ | Implement or audit UI internationalization: translation keys, locale files, plur |
 
 ## manager
 
@@ -1240,11 +1127,23 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Complete environment and secrets management workflow: .env file lifecycle across |
-| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | The Release Manager skill provides comprehensive tools and knowledge for managin |
-| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Comprehensive toolkit for product managers including RICE prioritization, custom |
-| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | The Git Worktree Manager skill provides systematic management of Git worktrees f |
+| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Manage environment files, required-variable validation, secret storage, leak det |
+| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | Prepare software releases with version selection, changelogs, artifacts, validat |
+| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Prioritize features, synthesize customer research, and write PRDs or go-to-marke |
+| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | Create, inspect, and clean up Git worktrees for parallel development, with expli |
 | [portfolio-risk-manager](skills/finance-investing/portfolio-risk-manager) | finance-investing | ★★☆☆☆ | Use when reviewing portfolio exposures, checking concentration and beta risk, su |
+
+## mcp
+
+**5 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [mcp-builder](skills/developer-engineering/mcp-builder) | developer-engineering | ★★★★★ | Build MCP servers that expose external APIs or services through well-scoped tool |
+| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★★ | Use Xquik for X/Twitter research and connected-account actions; Radar and suppor |
+| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when a user explicitly needs terminal-based MCP discovery, schema inspection |
+| [native-mcp](skills/ai-agent-platform/native-mcp) | ai-agent-platform | ★★★★☆ | Configure Hermes Agent''s built-in MCP client: server discovery, stdio/HTTP conn |
+| [linear](skills/knowledge-and-pm-integrations/linear) | knowledge-and-pm-integrations | ★★★★☆ | 用于管理 Linear issues、项目、团队和协作状态。 |
 
 ## skill
 
@@ -1252,23 +1151,22 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create new skills, modify and improve existing skills, and measure skill perform |
-| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Reviews and improves Claude Code skills against official best practices. Support |
-| [skill-tester](skills/developer-engineering/skill-tester) | developer-engineering | ★★★★★ | Name: skill-tester Tier: POWERFUL Category: Engineering Quality Assurance Depend |
-| [skill-security-auditor](skills/security-and-reliability/skill-security-auditor) | security-and-reliability | ★★★★☆ | Security audit and vulnerability scanner for AI agent skills before installation |
+| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create or improve agent skills, trigger descriptions, and evaluation cases; use  |
+| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Review and improve agent skills for clear triggers, actionable instructions, pro |
+| [skill-tester](skills/developer-engineering/skill-tester) | developer-engineering | ★★★★★ | Validate skill structure, bundled scripts and expected outputs against the targe |
+| [skill-security-auditor](skills/security-and-reliability/skill-security-auditor) | security-and-reliability | ★★★★☆ | Audit external agent skills before installation for malicious instructions, unsa |
 | [skill-vetter](skills/security-and-reliability/skill-vetter) | security-and-reliability | ★★☆☆☆ | Use before installing or trusting an external skill to inspect instructions, scr |
 
-## skills
+## analysis
 
-**5 skills**
+**4 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [find-skills](skills/ai-workflow/find-skills) | ai-workflow | ★★★★☆ | Use when users do not know which skill fits a task, need to search available ski |
-| [skills-search](skills/ai-workflow/skills-search) | ai-workflow | ★★★★☆ | This skill should be used when users want to search, discover, install, or manag |
-| [using-superpowers](skills/ai-workflow/using-superpowers) | ai-workflow | ★★★★☆ | Use when starting any conversation - establishes how to find and use skills, req |
-| [writing-skills](skills/ai-workflow/writing-skills) | ai-workflow | ★★★★☆ | Use when creating new skills, editing existing skills, or verifying skills work  |
-| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to turn Feishu/Lark API operations into reusable agent skill |
+| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Compare competitor repositories using verified code and source evidence when tec |
+| [lens](skills/task-understanding-decomposition/lens) | task-understanding-decomposition | ★★★★★ | 代码库理解、功能发现、数据流追踪和上下文调查。 |
+| [ripple](skills/task-understanding-decomposition/ripple) | task-understanding-decomposition | ★★★★★ | 变更前影响分析，评估依赖链和一致性风险。 |
+| [scout](skills/task-understanding-decomposition/scout) | task-understanding-decomposition | ★★★★★ | 缺陷调查、复现步骤、根因分析和影响评估。 |
 
 ## appsec
 
@@ -1277,7 +1175,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [codeql-security-scanner](skills/security-and-reliability/codeql-security-scanner) | security-and-reliability | ★★★★☆ | 用于通过 CodeQL 执行语义代码扫描、安全查询、自定义规则、SARIF 报告和 GitHub Code Scanning 集成。 |
-| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | A skill to evaluate how secure Firestore security rules are. Use this when Fires |
+| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | Audit Firestore and Cloud Storage rules for authorization, tenant isolation, fie |
 | [security-auditor](skills/security-and-reliability/security-auditor) | security-and-reliability | ★★★★☆ | Security audit workflow for AI-generated application code, APIs, infrastructure  |
 | [semgrep-appsec-scanner](skills/security-and-reliability/semgrep-appsec-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Semgrep 执行应用安全 SAST、源码扫描、自定义规则、密钥流程和供应链依赖分析。 |
 
@@ -1288,9 +1186,9 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [migration-architect](skills/developer-engineering/migration-architect) | developer-engineering | ★★★★★ | Purpose: Zero-downtime migration planning, compatibility validation, and rollbac |
-| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | The RAG (Retrieval-Augmented Generation) Architect skill provides comprehensive  |
-| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | 用于 AWS 云架构设计、服务选型、成本优化与 Well-Architected Framework 评估。来源：alirezarezvani/claude-s |
-| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | This skill should be used when the user asks to \"design system architecture\",  |
+| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | Design or diagnose RAG ingestion, retrieval, permissions, reranking, citations,  |
+| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | Design or review AWS architecture and infrastructure as code for serverless syst |
+| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | Design or review system architecture, technical tradeoffs, dependencies, and sca |
 
 ## best
 
@@ -1299,9 +1197,31 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [typescript-best-practices](skills/developer-engineering/typescript-best-practices) | developer-engineering | ★★★★☆ | Use when writing or reviewing TypeScript for type safety, advanced types, API bo |
-| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | React and Next.js performance optimization guidelines from Vercel Engineering. T |
-| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Postgres performance optimization and best practices from Supabase. Use this ski |
+| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | Optimize React and Next.js rendering, data fetching, bundles, and runtime perfor |
+| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Use when writing or reviewing Postgres schemas, queries, indexes, RLS policies,  |
 | [security-best-practices](skills/security-and-reliability/security-best-practices) | security-and-reliability | ★★★☆☆ | Use when checking language or framework security best practices, producing secur |
+
+## builder
+
+**4 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [builder](skills/developer-engineering/builder) | developer-engineering | ★★★★★ | 生产级业务逻辑、接口集成和类型安全实现。 |
+| [mcp-builder](skills/developer-engineering/mcp-builder) | developer-engineering | ★★★★★ | Build MCP servers that expose external APIs or services through well-scoped tool |
+| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Build complex interactive HTML artifacts with React, Tailwind, and shadcn/ui whe |
+| [stock-screener-builder](skills/finance-investing/stock-screener-builder) | finance-investing | ★★☆☆☆ | Use when building a stock screen, filtering a universe by valuation, growth, qua |
+
+## cli
+
+**4 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | Create terminal recordings and animated CLI demo GIFs from command workflows or  |
+| [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
+| [lark-meeting](skills/knowledge-and-pm-integrations/lark-meeting) | knowledge-and-pm-integrations | ★★★★☆ | Use Lark CLI to locate meetings, manage Minutes and AI notes, inspect transcript |
 
 ## cve
 
@@ -1331,21 +1251,10 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Use when the user asks how to build with OpenAI products or APIs and needs up-to |
-| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki 文档）：读取和编辑飞书文档内容。当用户给出文档 URL 或 token，或需要查看、创建、编辑文档、插入或下载文档图片附件时 |
-| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较 |
-| [docs-cleaner](skills/operations-general/docs-cleaner) | operations-general | ★★★☆☆ | Consolidates redundant documentation while preserving all valuable content. This |
-
-## generator
-
-**4 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | This skill should be used when users want to create animated CLI demos, terminal |
-| [changelog-generator](skills/devops-sre/changelog-generator) | devops-sre | ★★★★★ | Parse conventional commits, determine semantic version bumps, and generate struc |
-| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Analyze a codebase and generate production-grade operational runbooks. Detects y |
-| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Generates high-converting landing pages as complete Next.js/React (TSX) componen |
+| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Find current official OpenAI guidance for Codex, APIs, models, prompting, or mig |
+| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki）内容操作：读取、创建、编辑文档，插入或下载图片附件，以及操作思维笔记。用户提供文档 URL/token（包括 doubao. |
+| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 操作飞书云空间中的 Markdown 文件：读取、创建、上传、局部编辑和比较。用于飞书 Markdown 资源操作；本地 Markdown 编辑无需此技能，导入 |
+| [docs-cleaner](skills/operations-general/docs-cleaner) | operations-general | ★★★☆☆ | Consolidate overlapping documentation and remove repetition while preserving use |
 
 ## github
 
@@ -1353,32 +1262,10 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [github-contributor](skills/developer-engineering/github-contributor) | developer-engineering | ★★★★★ | Strategic guide for becoming an effective GitHub contributor. Covers opportunity |
-| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Provides comprehensive GitHub operations using gh CLI and GitHub API. Activates  |
+| [github-contributor](skills/developer-engineering/github-contributor) | developer-engineering | ★★★★★ | Find suitable open-source contribution opportunities and prepare focused GitHub  |
+| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Operate GitHub repositories, PRs, issues, and Actions through gh CLI and GitHub  |
 | [codeql-security-scanner](skills/security-and-reliability/codeql-security-scanner) | security-and-reliability | ★★★★☆ | 用于通过 CodeQL 执行语义代码扫描、安全查询、自定义规则、SARIF 报告和 GitHub Code Scanning 集成。 |
 | [github](skills/engineering-workflow-automation/github) | engineering-workflow-automation | ★★☆☆☆ | Use when automating GitHub issues, pull requests, reviews, CI checks, labels, re |
-
-## gsd
-
-**4 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
-
-## hermes
-
-**4 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
 
 ## knowledge
 
@@ -1386,9 +1273,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [grove](skills/knowledge-and-pm-integrations/grove) | knowledge-and-pm-integrations | ★★★★★ | Designing, optimizing, and auditing repository structure. Covers directory desig |
-| [lore](skills/knowledge-and-pm-integrations/lore) | knowledge-and-pm-integrations | ★★★★★ | Curating cross-agent knowledge and guarding institutional memory. Extracts patte |
-| [tome](skills/knowledge-and-pm-integrations/tome) | knowledge-and-pm-integrations | ★★★★★ | Converting repository changes into detailed learning documents. Use when turning |
+| [grove](skills/knowledge-and-pm-integrations/grove) | knowledge-and-pm-integrations | ★★★★★ | 仓库结构、文档布局、测试脚本组织和迁移规划。 |
+| [lore](skills/knowledge-and-pm-integrations/lore) | knowledge-and-pm-integrations | ★★★★★ | Curating cross-agent knowledge and institutional memory: extracts patterns from  |
+| [tome](skills/knowledge-and-pm-integrations/tome) | knowledge-and-pm-integrations | ★★★★★ | 把仓库变更转化为学习文档、术语说明和设计记录。 |
 | [notion-knowledge-capture](skills/knowledge-and-pm-integrations/notion-knowledge-capture) | knowledge-and-pm-integrations | ★★★☆☆ | 用于把对话、决策和笔记沉淀到 Notion。 |
 
 ## kubernetes
@@ -1398,7 +1285,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [kubernetes-specialist](skills/developer-engineering/kubernetes-specialist) | developer-engineering | ★★★★☆ | Use when managing Kubernetes clusters, debugging Pods and workloads, designing H |
-| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan, create, and configure production-ready Azure Kubernetes Service (AKS) clus |
+| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan and configure Azure Kubernetes Service clusters, including SKU, networking, |
 | [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
 | [trivy-vulnerability-scanner](skills/security-and-reliability/trivy-vulnerability-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Trivy 扫描仓库、容器镜像、文件系统、rootfs、SBOM、Kubernetes、IaC、密钥、许可证和系统 CVE。 |
 
@@ -1408,21 +1295,10 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Social media campaign analysis and performance tracking. Calculates engagement r |
+| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Analyze social campaign engagement, ROI, audience behavior, and platform compari |
 | [clay](skills/multimodal-media/clay) | multimodal-media | ★★★★★ | AI 3D model generation agent. Generates text-to-3D and image-to-3D code (Python/ |
 | [sketch](skills/multimodal-media/sketch) | multimodal-media | ★★★★★ | Generating AI image-generation code using the Gemini API. Handles text-to-image  |
 | [tone](skills/multimodal-media/tone) | multimodal-media | ★★★★★ | Game audio generation agent. Produces code (Python/JS/TS/Shell) for SFX, BGM, Vo |
-
-## meetings
-
-**4 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [lark-minutes](skills/knowledge-and-pm-integrations/lark-minutes) | knowledge-and-pm-integrations | ★★★★☆ | 飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_tok |
-| [lark-vc](skills/knowledge-and-pm-integrations/lark-vc) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。当用户查询已结束的会议、获取会议产物（纪要/妙记）、查看参会人时使用； |
-| [lark-vc-agent](skills/knowledge-and-pm-integrations/lark-vc-agent) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议会中能力：用于让应用机器人真实加入或离开正在进行的会议，并读取当前身份可见的会中事件、发送会中文本消息或会中表情。适用于用户询问正在开的会议发生了什 |
-| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | Use when users need to collect Feishu/Lark meeting minutes across a time range,  |
 
 ## memory
 
@@ -1430,10 +1306,10 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [cast](skills/openclaw-memory-and-safety/cast) | openclaw-memory-and-safety | ★★★★★ | Casting personas via rapid generation, persistence, lifecycle management, and in |
-| [omen](skills/openclaw-memory-and-safety/omen) | openclaw-memory-and-safety | ★★★★★ | Enumerating failure modes via pre-mortem analysis. Systematically identifies fai |
+| [cast](skills/openclaw-memory-and-safety/cast) | openclaw-memory-and-safety | ★★★★★ | 用户画像生成、角色注册、生命周期和跨智能体同步。 |
+| [omen](skills/openclaw-memory-and-safety/omen) | openclaw-memory-and-safety | ★★★★★ | 预演失败模式，识别计划风险并给出优先级。 |
 | [warden](skills/openclaw-memory-and-safety/warden) | openclaw-memory-and-safety | ★★★★★ | Guardian of V.A.I.R.E. quality standards (Value/Agency/Identity/Resilience/Echo) |
-| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and use Honcho memory with Hermes -- cross-session user modeling, mult |
+| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and troubleshoot Honcho memory for Hermes. |
 
 ## notion
 
@@ -1446,16 +1322,16 @@
 | [notion-research-documentation](skills/knowledge-and-pm-integrations/notion-research-documentation) | knowledge-and-pm-integrations | ★★★☆☆ | 用于整合 Notion 信息并生成研究文档。 |
 | [notion-spec-to-implementation](skills/knowledge-and-pm-integrations/notion-spec-to-implementation) | knowledge-and-pm-integrations | ★★★☆☆ | 用于把 Notion 规格转成计划、任务和进度跟踪。 |
 
-## postgres
+## performance
 
 **4 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [neon-postgres](skills/developer-engineering/neon-postgres) | developer-engineering | ★★★★★ | Guides and best practices for working with Neon Serverless Postgres. Covers setu |
-| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose and fix excessive Postgres egress (network data transfer) in a codebase |
-| [supabase-postgres](skills/developer-engineering/supabase-postgres) | developer-engineering | ★★★★☆ | 用于 Supabase 平台开发与 PostgreSQL 最佳实践，包含 RLS、Edge Functions 和实时订阅。来源：supabase 官方 52. |
-| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Postgres performance optimization and best practices from Supabase. Use this ski |
+| [performance-profiler](skills/developer-engineering/performance-profiler) | developer-engineering | ★★★★★ | Profile Node.js, Python, or Go CPU, memory, I/O, and query bottlenecks; use flam |
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
+| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose excessive Postgres or Neon network egress and database transfer costs b |
+| [python-performance](skills/developer-engineering/python-performance) | developer-engineering | ★★★★☆ | Profile and optimize Python code using cProfile, memory profilers, and performan |
 
 ## research
 
@@ -1463,10 +1339,21 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Generate format-controlled research reports with evidence tracking, citations, a |
-| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | 用于按关键词、作者、分类或编号检索 arXiv 论文。 |
-| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Use when building, querying, or maintaining a Karpathy-style interlinked markdow |
+| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Produce source-backed research reports, literature reviews, or technical and mar |
+| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | Search arXiv papers by keyword, author, category, or ID. |
+| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Karpathy''s LLM Wiki: build/query interlinked markdown KB. |
 | [notion-research-documentation](skills/knowledge-and-pm-integrations/notion-research-documentation) | knowledge-and-pm-integrations | ★★★☆☆ | 用于整合 Notion 信息并生成研究文档。 |
+
+## safety
+
+**4 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [cast](skills/openclaw-memory-and-safety/cast) | openclaw-memory-and-safety | ★★★★★ | 用户画像生成、角色注册、生命周期和跨智能体同步。 |
+| [omen](skills/openclaw-memory-and-safety/omen) | openclaw-memory-and-safety | ★★★★★ | 预演失败模式，识别计划风险并给出优先级。 |
+| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Write or review operational runbooks for deployment, rollback, incidents, recove |
+| [warden](skills/openclaw-memory-and-safety/warden) | openclaw-memory-and-safety | ★★★★★ | Guardian of V.A.I.R.E. quality standards (Value/Agency/Identity/Resilience/Echo) |
 
 ## secrets
 
@@ -1474,10 +1361,21 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Complete environment and secrets management workflow: .env file lifecycle across |
+| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Manage environment files, required-variable validation, secret storage, leak det |
 | [security-auditor](skills/security-and-reliability/security-auditor) | security-and-reliability | ★★★★☆ | Security audit workflow for AI-generated application code, APIs, infrastructure  |
 | [semgrep-appsec-scanner](skills/security-and-reliability/semgrep-appsec-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Semgrep 执行应用安全 SAST、源码扫描、自定义规则、密钥流程和供应链依赖分析。 |
 | [trivy-vulnerability-scanner](skills/security-and-reliability/trivy-vulnerability-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Trivy 扫描仓库、容器镜像、文件系统、rootfs、SBOM、Kubernetes、IaC、密钥、许可证和系统 CVE。 |
+
+## skills
+
+**4 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [find-skills](skills/ai-workflow/find-skills) | ai-workflow | ★★★★☆ | Use when users do not know which skill fits a task, need to search available ski |
+| [using-superpowers](skills/ai-workflow/using-superpowers) | ai-workflow | ★★★★☆ | Select relevant Superpowers workflow skills when the user requests that workflow |
+| [writing-skills](skills/ai-workflow/writing-skills) | ai-workflow | ★★★★☆ | Use when creating new skills, editing existing skills, or verifying skills work  |
+| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | 创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。 |
 
 ## tools
 
@@ -1485,10 +1383,10 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when users need to operate MCP servers or tools with the mcporter CLI: list  |
-| [native-mcp](skills/ai-agent-platform/native-mcp) | ai-agent-platform | ★★★★☆ | Built-in MCP (Model Context Protocol) client that connects to external MCP serve |
-| [markdown-tools](skills/office-white-collar/markdown-tools) | office-white-collar | ★★★★☆ | Converts documents to markdown with multi-tool orchestration for best quality. S |
-| [mermaid-tools](skills/office-white-collar/mermaid-tools) | office-white-collar | ★★★★☆ | Extracts Mermaid diagrams from markdown files and generates high-quality PNG ima |
+| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when a user explicitly needs terminal-based MCP discovery, schema inspection |
+| [native-mcp](skills/ai-agent-platform/native-mcp) | ai-agent-platform | ★★★★☆ | Configure Hermes Agent''s built-in MCP client: server discovery, stdio/HTTP conn |
+| [markdown-tools](skills/office-white-collar/markdown-tools) | office-white-collar | ★★★★☆ | Convert PDF, DOCX, PPTX, and other documents to Markdown, preserving tables, ima |
+| [mermaid-tools](skills/office-white-collar/mermaid-tools) | office-white-collar | ★★★★☆ | Extract Mermaid diagrams from Markdown and render PNG images with the bundled to |
 
 ## vulnerability-scanning
 
@@ -1497,7 +1395,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [grype-syft-sbom-scanner](skills/security-and-reliability/grype-syft-sbom-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Syft 生成 SBOM，并用 Grype 扫描容器镜像、文件系统、软件包、归档和 SBOM 漏洞。 |
-| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Use when the user asks to perform security audits, penetration testing, vulnerab |
+| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Perform authorized security assessments, vulnerability scans, and penetration te |
 | [trivy-vulnerability-scanner](skills/security-and-reliability/trivy-vulnerability-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Trivy 扫描仓库、容器镜像、文件系统、rootfs、SBOM、Kubernetes、IaC、密钥、许可证和系统 CVE。 |
 | [vuls-linux-cve-scanner](skills/security-and-reliability/vuls-linux-cve-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Vuls 对 Linux、FreeBSD、容器、WordPress、库和网络设备执行 Agentless CVE 扫描。 |
 
@@ -1507,19 +1405,19 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUD |
+| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction  |
 | [playwright-pro](skills/engineering-workflow-automation/playwright-pro) | engineering-workflow-automation | ★★★★☆ | Production-grade Playwright testing skill for E2E suites, flaky test diagnosis,  |
 | [semgrep-appsec-scanner](skills/security-and-reliability/semgrep-appsec-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Semgrep 执行应用安全 SAST、源码扫描、自定义规则、密钥流程和供应链依赖分析。 |
 
-## cli
+## creator
 
 **3 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | This skill should be used when users want to create animated CLI demos, terminal |
-| [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
+| [skill-creator](skills/ai-workflow/skill-creator) | ai-workflow | ★★★★★ | Create or improve agent skills, trigger descriptions, and evaluation cases; use  |
+| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create or revise marketing content with a consistent brand voice, audience inten |
+| [slack-gif-creator](skills/operations-general/slack-gif-creator) | operations-general | ★★★★★ | Knowledge and utilities for creating animated GIFs optimized for Slack. Provides |
 
 ## database
 
@@ -1527,29 +1425,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [database-designer](skills/developer-engineering/database-designer) | developer-engineering | ★★★★★ | A comprehensive database design skill that provides expert-level analysis, optim |
+| [database-designer](skills/developer-engineering/database-designer) | developer-engineering | ★★★★★ | Design, review, or migrate database schemas using workload requirements, data in |
 | [database-schema-designer](skills/developer-engineering/database-schema-designer) | developer-engineering | ★★★★★ | Design relational database schemas from requirements and generate migrations, Ty |
-| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitabl |
-
-## debugging
-
-**3 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [debugging-strategies](skills/developer-engineering/debugging-strategies) | developer-engineering | ★★★★☆ | Master systematic debugging techniques, profiling tools, and root cause analysis |
-| [parallel-debugging](skills/developer-engineering/parallel-debugging) | developer-engineering | ★★★★☆ | Debug complex issues using competing hypotheses with parallel investigation, evi |
-| [systematic-debugging](skills/developer-engineering/systematic-debugging) | developer-engineering | ★★★★☆ | Use when encountering any bug, test failure, or unexpected behavior, before prop |
-
-## engineer
-
-**3 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [prompt-engineer-toolkit](skills/growth-operations-xiaohongshu/prompt-engineer-toolkit) | growth-operations-xiaohongshu | ★★★★★ | Systematic prompt engineering from first principles. Build, test, version, and o |
-| [rust-engineer](skills/developer-engineering/rust-engineer) | developer-engineering | ★★★★☆ | Use when writing or reviewing Rust code, designing safe APIs, debugging ownershi |
-| [terraform-engineer](skills/developer-engineering/terraform-engineer) | developer-engineering | ★★★★☆ | Use when designing Terraform IaC, reviewing modules, managing state, planning pr |
+| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 操作飞书 Base 多维表格、字段、记录、视图、公式、仪表盘、BaseApp 页面和角色权限。处理 /base/、/app/ 链接；导入导出转 lark-dri |
 
 ## frontend
 
@@ -1557,9 +1435,19 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Guide for adding native-feeling page, route, shared-element, and list transition |
+| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Implement React ViewTransition animations, navigation transitions, transition ty |
 | [ui-ux-pro-max](skills/product-design/ui-ux-pro-max) | product-design | ★★★★☆ | Front-end UI/UX design intelligence for creating, reviewing, and hardening polis |
-| [frontend-design](skills/developer-engineering/frontend-design) | developer-engineering | ★★☆☆☆ | Create distinctive, production-grade frontend interfaces with high design qualit |
+| [frontend-design](skills/developer-engineering/frontend-design) | developer-engineering | ★★☆☆☆ | Design and implement polished web components, pages, and applications with a coh |
+
+## generator
+
+**3 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | Create terminal recordings and animated CLI demo GIFs from command workflows or  |
+| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Write or review operational runbooks for deployment, rollback, incidents, recove |
+| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Build React/Next.js landing pages with Tailwind, focused copy, accessible sectio |
 
 ## git
 
@@ -1569,7 +1457,7 @@
 |-------|----------|---------|-------------|
 | [finishing-a-development-branch](skills/ai-workflow/finishing-a-development-branch) | ai-workflow | ★★★★☆ | Use when implementation is complete, all tests pass, and you need to decide how  |
 | [using-git-worktrees](skills/ai-workflow/using-git-worktrees) | ai-workflow | ★★★★☆ | Use when starting feature work that needs isolation from current workspace or be |
-| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | The Git Worktree Manager skill provides systematic management of Git worktrees f |
+| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | Create, inspect, and clean up Git worktrees for parallel development, with expli |
 
 ## knowledge-base
 
@@ -1577,9 +1465,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或 |
-| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Use when building, querying, or maintaining a Karpathy-style interlinked markdow |
-| [obsidian](skills/knowledge-and-pm-integrations/obsidian) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to read, search, create, edit, organize, or cross-link notes |
+| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书知识空间、成员和文档节点，查询或调整节点层级。支持飞书或 doubao.com 的 /wiki/ 链接和 token；文件上传转 lark-drive， |
+| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Karpathy''s LLM Wiki: build/query interlinked markdown KB. |
+| [obsidian](skills/knowledge-and-pm-integrations/obsidian) | knowledge-and-pm-integrations | ★★★☆☆ | Read, search, create, or edit notes in an authorized Obsidian vault while preser |
 
 ## markdown
 
@@ -1587,9 +1475,19 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Use when building, querying, or maintaining a Karpathy-style interlinked markdow |
-| [markdown-tools](skills/office-white-collar/markdown-tools) | office-white-collar | ★★★★☆ | Converts documents to markdown with multi-tool orchestration for best quality. S |
-| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较 |
+| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Karpathy''s LLM Wiki: build/query interlinked markdown KB. |
+| [markdown-tools](skills/office-white-collar/markdown-tools) | office-white-collar | ★★★★☆ | Convert PDF, DOCX, PPTX, and other documents to Markdown, preserving tables, ima |
+| [lark-markdown](skills/knowledge-and-pm-integrations/lark-markdown) | knowledge-and-pm-integrations | ★★★☆☆ | 操作飞书云空间中的 Markdown 文件：读取、创建、上传、局部编辑和比较。用于飞书 Markdown 资源操作；本地 Markdown 编辑无需此技能，导入 |
+
+## meeting
+
+**3 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [meeting-minutes-taker](skills/office-white-collar/meeting-minutes-taker) | office-white-collar | ★★★★★ | Turn meeting transcripts into accurate minutes with decisions, actions, owners,  |
+| [lark-meeting](skills/knowledge-and-pm-integrations/lark-meeting) | knowledge-and-pm-integrations | ★★★★☆ | Use Lark CLI to locate meetings, manage Minutes and AI notes, inspect transcript |
+| [notion-meeting-intelligence](skills/knowledge-and-pm-integrations/notion-meeting-intelligence) | knowledge-and-pm-integrations | ★★★☆☆ | 用于基于 Notion 上下文准备会议材料。 |
 
 ## office
 
@@ -1597,19 +1495,19 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [morph](skills/office-white-collar/morph) | office-white-collar | ★★★★★ | Converting document formats (Markdown/Word/Excel/PDF/HTML). Converts specs from  |
+| [morph](skills/office-white-collar/morph) | office-white-collar | ★★★★★ | Converting document formats (Markdown/Word/Excel/PDF/HTML) and generating reusab |
 | [prism](skills/office-white-collar/prism) | office-white-collar | ★★★★★ | Consultant for NotebookLM steering prompt design. Optimizes Audio/Video/Slide/In |
-| [stage](skills/office-white-collar/stage) | office-white-collar | ★★★★★ | Generating slides via Marp, reveal.js, or Slidev, designing narrative arcs, and  |
+| [stage](skills/office-white-collar/stage) | office-white-collar | ★★★★★ | 演示文稿生成、叙事节奏设计和会议演讲优化。 |
 
-## performance
+## postgres
 
 **3 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [performance-profiler](skills/developer-engineering/performance-profiler) | developer-engineering | ★★★★★ | Systematic performance profiling for Node.js, Python, and Go applications. Ident |
-| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose and fix excessive Postgres egress (network data transfer) in a codebase |
-| [python-performance](skills/developer-engineering/python-performance) | developer-engineering | ★★★★☆ | Use when profiling Python code, reducing memory usage, optimizing hot paths, cho |
+| [neon-postgres](skills/developer-engineering/neon-postgres) | developer-engineering | ★★★★★ | Build or troubleshoot Neon Postgres connections, branching, pooling, scaling, Au |
+| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose excessive Postgres or Neon network egress and database transfer costs b |
+| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Use when writing or reviewing Postgres schemas, queries, indexes, RLS policies,  |
 
 ## review
 
@@ -1617,9 +1515,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [pr-review-expert](skills/developer-engineering/pr-review-expert) | developer-engineering | ★★★★★ | Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond st |
-| [security-review](skills/security-and-reliability/security-review) | security-and-reliability | ★★★★★ | Security code review for vulnerabilities. Use when asked to \"security review\", |
-| [gha-security-review](skills/security-and-reliability/gha-security-review) | security-and-reliability | ★★★★☆ | GitHub Actions security review for workflow exploitation vulnerabilities. Use wh |
+| [pr-review-expert](skills/developer-engineering/pr-review-expert) | developer-engineering | ★★★★★ | Review GitHub PRs or GitLab MRs for correctness, security, compatibility, and af |
+| [security-review](skills/security-and-reliability/security-review) | security-and-reliability | ★★★★★ | Review code changes for injection, XSS, authentication, authorization, cryptogra |
+| [gha-security-review](skills/security-and-reliability/gha-security-review) | security-and-reliability | ★★★★☆ | Audit GitHub Actions workflows for unsafe triggers, expression injection, creden |
 
 ## reviewer
 
@@ -1627,19 +1525,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Reviews and improves Claude Code skills against official best practices. Support |
+| [skill-reviewer](skills/ai-workflow/skill-reviewer) | ai-workflow | ★★★★★ | Review and improve agent skills for clear triggers, actionable instructions, pro |
 | [api-design-reviewer](skills/developer-engineering/api-design-reviewer) | developer-engineering | ★★★★★ | Use when reviewing API designs for consistency, usability, versioning, error sem |
 | [sec-filing-reviewer](skills/finance-investing/sec-filing-reviewer) | finance-investing | ★★☆☆☆ | Use when reviewing SEC filings, extracting material risk disclosures, scanning 1 |
-
-## safety
-
-**3 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [cast](skills/openclaw-memory-and-safety/cast) | openclaw-memory-and-safety | ★★★★★ | Casting personas via rapid generation, persistence, lifecycle management, and in |
-| [omen](skills/openclaw-memory-and-safety/omen) | openclaw-memory-and-safety | ★★★★★ | Enumerating failure modes via pre-mortem analysis. Systematically identifies fai |
-| [warden](skills/openclaw-memory-and-safety/warden) | openclaw-memory-and-safety | ★★★★★ | Guardian of V.A.I.R.E. quality standards (Value/Agency/Identity/Resilience/Echo) |
 
 ## sbom
 
@@ -1657,19 +1545,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
+| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★★ | Use Xquik for X/Twitter research and connected-account actions; Radar and suppor |
 | [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
 | [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
-| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★☆ | Use Xquik for authorized X/Twitter data workflows, including tweet search, profi |
-
-## supabase
-
-**3 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [supabase](skills/developer-engineering/supabase) | developer-engineering | ★★★★☆ | Use when doing ANY task involving Supabase. Triggers: Supabase products (Databas |
-| [supabase-postgres](skills/developer-engineering/supabase-postgres) | developer-engineering | ★★★★☆ | 用于 Supabase 平台开发与 PostgreSQL 最佳实践，包含 RLS、Edge Functions 和实时订阅。来源：supabase 官方 52. |
-| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Postgres performance optimization and best practices from Supabase. Use this ski |
 
 ## supply-chain
 
@@ -1687,9 +1565,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | This skill should be used when the user asks to "design interview processes", "c |
-| [ui-design-system](skills/product-design/ui-design-system) | product-design | ★★★★★ | UI design system toolkit for Senior UI Designer including design token generatio |
-| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Use when building Tailwind CSS design systems, theme tokens, reusable component  |
+| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | Design hiring interviews, competency matrices, question banks, scoring rubrics,  |
+| [ui-design-system](skills/product-design/ui-design-system) | product-design | ★★★★★ | Create or maintain UI design tokens, component documentation, responsive rules,  |
+| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Build scalable design systems with Tailwind CSS v4, design tokens, component lib |
 
 ## twitter
 
@@ -1697,9 +1575,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
+| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★★ | Use Xquik for X/Twitter research and connected-account actions; Radar and suppor |
 | [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
-| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★☆ | Use Xquik for authorized X/Twitter data workflows, including tweet search, profi |
-| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Fetch Twitter/X post content by URL using jina.ai API to bypass JavaScript restr |
+| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Read Twitter/X posts and threads from supplied URLs, including author, text, tim |
 
 ## vercel
 
@@ -1707,8 +1585,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | React and Next.js performance optimization guidelines from Vercel Engineering. T |
-| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Guide for adding native-feeling page, route, shared-element, and list transition |
+| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | Optimize React and Next.js rendering, data fetching, bundles, and runtime perfor |
+| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Implement React ViewTransition animations, navigation transitions, transition ty |
 | [vercel-deploy](skills/deployment-platforms/vercel-deploy) | deployment-platforms | ★★★☆☆ | Deploy applications and websites to Vercel. Use when the user requests deploymen |
 
 ## web
@@ -1717,9 +1595,9 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Use when Codex is building or iterating on a web game (HTML/JS) and needs a reli |
+| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Build or iterate on HTML/JS web games with Playwright input bursts, gameplay scr |
 | [web-scraper](skills/engineering-workflow-automation/web-scraper) | engineering-workflow-automation | ★★★★☆ | Use when users need webpage scraping, structured data extraction, crawling strat |
-| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts  |
+| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Build complex interactive HTML artifacts with React, Tailwind, and shadcn/ui whe |
 
 ## agent-skill
 
@@ -1727,8 +1605,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
-| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Use when the user asks to perform security audits, penetration testing, vulnerab |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
+| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Perform authorized security assessments, vulnerability scans, and penetration te |
 
 ## analyst
 
@@ -1745,7 +1623,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Social media campaign analysis and performance tracking. Calculates engagement r |
+| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Analyze social campaign engagement, ROI, audience behavior, and platform compari |
 | [earnings-call-analyzer](skills/finance-investing/earnings-call-analyzer) | finance-investing | ★★☆☆☆ | Use when summarizing earnings calls, extracting management tone changes, surfaci |
 
 ## app
@@ -1755,16 +1633,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [app-store-optimization](skills/growth-operations-xiaohongshu/app-store-optimization) | growth-operations-xiaohongshu | ★★★★★ | App Store Optimization toolkit for researching keywords, optimizing metadata, an |
-| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | 用于 Next.js App Router 模式开发，包含 RSC、Server Actions 和路由最佳实践。来源：skills.sh 10.2K inst |
-
-## architecture
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [andrej-karpathy-skills](skills/ai-workflow/andrej-karpathy-skills) | ai-workflow | ★★★★☆ | Karpathy-inspired coding discipline for AI agents: think before coding, keep cha |
+| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | Master Next.js 14+ App Router with Server Components, streaming, parallel routes |
 
 ## auditor
 
@@ -1772,35 +1641,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [dependency-auditor](skills/developer-engineering/dependency-auditor) | developer-engineering | ★★★★★ | > Skill Type: POWERFUL > Category: Engineering > Domain: Dependency Management & |
-| [skill-security-auditor](skills/security-and-reliability/skill-security-auditor) | security-and-reliability | ★★★★☆ | Security audit and vulnerability scanner for AI agent skills before installation |
-
-## brownfield
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
-
-## capture
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [capture-screen](skills/office-white-collar/capture-screen) | office-white-collar | ★★★★★ | Programmatic screenshot capture on macOS. Find window IDs with Swift CGWindowLis |
-| [notion-knowledge-capture](skills/knowledge-and-pm-integrations/notion-knowledge-capture) | knowledge-and-pm-integrations | ★★★☆☆ | 用于把对话、决策和笔记沉淀到 Notion。 |
-
-## changelog
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [changelog-generator](skills/devops-sre/changelog-generator) | devops-sre | ★★★★★ | Parse conventional commits, determine semantic version bumps, and generate struc |
-| [changelog-automation](skills/engineering-workflow-automation/changelog-automation) | engineering-workflow-automation | ★★★★☆ | Automate changelog generation from commits, PRs, and releases following Keep a C |
+| [dependency-auditor](skills/developer-engineering/dependency-auditor) | developer-engineering | ★★★★★ | Audit dependency versions, vulnerabilities, licenses and upgrade risks across pa |
+| [skill-security-auditor](skills/security-and-reliability/skill-security-auditor) | security-and-reliability | ★★★★☆ | Audit external agent skills before installation for malicious instructions, unsa |
 
 ## checker
 
@@ -1808,7 +1650,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [fact-checker](skills/operations-general/fact-checker) | operations-general | ★★★★★ | Verifies factual claims in documents using web search and official sources, then |
+| [fact-checker](skills/operations-general/fact-checker) | operations-general | ★★★★★ | Verify factual claims against current authoritative sources and apply requested  |
 | [link-checker](skills/security-and-reliability/link-checker) | security-and-reliability | ★★☆☆☆ | Use when checking URL availability, dead links, redirect chains, suspicious doma |
 
 ## cloudflare
@@ -1818,7 +1660,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [cloudflare-deploy](skills/deployment-platforms/cloudflare-deploy) | deployment-platforms | ★★★★★ | Deploy applications and infrastructure to Cloudflare using Workers, Pages, and r |
-| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Investigate and resolve Cloudflare configuration issues using API-driven evidenc |
+| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Diagnose Cloudflare DNS, TLS, redirects, and configuration issues using live API |
 
 ## code-scanning
 
@@ -1835,17 +1677,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-onboarding](skills/developer-engineering/codebase-onboarding) | developer-engineering | ★★★★★ | Analyze a codebase and generate comprehensive onboarding documentation tailored  |
-| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Inspect and analyze codebases using pygount for LOC counting, language breakdown |
-
-## codex
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [gsd-graphify-brownfield-bootstrap](skills/engineering-workflow-automation/gsd-graphify-brownfield-bootstrap) | engineering-workflow-automation | ★★★★★ | Bootstrap GSD + graphify for an existing brownfield repo when the project needs  |
-| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Use when the user asks Codex to directly generate images with gpt-image-2 using  |
+| [codebase-onboarding](skills/developer-engineering/codebase-onboarding) | developer-engineering | ★★★★★ | Create repository onboarding guides with architecture, key files, setup, debuggi |
+| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Use when a user needs reproducible repository sizing, language composition, file |
 
 ## configuration
 
@@ -1853,8 +1686,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
-| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★★☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
+| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★☆☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
 
 ## container-security
 
@@ -1865,22 +1698,13 @@
 | [grype-syft-sbom-scanner](skills/security-and-reliability/grype-syft-sbom-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Syft 生成 SBOM，并用 Grype 扫描容器镜像、文件系统、软件包、归档和 SBOM 漏洞。 |
 | [trivy-vulnerability-scanner](skills/security-and-reliability/trivy-vulnerability-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Trivy 扫描仓库、容器镜像、文件系统、rootfs、SBOM、Kubernetes、IaC、密钥、许可证和系统 CVE。 |
 
-## doc
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [doc-coauthoring](skills/office-white-collar/doc-coauthoring) | office-white-collar | ★★★★★ | Guide users through a structured workflow for co-authoring documentation. Use wh |
-| [doc](skills/office-white-collar/doc) | office-white-collar | ★★★☆☆ | Use when the task involves reading, creating, or editing `.docx` documents, espe |
-
 ## docker
 
 **2 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [docker-expert](skills/developer-engineering/docker-expert) | developer-engineering | ★★★★☆ | 用于 Docker 容器化最佳实践、多阶段构建优化与 Docker Compose 编排。来源：skills.sh 8.7K installs。 |
+| [docker-expert](skills/developer-engineering/docker-expert) | developer-engineering | ★★★★☆ | Use when containerizing an application with Docker, optimizing multi-stage build |
 | [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
 
 ## driven
@@ -1892,14 +1716,23 @@
 | [subagent-driven-development](skills/ai-workflow/subagent-driven-development) | ai-workflow | ★★★☆☆ | Use when executing implementation plans with independent tasks in the current se |
 | [event-driven-tracker](skills/finance-investing/event-driven-tracker) | finance-investing | ★★☆☆☆ | Use when tracking earnings, product launches, M&A, dividends, buybacks, unlocks, |
 
-## events
+## engineer
 
 **2 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Lark/Feishu real-time event listening / subscribing / consuming: stream events a |
-| [lark-vc-agent](skills/knowledge-and-pm-integrations/lark-vc-agent) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议会中能力：用于让应用机器人真实加入或离开正在进行的会议，并读取当前身份可见的会中事件、发送会中文本消息或会中表情。适用于用户询问正在开的会议发生了什 |
+| [rust-engineer](skills/developer-engineering/rust-engineer) | developer-engineering | ★★★★☆ | Use when writing or reviewing Rust code, designing safe APIs, debugging ownershi |
+| [terraform-engineer](skills/developer-engineering/terraform-engineer) | developer-engineering | ★★★★☆ | Use when designing Terraform IaC, reviewing modules, managing state, planning pr |
+
+## evaluation
+
+**2 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [promptfoo-evaluation](skills/developer-engineering/promptfoo-evaluation) | developer-engineering | ★★★★★ | Configure and run Promptfoo evaluations, assertions, rubrics, and datasets when  |
+| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | Design or diagnose RAG ingestion, retrieval, permissions, reranking, citations,  |
 
 ## figma
 
@@ -1907,8 +1740,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Translate Figma nodes into production-ready code with 1:1 visual fidelity using  |
-| [figma](skills/ai-agent-platform/figma) | ai-agent-platform | ★★☆☆☆ | Use the Figma MCP server to fetch design context, screenshots, variables, and as |
+| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Implement UI from Figma URLs or node IDs with visual fidelity, project conventio |
+| [figma](skills/ai-agent-platform/figma) | ai-agent-platform | ★★☆☆☆ | Fetch Figma design context, variables, screenshots, and assets through MCP when  |
 
 ## financial
 
@@ -1925,8 +1758,17 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gateway](skills/developer-engineering/gateway) | developer-engineering | ★★★★★ | Designing and reviewing APIs via OpenAPI spec generation, versioning strategy, b |
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
+| [gateway](skills/developer-engineering/gateway) | developer-engineering | ★★★★★ | 接口设计、规范生成、版本策略和破坏性变更检查。 |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
+
+## graphify
+
+**2 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [graphify](skills/developer-engineering/graphify) | developer-engineering | ★★★★★ | Build, query, or refresh Graphify knowledge graphs for code and documents when g |
+| [hermes-open-gsd-workflow](skills/ai-agent-platform/hermes-open-gsd-workflow) | ai-agent-platform | ★★★★☆ | Route a development task to the official Hermes Agent skill, Graphify Codex arti |
 
 ## graphql
 
@@ -1937,14 +1779,23 @@
 | [graphql-expert](skills/developer-engineering/graphql-expert) | developer-engineering | ★★★★☆ | Use when designing GraphQL APIs, reviewing schemas and resolvers, optimizing que |
 | [linear](skills/knowledge-and-pm-integrations/linear) | knowledge-and-pm-integrations | ★★★★☆ | 用于管理 Linear issues、项目、团队和协作状态。 |
 
+## hermes
+
+**2 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
+| [hermes-open-gsd-workflow](skills/ai-agent-platform/hermes-open-gsd-workflow) | ai-agent-platform | ★★★★☆ | Route a development task to the official Hermes Agent skill, Graphify Codex arti |
+
 ## integrations
 
 **2 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when users need to operate MCP servers or tools with the mcporter CLI: list  |
-| [native-mcp](skills/ai-agent-platform/native-mcp) | ai-agent-platform | ★★★★☆ | Built-in MCP (Model Context Protocol) client that connects to external MCP serve |
+| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when a user explicitly needs terminal-based MCP discovery, schema inspection |
+| [native-mcp](skills/ai-agent-platform/native-mcp) | ai-agent-platform | ★★★★☆ | Configure Hermes Agent''s built-in MCP client: server discovery, stdio/HTTP conn |
 
 ## linkedin
 
@@ -1952,17 +1803,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Two-phase LinkedIn lead pipeline driven by linkedin-cli. Phase A imports leads f |
+| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Manage LinkedIn lead qualification and follow-up workflows through linkedin-cli  |
 | [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
-
-## meeting
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [meeting-minutes-taker](skills/office-white-collar/meeting-minutes-taker) | office-white-collar | ★★★★★ | Transforms raw meeting transcripts into high-fidelity, structured meeting minute |
-| [notion-meeting-intelligence](skills/knowledge-and-pm-integrations/notion-meeting-intelligence) | knowledge-and-pm-integrations | ★★★☆☆ | 用于基于 Notion 上下文准备会议材料。 |
 
 ## metrics
 
@@ -1970,7 +1812,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Inspect and analyze codebases using pygount for LOC counting, language breakdown |
+| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Use when a user needs reproducible repository sizing, language composition, file |
 | [saas-metrics-coach](skills/finance-investing/saas-metrics-coach) | finance-investing | ★★★★☆ | SaaS financial health advisor. Use when a user shares revenue or customer number |
 
 ## minutes
@@ -1979,8 +1821,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [meeting-minutes-taker](skills/office-white-collar/meeting-minutes-taker) | office-white-collar | ★★★★★ | Transforms raw meeting transcripts into high-fidelity, structured meeting minute |
-| [lark-minutes](skills/knowledge-and-pm-integrations/lark-minutes) | knowledge-and-pm-integrations | ★★★★☆ | 飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_tok |
+| [meeting-minutes-taker](skills/office-white-collar/meeting-minutes-taker) | office-white-collar | ★★★★★ | Turn meeting transcripts into accurate minutes with decisions, actions, owners,  |
+| [lark-meeting](skills/knowledge-and-pm-integrations/lark-meeting) | knowledge-and-pm-integrations | ★★★★☆ | Use Lark CLI to locate meetings, manage Minutes and AI notes, inspect transcript |
 
 ## neon
 
@@ -1988,8 +1830,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [neon-postgres](skills/developer-engineering/neon-postgres) | developer-engineering | ★★★★★ | Guides and best practices for working with Neon Serverless Postgres. Covers setu |
-| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose and fix excessive Postgres egress (network data transfer) in a codebase |
+| [neon-postgres](skills/developer-engineering/neon-postgres) | developer-engineering | ★★★★★ | Build or troubleshoot Neon Postgres connections, branching, pooling, scaling, Au |
+| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose excessive Postgres or Neon network egress and database transfer costs b |
 
 ## nextjs
 
@@ -1997,8 +1839,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | 用于 Next.js App Router 模式开发，包含 RSC、Server Actions 和路由最佳实践。来源：skills.sh 10.2K inst |
-| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Guide for adding native-feeling page, route, shared-element, and list transition |
+| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | Master Next.js 14+ App Router with Server Components, streaming, parallel routes |
+| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Implement React ViewTransition animations, navigation transitions, transition ty |
 
 ## notes
 
@@ -2006,8 +1848,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Use when building, querying, or maintaining a Karpathy-style interlinked markdow |
-| [obsidian](skills/knowledge-and-pm-integrations/obsidian) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to read, search, create, edit, organize, or cross-link notes |
+| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Karpathy''s LLM Wiki: build/query interlinked markdown KB. |
+| [obsidian](skills/knowledge-and-pm-integrations/obsidian) | knowledge-and-pm-integrations | ★★★☆☆ | Read, search, create, or edit notes in an authorized Obsidian vault while preser |
 
 ## observability
 
@@ -2015,7 +1857,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Description: Design comprehensive observability strategies for production system |
+| [observability-designer](skills/devops-sre/observability-designer) | devops-sre | ★★★★★ | Design production observability with SLI/SLO definitions, actionable alerts, tel |
 | [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
 
 ## outreach
@@ -2024,7 +1866,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Two-phase LinkedIn lead pipeline driven by linkedin-cli. Phase A imports leads f |
+| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Manage LinkedIn lead qualification and follow-up workflows through linkedin-cli  |
 | [linkedin](skills/operations-general/linkedin) | operations-general | ★★★★★ | General-purpose LinkedIn automation – fetch profiles, search people and companie |
 
 ## owasp
@@ -2034,25 +1876,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [security-auditor](skills/security-and-reliability/security-auditor) | security-and-reliability | ★★★★☆ | Security audit workflow for AI-generated application code, APIs, infrastructure  |
-| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Use when the user asks to perform security audits, penetration testing, vulnerab |
-
-## parallel
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [dispatching-parallel-agents](skills/ai-workflow/dispatching-parallel-agents) | ai-workflow | ★★★★☆ | Use when facing 2+ independent tasks that can be worked on without shared state  |
-| [parallel-debugging](skills/developer-engineering/parallel-debugging) | developer-engineering | ★★★★☆ | Debug complex issues using competing hypotheses with parallel investigation, evi |
-
-## pdf
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [pdf](skills/office-white-collar/pdf) | office-white-collar | ★★★★★ | Use this skill whenever the user wants to do anything with PDF files. This inclu |
-| [pdf-creator](skills/office-white-collar/pdf-creator) | office-white-collar | ★★☆☆☆ | Create PDF documents from markdown with proper Chinese font support using weasyp |
+| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Perform authorized security assessments, vulnerability scans, and penetration te |
 
 ## plans
 
@@ -2060,7 +1884,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Use when you have a spec or requirements for a multi-step task, before touching  |
+| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Write a practical implementation plan when multi-step work needs task boundaries |
 | [executing-plans](skills/ai-workflow/executing-plans) | ai-workflow | ★★★☆☆ | Use when you have a written implementation plan to execute in a separate session |
 
 ## playwright
@@ -2071,15 +1895,6 @@
 |-------|----------|---------|-------------|
 | [playwright](skills/engineering-workflow-automation/playwright) | engineering-workflow-automation | ★★★★☆ | Use when the task requires automating a real browser from the terminal (navigati |
 | [playwright-pro](skills/engineering-workflow-automation/playwright-pro) | engineering-workflow-automation | ★★★★☆ | Production-grade Playwright testing skill for E2E suites, flaky test diagnosis,  |
-
-## ppt
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
-| [ppt-creator](skills/office-white-collar/ppt-creator) | office-white-collar | ★★★★☆ | Create professional slide decks from topics or documents. Generates structured c |
 
 ## practices
 
@@ -2096,8 +1911,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
-| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 飞书幻灯片：创建和编辑幻灯片。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。 |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
+| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书幻灯片与页面；支持飞书或 doubao.com 的 /slides/ 链接和 token。文件导入导出转 lark-drive，独立画板转  |
 
 ## project-management
 
@@ -2107,15 +1922,6 @@
 |-------|----------|---------|-------------|
 | [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
 | [linear](skills/knowledge-and-pm-integrations/linear) | knowledge-and-pm-integrations | ★★★★☆ | 用于管理 Linear issues、项目、团队和协作状态。 |
-
-## prompt
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [prompt-engineer-toolkit](skills/growth-operations-xiaohongshu/prompt-engineer-toolkit) | growth-operations-xiaohongshu | ★★★★★ | Systematic prompt engineering from first principles. Build, test, version, and o |
-| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Transform vague prompts into precise, well-structured specifications using EARS  |
 
 ## quality-gate
 
@@ -2132,8 +1938,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | React and Next.js performance optimization guidelines from Vercel Engineering. T |
-| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Guide for adding native-feeling page, route, shared-element, and list transition |
+| [vercel-react-best-practices](skills/developer-engineering/vercel-react-best-practices) | developer-engineering | ★★★★☆ | Optimize React and Next.js rendering, data fetching, bundles, and runtime perfor |
+| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Implement React ViewTransition animations, navigation transitions, transition ty |
 
 ## researcher
 
@@ -2142,16 +1948,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [researcher](skills/product-design/researcher) | product-design | ★★★★★ | User research specialist. Designs interview guides, usability test plans, qualit |
-| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | UX research and design toolkit for Senior UX Designer/Researcher including data- |
-
-## root-cause-analysis
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [debugging-strategies](skills/developer-engineering/debugging-strategies) | developer-engineering | ★★★★☆ | Master systematic debugging techniques, profiling tools, and root cause analysis |
-| [parallel-debugging](skills/developer-engineering/parallel-debugging) | developer-engineering | ★★★★☆ | Debug complex issues using competing hypotheses with parallel investigation, evi |
+| [ux-researcher-designer](skills/product-design/ux-researcher-designer) | product-design | ★★★★★ | Plan and synthesize UX research, personas, journey maps, and usability studies w |
 
 ## saas
 
@@ -2159,7 +1956,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Generate complete, production-ready SaaS projects from a product brief. Outputs  |
+| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Build a SaaS application or vertical slice from a validated brief, covering auth |
 | [saas-metrics-coach](skills/finance-investing/saas-metrics-coach) | finance-investing | ★★★★☆ | SaaS financial health advisor. Use when a user shares revenue or customer number |
 
 ## sast
@@ -2178,16 +1975,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [database-schema-designer](skills/developer-engineering/database-schema-designer) | developer-engineering | ★★★★★ | Design relational database schemas from requirements and generate migrations, Ty |
-| [schema](skills/developer-engineering/schema) | developer-engineering | ★★★★★ | Designing database schemas, planning migrations, and authoring ER diagrams. Hand |
-
-## search
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [skills-search](skills/ai-workflow/skills-search) | ai-workflow | ★★★★☆ | This skill should be used when users want to search, discover, install, or manag |
-| [tavily-search](skills/task-understanding-decomposition/tavily-search) | task-understanding-decomposition | ★★☆☆☆ | Use when users need real-time web search, fresh facts, source-backed evidence, m |
+| [schema](skills/developer-engineering/schema) | developer-engineering | ★★★★★ | 数据库模式设计、迁移规划、索引策略和关系建模。 |
 
 ## senior
 
@@ -2195,8 +1983,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [senior-devops](skills/devops-sre/senior-devops) | devops-sre | ★★★★★ | Comprehensive DevOps skill for CI/CD, infrastructure automation, containerizatio |
-| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | This skill should be used when the user asks to \"design system architecture\",  |
+| [senior-devops](skills/devops-sre/senior-devops) | devops-sre | ★★★★★ | Design and operate CI/CD, infrastructure as code, containers, and cloud deployme |
+| [senior-architect](skills/devops-sre/senior-architect) | devops-sre | ★★★★☆ | Design or review system architecture, technical tradeoffs, dependencies, and sca |
 
 ## slides
 
@@ -2204,17 +1992,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
-| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 飞书幻灯片：创建和编辑幻灯片。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。 |
-
-## spreadsheet
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替 |
-| [spreadsheet](skills/office-white-collar/spreadsheet) | office-white-collar | ★★★★☆ | Use when tasks involve creating, editing, analyzing, or formatting spreadsheets  |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
+| [lark-slides](skills/knowledge-and-pm-integrations/lark-slides) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书幻灯片与页面；支持飞书或 doubao.com 的 /slides/ 链接和 token。文件导入导出转 lark-drive，独立画板转  |
 
 ## strategy
 
@@ -2225,6 +2004,15 @@
 | [marketing-strategy-pmm](skills/growth-operations-xiaohongshu/marketing-strategy-pmm) | growth-operations-xiaohongshu | ★★★★★ | Product marketing skill for positioning, GTM strategy, competitive intelligence, |
 | [options-strategy-evaluator](skills/finance-investing/options-strategy-evaluator) | finance-investing | ★★☆☆☆ | Use when evaluating an options structure, checking expiry payoff checkpoints, co |
 
+## supabase
+
+**2 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [supabase](skills/developer-engineering/supabase) | developer-engineering | ★★★★☆ | Build or troubleshoot Supabase Database, Auth, Storage, Realtime, Edge Functions |
+| [supabase-postgres-best-practices](skills/developer-engineering/supabase-postgres-best-practices) | developer-engineering | ★★★☆☆ | Use when writing or reviewing Postgres schemas, queries, indexes, RLS policies,  |
+
 ## terraform
 
 **2 skills**
@@ -2234,23 +2022,23 @@
 | [terraform-engineer](skills/developer-engineering/terraform-engineer) | developer-engineering | ★★★★☆ | Use when designing Terraform IaC, reviewing modules, managing state, planning pr |
 | [cc-devops-skills](skills/devops-sre/cc-devops-skills) | devops-sre | ★★★★☆ | SRE, DevOps, Kubernetes, CI/CD, PromQL, Terraform, Docker, and incident operatio |
 
+## testing
+
+**2 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
+| [webapp-testing](skills/developer-engineering/webapp-testing) | developer-engineering | ★★★☆☆ | Use when testing local web applications with Playwright, verifying frontend beha |
+
 ## threat-modeling
 
 **2 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Security audit of a codebase — web apps, APIs, services, CLI tools, libraries, d |
+| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Audit codebases for exploitable security vulnerabilities with concrete attack pa |
 | [security-auditor](skills/security-and-reliability/security-auditor) | security-and-reliability | ★★★★☆ | Security audit workflow for AI-generated application code, APIs, infrastructure  |
-
-## toolkit
-
-**2 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [prompt-engineer-toolkit](skills/growth-operations-xiaohongshu/prompt-engineer-toolkit) | growth-operations-xiaohongshu | ★★★★★ | Systematic prompt engineering from first principles. Build, test, version, and o |
-| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Comprehensive toolkit for product managers including RICE prioritization, custom |
 
 ## tracker
 
@@ -2258,8 +2046,17 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Tier: POWERFUL 🔥 Category: Engineering Process Automation Expertise: Code Qualit |
+| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Identify technical debt, rank remediation by impact and effort, and track progre |
 | [event-driven-tracker](skills/finance-investing/event-driven-tracker) | finance-investing | ★★☆☆☆ | Use when tracking earnings, product launches, M&A, dividends, buybacks, unlocks, |
+
+## transcript
+
+**2 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [lark-meeting](skills/knowledge-and-pm-integrations/lark-meeting) | knowledge-and-pm-integrations | ★★★★☆ | Use Lark CLI to locate meetings, manage Minutes and AI notes, inspect transcript |
+| [transcript-fixer](skills/office-white-collar/transcript-fixer) | office-white-collar | ★★★★☆ | Correct speech-recognition errors, homophones, and mixed Chinese/English termino |
 
 ## verification
 
@@ -2276,8 +2073,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或 |
-| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Use when building, querying, or maintaining a Karpathy-style interlinked markdow |
+| [lark-wiki](skills/knowledge-and-pm-integrations/lark-wiki) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书知识空间、成员和文档节点，查询或调整节点层级。支持飞书或 doubao.com 的 /wiki/ 链接和 token；文件上传转 lark-drive， |
+| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Karpathy''s LLM Wiki: build/query interlinked markdown KB. |
 
 ## worktree
 
@@ -2286,7 +2083,7 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [using-git-worktrees](skills/ai-workflow/using-git-worktrees) | ai-workflow | ★★★★☆ | Use when starting feature work that needs isolation from current workspace or be |
-| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | The Git Worktree Manager skill provides systematic management of Git worktrees f |
+| [git-worktree-manager](skills/developer-engineering/git-worktree-manager) | developer-engineering | ★★★★☆ | Create, inspect, and clean up Git worktrees for parallel development, with expli |
 
 ## x
 
@@ -2294,8 +2091,8 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
+| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★★ | Use Xquik for X/Twitter research and connected-account actions; Radar and suppor |
 | [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
-| [x-twitter-scraper](skills/growth-operations-xiaohongshu/x-twitter-scraper) | growth-operations-xiaohongshu | ★★★★☆ | Use Xquik for authorized X/Twitter data workflows, including tweet search, profi |
 
 ## academic
 
@@ -2303,7 +2100,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | 用于按关键词、作者、分类或编号检索 arXiv 论文。 |
+| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | Search arXiv papers by keyword, author, category, or ID. |
 
 ## accessibility
 
@@ -2335,7 +2132,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUD |
+| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction  |
 
 ## agent-workflow
 
@@ -2343,7 +2140,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to turn Feishu/Lark API operations into reusable agent skill |
+| [lark-skill-maker](skills/knowledge-and-pm-integrations/lark-skill-maker) | knowledge-and-pm-integrations | ★★★☆☆ | 创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。 |
 
 ## agents
 
@@ -2359,7 +2156,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Agile product ownership for backlog management and sprint execution. Covers user |
+| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Manage product backlogs and sprints: user stories, acceptance criteria, epic bre |
 
 ## ai-generated-code
 
@@ -2383,7 +2180,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Creating algorithmic art using p5.js with seeded randomness and interactive para |
+| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Create original generative art with p5.js, seeded randomness, flow fields, parti |
 
 ## analytics
 
@@ -2393,13 +2190,21 @@
 |-------|----------|---------|-------------|
 | [campaign-analytics](skills/growth-operations-xiaohongshu/campaign-analytics) | growth-operations-xiaohongshu | ★★★★★ | Analyzes campaign performance with multi-touch attribution, funnel conversion, a |
 
+## android
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
+
 ## animation
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Guide for adding native-feeling page, route, shared-element, and list transition |
+| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Implement React ViewTransition animations, navigation transitions, transition ty |
 
 ## api-and-interface-design
 
@@ -2407,7 +2212,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Guides stable API and interface design. Use when designing APIs, module boundari |
+| [api-and-interface-design](skills/ai-workflow/api-and-interface-design) | ai-workflow | ★★★★★ | Design REST/GraphQL APIs, module interfaces, and type contracts when creating en |
 
 ## application-security
 
@@ -2415,7 +2220,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Security audit of a codebase — web apps, APIs, services, CLI tools, libraries, d |
+| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Audit codebases for exploitable security vulnerabilities with concrete attack pa |
 
 ## approval
 
@@ -2431,7 +2236,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that c |
+| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build or debug ChatGPT Apps SDK projects with MCP tools and widget UIs, using cu |
+
+## architecture
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [andrej-karpathy-skills](skills/ai-workflow/andrej-karpathy-skills) | ai-workflow | ★★★★☆ | Karpathy-inspired coding discipline for AI agents: think before coding, keep cha |
 
 ## arena
 
@@ -2447,7 +2260,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Creating algorithmic art using p5.js with seeded randomness and interactive para |
+| [algorithmic-art](skills/growth-operations-xiaohongshu/algorithmic-art) | growth-operations-xiaohongshu | ★★★★★ | Create original generative art with p5.js, seeded randomness, flow fields, parti |
 
 ## artifacts
 
@@ -2455,7 +2268,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts  |
+| [web-artifacts-builder](skills/developer-engineering/web-artifacts-builder) | developer-engineering | ★★★☆☆ | Build complex interactive HTML artifacts with React, Tailwind, and shadcn/ui whe |
 
 ## arxiv
 
@@ -2463,7 +2276,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | 用于按关键词、作者、分类或编号检索 arXiv 论文。 |
+| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | Search arXiv papers by keyword, author, category, or ID. |
 
 ## attendance
 
@@ -2471,15 +2284,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to query Feishu/Lark attendance records, audit punch-in gaps |
-
-## audit
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [seo-audit](skills/growth-operations-xiaohongshu/seo-audit) | growth-operations-xiaohongshu | ★★★★☆ | Use when users need a comprehensive SEO audit, on-page optimization review, tech |
+| [lark-attendance](skills/knowledge-and-pm-integrations/lark-attendance) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying Lark attendance records, checking missing clock-ins, and prepa |
 
 ## auth
 
@@ -2487,7 +2292,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★★☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
+| [lark-shared](skills/knowledge-and-pm-integrations/lark-shared) | knowledge-and-pm-integrations | ★★★☆☆ | Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identit |
 
 ## authoring
 
@@ -2503,15 +2308,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | A skill to evaluate how secure Firestore security rules are. Use this when Fires |
-
-## auto-continue
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
+| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | Audit Firestore and Cloud Storage rules for authorization, tenant isolation, fie |
 
 ## aws
 
@@ -2519,7 +2316,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | 用于 AWS 云架构设计、服务选型、成本优化与 Well-Architected Framework 评估。来源：alirezarezvani/claude-s |
+| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | Design or review AWS architecture and infrastructure as code for serverless syst |
 
 ## azure
 
@@ -2527,7 +2324,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan, create, and configure production-ready Azure Kubernetes Service (AKS) clus |
+| [azure-kubernetes](skills/devops-sre/azure-kubernetes) | devops-sre | ★★★★☆ | Plan and configure Azure Kubernetes Service clusters, including SKU, networking, |
 
 ## backend
 
@@ -2551,7 +2348,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitabl |
+| [lark-base](skills/knowledge-and-pm-integrations/lark-base) | knowledge-and-pm-integrations | ★★★★☆ | 操作飞书 Base 多维表格、字段、记录、视图、公式、仪表盘、BaseApp 页面和角色权限。处理 /base/、/app/ 链接；导入导出转 lark-dri |
 
 ## beacon
 
@@ -2559,7 +2356,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [beacon](skills/devops-sre/beacon) | devops-sre | ★★★★★ | Engineering observability and reliability through SLO/SLI design, distributed tr |
+| [beacon](skills/devops-sre/beacon) | devops-sre | ★★★★★ | 可观测性、服务目标、告警、容量和可靠性设计。 |
 
 ## billing
 
@@ -2575,7 +2372,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [brainstorming](skills/ai-workflow/brainstorming) | ai-workflow | ★★★☆☆ | You MUST use this before any creative work - creating features, building compone |
+| [brainstorming](skills/ai-workflow/brainstorming) | ai-workflow | ★★★☆☆ | Use before creative product or engineering work when the user wants to design a  |
 
 ## brand
 
@@ -2583,7 +2380,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [brand-guidelines](skills/operations-general/brand-guidelines) | operations-general | ★★★☆☆ | Applies Anthropic''s official brand colors and typography to any sort of artifac |
+| [brand-guidelines](skills/operations-general/brand-guidelines) | operations-general | ★★★☆☆ | Apply Anthropic brand colors and typography when the user requests Anthropic vis |
 
 ## breach
 
@@ -2591,7 +2388,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [breach](skills/security-and-reliability/breach) | security-and-reliability | ★★★★★ | Designing red team attack scenarios, building threat models, applying MITRE ATT& |
+| [breach](skills/security-and-reliability/breach) | security-and-reliability | ★★★★★ | 红队场景、攻击路径、威胁建模和对抗演练设计。 |
 
 ## browser
 
@@ -2615,7 +2412,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Tests in real browsers via Chrome DevTools MCP. Use when building or debugging a |
+| [browser-testing-with-devtools](skills/ai-workflow/browser-testing-with-devtools) | ai-workflow | ★★★★★ | Inspect browser DOM, network, console, screenshots, and performance with Chrome  |
 
 ## calendar
 
@@ -2647,7 +2444,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [canvas-design](skills/product-design/canvas-design) | product-design | ★★★★☆ | Create beautiful visual art in .png and .pdf documents using design philosophy.  |
+| [canvas-design](skills/product-design/canvas-design) | product-design | ★★★★☆ | Create original static visual designs such as posters, artwork, and compositions |
+
+## capture
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [notion-knowledge-capture](skills/knowledge-and-pm-integrations/notion-knowledge-capture) | knowledge-and-pm-integrations | ★★★☆☆ | 用于把对话、决策和笔记沉淀到 Notion。 |
 
 ## cast
 
@@ -2655,15 +2460,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [cast](skills/openclaw-memory-and-safety/cast) | openclaw-memory-and-safety | ★★★★★ | Casting personas via rapid generation, persistence, lifecycle management, and in |
-
-## channel
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [teams-channel-post-writer](skills/operations-general/teams-channel-post-writer) | operations-general | ★★★★☆ | Creates educational Teams channel posts for internal knowledge sharing about Cla |
+| [cast](skills/openclaw-memory-and-safety/cast) | openclaw-memory-and-safety | ★★★★★ | 用户画像生成、角色注册、生命周期和跨智能体同步。 |
 
 ## chat
 
@@ -2671,7 +2468,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急 |
+| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（ |
 
 ## chatgpt
 
@@ -2679,15 +2476,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that c |
-
-## check
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [confidence-check](skills/operations-general/confidence-check) | operations-general | ★★★★☆ | Use when users need structured self-review before final answers: validate assump |
+| [chatgpt-apps](skills/ai-agent-platform/chatgpt-apps) | ai-agent-platform | ★★★★★ | Build or debug ChatGPT Apps SDK projects with MCP tools and widget UIs, using cu |
 
 ## ci-cd-and-automation
 
@@ -2719,7 +2508,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [docs-cleaner](skills/operations-general/docs-cleaner) | operations-general | ★★★☆☆ | Consolidates redundant documentation while preserving all valuable content. This |
+| [docs-cleaner](skills/operations-general/docs-cleaner) | operations-general | ★★★☆☆ | Consolidate overlapping documentation and remove repetition while preserving use |
 
 ## cloak
 
@@ -2727,7 +2516,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [cloak](skills/security-and-reliability/cloak) | security-and-reliability | ★★★★★ | Engineering privacy and data governance via PII detection, data flow mapping, co |
+| [cloak](skills/security-and-reliability/cloak) | security-and-reliability | ★★★★★ | 隐私工程、敏感信息流、同意管理和数据治理。 |
 
 ## cloud-storage
 
@@ -2735,7 +2524,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | A skill to evaluate how secure Firestore security rules are. Use this when Fires |
+| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | Audit Firestore and Cloud Storage rules for authorization, tenant isolation, fie |
 
 ## coach
 
@@ -2745,21 +2534,13 @@
 |-------|----------|---------|-------------|
 | [saas-metrics-coach](skills/finance-investing/saas-metrics-coach) | finance-investing | ★★★★☆ | SaaS financial health advisor. Use when a user shares revenue or customer number |
 
-## coauthoring
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [doc-coauthoring](skills/office-white-collar/doc-coauthoring) | office-white-collar | ★★★★★ | Guide users through a structured workflow for co-authoring documentation. Use wh |
-
 ## code analysis
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Inspect and analyze codebases using pygount for LOC counting, language breakdown |
+| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Use when a user needs reproducible repository sizing, language composition, file |
 
 ## code-review-and-quality
 
@@ -2767,7 +2548,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Conducts multi-axis code review. Use before merging any change. Use when reviewi |
+| [code-review-and-quality](skills/ai-workflow/code-review-and-quality) | ai-workflow | ★★★★★ | Review code changes for correctness, maintainability, security, and validation e |
 
 ## code-simplification
 
@@ -2775,7 +2556,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Simplifies code for clarity. Use when refactoring code for clarity without chang |
+| [code-simplification](skills/ai-workflow/code-simplification) | ai-workflow | ★★★★★ | Refactor working code for clarity and maintainability while preserving behavior; |
 
 ## codeql
 
@@ -2784,6 +2565,14 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [codeql-security-scanner](skills/security-and-reliability/codeql-security-scanner) | security-and-reliability | ★★★★☆ | 用于通过 CodeQL 执行语义代码扫描、安全查询、自定义规则、SARIF 报告和 GitHub Code Scanning 集成。 |
+
+## codex
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Generate or edit images with gpt-image-2 when explicitly requested, using the do |
 
 ## coding-discipline
 
@@ -2815,7 +2604,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Use during incidents to coordinate triage, assign roles, manage communications,  |
+| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Coordinate active incidents through severity assessment, roles, mitigation, comm |
 
 ## comments
 
@@ -2825,21 +2614,13 @@
 |-------|----------|---------|-------------|
 | [gh-address-comments](skills/engineering-workflow-automation/gh-address-comments) | engineering-workflow-automation | ★★☆☆☆ | Use when addressing GitHub PR review comments or issue comments on the current b |
 
-## comms
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [internal-comms](skills/operations-general/internal-comms) | operations-general | ★★☆☆☆ | Use when users need internal communications such as status reports, leadership u |
-
 ## compete
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [compete](skills/growth-operations-xiaohongshu/compete) | growth-operations-xiaohongshu | ★★★★★ | Researching competitors, analyzing differentiation, and shaping strategic positi |
+| [compete](skills/growth-operations-xiaohongshu/compete) | growth-operations-xiaohongshu | ★★★★★ | 竞品研究、差异化定位、矩阵对比和竞争战卡。 |
 
 ## competitive
 
@@ -2847,7 +2628,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Run a structured competitive analysis on any product or company. Synthesizes dat |
+| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Analyze competitors from product, pricing, reviews, SEO, and hiring evidence to  |
 
 ## competitors
 
@@ -2855,7 +2636,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Analyze competitor repositories with evidence-based approach. Use when tracking  |
+| [competitors-analysis](skills/growth-operations-xiaohongshu/competitors-analysis) | growth-operations-xiaohongshu | ★★★★★ | Compare competitor repositories using verified code and source evidence when tec |
 
 ## compliance
 
@@ -2863,7 +2644,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
 
 ## comply
 
@@ -2881,21 +2662,13 @@
 |-------|----------|---------|-------------|
 | [comps-valuation-analyst](skills/finance-investing/comps-valuation-analyst) | finance-investing | ★★☆☆☆ | Use when valuing a public company with peer multiples, building comparable-compa |
 
-## confidence
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [confidence-check](skills/operations-general/confidence-check) | operations-general | ★★★★☆ | Use when users need structured self-review before final answers: validate assump |
-
 ## contacts
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名。当 |
+| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名,以 |
 
 ## content
 
@@ -2903,7 +2676,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create SEO-optimized marketing content with consistent brand voice. Includes bra |
+| [content-creator](skills/growth-operations-xiaohongshu/content-creator) | growth-operations-xiaohongshu | ★★★★★ | Create or revise marketing content with a consistent brand voice, audience inten |
 
 ## context-engineering
 
@@ -2911,7 +2684,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Optimizes agent context setup. Use when starting a new session, when agent outpu |
+| [context-engineering](skills/ai-workflow/context-engineering) | ai-workflow | ★★★★★ | Diagnose missing or overloaded agent context and configure project instructions  |
 
 ## contributor
 
@@ -2919,7 +2692,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [github-contributor](skills/developer-engineering/github-contributor) | developer-engineering | ★★★★★ | Strategic guide for becoming an effective GitHub contributor. Covers opportunity |
+| [github-contributor](skills/developer-engineering/github-contributor) | developer-engineering | ★★★★★ | Find suitable open-source contribution opportunities and prepare focused GitHub  |
 
 ## cost-optimization
 
@@ -2927,7 +2700,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose and fix excessive Postgres egress (network data transfer) in a codebase |
+| [neon-postgres-egress-optimizer](skills/developer-engineering/neon-postgres-egress-optimizer) | developer-engineering | ★★★★☆ | Diagnose excessive Postgres or Neon network egress and database transfer costs b |
 
 ## crest
 
@@ -2935,7 +2708,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [crest](skills/operations-general/crest) | operations-general | ★★★★★ | Building engineer self-branding by transforming technical contributions into a p |
+| [crest](skills/operations-general/crest) | operations-general | ★★★★★ | Building engineer self-branding by turning technical contributions into a profes |
 
 ## custom-queries
 
@@ -2959,7 +2732,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [dawn](skills/operations-general/dawn) | operations-general | ★★★★★ | Proposes exactly one personal side-project idea per invocation, sized to a 1-3 d |
+| [dawn](skills/operations-general/dawn) | operations-general | ★★★★★ | Propose one personal side-project idea scoped to a 1-3 day MVP when the user req |
 
 ## debt
 
@@ -2967,7 +2740,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Tier: POWERFUL 🔥 Category: Engineering Process Automation Expertise: Code Qualit |
+| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Identify technical debt, rank remediation by impact and effort, and track progre |
+
+## debugging
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [systematic-debugging](skills/developer-engineering/systematic-debugging) | developer-engineering | ★★★★☆ | Use when encountering any bug, test failure, or unexpected behavior, before prop |
 
 ## debugging-and-error-recovery
 
@@ -2975,7 +2756,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Guides systematic root-cause debugging. Use when tests fail, builds break, behav |
+| [debugging-and-error-recovery](skills/ai-workflow/debugging-and-error-recovery) | ai-workflow | ★★★★★ | Diagnose failing tests, broken builds, and unexpected runtime behavior through r |
 
 ## deep
 
@@ -2983,7 +2764,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Generate format-controlled research reports with evidence tracking, citations, a |
+| [deep-research](skills/ai-workflow/deep-research) | ai-workflow | ★★★★★ | Produce source-backed research reports, literature reviews, or technical and mar |
 
 ## delivery
 
@@ -3007,7 +2788,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | This skill should be used when users want to create animated CLI demos, terminal |
+| [cli-demo-generator](skills/developer-engineering/cli-demo-generator) | developer-engineering | ★★★★★ | Create terminal recordings and animated CLI demo GIFs from command workflows or  |
 
 ## dependency
 
@@ -3015,7 +2796,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [dependency-auditor](skills/developer-engineering/dependency-auditor) | developer-engineering | ★★★★★ | > Skill Type: POWERFUL > Category: Engineering > Domain: Dependency Management & |
+| [dependency-auditor](skills/developer-engineering/dependency-auditor) | developer-engineering | ★★★★★ | Audit dependency versions, vulnerabilities, licenses and upgrade risks across pa |
 
 ## dependency-audit
 
@@ -3039,7 +2820,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Manages deprecation and migration. Use when removing old systems, APIs, or featu |
+| [deprecation-and-migration](skills/ai-workflow/deprecation-and-migration) | ai-workflow | ★★★★★ | Plan deprecation and migration of systems, APIs, and production schemas, includi |
 
 ## design-system
 
@@ -3055,15 +2836,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Use when Codex is building or iterating on a web game (HTML/JS) and needs a reli |
-
-## diagnostics
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
+| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Build or iterate on HTML/JS web games with Playwright input bursts, gameplay scr |
 
 ## diagram
 
@@ -3071,7 +2844,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用多种格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板时使 |
+| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying, exporting, or editing Lark whiteboards, including preview ima |
 
 ## dialectic
 
@@ -3079,7 +2852,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and use Honcho memory with Hermes -- cross-session user modeling, mult |
+| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and troubleshoot Honcho memory for Hermes. |
 
 ## documentation
 
@@ -3103,7 +2876,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki 文档）：读取和编辑飞书文档内容。当用户给出文档 URL 或 token，或需要查看、创建、编辑文档、插入或下载文档图片附件时 |
+| [lark-doc](skills/knowledge-and-pm-integrations/lark-doc) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书云文档（Docx / Wiki）内容操作：读取、创建、编辑文档，插入或下载图片附件，以及操作思维笔记。用户提供文档 URL/token（包括 doubao. |
 
 ## docx
 
@@ -3111,7 +2884,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [docx](skills/office-white-collar/docx) | office-white-collar | ★★★★★ | Use this skill whenever the user wants to create, read, edit, or manipulate Word |
+| [docx](skills/office-white-collar/docx) | office-white-collar | ★★★★★ | Create, read, edit, or review Word documents (.docx), including styles, tables,  |
+
+## doubt-driven-development
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [doubt-driven-development](skills/ai-workflow/doubt-driven-development) | ai-workflow | ★★★★★ | Review high-risk or uncertain engineering decisions adversarially when independe |
 
 ## drive
 
@@ -3119,7 +2900,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 飞书云空间（云盘/云存储）：管理 Drive 文件和文件夹，包含上传/下载、创建文件夹、复制/移动/删除、查看元数据、评论/权限/订阅、标题、版本、飞书文档密级 |
+| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书 Drive 云空间文件、目录、元数据、权限和版本，以及 Word/Markdown/Excel/CSV/PPTX 导入导出。搜索文件或解析资源链接时使 |
 
 ## e2e-testing
 
@@ -3137,13 +2918,21 @@
 |-------|----------|---------|-------------|
 | [earnings-call-analyzer](skills/finance-investing/earnings-call-analyzer) | finance-investing | ★★☆☆☆ | Use when summarizing earnings calls, extracting management tone changes, surfaci |
 
+## eas
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
+
 ## editorial
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
 
 ## email
 
@@ -3159,15 +2948,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Complete environment and secrets management workflow: .env file lifecycle across |
-
-## evaluation
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [promptfoo-evaluation](skills/developer-engineering/promptfoo-evaluation) | developer-engineering | ★★★★★ | Configures and runs LLM evaluation using Promptfoo framework. Use when setting u |
+| [env-secrets-manager](skills/devops-sre/env-secrets-manager) | devops-sre | ★★★★★ | Manage environment files, required-variable validation, secret storage, leak det |
 
 ## evaluator
 
@@ -3185,13 +2966,13 @@
 |-------|----------|---------|-------------|
 | [event-driven-tracker](skills/finance-investing/event-driven-tracker) | finance-investing | ★★☆☆☆ | Use when tracking earnings, product launches, M&A, dividends, buybacks, unlocks, |
 
-## excel
+## events
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [excel-automation](skills/office-white-collar/excel-automation) | office-white-collar | ★★★★★ | Create, parse, and control Excel files on macOS. Professional formatting with op |
+| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Consume Lark/Feishu events as NDJSON with lark-cli for messaging, approvals, tas |
 
 ## execution
 
@@ -3201,13 +2982,21 @@
 |-------|----------|---------|-------------|
 | [executing-plans](skills/ai-workflow/executing-plans) | ai-workflow | ★★★☆☆ | Use when you have a written implementation plan to execute in a separate session |
 
+## expo
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
+
 ## fact
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [fact-checker](skills/operations-general/fact-checker) | operations-general | ★★★★★ | Verifies factual claims in documents using web search and official sources, then |
+| [fact-checker](skills/operations-general/fact-checker) | operations-general | ★★★★★ | Verify factual claims against current authoritative sources and apply requested  |
 
 ## factor
 
@@ -3239,7 +3028,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 飞书云空间（云盘/云存储）：管理 Drive 文件和文件夹，包含上传/下载、创建文件夹、复制/移动/删除、查看元数据、评论/权限/订阅、标题、版本、飞书文档密级 |
+| [lark-drive](skills/knowledge-and-pm-integrations/lark-drive) | knowledge-and-pm-integrations | ★★★★☆ | 管理飞书 Drive 云空间文件、目录、元数据、权限和版本，以及 Word/Markdown/Excel/CSV/PPTX 导入导出。搜索文件或解析资源链接时使 |
 
 ## filing
 
@@ -3263,7 +3052,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | A skill to evaluate how secure Firestore security rules are. Use this when Fires |
+| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | Audit Firestore and Cloud Storage rules for authorization, tenant isolation, fie |
 
 ## firestore
 
@@ -3271,7 +3060,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | A skill to evaluate how secure Firestore security rules are. Use this when Fires |
+| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | Audit Firestore and Cloud Storage rules for authorization, tenant isolation, fie |
 
 ## fix
 
@@ -3279,7 +3068,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gh-fix-ci](skills/engineering-workflow-automation/gh-fix-ci) | engineering-workflow-automation | ★★★☆☆ | Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub |
+| [gh-fix-ci](skills/engineering-workflow-automation/gh-fix-ci) | engineering-workflow-automation | ★★★☆☆ | Inspect and fix failing GitHub Actions PR checks using gh logs and focused valid |
 
 ## fixer
 
@@ -3287,7 +3076,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [transcript-fixer](skills/office-white-collar/transcript-fixer) | office-white-collar | ★★★★☆ | Corrects speech-to-text transcription errors in meeting notes, lectures, and int |
+| [transcript-fixer](skills/office-white-collar/transcript-fixer) | office-white-collar | ★★★★☆ | Correct speech-recognition errors, homophones, and mixed Chinese/English termino |
 
 ## flaky-tests
 
@@ -3311,7 +3100,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Builds production-quality UIs. Use when building or modifying user-facing interf |
+| [frontend-ui-engineering](skills/ai-workflow/frontend-ui-engineering) | ai-workflow | ★★★★★ | Build accessible, responsive interfaces and components with production UI states |
+
+## full-stack
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Build a SaaS application or vertical slice from a validated brief, covering auth |
 
 ## game
 
@@ -3319,7 +3116,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Use when Codex is building or iterating on a web game (HTML/JS) and needs a reli |
+| [develop-web-game](skills/ai-agent-platform/develop-web-game) | ai-agent-platform | ★★★★☆ | Build or iterate on HTML/JS web games with Playwright input bursts, gameplay scr |
 
 ## gear
 
@@ -3327,7 +3124,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gear](skills/devops-sre/gear) | devops-sre | ★★★★★ | Managing dependencies, CI/CD optimization, Docker configuration, and operational |
+| [gear](skills/devops-sre/gear) | devops-sre | ★★★★★ | 依赖、构建、容器、监控和开发环境运维优化。 |
 
 ## gha
 
@@ -3335,7 +3132,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gha-security-review](skills/security-and-reliability/gha-security-review) | security-and-reliability | ★★★★☆ | GitHub Actions security review for workflow exploitation vulnerabilities. Use wh |
+| [gha-security-review](skills/security-and-reliability/gha-security-review) | security-and-reliability | ★★★★☆ | Audit GitHub Actions workflows for unsafe triggers, expression injection, creden |
 
 ## gif
 
@@ -3351,15 +3148,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Structures git workflow practices. Use when making any code change. Use when com |
-
-## gog
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [gog](skills/office-white-collar/gog) | office-white-collar | ★★★★☆ | Use when users need Google Workspace automation across Gmail, Calendar, Drive, D |
+| [git-workflow-and-versioning](skills/ai-workflow/git-workflow-and-versioning) | ai-workflow | ★★★★★ | Manage branches, commits, conflicts, semantic versions, and changelogs when prep |
 
 ## governance
 
@@ -3367,7 +3156,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
 
 ## gpt-image-2
 
@@ -3375,7 +3164,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Use when the user asks Codex to directly generate images with gpt-image-2 using  |
+| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Generate or edit images with gpt-image-2 when explicitly requested, using the do |
 
 ## grove
 
@@ -3383,7 +3172,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [grove](skills/knowledge-and-pm-integrations/grove) | knowledge-and-pm-integrations | ★★★★★ | Designing, optimizing, and auditing repository structure. Covers directory desig |
+| [grove](skills/knowledge-and-pm-integrations/grove) | knowledge-and-pm-integrations | ★★★★★ | 仓库结构、文档布局、测试脚本组织和迁移规划。 |
 
 ## grype
 
@@ -3399,7 +3188,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [input-guard](skills/openclaw-memory-and-safety/input-guard) | openclaw-memory-and-safety | ★★★★★ | Scan untrusted external text (web pages, tweets, search results, API responses)  |
+| [input-guard](skills/openclaw-memory-and-safety/input-guard) | openclaw-memory-and-safety | ★★★★★ | Inspect untrusted external content for prompt injection when suspicious instruct |
 
 ## guardian
 
@@ -3407,7 +3196,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guardian](skills/engineering-workflow-automation/guardian) | engineering-workflow-automation | ★★★★★ | Gatekeeping Git/PR by classifying change essence and recommending granularity, n |
+| [guardian](skills/engineering-workflow-automation/guardian) | engineering-workflow-automation | ★★★★★ | 提交、分支、合并请求策略和变更粒度把关。 |
 
 ## guidelines
 
@@ -3415,7 +3204,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [brand-guidelines](skills/operations-general/brand-guidelines) | operations-general | ★★★☆☆ | Applies Anthropic''s official brand colors and typography to any sort of artifac |
+| [brand-guidelines](skills/operations-general/brand-guidelines) | operations-general | ★★★☆☆ | Apply Anthropic brand colors and typography when the user requests Anthropic vis |
 
 ## harvest
 
@@ -3431,7 +3220,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hearth](skills/operations-general/hearth) | operations-general | ★★★★★ | Generating, optimizing, and auditing personal development environment config fil |
+| [hearth](skills/operations-general/hearth) | operations-general | ★★★★★ | Generating and auditing personal dev environment configs (zsh/tmux/neovim/ghostt |
 
 ## helm
 
@@ -3447,7 +3236,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and use Honcho memory with Hermes -- cross-session user modeling, mult |
+| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and troubleshoot Honcho memory for Hermes. |
 
 ## host-security
 
@@ -3463,7 +3252,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
 
 ## hub
 
@@ -3471,7 +3260,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [agent-hub](skills/ai-agent-platform/agent-hub) | ai-agent-platform | ★★★★☆ | Multi-agent collaboration plugin that spawns N parallel subagents competing on t |
+| [agent-hub](skills/ai-agent-platform/agent-hub) | ai-agent-platform | ★★★★☆ | Compare independent solutions with agent-hub when parallel competition is reques |
 
 ## i18n
 
@@ -3479,7 +3268,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [i18n-expert](skills/developer-engineering/i18n-expert) | developer-engineering | ★★★★☆ | This skill should be used when setting up, auditing, or enforcing internationali |
+| [i18n-expert](skills/developer-engineering/i18n-expert) | developer-engineering | ★★★★☆ | Implement or audit UI internationalization: translation keys, locale files, plur |
 
 ## iac
 
@@ -3495,7 +3284,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Refines raw ideas into sharp, actionable concepts through structured divergent a |
+| [idea-refine](skills/ai-workflow/idea-refine) | ai-workflow | ★★★★☆ | Explore alternatives and stress-test assumptions when refining a vague idea into |
 
 ## identity
 
@@ -3503,7 +3292,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名。当 |
+| [lark-contact](skills/knowledge-and-pm-integrations/lark-contact) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名,以 |
 
 ## image-generation
 
@@ -3511,7 +3300,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Use when the user asks Codex to directly generate images with gpt-image-2 using  |
+| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Generate or edit images with gpt-image-2 when explicitly requested, using the do |
 
 ## imagegen
 
@@ -3519,7 +3308,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [imagegen](skills/multimodal-media/imagegen) | multimodal-media | ★★★★☆ | Use when the user asks to generate or edit images via the OpenAI Image API (for  |
+| [imagegen](skills/multimodal-media/imagegen) | multimodal-media | ★★★★☆ | Generate or edit images with OpenAI image tools or the bundled API CLI, includin |
 
 ## implement
 
@@ -3527,7 +3316,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Translate Figma nodes into production-ready code with 1:1 visual fidelity using  |
+| [figma-implement-design](skills/ai-agent-platform/figma-implement-design) | ai-agent-platform | ★★★★★ | Implement UI from Figma URLs or node IDs with visual fidelity, project conventio |
 
 ## implementation
 
@@ -3551,7 +3340,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Use during incidents to coordinate triage, assign roles, manage communications,  |
+| [incident-commander](skills/devops-sre/incident-commander) | devops-sre | ★★★★★ | Coordinate active incidents through severity assessment, roles, mitigation, comm |
 
 ## incident-response
 
@@ -3575,7 +3364,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [input-guard](skills/openclaw-memory-and-safety/input-guard) | openclaw-memory-and-safety | ★★★★★ | Scan untrusted external text (web pages, tweets, search results, API responses)  |
+| [input-guard](skills/openclaw-memory-and-safety/input-guard) | openclaw-memory-and-safety | ★★★★★ | Inspect untrusted external content for prompt injection when suspicious instruct |
 
 ## intelligence
 
@@ -3585,21 +3374,13 @@
 |-------|----------|---------|-------------|
 | [notion-meeting-intelligence](skills/knowledge-and-pm-integrations/notion-meeting-intelligence) | knowledge-and-pm-integrations | ★★★☆☆ | 用于基于 Notion 上下文准备会议材料。 |
 
-## internal
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [internal-comms](skills/operations-general/internal-comms) | operations-general | ★★☆☆☆ | Use when users need internal communications such as status reports, leadership u |
-
 ## interop
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when users need to operate MCP servers or tools with the mcporter CLI: list  |
+| [mcporter](skills/ai-agent-platform/mcporter) | ai-agent-platform | ★★★★☆ | Use when a user explicitly needs terminal-based MCP discovery, schema inspection |
 
 ## interview
 
@@ -3607,7 +3388,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | This skill should be used when the user asks to "design interview processes", "c |
+| [interview-system-designer](skills/operations-general/interview-system-designer) | operations-general | ★★★★★ | Design hiring interviews, competency matrices, question banks, scoring rubrics,  |
+
+## interview-me
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [interview-me](skills/ai-workflow/interview-me) | ai-workflow | ★★★★★ | Interview the user when they request guided discovery or when unresolved goals,  |
 
 ## investment
 
@@ -3617,13 +3406,21 @@
 |-------|----------|---------|-------------|
 | [investment-memo-writer](skills/finance-investing/investment-memo-writer) | finance-investing | ★★☆☆☆ | Use when turning research notes into an investment memo, writing a buy or sell t |
 
+## ios
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
+
 ## isms
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
 
 ## iso27001
 
@@ -3631,7 +3428,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
 
 ## issues
 
@@ -3655,7 +3452,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Generates high-converting landing pages as complete Next.js/React (TSX) componen |
+| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Build React/Next.js landing pages with Tailwind, focused copy, accessible sectio |
 
 ## latch
 
@@ -3671,7 +3468,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Two-phase LinkedIn lead pipeline driven by linkedin-cli. Phase A imports leads f |
+| [linkedin-growth](skills/growth-operations-xiaohongshu/linkedin-growth) | growth-operations-xiaohongshu | ★★★★★ | Manage LinkedIn lead qualification and follow-up workflows through linkedin-cli  |
 
 ## learn
 
@@ -3679,7 +3476,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Self-improvement through conversation analysis. Extracts learnings from correcti |
+| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Review user corrections or session outcomes to propose durable workflow improvem |
 
 ## ledger
 
@@ -3687,7 +3484,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [ledger](skills/finance-investing/ledger) | finance-investing | ★★★★★ | Optimizing FinOps and cloud costs. Cost estimation from IaC, right-sizing, RI/SP |
+| [ledger](skills/finance-investing/ledger) | finance-investing | ★★★★★ | 云成本、预算告警、资源规格和人工智能工作负载成本优化。 |
 
 ## lens
 
@@ -3695,7 +3492,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lens](skills/task-understanding-decomposition/lens) | task-understanding-decomposition | ★★★★★ | Comprehending and investigating codebases. Systematically performs structure map |
+| [lens](skills/task-understanding-decomposition/lens) | task-understanding-decomposition | ★★★★★ | 代码库理解、功能发现、数据流追踪和上下文调查。 |
 
 ## levy
 
@@ -3735,7 +3532,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Inspect and analyze codebases using pygount for LOC counting, language breakdown |
+| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Use when a user needs reproducible repository sizing, language composition, file |
 
 ## lockfiles
 
@@ -3751,7 +3548,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lore](skills/knowledge-and-pm-integrations/lore) | knowledge-and-pm-integrations | ★★★★★ | Curating cross-agent knowledge and guarding institutional memory. Extracts patte |
+| [lore](skills/knowledge-and-pm-integrations/lore) | knowledge-and-pm-integrations | ★★★★★ | Curating cross-agent knowledge and institutional memory: extracts patterns from  |
 
 ## macro
 
@@ -3767,7 +3564,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
 
 ## mail
 
@@ -3785,6 +3582,14 @@
 |-------|----------|---------|-------------|
 | [security-ownership-map](skills/security-and-reliability/security-ownership-map) | security-and-reliability | ★★★★★ | 用于基于 Git 历史分析安全所有权、敏感代码归属、bus factor、CODEOWNERS 现实差距和风险热点。 |
 
+## meetings
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | 会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。 |
+
 ## memo
 
 **1 skills**
@@ -3793,21 +3598,13 @@
 |-------|----------|---------|-------------|
 | [investment-memo-writer](skills/finance-investing/investment-memo-writer) | finance-investing | ★★☆☆☆ | Use when turning research notes into an investment memo, writing a buy or sell t |
 
-## mentoring
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [code-review-excellence](skills/developer-engineering/code-review-excellence) | developer-engineering | ★★★★☆ | Master effective code review practices to provide constructive feedback, catch b |
-
 ## mermaid
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [mermaid-tools](skills/office-white-collar/mermaid-tools) | office-white-collar | ★★★★☆ | Extracts Mermaid diagrams from markdown files and generates high-quality PNG ima |
+| [mermaid-tools](skills/office-white-collar/mermaid-tools) | office-white-collar | ★★★★☆ | Extract Mermaid diagrams from Markdown and render PNG images with the bundled to |
 
 ## messaging
 
@@ -3815,7 +3612,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急 |
+| [lark-im](skills/knowledge-and-pm-integrations/lark-im) | knowledge-and-pm-integrations | ★★★★☆ | 飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（ |
 
 ## migration
 
@@ -3831,7 +3628,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Safely package codebases with repomix by automatically detecting and removing ha |
+| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Scan for hardcoded credentials, report redacted findings, and block repomix pack |
+
+## mobile
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
 
 ## model
 
@@ -3855,7 +3660,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [monorepo-navigator](skills/developer-engineering/monorepo-navigator) | developer-engineering | ★★★★★ | Navigate, manage, and optimize monorepos. Covers Turborepo, Nx, pnpm workspaces, |
+| [monorepo-navigator](skills/developer-engineering/monorepo-navigator) | developer-engineering | ★★★★★ | Inspect or improve Turborepo, Nx, pnpm, or Lerna monorepos: package boundaries,  |
 
 ## morph
 
@@ -3863,7 +3668,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [morph](skills/office-white-collar/morph) | office-white-collar | ★★★★★ | Converting document formats (Markdown/Word/Excel/PDF/HTML). Converts specs from  |
+| [morph](skills/office-white-collar/morph) | office-white-collar | ★★★★★ | Converting document formats (Markdown/Word/Excel/PDF/HTML) and generating reusab |
 
 ## multi-agent
 
@@ -3871,7 +3676,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
 
 ## multimodal
 
@@ -3879,7 +3684,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Use when the user asks Codex to directly generate images with gpt-image-2 using  |
+| [gpt-image2](skills/multimodal-media/gpt-image2) | multimodal-media | ★★★★☆ | Generate or edit images with gpt-image-2 when explicitly requested, using the do |
 
 ## natural-language-programming
 
@@ -3887,7 +3692,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUD |
+| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction  |
 
 ## navigator
 
@@ -3895,7 +3700,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [monorepo-navigator](skills/developer-engineering/monorepo-navigator) | developer-engineering | ★★★★★ | Navigate, manage, and optimize monorepos. Covers Turborepo, Nx, pnpm workspaces, |
+| [monorepo-navigator](skills/developer-engineering/monorepo-navigator) | developer-engineering | ★★★★★ | Inspect or improve Turborepo, Nx, pnpm, or Lerna monorepos: package boundaries,  |
 
 ## netlify
 
@@ -3911,7 +3716,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nexus](skills/ai-workflow/nexus) | ai-workflow | ★★★★★ | Orchestrating specialist AI agent teams as a meta-coordinator. Decomposes reques |
+| [nexus](skills/ai-workflow/nexus) | ai-workflow | ★★★★★ | 多智能体任务分解、链路编排、执行协调和结果整合。 |
 
 ## nlpm
 
@@ -3919,15 +3724,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUD |
-
-## non-intrusive
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
+| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction  |
 
 ## notebook
 
@@ -3937,13 +3734,21 @@
 |-------|----------|---------|-------------|
 | [jupyter-notebook](skills/engineering-workflow-automation/jupyter-notebook) | engineering-workflow-automation | ★★★★☆ | Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) |
 
+## observability-and-instrumentation
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [observability-and-instrumentation](skills/ai-workflow/observability-and-instrumentation) | ai-workflow | ★★★★★ | Add or improve logs, metrics, traces, and alerts when services need diagnosable  |
+
 ## observation
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and use Honcho memory with Hermes -- cross-session user modeling, mult |
+| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and troubleshoot Honcho memory for Hermes. |
 
 ## obsidian
 
@@ -3951,7 +3756,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [obsidian](skills/knowledge-and-pm-integrations/obsidian) | knowledge-and-pm-integrations | ★★★☆☆ | Use when users need to read, search, create, edit, organize, or cross-link notes |
+| [obsidian](skills/knowledge-and-pm-integrations/obsidian) | knowledge-and-pm-integrations | ★★★☆☆ | Read, search, create, or edit notes in an authorized Obsidian vault while preser |
 
 ## offensive-security
 
@@ -3959,7 +3764,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Use when the user asks to perform security audits, penetration testing, vulnerab |
+| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Perform authorized security assessments, vulnerability scans, and penetration te |
 
 ## okr
 
@@ -3975,7 +3780,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [omen](skills/openclaw-memory-and-safety/omen) | openclaw-memory-and-safety | ★★★★★ | Enumerating failure modes via pre-mortem analysis. Systematically identifies fai |
+| [omen](skills/openclaw-memory-and-safety/omen) | openclaw-memory-and-safety | ★★★★★ | 预演失败模式，识别计划风险并给出优先级。 |
 
 ## onboarding
 
@@ -3983,7 +3788,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-onboarding](skills/developer-engineering/codebase-onboarding) | developer-engineering | ★★★★★ | Analyze a codebase and generate comprehensive onboarding documentation tailored  |
+| [codebase-onboarding](skills/developer-engineering/codebase-onboarding) | developer-engineering | ★★★★★ | Create repository onboarding guides with architecture, key files, setup, debuggi |
+
+## open-gsd
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [hermes-open-gsd-workflow](skills/ai-agent-platform/hermes-open-gsd-workflow) | ai-agent-platform | ★★★★☆ | Route a development task to the official Hermes Agent skill, Graphify Codex arti |
 
 ## openai
 
@@ -3991,7 +3804,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Use when the user asks how to build with OpenAI products or APIs and needs up-to |
+| [openai-docs](skills/ai-agent-platform/openai-docs) | ai-agent-platform | ★★★☆☆ | Find current official OpenAI guidance for Codex, APIs, models, prompting, or mig |
 
 ## openapi
 
@@ -4009,13 +3822,13 @@
 |-------|----------|---------|-------------|
 | [tweetclaw-source-research](skills/growth-operations-xiaohongshu/tweetclaw-source-research) | growth-operations-xiaohongshu | ★★★★☆ | Use TweetClaw through OpenClaw to collect X/Twitter source context before drafti |
 
-## operator
+## operations
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
+| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Write or review operational runbooks for deployment, rollback, incidents, recove |
 
 ## ops
 
@@ -4023,7 +3836,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Provides comprehensive GitHub operations using gh CLI and GitHub API. Activates  |
+| [github-ops](skills/devops-sre/github-ops) | devops-sre | ★★★★★ | Operate GitHub repositories, PRs, issues, and Actions through gh CLI and GitHub  |
 
 ## optimization
 
@@ -4039,7 +3852,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Transform vague prompts into precise, well-structured specifications using EARS  |
+| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Refine prompts or ambiguous requirements into testable specifications when the u |
 
 ## options
 
@@ -4055,7 +3868,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [oracle](skills/ai-agent-platform/oracle) | ai-agent-platform | ★★★★★ | Designing and evaluating AI/ML systems across prompt engineering, RAG design, LL |
+| [oracle](skills/ai-agent-platform/oracle) | ai-agent-platform | ★★★★★ | 人工智能应用设计、评估、检索增强和安全护栏规划。 |
+
+## orchestration
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [hermes-open-gsd-workflow](skills/ai-agent-platform/hermes-open-gsd-workflow) | ai-agent-platform | ★★★★☆ | Route a development task to the official Hermes Agent skill, Graphify Codex arti |
 
 ## osv
 
@@ -4071,7 +3892,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Agile product ownership for backlog management and sprint execution. Covers user |
+| [agile-product-owner](skills/product-design/agile-product-owner) | product-design | ★★★★★ | Manage product backlogs and sprints: user stories, acceptance criteria, epic bre |
 
 ## ownership
 
@@ -4087,7 +3908,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Generates high-converting landing pages as complete Next.js/React (TSX) componen |
+| [landing-page-generator](skills/product-design/landing-page-generator) | product-design | ★★★★☆ | Build React/Next.js landing pages with Tailwind, focused copy, accessible sectio |
 
 ## papers
 
@@ -4095,7 +3916,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | 用于按关键词、作者、分类或编号检索 arXiv 论文。 |
+| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | Search arXiv papers by keyword, author, category, or ID. |
+
+## parallel
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [dispatching-parallel-agents](skills/ai-workflow/dispatching-parallel-agents) | ai-workflow | ★★★★☆ | Use when facing 2+ independent tasks that can be worked on without shared state  |
 
 ## patch-management
 
@@ -4105,13 +3934,21 @@
 |-------|----------|---------|-------------|
 | [vuls-linux-cve-scanner](skills/security-and-reliability/vuls-linux-cve-scanner) | security-and-reliability | ★★★★☆ | 用于通过 Vuls 对 Linux、FreeBSD、容器、WordPress、库和网络设备执行 Agentless CVE 扫描。 |
 
+## pdf
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [pdf](skills/office-white-collar/pdf) | office-white-collar | ★★★★★ | Read, create, edit, merge, split, OCR, or fill PDF documents when PDF content or |
+
 ## penetration-testing
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Use when the user asks to perform security audits, penetration testing, vulnerab |
+| [security-pen-testing](skills/security-and-reliability/security-pen-testing) | security-and-reliability | ★★★★☆ | Perform authorized security assessments, vulnerability scans, and penetration te |
 
 ## performance-optimization
 
@@ -4119,7 +3956,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Optimizes application performance. Use when performance requirements exist, when |
+| [performance-optimization](skills/ai-workflow/performance-optimization) | ai-workflow | ★★★★★ | Investigate and improve measured frontend, backend, query, or database bottlenec |
 
 ## pipe
 
@@ -4127,15 +3964,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [pipe](skills/deployment-platforms/pipe) | deployment-platforms | ★★★★★ | Designing GitHub Actions workflows in depth — covering trigger strategy, securit |
-
-## pipeline
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [ci-cd-pipeline-builder](skills/devops-sre/ci-cd-pipeline-builder) | devops-sre | ★★★★★ | Analyzes your project stack and generates production-ready CI/CD pipeline config |
+| [pipe](skills/deployment-platforms/pipe) | deployment-platforms | ★★★★★ | Designing GitHub Actions workflows in depth: trigger strategy, security hardenin |
 
 ## planning-and-task-breakdown
 
@@ -4143,7 +3972,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Breaks work into ordered tasks. Use when you have a spec or clear requirements a |
+| [planning-and-task-breakdown](skills/ai-workflow/planning-and-task-breakdown) | ai-workflow | ★★★★★ | Turn clear requirements into ordered tasks, dependencies, and acceptance checks; |
 
 ## pmm
 
@@ -4161,13 +3990,13 @@
 |-------|----------|---------|-------------|
 | [portfolio-risk-manager](skills/finance-investing/portfolio-risk-manager) | finance-investing | ★★☆☆☆ | Use when reviewing portfolio exposures, checking concentration and beta risk, su |
 
-## post
+## ppt
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [teams-channel-post-writer](skills/operations-general/teams-channel-post-writer) | operations-general | ★★★★☆ | Creates educational Teams channel posts for internal knowledge sharing about Cla |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
 
 ## pptx
 
@@ -4175,7 +4004,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [pptx](skills/office-white-collar/pptx) | office-white-collar | ★★★★★ | Use this skill any time a .pptx file is involved in any way — as input, output,  |
+| [pptx](skills/office-white-collar/pptx) | office-white-collar | ★★★★★ | Create, read, edit, or combine PowerPoint (.pptx) decks, including layouts, note |
 
 ## prism
 
@@ -4185,21 +4014,13 @@
 |-------|----------|---------|-------------|
 | [prism](skills/office-white-collar/prism) | office-white-collar | ★★★★★ | Consultant for NotebookLM steering prompt design. Optimizes Audio/Video/Slide/In |
 
-## proactive
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [proactive-agent](skills/ai-agent-platform/proactive-agent) | ai-agent-platform | ★★★★☆ | Use when an agent should proactively plan, monitor progress, surface risks, sugg |
-
 ## process
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [using-superpowers](skills/ai-workflow/using-superpowers) | ai-workflow | ★★★★☆ | Use when starting any conversation - establishes how to find and use skills, req |
+| [using-superpowers](skills/ai-workflow/using-superpowers) | ai-workflow | ★★★★☆ | Select relevant Superpowers workflow skills when the user requests that workflow |
 
 ## profiler
 
@@ -4207,7 +4028,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [performance-profiler](skills/developer-engineering/performance-profiler) | developer-engineering | ★★★★★ | Systematic performance profiling for Node.js, Python, and Go applications. Ident |
+| [performance-profiler](skills/developer-engineering/performance-profiler) | developer-engineering | ★★★★★ | Profile Node.js, Python, or Go CPU, memory, I/O, and query bottlenecks; use flam |
 
 ## profiles
 
@@ -4215,23 +4036,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and use Honcho memory with Hermes -- cross-session user modeling, mult |
+| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and troubleshoot Honcho memory for Hermes. |
 
-## profiling
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [debugging-strategies](skills/developer-engineering/debugging-strategies) | developer-engineering | ★★★★☆ | Master systematic debugging techniques, profiling tools, and root cause analysis |
-
-## project-workflow
+## prompt
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
+| [prompt-optimizer](skills/ai-workflow/prompt-optimizer) | ai-workflow | ★★★★☆ | Refine prompts or ambiguous requirements into testable specifications when the u |
 
 ## prompt-engineering
 
@@ -4239,7 +4052,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUD |
+| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction  |
 
 ## promptfoo
 
@@ -4247,7 +4060,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [promptfoo-evaluation](skills/developer-engineering/promptfoo-evaluation) | developer-engineering | ★★★★★ | Configures and runs LLM evaluation using Promptfoo framework. Use when setting u |
+| [promptfoo-evaluation](skills/developer-engineering/promptfoo-evaluation) | developer-engineering | ★★★★★ | Configure and run Promptfoo evaluations, assertions, rubrics, and datasets when  |
 
 ## promql
 
@@ -4263,7 +4076,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [pulse](skills/growth-operations-xiaohongshu/pulse) | growth-operations-xiaohongshu | ★★★★★ | Defining KPIs, designing tracking events, and specifying dashboards. Covers Nort |
+| [pulse](skills/growth-operations-xiaohongshu/pulse) | growth-operations-xiaohongshu | ★★★★★ | 关键指标、埋点、漏斗、留存和仪表盘规格设计。 |
 
 ## pygount
 
@@ -4271,7 +4084,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Inspect and analyze codebases using pygount for LOC counting, language breakdown |
+| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Use when a user needs reproducible repository sizing, language composition, file |
 
 ## python
 
@@ -4279,7 +4092,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [python-performance](skills/developer-engineering/python-performance) | developer-engineering | ★★★★☆ | Use when profiling Python code, reducing memory usage, optimizing hot paths, cho |
+| [python-performance](skills/developer-engineering/python-performance) | developer-engineering | ★★★★☆ | Profile and optimize Python code using cProfile, memory profilers, and performan |
 
 ## qa
 
@@ -4295,7 +4108,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | The RAG (Retrieval-Augmented Generation) Architect skill provides comprehensive  |
+| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | Design or diagnose RAG ingestion, retrieval, permissions, reranking, citations,  |
 
 ## rag-alternative
 
@@ -4303,7 +4116,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Use when building, querying, or maintaining a Karpathy-style interlinked markdow |
+| [llm-wiki](skills/knowledge-and-pm-integrations/llm-wiki) | knowledge-and-pm-integrations | ★★★★☆ | Karpathy''s LLM Wiki: build/query interlinked markdown KB. |
 
 ## rally
 
@@ -4311,7 +4124,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [rally](skills/ai-workflow/rally) | ai-workflow | ★★★★★ | Orchestrating multi-session parallel execution using Claude Code Agent Teams API |
+| [rally](skills/ai-workflow/rally) | ai-workflow | ★★★★★ | 多会话并行执行编排，协调多个智能体共同完成任务。 |
+
+## react-native
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [react-native-engineering](skills/developer-engineering/react-native-engineering) | developer-engineering | ★★★★★ | Build, debug, upgrade, or ship React Native and Expo apps, including navigation, |
 
 ## reader
 
@@ -4319,7 +4140,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Fetch Twitter/X post content by URL using jina.ai API to bypass JavaScript restr |
+| [twitter-reader](skills/growth-operations-xiaohongshu/twitter-reader) | growth-operations-xiaohongshu | ★★★☆☆ | Read Twitter/X posts and threads from supplied URLs, including author, text, tim |
 
 ## refactoring
 
@@ -4335,7 +4156,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Self-improvement through conversation analysis. Extracts learnings from correcti |
+| [reflect-learn](skills/task-understanding-decomposition/reflect-learn) | task-understanding-decomposition | ★★★★★ | Review user corrections or session outcomes to propose durable workflow improvem |
 
 ## regime
 
@@ -4359,7 +4180,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | The Release Manager skill provides comprehensive tools and knowledge for managin |
+| [release-manager](skills/devops-sre/release-manager) | devops-sre | ★★★★★ | Prepare software releases with version selection, changelogs, artifacts, validat |
 
 ## render
 
@@ -4369,21 +4190,13 @@
 |-------|----------|---------|-------------|
 | [render-deploy](skills/deployment-platforms/render-deploy) | deployment-platforms | ★★★★★ | Deploy applications to Render by analyzing codebases, generating render.yaml Blu |
 
-## repo-integration
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-project-integration](skills/engineering-workflow-automation/hermes-graphify-gsd-project-integration) | engineering-workflow-automation | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a specific repository, |
-
 ## repomix
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Safely package codebases with repomix by automatically detecting and removing ha |
+| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Scan for hardcoded credentials, report redacted findings, and block repomix pack |
 
 ## reporting
 
@@ -4399,7 +4212,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Inspect and analyze codebases using pygount for LOC counting, language breakdown |
+| [codebase-inspection](skills/developer-engineering/codebase-inspection) | developer-engineering | ★★★★☆ | Use when a user needs reproducible repository sizing, language composition, file |
 
 ## responsive-design
 
@@ -4409,13 +4222,21 @@
 |-------|----------|---------|-------------|
 | [ui-ux-pro-max](skills/product-design/ui-ux-pro-max) | product-design | ★★★★☆ | Front-end UI/UX design intelligence for creating, reviewing, and hardening polis |
 
+## retrieval
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | Design or diagnose RAG ingestion, retrieval, permissions, reranking, citations,  |
+
 ## ripple
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [ripple](skills/task-understanding-decomposition/ripple) | task-understanding-decomposition | ★★★★★ | Analyzing pre-change impact by evaluating risk across vertical (dependency chain |
+| [ripple](skills/task-understanding-decomposition/ripple) | task-understanding-decomposition | ★★★★★ | 变更前影响分析，评估依赖链和一致性风险。 |
 
 ## risk
 
@@ -4431,7 +4252,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and Me |
+| [information-security-manager-iso27001](skills/security-and-reliability/information-security-manager-iso27001) | security-and-reliability | ★★★★☆ | Design or audit ISO 27001 ISMS controls, security risk treatment, and compliance |
 
 ## router
 
@@ -4439,7 +4260,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | 用于 Next.js App Router 模式开发，包含 RSC、Server Actions 和路由最佳实践。来源：skills.sh 10.2K inst |
+| [nextjs-app-router](skills/developer-engineering/nextjs-app-router) | developer-engineering | ★★★★☆ | Master Next.js 14+ App Router with Server Components, streaming, parallel routes |
+
+## routing
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [hermes-open-gsd-workflow](skills/ai-agent-platform/hermes-open-gsd-workflow) | ai-agent-platform | ★★★★☆ | Route a development task to the official Hermes Agent skill, Graphify Codex arti |
 
 ## runbook
 
@@ -4447,15 +4276,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Analyze a codebase and generate production-grade operational runbooks. Detects y |
-
-## runtime
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
+| [runbook-generator](skills/openclaw-memory-and-safety/runbook-generator) | openclaw-memory-and-safety | ★★★★★ | Write or review operational runbooks for deployment, rollback, incidents, recove |
 
 ## rust
 
@@ -4471,7 +4292,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Safely package codebases with repomix by automatically detecting and removing ha |
+| [repomix-safe-mixer](skills/developer-engineering/repomix-safe-mixer) | developer-engineering | ★★★★★ | Scan for hardcoded credentials, report redacted findings, and block repomix pack |
 
 ## sarif
 
@@ -4495,7 +4316,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [scaffold](skills/deployment-platforms/scaffold) | deployment-platforms | ★★★★★ | Provisioning infrastructure via cloud IaC (Terraform/OpenTofu/CloudFormation/Pul |
+| [scaffold](skills/deployment-platforms/scaffold) | deployment-platforms | ★★★★★ | 云基础设施、环境配置和本地开发部署脚手架。 |
 
 ## scaffolder
 
@@ -4503,7 +4324,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Generate complete, production-ready SaaS projects from a product brief. Outputs  |
+| [saas-scaffolder](skills/product-design/saas-scaffolder) | product-design | ★★★★★ | Build a SaaS application or vertical slice from a validated brief, covering auth |
 
 ## scheduling
 
@@ -4519,7 +4340,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | 用于按关键词、作者、分类或编号检索 arXiv 论文。 |
+| [arxiv](skills/knowledge-and-pm-integrations/arxiv) | knowledge-and-pm-integrations | ★★★★☆ | Search arXiv papers by keyword, author, category, or ID. |
 
 ## scout
 
@@ -4527,7 +4348,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [scout](skills/task-understanding-decomposition/scout) | task-understanding-decomposition | ★★★★★ | Investigating bugs via root cause analysis (RCA), reproduction steps, and impact |
+| [scout](skills/task-understanding-decomposition/scout) | task-understanding-decomposition | ★★★★★ | 缺陷调查、复现步骤、根因分析和影响评估。 |
 
 ## scraper
 
@@ -4536,14 +4357,6 @@
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
 | [web-scraper](skills/engineering-workflow-automation/web-scraper) | engineering-workflow-automation | ★★★★☆ | Use when users need webpage scraping, structured data extraction, crawling strat |
-
-## screen
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [capture-screen](skills/office-white-collar/capture-screen) | office-white-collar | ★★★★★ | Programmatic screenshot capture on macOS. Find window IDs with Swift CGWindowLis |
 
 ## screener
 
@@ -4561,6 +4374,14 @@
 |-------|----------|---------|-------------|
 | [screenshot](skills/multimodal-media/screenshot) | multimodal-media | ★★★★★ | Use when the user explicitly asks for a desktop or system screenshot (full scree |
 
+## search
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [rag-architect](skills/openclaw-memory-and-safety/rag-architect) | openclaw-memory-and-safety | ★★★★★ | Design or diagnose RAG ingestion, retrieval, permissions, reranking, citations,  |
+
 ## sec
 
 **1 skills**
@@ -4575,7 +4396,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Hardens code against vulnerabilities. Use when handling user input, authenticati |
+| [security-and-hardening](skills/ai-workflow/security-and-hardening) | ai-workflow | ★★★★★ | Harden authentication, input handling, storage, and integrations when implementi |
 
 ## security-audit
 
@@ -4583,7 +4404,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Security audit of a codebase — web apps, APIs, services, CLI tools, libraries, d |
+| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Audit codebases for exploitable security vulnerabilities with concrete attack pa |
 
 ## security-rules
 
@@ -4591,7 +4412,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | A skill to evaluate how secure Firestore security rules are. Use this when Fires |
+| [firebase-security-rules-auditor](skills/security-and-reliability/firebase-security-rules-auditor) | security-and-reliability | ★★★★☆ | Audit Firestore and Cloud Storage rules for authorization, tenant isolation, fie |
 
 ## self
 
@@ -4617,29 +4438,13 @@
 |-------|----------|---------|-------------|
 | [sentry](skills/security-and-reliability/sentry) | security-and-reliability | ★★★★☆ | 用于只读查询 Sentry issues、events 和服务健康数据，汇总线上错误并辅助生产问题排查。 |
 
-## seo
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [seo-audit](skills/growth-operations-xiaohongshu/seo-audit) | growth-operations-xiaohongshu | ★★★★☆ | Use when users need a comprehensive SEO audit, on-page optimization review, tech |
-
-## server
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [mcp-server-builder](skills/developer-engineering/mcp-server-builder) | developer-engineering | ★★★★★ | Design and implement Model Context Protocol (MCP) servers that expose any REST A |
-
 ## setup
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
 
 ## shard
 
@@ -4655,7 +4460,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替 |
+| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书电子表格，处理单元格、公式、工作表、图表、透视表和财务模型；搜索云空间文件转 lark-drive，Base 多维表格转 lark-base |
 
 ## sherpa
 
@@ -4663,7 +4468,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [sherpa](skills/ai-workflow/sherpa) | ai-workflow | ★★★★★ | Guiding workflows by decomposing complex tasks (Epics) into Atomic Steps under 1 |
+| [sherpa](skills/ai-workflow/sherpa) | ai-workflow | ★★★★★ | 把复杂任务拆成短步骤，控制漂移并推进交付。 |
 
 ## shipping-and-launch
 
@@ -4679,7 +4484,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [sigil](skills/ai-agent-platform/sigil) | ai-agent-platform | ★★★★★ | Generating, updating, auditing, and sync-repairing project-specific Claude Code  |
+| [sigil](skills/ai-agent-platform/sigil) | ai-agent-platform | ★★★★★ | 根据项目代码自动生成贴合仓库约定的技能。 |
 
 ## sketch
 
@@ -4695,7 +4500,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUD |
+| [nlpm-audit](skills/ai-workflow/nlpm-audit) | ai-workflow | ★★★★☆ | Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction  |
 
 ## slack
 
@@ -4711,7 +4516,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Social media campaign analysis and performance tracking. Calculates engagement r |
+| [social-media-analyzer](skills/growth-operations-xiaohongshu/social-media-analyzer) | growth-operations-xiaohongshu | ★★★★★ | Analyze social campaign engagement, ROI, audience behavior, and platform compari |
 
 ## solution
 
@@ -4719,7 +4524,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | 用于 AWS 云架构设计、服务选型、成本优化与 Well-Architected Framework 评估。来源：alirezarezvani/claude-s |
+| [aws-solution-architect](skills/developer-engineering/aws-solution-architect) | developer-engineering | ★★★★☆ | Design or review AWS architecture and infrastructure as code for serverless syst |
 
 ## sora
 
@@ -4727,7 +4532,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [sora](skills/multimodal-media/sora) | multimodal-media | ★★★★☆ | Use when the user asks to generate, remix, poll, list, download, or delete Sora  |
+| [sora](skills/multimodal-media/sora) | multimodal-media | ★★★★☆ | Generate, remix, inspect, download, or delete Sora videos through the bundled AP |
 
 ## source-driven-development
 
@@ -4735,7 +4540,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Grounds every implementation decision in official documentation. Use when you wa |
+| [source-driven-development](skills/ai-workflow/source-driven-development) | ai-workflow | ★★★★☆ | Verify implementation against official documentation when the task requests sour |
 
 ## source-research
 
@@ -4751,7 +4556,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Configure, extend, or contribute to Hermes Agent. |
+| [hermes-agent](skills/ai-agent-platform/hermes-agent) | ai-agent-platform | ★★★★☆ | Use, configure, theme, extend, and orchestrate Hermes Agent. |
 
 ## spec
 
@@ -4767,7 +4572,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Creates specs before coding. Use when starting a new project, feature, or signif |
+| [spec-driven-development](skills/ai-workflow/spec-driven-development) | ai-workflow | ★★★★★ | Specify new features or substantial behavior changes when goals, boundaries, and |
 
 ## specialist
 
@@ -4783,7 +4588,15 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [speech](skills/multimodal-media/speech) | multimodal-media | ★★★★☆ | Use when the user asks for text-to-speech narration or voiceover, accessibility  |
+| [speech](skills/multimodal-media/speech) | multimodal-media | ★★★★☆ | Create text-to-speech narration, voiceovers, or batch audio with OpenAI''s Audio |
+
+## spreadsheet
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [lark-sheets](skills/knowledge-and-pm-integrations/lark-sheets) | knowledge-and-pm-integrations | ★★★★☆ | 创建、读取和编辑飞书电子表格，处理单元格、公式、工作表、图表、透视表和财务模型；搜索云空间文件转 lark-drive，Base 多维表格转 lark-base |
 
 ## stage
 
@@ -4791,7 +4604,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [stage](skills/office-white-collar/stage) | office-white-collar | ★★★★★ | Generating slides via Marp, reveal.js, or Slidev, designing narrative arcs, and  |
+| [stage](skills/office-white-collar/stage) | office-white-collar | ★★★★★ | 演示文稿生成、叙事节奏设计和会议演讲优化。 |
 
 ## standup
 
@@ -4839,15 +4652,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Scans API route definitions across frameworks (Next.js App Router, Express, Fast |
-
-## summarize
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [summarize](skills/multimodal-media/summarize) | multimodal-media | ★★☆☆☆ | Use when users need concise, faithful summaries of webpages, documents, emails,  |
+| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Generate API tests from routes and contracts for authentication, validation, pag |
 
 ## summary
 
@@ -4855,15 +4660,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | Use when users need to collect Feishu/Lark meeting minutes across a time range,  |
-
-## supermemory
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [supermemory](skills/operations-general/supermemory) | operations-general | ★★★☆☆ | Use when users need durable memory management, preference capture, contradiction |
+| [lark-workflow-meeting-summary](skills/knowledge-and-pm-integrations/lark-workflow-meeting-summary) | knowledge-and-pm-integrations | ★★★★☆ | 会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。 |
 
 ## syft
 
@@ -4887,7 +4684,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Use when building Tailwind CSS design systems, theme tokens, reusable component  |
+| [tailwind-design-system](skills/developer-engineering/tailwind-design-system) | developer-engineering | ★★★★☆ | Build scalable design systems with Tailwind CSS v4, design tokens, component lib |
 
 ## taker
 
@@ -4895,7 +4692,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [meeting-minutes-taker](skills/office-white-collar/meeting-minutes-taker) | office-white-collar | ★★★★★ | Transforms raw meeting transcripts into high-fidelity, structured meeting minute |
+| [meeting-minutes-taker](skills/office-white-collar/meeting-minutes-taker) | office-white-collar | ★★★★★ | Turn meeting transcripts into accurate minutes with decisions, actions, owners,  |
 
 ## tasks
 
@@ -4905,29 +4702,13 @@
 |-------|----------|---------|-------------|
 | [lark-task](skills/knowledge-and-pm-integrations/lark-task) | knowledge-and-pm-integrations | ★★★★☆ | 飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能 |
 
-## tavily
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [tavily-search](skills/task-understanding-decomposition/tavily-search) | task-understanding-decomposition | ★★☆☆☆ | Use when users need real-time web search, fresh facts, source-backed evidence, m |
-
-## teams
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [teams-channel-post-writer](skills/operations-general/teams-channel-post-writer) | operations-general | ★★★★☆ | Creates educational Teams channel posts for internal knowledge sharing about Cla |
-
 ## teardown
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Run a structured competitive analysis on any product or company. Synthesizes dat |
+| [competitive-teardown](skills/product-design/competitive-teardown) | product-design | ★★★★★ | Analyze competitors from product, pricing, reviews, SEO, and hiring evidence to  |
 
 ## tech
 
@@ -4935,7 +4716,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Tier: POWERFUL 🔥 Category: Engineering Process Automation Expertise: Code Qualit |
+| [tech-debt-tracker](skills/developer-engineering/tech-debt-tracker) | developer-engineering | ★★★★★ | Identify technical debt, rank remediation by impact and effort, and track progre |
 
 ## test
 
@@ -4943,7 +4724,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Scans API route definitions across frameworks (Next.js App Router, Express, Fast |
+| [api-test-suite-builder](skills/developer-engineering/api-test-suite-builder) | developer-engineering | ★★★★★ | Generate API tests from routes and contracts for authentication, validation, pag |
 
 ## test-driven-development
 
@@ -4951,7 +4732,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Drives development with tests. Use when implementing any logic, fixing any bug,  |
+| [test-driven-development](skills/ai-workflow/test-driven-development) | ai-workflow | ★★★★★ | Develop testable logic or fix behavioral bugs with focused regression tests and  |
 
 ## tester
 
@@ -4959,15 +4740,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [skill-tester](skills/developer-engineering/skill-tester) | developer-engineering | ★★★★★ | Name: skill-tester Tier: POWERFUL Category: Engineering Quality Assurance Depend |
-
-## testing
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [webapp-testing](skills/developer-engineering/webapp-testing) | developer-engineering | ★★★☆☆ | Use when testing local web applications with Playwright, verifying frontend beha |
+| [skill-tester](skills/developer-engineering/skill-tester) | developer-engineering | ★★★★★ | Validate skill structure, bundled scripts and expected outputs against the targe |
 
 ## theme
 
@@ -4991,7 +4764,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [tome](skills/knowledge-and-pm-integrations/tome) | knowledge-and-pm-integrations | ★★★★★ | Converting repository changes into detailed learning documents. Use when turning |
+| [tome](skills/knowledge-and-pm-integrations/tome) | knowledge-and-pm-integrations | ★★★★★ | 把仓库变更转化为学习文档、术语说明和设计记录。 |
 
 ## tone
 
@@ -5001,13 +4774,21 @@
 |-------|----------|---------|-------------|
 | [tone](skills/multimodal-media/tone) | multimodal-media | ★★★★★ | Game audio generation agent. Produces code (Python/JS/TS/Shell) for SFX, BGM, Vo |
 
+## toolkit
+
+**1 skills**
+
+| Skill | Category | Quality | Description |
+|-------|----------|---------|-------------|
+| [product-manager-toolkit](skills/product-design/product-manager-toolkit) | product-design | ★★★★★ | Prioritize features, synthesize customer research, and write PRDs or go-to-marke |
+
 ## trace
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [trace](skills/product-design/trace) | product-design | ★★★★★ | Analyzing session replays, extracting persona-based behavioral patterns, and sto |
+| [trace](skills/product-design/trace) | product-design | ★★★★★ | 会话回放分析、行为模式提取和体验问题叙事。 |
 
 ## transcribe
 
@@ -5017,21 +4798,13 @@
 |-------|----------|---------|-------------|
 | [transcribe](skills/multimodal-media/transcribe) | multimodal-media | ★★★☆☆ | Transcribe audio files to text with optional diarization and known-speaker hints |
 
-## transcript
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [transcript-fixer](skills/office-white-collar/transcript-fixer) | office-white-collar | ★★★★☆ | Corrects speech-to-text transcription errors in meeting notes, lectures, and int |
-
 ## transitions
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Guide for adding native-feeling page, route, shared-element, and list transition |
+| [vercel-react-view-transitions](skills/developer-engineering/vercel-react-view-transitions) | developer-engineering | ★★★★☆ | Implement React ViewTransition animations, navigation transitions, transition ty |
 
 ## triage
 
@@ -5039,7 +4812,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [triage](skills/devops-sre/triage) | devops-sre | ★★★★★ | Responding to incidents, identifying impact scope, formulating recovery procedur |
+| [triage](skills/devops-sre/triage) | devops-sre | ★★★★★ | 事故首响、影响范围识别、恢复步骤和复盘整理。 |
 
 ## troubleshooting
 
@@ -5047,7 +4820,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Investigate and resolve Cloudflare configuration issues using API-driven evidenc |
+| [cloudflare-troubleshooting](skills/devops-sre/cloudflare-troubleshooting) | devops-sre | ★★★★★ | Diagnose Cloudflare DNS, TLS, redirects, and configuration issues using live API |
 
 ## typescript
 
@@ -5073,21 +4846,13 @@
 |-------|----------|---------|-------------|
 | [ui-ux-pro-max](skills/product-design/ui-ux-pro-max) | product-design | ★★★★☆ | Front-end UI/UX design intelligence for creating, reviewing, and hardening polis |
 
-## upgrade-safe
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
-
 ## user-modeling
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and use Honcho memory with Hermes -- cross-session user modeling, mult |
+| [honcho](skills/openclaw-memory-and-safety/honcho) | openclaw-memory-and-safety | ★★★★☆ | Configure and troubleshoot Honcho memory for Hermes. |
 
 ## using-agent-skills
 
@@ -5095,7 +4860,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Discovers and invokes agent skills. Use when starting a session or when you need |
+| [using-agent-skills](skills/ai-workflow/using-agent-skills) | ai-workflow | ★★★★☆ | Find the most relevant engineering skill when task routing is unclear; load only |
 
 ## ux
 
@@ -5111,7 +4876,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Security audit of a codebase — web apps, APIs, services, CLI tools, libraries, d |
+| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Audit codebases for exploitable security vulnerabilities with concrete attack pa |
 
 ## valuation
 
@@ -5129,14 +4894,6 @@
 |-------|----------|---------|-------------|
 | [skill-vetter](skills/security-and-reliability/skill-vetter) | security-and-reliability | ★★☆☆☆ | Use before installing or trusting an external skill to inspect instructions, scr |
 
-## video-conference
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [lark-vc](skills/knowledge-and-pm-integrations/lark-vc) | knowledge-and-pm-integrations | ★★★★☆ | 飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。当用户查询已结束的会议、获取会议产物（纪要/妙记）、查看参会人时使用； |
-
 ## visual-regression
 
 **1 skills**
@@ -5151,7 +4908,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [voice](skills/product-design/voice) | product-design | ★★★★★ | Collecting user feedback via NPS surveys, review analysis, sentiment analysis, f |
+| [voice](skills/product-design/voice) | product-design | ★★★★★ | 用户反馈收集、满意度调研、评论分析和洞察提炼。 |
 
 ## vulnerability-research
 
@@ -5159,7 +4916,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Security audit of a codebase — web apps, APIs, services, CLI tools, libraries, d |
+| [security-audit](skills/security-and-reliability/security-audit) | security-and-reliability | ★★★★☆ | Audit codebases for exploitable security vulnerabilities with concrete attack pa |
 
 ## vuls
 
@@ -5177,14 +4934,6 @@
 |-------|----------|---------|-------------|
 | [warden](skills/openclaw-memory-and-safety/warden) | openclaw-memory-and-safety | ★★★★★ | Guardian of V.A.I.R.E. quality standards (Value/Agency/Identity/Resilience/Echo) |
 
-## weather
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [weather](skills/operations-general/weather) | operations-general | ★★☆☆☆ | Use when users ask for current weather, forecasts, severe-weather context, trave |
-
 ## webapp
 
 **1 skills**
@@ -5199,7 +4948,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬 |
+| [guizang-ppt-skill](skills/office-white-collar/guizang-ppt-skill) | office-white-collar | ★★★★★ | 制作可横向翻页的单 HTML 网页 PPT，支持杂志风或瑞士风、讲稿、演讲者视图和观众屏同步；用于演讲、分享或发布会网页演示。 |
 
 ## websocket
 
@@ -5207,7 +4956,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Lark/Feishu real-time event listening / subscribing / consuming: stream events a |
+| [lark-event](skills/knowledge-and-pm-integrations/lark-event) | knowledge-and-pm-integrations | ★★★★☆ | Consume Lark/Feishu events as NDJSON with lark-cli for messaging, approvals, tas |
 
 ## whiteboard
 
@@ -5215,15 +4964,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | 飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用多种格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板时使 |
-
-## wrappers
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-nonintrusive-workflow](skills/ai-agent-platform/hermes-graphify-gsd-nonintrusive-workflow) | ai-agent-platform | ★★★★★ | Use when integrating Hermes Agent, graphify, and GSD into a local development wo |
+| [lark-whiteboard](skills/knowledge-and-pm-integrations/lark-whiteboard) | knowledge-and-pm-integrations | ★★★☆☆ | Use when querying, exporting, or editing Lark whiteboards, including preview ima |
 
 ## writer
 
@@ -5233,21 +4974,13 @@
 |-------|----------|---------|-------------|
 | [investment-memo-writer](skills/finance-investing/investment-memo-writer) | finance-investing | ★★☆☆☆ | Use when turning research notes into an investment memo, writing a buy or sell t |
 
-## writer-lease
-
-**1 skills**
-
-| Skill | Category | Quality | Description |
-|-------|----------|---------|-------------|
-| [hermes-graphify-gsd-runtime-operator](skills/ai-agent-platform/hermes-graphify-gsd-runtime-operator) | ai-agent-platform | ★★★★★ | Use when operating or debugging a repo-local Hermes + graphify + GSD autonomous  |
-
 ## writing
 
 **1 skills**
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Use when you have a spec or requirements for a multi-step task, before touching  |
+| [writing-plans](skills/ai-workflow/writing-plans) | ai-workflow | ★★★★☆ | Write a practical implementation plan when multi-step work needs task boundaries |
 
 ## xlsx
 
@@ -5255,7 +4988,7 @@
 
 | Skill | Category | Quality | Description |
 |-------|----------|---------|-------------|
-| [xlsx](skills/office-white-collar/xlsx) | office-white-collar | ★★★★★ | Use this skill any time a spreadsheet file is the primary input or output. This  |
+| [xlsx](skills/office-white-collar/xlsx) | office-white-collar | ★★★★★ | Create, read, edit, repair, or convert spreadsheet files (.xlsx, .xlsm, .csv, .t |
 
 ## yeet
 

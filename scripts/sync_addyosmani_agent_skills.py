@@ -33,6 +33,33 @@ UPSTREAM_WEB = f"https://github.com/{UPSTREAM_REPO}"
 DEFAULT_CATEGORY = "ai-workflow"
 MAPPING_FILE = "docs/sources/addyosmani-agent-skills-2026-04.skills.json"
 
+ZH_DESCRIPTIONS = {
+    "api-and-interface-design": "用于API、interface、设计，支持任务规划、执行、评审和验证。",
+    "browser-testing-with-devtools": "用于通过浏览器 DevTools 测试、调试和验证前端行为。",
+    "ci-cd-and-automation": "用于CI、CD、自动化，支持任务规划、执行、评审和验证。",
+    "code-review-and-quality": "用于代码、评审、质量，支持任务规划、执行、评审和验证。",
+    "code-simplification": "用于代码、simplification，支持任务规划、执行、评审和验证。",
+    "context-engineering": "用于设计上下文工程策略、提示输入结构和长任务信息流。",
+    "debugging-and-error-recovery": "用于调试、错误、recovery，支持任务规划、执行、评审和验证。",
+    "deprecation-and-migration": "用于deprecation、migration，支持任务规划、执行、评审和验证。",
+    "documentation-and-adrs": "用于documentation、adrs，支持任务规划、执行、评审和验证。",
+    "doubt-driven-development": "用新上下文的对抗性审查质疑关键决策，适用于高风险或正确性优先的开发任务。",
+    "frontend-ui-engineering": "用于前端、UI、工程，支持任务规划、执行、评审和验证。",
+    "git-workflow-and-versioning": "用于Git、工作流、versioning，支持任务规划、执行、评审和验证。",
+    "idea-refine": "用于idea、refine，支持任务规划、执行、评审和验证。",
+    "incremental-implementation": "用于incremental、实现，支持任务规划、执行、评审和验证。",
+    "interview-me": "通过逐问访谈澄清真实需求、目标用户与成功标准，避免在含糊请求上过早实施。",
+    "observability-and-instrumentation": "为生产代码设计日志、指标、追踪和告警，使行为可观测、问题可诊断。",
+    "performance-optimization": "用于性能、优化，支持任务规划、执行、评审和验证。",
+    "planning-and-task-breakdown": "用于planning、任务、breakdown，支持任务规划、执行、评审和验证。",
+    "security-and-hardening": "用于安全、加固，支持任务规划、执行、评审和验证。",
+    "shipping-and-launch": "用于shipping、launch，支持任务规划、执行、评审和验证。",
+    "source-driven-development": "用于来源、驱动、development，支持任务规划、执行、评审和验证。",
+    "spec-driven-development": "用于spec、驱动、development，支持任务规划、执行、评审和验证。",
+    "test-driven-development": "用于测试、驱动、development，支持任务规划、执行、评审和验证。",
+    "using-agent-skills": "用于选择、加载和正确使用 Agent Skills 完成任务。",
+}
+
 EXISTING_AI_WORKFLOW_SKILLS = {
     "agent-workflow-designer",
     "brainstorming",
@@ -170,11 +197,17 @@ def discover_upstream_skills(upstream_root: Path) -> list[UpstreamSkill]:
 
 
 def render_skill_markdown(skill: UpstreamSkill, body: str, today: str) -> str:
+    body = body.replace("../../references/", "references/")
     tags = ["ai", "agent", "workflow", "engineering", skill.slug]
+    zh_description = ZH_DESCRIPTIONS.get(
+        skill.slug,
+        f"同步 {skill.slug} 的上游工程工作流指南与实践。",
+    )
     frontmatter = [
         "---",
         f"name: {skill.slug}",
         f"description: {yaml_quote(skill.description)}",
+        f"zh_description: {yaml_quote(zh_description)}",
         'version: "1.0.0"',
         "author: addyosmani",
         f"source: {yaml_quote('github:' + UPSTREAM_REPO)}",
@@ -220,6 +253,36 @@ def copy_upstream_bundle(upstream_root: Path, destination: Path) -> None:
             shutil.copytree(source, target)
         else:
             shutil.copy2(source, target)
+    adapt_bundle_plugin_manifest(bundle_root)
+
+
+def adapt_bundle_plugin_manifest(bundle_root: Path) -> None:
+    """Prune manifest paths omitted from the intentionally compact local bundle."""
+    manifest_path = bundle_root / ".claude-plugin" / "plugin.json"
+    if not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+    commands = manifest.get("commands")
+    if isinstance(commands, list):
+        manifest["commands"] = [
+            command
+            for command in commands
+            if isinstance(command, str)
+            and (bundle_root / command.removeprefix("./")).exists()
+        ]
+
+    skills_path = manifest.get("skills")
+    if (
+        isinstance(skills_path, str)
+        and not (bundle_root / skills_path.removeprefix("./")).exists()
+    ):
+        manifest.pop("skills")
+
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 def move_existing_ai_workflow_skills(repo_root: Path, category: str, dry_run: bool) -> dict[str, str]:

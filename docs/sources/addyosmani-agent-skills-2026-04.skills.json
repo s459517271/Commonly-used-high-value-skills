@@ -1,7 +1,8 @@
 {
+  "schema_version": 2,
   "video": {
     "url": "https://github.com/addyosmani/agent-skills",
-    "checked_at": "2026-07-20",
+    "checked_at": "2026-09-06",
     "note": "Curated full import of addyosmani/agent-skills; refresh with scripts/sync_addyosmani_agent_skills.py."
   },
   "official_references": [
@@ -28,10 +29,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/api-and-interface-design/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "ce89b03cbd768d4c9f512beedae46c20822a6bf6"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/api-and-interface-design/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/api-and-interface-design/SKILL.md",
+              "target": "skills/ai-workflow/api-and-interface-design/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "ce89b03cbd768d4c9f512beedae46c20822a6bf6",
+            "content_sha256": "bb2571c39d1e9c0c112e9812d54ae093e97daa4d20908b88180298ef65cd212b",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/api-and-interface-design",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/definition-of-done.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/observability-checklist.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/performance-checklist.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/security-checklist.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/api-and-interface-design/references/testing-patterns.md",
+              "target": "skills/ai-workflow/api-and-interface-design/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/SKILL.md",
+          "sha256": "bb2571c39d1e9c0c112e9812d54ae093e97daa4d20908b88180298ef65cd212b",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/api-and-interface-design/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "api-and-interface-design",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "browser-testing-with-devtools",
@@ -44,10 +183,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/browser-testing-with-devtools/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-21",
-        "last_synced_at": "2026-06-21",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "e8c9b4632d9e4ab8ca4ea514dae03e25683e8186"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/browser-testing-with-devtools/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/browser-testing-with-devtools/SKILL.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "e8c9b4632d9e4ab8ca4ea514dae03e25683e8186",
+            "content_sha256": "b688f7919193c15c67b34bbebf47806cddc5a46f2136256deb233b620a51fc03",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/browser-testing-with-devtools",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/definition-of-done.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/observability-checklist.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/performance-checklist.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/security-checklist.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/browser-testing-with-devtools/references/testing-patterns.md",
+              "target": "skills/ai-workflow/browser-testing-with-devtools/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/SKILL.md",
+          "sha256": "b688f7919193c15c67b34bbebf47806cddc5a46f2136256deb233b620a51fc03",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/browser-testing-with-devtools/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "browser-testing-with-devtools",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "ci-cd-and-automation",
@@ -60,10 +337,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/ci-cd-and-automation/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "fea75b16472ba87e8c11f13a9e000c3ffdb2d1f5"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/ci-cd-and-automation/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/ci-cd-and-automation/SKILL.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "fea75b16472ba87e8c11f13a9e000c3ffdb2d1f5",
+            "content_sha256": "eeca38e6488863e5b91015a2ad6681aa355411da5070b4b1af7b2511e84719d3",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/ci-cd-and-automation",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/definition-of-done.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/observability-checklist.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/performance-checklist.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/security-checklist.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/ci-cd-and-automation/references/testing-patterns.md",
+              "target": "skills/ai-workflow/ci-cd-and-automation/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/SKILL.md",
+          "sha256": "eeca38e6488863e5b91015a2ad6681aa355411da5070b4b1af7b2511e84719d3",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/ci-cd-and-automation/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "ci-cd-and-automation",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "code-review-and-quality",
@@ -76,10 +491,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/code-review-and-quality/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-13",
-        "last_synced_at": "2026-07-13",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/code-review-and-quality/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/code-review-and-quality/SKILL.md",
+              "target": "skills/ai-workflow/code-review-and-quality/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2",
+            "content_sha256": "75e9a227b45afa9d05f28c868a18b4be3a88d81251cb32d064830d01303f4163",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/code-review-and-quality",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/definition-of-done.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/observability-checklist.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/performance-checklist.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/security-checklist.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-review-and-quality/references/testing-patterns.md",
+              "target": "skills/ai-workflow/code-review-and-quality/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/SKILL.md",
+          "sha256": "75e9a227b45afa9d05f28c868a18b4be3a88d81251cb32d064830d01303f4163",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-review-and-quality/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "code-review-and-quality",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "code-simplification",
@@ -92,10 +645,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/code-simplification/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "fea75b16472ba87e8c11f13a9e000c3ffdb2d1f5"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/code-simplification/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/code-simplification/SKILL.md",
+              "target": "skills/ai-workflow/code-simplification/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "fea75b16472ba87e8c11f13a9e000c3ffdb2d1f5",
+            "content_sha256": "3c2b55fbc8611c99ea74368b017fe74881ba39a9285dd1bd48388a3e52b78687",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/code-simplification",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/code-simplification/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/code-simplification/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-simplification/references/definition-of-done.md",
+              "target": "skills/ai-workflow/code-simplification/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-simplification/references/observability-checklist.md",
+              "target": "skills/ai-workflow/code-simplification/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-simplification/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/code-simplification/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-simplification/references/performance-checklist.md",
+              "target": "skills/ai-workflow/code-simplification/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-simplification/references/security-checklist.md",
+              "target": "skills/ai-workflow/code-simplification/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/code-simplification/references/testing-patterns.md",
+              "target": "skills/ai-workflow/code-simplification/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/code-simplification/SKILL.md",
+          "sha256": "3c2b55fbc8611c99ea74368b017fe74881ba39a9285dd1bd48388a3e52b78687",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "code-simplification",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/code-simplification/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "code-simplification",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "context-engineering",
@@ -108,10 +799,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/context-engineering/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "cc48b6997eb3d76c1b403826b020299a2eae179f"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/context-engineering/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/context-engineering/SKILL.md",
+              "target": "skills/ai-workflow/context-engineering/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "cc48b6997eb3d76c1b403826b020299a2eae179f",
+            "content_sha256": "73764d5ac55e42e79729dcb336ec13dd9ffab0fe91628e8348f565d8a5ebb19b",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/context-engineering",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/context-engineering/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/context-engineering/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/context-engineering/references/definition-of-done.md",
+              "target": "skills/ai-workflow/context-engineering/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/context-engineering/references/observability-checklist.md",
+              "target": "skills/ai-workflow/context-engineering/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/context-engineering/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/context-engineering/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/context-engineering/references/performance-checklist.md",
+              "target": "skills/ai-workflow/context-engineering/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/context-engineering/references/security-checklist.md",
+              "target": "skills/ai-workflow/context-engineering/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/context-engineering/references/testing-patterns.md",
+              "target": "skills/ai-workflow/context-engineering/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/context-engineering/SKILL.md",
+          "sha256": "73764d5ac55e42e79729dcb336ec13dd9ffab0fe91628e8348f565d8a5ebb19b",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "context-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/context-engineering/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "context-engineering",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "debugging-and-error-recovery",
@@ -124,10 +953,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/debugging-and-error-recovery/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-21",
-        "last_synced_at": "2026-06-21",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "45ccfb6f3dcb0116e91f8a0d5a8338840c1b404f"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/debugging-and-error-recovery/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/debugging-and-error-recovery/SKILL.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "45ccfb6f3dcb0116e91f8a0d5a8338840c1b404f",
+            "content_sha256": "ecdcf52c801e0c124381ec71d2b0e9b7cbbde0ac9dcef40bc4862fbfdeafa2bb",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/debugging-and-error-recovery",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/definition-of-done.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/observability-checklist.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/performance-checklist.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/security-checklist.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/debugging-and-error-recovery/references/testing-patterns.md",
+              "target": "skills/ai-workflow/debugging-and-error-recovery/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/SKILL.md",
+          "sha256": "ecdcf52c801e0c124381ec71d2b0e9b7cbbde0ac9dcef40bc4862fbfdeafa2bb",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/debugging-and-error-recovery/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "debugging-and-error-recovery",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "deprecation-and-migration",
@@ -140,10 +1107,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/deprecation-and-migration/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-13",
-        "last_synced_at": "2026-07-13",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "1483fc12473e5297408a069b661778aa76fbd1cf"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/deprecation-and-migration/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/deprecation-and-migration/SKILL.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "1483fc12473e5297408a069b661778aa76fbd1cf",
+            "content_sha256": "47f36a0b6b7800e4d2e6ac8e53e36d9b809559644307de2250101a10209f8550",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/deprecation-and-migration",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/definition-of-done.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/observability-checklist.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/performance-checklist.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/security-checklist.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/deprecation-and-migration/references/testing-patterns.md",
+              "target": "skills/ai-workflow/deprecation-and-migration/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/SKILL.md",
+          "sha256": "47f36a0b6b7800e4d2e6ac8e53e36d9b809559644307de2250101a10209f8550",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/deprecation-and-migration/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "deprecation-and-migration",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "documentation-and-adrs",
@@ -156,10 +1261,302 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/documentation-and-adrs/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-20",
-        "last_synced_at": "2026-07-20",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "a0eba71b5544c47c922cc55127bccec8b0f1e6ab"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/documentation-and-adrs/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/documentation-and-adrs/SKILL.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "a0eba71b5544c47c922cc55127bccec8b0f1e6ab",
+            "content_sha256": "c745e9037c7486f6d931070ab3576ccf90dd089c6e772a60942e60152c1a7bba",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/documentation-and-adrs",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/definition-of-done.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/observability-checklist.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/performance-checklist.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/security-checklist.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/documentation-and-adrs/references/testing-patterns.md",
+              "target": "skills/ai-workflow/documentation-and-adrs/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/SKILL.md",
+          "sha256": "c745e9037c7486f6d931070ab3576ccf90dd089c6e772a60942e60152c1a7bba",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/documentation-and-adrs/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "documentation-and-adrs",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
+    },
+    {
+      "video_name": "doubt-driven-development",
+      "normalized_slug": "doubt-driven-development",
+      "status": "verified_in_repo",
+      "repo_skill": "skills/ai-workflow/doubt-driven-development/SKILL.md",
+      "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/doubt-driven-development/SKILL.md",
+      "notes": "Imported from addyosmani/agent-skills into the AI workflow category with repeatable upstream sync.",
+      "upstream": {
+        "repo": "addyosmani/agent-skills",
+        "path": "skills/doubt-driven-development/SKILL.md",
+        "ref": "main",
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/doubt-driven-development/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/doubt-driven-development/SKILL.md",
+              "target": "skills/ai-workflow/doubt-driven-development/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2",
+            "content_sha256": "97f4d4aecfc9c41e4dd4130a32238553ea889d7f5e7f492dd7647c7e2ee36098",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/doubt-driven-development",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/definition-of-done.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/observability-checklist.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/performance-checklist.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/security-checklist.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/doubt-driven-development/references/testing-patterns.md",
+              "target": "skills/ai-workflow/doubt-driven-development/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/SKILL.md",
+          "sha256": "97f4d4aecfc9c41e4dd4130a32238553ea889d7f5e7f492dd7647c7e2ee36098",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/doubt-driven-development/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "doubt-driven-development",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "frontend-ui-engineering",
@@ -172,10 +1569,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/frontend-ui-engineering/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/frontend-ui-engineering/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/frontend-ui-engineering/SKILL.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2",
+            "content_sha256": "cbb98b612e203f183cfaed31a9eec5c368ba49f8ee3cfa3fe3a8c27acbe7d706",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/frontend-ui-engineering",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/definition-of-done.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/observability-checklist.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/performance-checklist.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/security-checklist.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/frontend-ui-engineering/references/testing-patterns.md",
+              "target": "skills/ai-workflow/frontend-ui-engineering/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/SKILL.md",
+          "sha256": "cbb98b612e203f183cfaed31a9eec5c368ba49f8ee3cfa3fe3a8c27acbe7d706",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/frontend-ui-engineering/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "frontend-ui-engineering",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "git-workflow-and-versioning",
@@ -188,10 +1723,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/git-workflow-and-versioning/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-03",
-        "last_synced_at": "2026-07-03",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "b61213f5340b6671208d56c1db7be6c4fcbd98ac"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/git-workflow-and-versioning/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/git-workflow-and-versioning/SKILL.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "b61213f5340b6671208d56c1db7be6c4fcbd98ac",
+            "content_sha256": "43b28183211d9478e7c9c65f3615526f5d3d7904e8f9549694ca11437f8e28f2",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/git-workflow-and-versioning",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/definition-of-done.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/observability-checklist.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/performance-checklist.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/security-checklist.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/git-workflow-and-versioning/references/testing-patterns.md",
+              "target": "skills/ai-workflow/git-workflow-and-versioning/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/SKILL.md",
+          "sha256": "43b28183211d9478e7c9c65f3615526f5d3d7904e8f9549694ca11437f8e28f2",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/git-workflow-and-versioning/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "git-workflow-and-versioning",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "idea-refine",
@@ -204,10 +1877,192 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/idea-refine/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-29",
-        "last_synced_at": "2026-06-29",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "5aacc3bce933539dc85fa7c78a1807aa396f4801"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/idea-refine/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/idea-refine/SKILL.md",
+              "target": "skills/ai-workflow/idea-refine/SKILL.md"
+            },
+            {
+              "source": "skills/idea-refine/examples.md",
+              "target": "skills/ai-workflow/idea-refine/examples.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/idea-refine/frameworks.md",
+              "target": "skills/ai-workflow/idea-refine/frameworks.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/idea-refine/refinement-criteria.md",
+              "target": "skills/ai-workflow/idea-refine/refinement-criteria.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/idea-refine/scripts/idea-refine.sh",
+              "target": "skills/ai-workflow/idea-refine/scripts/idea-refine.sh",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "5aacc3bce933539dc85fa7c78a1807aa396f4801",
+            "content_sha256": "fac3e0b84f45bb37c1de1fb3ec4713717d55d7a0098a41e25f7e14054f0de717",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/idea-refine",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/idea-refine/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/idea-refine/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/idea-refine/references/definition-of-done.md",
+              "target": "skills/ai-workflow/idea-refine/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/idea-refine/references/observability-checklist.md",
+              "target": "skills/ai-workflow/idea-refine/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/idea-refine/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/idea-refine/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/idea-refine/references/performance-checklist.md",
+              "target": "skills/ai-workflow/idea-refine/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/idea-refine/references/security-checklist.md",
+              "target": "skills/ai-workflow/idea-refine/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/idea-refine/references/testing-patterns.md",
+              "target": "skills/ai-workflow/idea-refine/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/idea-refine/SKILL.md",
+          "sha256": "fac3e0b84f45bb37c1de1fb3ec4713717d55d7a0098a41e25f7e14054f0de717",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/examples.md",
+          "sha256": "563204bfbf2f80a444151695205af4cb759e722b3d1e5460e08f278a69c89ba1",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/frameworks.md",
+          "sha256": "161ebc18fdf2d996bc62a87a2d747cf1bf53548354f8925de25c732c27f00309",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/refinement-criteria.md",
+          "sha256": "1ca2973a4d01b5cb37ab7ddb2eff77fa4e792634a33d0ce44961c068fc88d51a",
+          "owner": "idea-refine",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/idea-refine/scripts/idea-refine.sh",
+          "sha256": "f02a52408a4218047c032d221483abfbb48d11f090bb4915965c7419bf2e0e47",
+          "owner": "idea-refine",
+          "mode": "100755"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "incremental-implementation",
@@ -220,10 +2075,456 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/incremental-implementation/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-24",
-        "last_synced_at": "2026-06-24",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/incremental-implementation/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/incremental-implementation/SKILL.md",
+              "target": "skills/ai-workflow/incremental-implementation/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2",
+            "content_sha256": "a70d0b5d98ee5eb02b88576f14cf6c52459ed7f16aeb8415deeae2d492a7159f",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/incremental-implementation",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/definition-of-done.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/observability-checklist.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/performance-checklist.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/security-checklist.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/incremental-implementation/references/testing-patterns.md",
+              "target": "skills/ai-workflow/incremental-implementation/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/incremental-implementation/SKILL.md",
+          "sha256": "a70d0b5d98ee5eb02b88576f14cf6c52459ed7f16aeb8415deeae2d492a7159f",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/incremental-implementation/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "incremental-implementation",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
+    },
+    {
+      "video_name": "interview-me",
+      "normalized_slug": "interview-me",
+      "status": "verified_in_repo",
+      "repo_skill": "skills/ai-workflow/interview-me/SKILL.md",
+      "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/interview-me/SKILL.md",
+      "notes": "Imported from addyosmani/agent-skills into the AI workflow category with repeatable upstream sync.",
+      "upstream": {
+        "repo": "addyosmani/agent-skills",
+        "path": "skills/interview-me/SKILL.md",
+        "ref": "main",
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "c4ad44928cd535fcfee1972988f97309d4cebf9f"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/interview-me/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/interview-me/SKILL.md",
+              "target": "skills/ai-workflow/interview-me/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "c4ad44928cd535fcfee1972988f97309d4cebf9f",
+            "content_sha256": "52d00041ea64a1ab6ba1edbf2eea12dc5dcaa75ef5e1a19f8b20a882aa623ea0",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/interview-me",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/interview-me/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/interview-me/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/interview-me/references/definition-of-done.md",
+              "target": "skills/ai-workflow/interview-me/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/interview-me/references/observability-checklist.md",
+              "target": "skills/ai-workflow/interview-me/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/interview-me/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/interview-me/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/interview-me/references/performance-checklist.md",
+              "target": "skills/ai-workflow/interview-me/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/interview-me/references/security-checklist.md",
+              "target": "skills/ai-workflow/interview-me/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/interview-me/references/testing-patterns.md",
+              "target": "skills/ai-workflow/interview-me/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/interview-me/SKILL.md",
+          "sha256": "52d00041ea64a1ab6ba1edbf2eea12dc5dcaa75ef5e1a19f8b20a882aa623ea0",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "interview-me",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/interview-me/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "interview-me",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
+    },
+    {
+      "video_name": "observability-and-instrumentation",
+      "normalized_slug": "observability-and-instrumentation",
+      "status": "verified_in_repo",
+      "repo_skill": "skills/ai-workflow/observability-and-instrumentation/SKILL.md",
+      "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/observability-and-instrumentation/SKILL.md",
+      "notes": "Imported from addyosmani/agent-skills into the AI workflow category with repeatable upstream sync.",
+      "upstream": {
+        "repo": "addyosmani/agent-skills",
+        "path": "skills/observability-and-instrumentation/SKILL.md",
+        "ref": "main",
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "6a9f2eb2d6f318e89faaff03a23ed84d8862c8e0"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/observability-and-instrumentation/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/observability-and-instrumentation/SKILL.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "6a9f2eb2d6f318e89faaff03a23ed84d8862c8e0",
+            "content_sha256": "c5e23550d3453bb0f36ebd3a8ed452bf0d82d74a62e0a2150f06cb9ba307b948",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/observability-and-instrumentation",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/definition-of-done.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/observability-checklist.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/performance-checklist.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/security-checklist.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/observability-and-instrumentation/references/testing-patterns.md",
+              "target": "skills/ai-workflow/observability-and-instrumentation/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/SKILL.md",
+          "sha256": "c5e23550d3453bb0f36ebd3a8ed452bf0d82d74a62e0a2150f06cb9ba307b948",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/observability-and-instrumentation/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "observability-and-instrumentation",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "performance-optimization",
@@ -236,10 +2537,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/performance-optimization/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "6a268d7710c15708598e4b0a6942275a359760ee"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/performance-optimization/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/performance-optimization/SKILL.md",
+              "target": "skills/ai-workflow/performance-optimization/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "6a268d7710c15708598e4b0a6942275a359760ee",
+            "content_sha256": "70a05f74dbf6b9c097c3cc217c4343e722c02103233132e0cc4eaa6f356a9c50",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/performance-optimization",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/performance-optimization/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/definition-of-done.md",
+              "target": "skills/ai-workflow/performance-optimization/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/observability-checklist.md",
+              "target": "skills/ai-workflow/performance-optimization/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/performance-optimization/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/performance-checklist.md",
+              "target": "skills/ai-workflow/performance-optimization/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/security-checklist.md",
+              "target": "skills/ai-workflow/performance-optimization/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/performance-optimization/references/testing-patterns.md",
+              "target": "skills/ai-workflow/performance-optimization/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/performance-optimization/SKILL.md",
+          "sha256": "70a05f74dbf6b9c097c3cc217c4343e722c02103233132e0cc4eaa6f356a9c50",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/performance-optimization/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "performance-optimization",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "planning-and-task-breakdown",
@@ -252,10 +2691,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/planning-and-task-breakdown/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-03",
-        "last_synced_at": "2026-07-03",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "8300e1bbe77a9f1610a0e9da624593c3d5dea020"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/planning-and-task-breakdown/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/planning-and-task-breakdown/SKILL.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "8300e1bbe77a9f1610a0e9da624593c3d5dea020",
+            "content_sha256": "952eadd5fa68da0954e2361972a297a1f8221c0f646da1c889cdb1fe923b3e54",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/planning-and-task-breakdown",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/definition-of-done.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/observability-checklist.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/performance-checklist.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/security-checklist.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/planning-and-task-breakdown/references/testing-patterns.md",
+              "target": "skills/ai-workflow/planning-and-task-breakdown/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/SKILL.md",
+          "sha256": "952eadd5fa68da0954e2361972a297a1f8221c0f646da1c889cdb1fe923b3e54",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/planning-and-task-breakdown/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "planning-and-task-breakdown",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "security-and-hardening",
@@ -268,10 +2845,159 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/security-and-hardening/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-13",
-        "last_synced_at": "2026-07-13",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "45fd4a043983fec456bf7eea6562147e8e9cd2b4"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/security-and-hardening/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/security-and-hardening/SKILL.md",
+              "target": "skills/ai-workflow/security-and-hardening/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "45fd4a043983fec456bf7eea6562147e8e9cd2b4",
+            "content_sha256": "bfe7c42f8e218960069c16434a493ae567795b3f43ad2b6db7321f8de7ebde00",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/security-and-hardening",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/definition-of-done.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/observability-checklist.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/performance-checklist.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/security-checklist.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/references/testing-patterns.md",
+              "target": "skills/ai-workflow/security-and-hardening/references/testing-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/security-and-hardening/EXTENDED.md",
+              "target": "skills/ai-workflow/security-and-hardening/EXTENDED.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/security-and-hardening/SKILL.md",
+          "sha256": "bfe7c42f8e218960069c16434a493ae567795b3f43ad2b6db7321f8de7ebde00",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "security-and-hardening",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/security-and-hardening/EXTENDED.md",
+          "owner": "security-and-hardening",
+          "sha256": "020394ca120db16004747eb65fd6585474bac5cddcdc5b65e84f06d0c2dcd339",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "shipping-and-launch",
@@ -284,10 +3010,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/shipping-and-launch/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-24",
-        "last_synced_at": "2026-06-24",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "cca4df5c573b0038fc1ca2ef5185552b507e18ad"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/shipping-and-launch/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/shipping-and-launch/SKILL.md",
+              "target": "skills/ai-workflow/shipping-and-launch/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "cca4df5c573b0038fc1ca2ef5185552b507e18ad",
+            "content_sha256": "ebbd01f67745b163792469fdd7f81d38418ded6c90578548a4fa6f166bb555f5",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/shipping-and-launch",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/definition-of-done.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/observability-checklist.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/performance-checklist.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/security-checklist.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/shipping-and-launch/references/testing-patterns.md",
+              "target": "skills/ai-workflow/shipping-and-launch/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/SKILL.md",
+          "sha256": "ebbd01f67745b163792469fdd7f81d38418ded6c90578548a4fa6f166bb555f5",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/shipping-and-launch/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "shipping-and-launch",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "source-driven-development",
@@ -300,10 +3164,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/source-driven-development/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-04-25",
-        "last_synced_at": "2026-04-25",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "6681f80a1141b07377272649d9a3b2b041551d00"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/source-driven-development/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/source-driven-development/SKILL.md",
+              "target": "skills/ai-workflow/source-driven-development/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "6681f80a1141b07377272649d9a3b2b041551d00",
+            "content_sha256": "f9ed0a8a41c38cbb1728306c6e42ac769e24b7e747d60394491da95ba002ffa2",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/source-driven-development",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/source-driven-development/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/definition-of-done.md",
+              "target": "skills/ai-workflow/source-driven-development/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/observability-checklist.md",
+              "target": "skills/ai-workflow/source-driven-development/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/source-driven-development/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/performance-checklist.md",
+              "target": "skills/ai-workflow/source-driven-development/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/security-checklist.md",
+              "target": "skills/ai-workflow/source-driven-development/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/source-driven-development/references/testing-patterns.md",
+              "target": "skills/ai-workflow/source-driven-development/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/source-driven-development/SKILL.md",
+          "sha256": "f9ed0a8a41c38cbb1728306c6e42ac769e24b7e747d60394491da95ba002ffa2",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/source-driven-development/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "source-driven-development",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "spec-driven-development",
@@ -316,10 +3318,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/spec-driven-development/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-07-03",
-        "last_synced_at": "2026-07-03",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "966e4e585191ae0bd879be959ce1eddcdd9d0e1a"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/spec-driven-development/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/spec-driven-development/SKILL.md",
+              "target": "skills/ai-workflow/spec-driven-development/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "966e4e585191ae0bd879be959ce1eddcdd9d0e1a",
+            "content_sha256": "3e3e0f5ee8b01fc44e0bf9f96d30b1a84d2b7de5cacc0ee81d259916a2f6739d",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/spec-driven-development",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/definition-of-done.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/observability-checklist.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/performance-checklist.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/security-checklist.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/spec-driven-development/references/testing-patterns.md",
+              "target": "skills/ai-workflow/spec-driven-development/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/spec-driven-development/SKILL.md",
+          "sha256": "3e3e0f5ee8b01fc44e0bf9f96d30b1a84d2b7de5cacc0ee81d259916a2f6739d",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/spec-driven-development/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "spec-driven-development",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "test-driven-development",
@@ -332,10 +3472,148 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/test-driven-development/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-05-19",
-        "last_synced_at": "2026-05-19",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/test-driven-development/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/test-driven-development/SKILL.md",
+              "target": "skills/ai-workflow/test-driven-development/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "91d4d07522de9577caf5d213e5bf1acc38fa3df2",
+            "content_sha256": "e7108d48e12e401b78234a6130c0aac860bbb22a7add1528953d76583c738472",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/test-driven-development",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/test-driven-development/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/definition-of-done.md",
+              "target": "skills/ai-workflow/test-driven-development/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/observability-checklist.md",
+              "target": "skills/ai-workflow/test-driven-development/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/test-driven-development/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/performance-checklist.md",
+              "target": "skills/ai-workflow/test-driven-development/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/security-checklist.md",
+              "target": "skills/ai-workflow/test-driven-development/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/test-driven-development/references/testing-patterns.md",
+              "target": "skills/ai-workflow/test-driven-development/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/test-driven-development/SKILL.md",
+          "sha256": "e7108d48e12e401b78234a6130c0aac860bbb22a7add1528953d76583c738472",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/test-driven-development/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "test-driven-development",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     },
     {
       "video_name": "using-agent-skills",
@@ -348,19 +3626,658 @@
         "repo": "addyosmani/agent-skills",
         "path": "skills/using-agent-skills/SKILL.md",
         "ref": "main",
-        "last_checked_at": "2026-06-24",
-        "last_synced_at": "2026-06-24",
-        "last_synced_commit": "1f66d57a5e1b041b11e49a8cdca275aa472f0131"
-      }
+        "last_checked_at": "2026-09-06",
+        "last_synced_at": "2026-09-06",
+        "last_synced_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+        "sync_mode": "monitor",
+        "path_commit": "2ce8d47a16017beb969f84db14f09270c45ab4e9"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "addyosmani/agent-skills",
+          "path": "skills/using-agent-skills/SKILL.md",
+          "license": "MIT",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "skills/using-agent-skills/SKILL.md",
+              "target": "skills/ai-workflow/using-agent-skills/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+            "path_commit": "2ce8d47a16017beb969f84db14f09270c45ab4e9",
+            "content_sha256": "e901a07ab7b208f20dc5c1602e75cbe0ed50494191c95008e4982d1da26839a1",
+            "last_checked_at": "2026-09-06",
+            "last_synced_at": "2026-09-06",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+              "content_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+              "spdx": "MIT",
+              "resolved_commit": "48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+              "api_spdx": "MIT"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/using-agent-skills",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/definition-of-done.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/observability-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/performance-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/security-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/references/testing-patterns.md",
+              "target": "skills/ai-workflow/using-agent-skills/references/testing-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude-plugin/marketplace.json",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude-plugin/marketplace.json",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude-plugin/plugin.json",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude-plugin/plugin.json",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/build.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/build.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/code-simplify.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/code-simplify.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/plan.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/plan.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/review.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/review.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/ship.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/ship.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/spec.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/spec.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/test.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/test.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/webperf.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/webperf.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/code-reviewer.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/code-reviewer.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/security-auditor.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/security-auditor.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/test-engineer.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/test-engineer.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/web-performance-auditor.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/web-performance-auditor.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/adoption-guide.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/adoption-guide.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/agents.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/agents.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/antigravity-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/antigravity-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/codex-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/codex-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/comparison.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/comparison.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/copilot-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/copilot-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/cursor-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/cursor-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/developer-onboarding.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/developer-onboarding.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/gemini-cli-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/gemini-cli-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/getting-started.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/getting-started.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/opencode-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/opencode-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/skill-anatomy.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/skill-anatomy.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/windsurf-setup.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/windsurf-setup.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/SDD-CACHE.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/SDD-CACHE.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/SIMPLIFY-IGNORE.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/SIMPLIFY-IGNORE.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/hooks.json",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/hooks.json",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/sdd-cache-post.sh",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/sdd-cache-post.sh",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/sdd-cache-pre.sh",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/sdd-cache-pre.sh",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/session-start-test.sh",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/session-start-test.sh",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/session-start.sh",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/session-start.sh",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/simplify-ignore-test.sh",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/simplify-ignore-test.sh",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/simplify-ignore.sh",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/simplify-ignore.sh",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/accessibility-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/accessibility-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/definition-of-done.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/definition-of-done.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/observability-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/observability-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/orchestration-patterns.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/orchestration-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/performance-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/performance-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/security-checklist.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/security-checklist.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/testing-patterns.md",
+              "target": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/testing-patterns.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/using-agent-skills/SKILL.md",
+          "sha256": "e901a07ab7b208f20dc5c1602e75cbe0ed50494191c95008e4982d1da26839a1",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/security-checklist.md",
+          "sha256": "ddd8278dd1d2c86fa5addc639ae9a2ae0344f05fa7214bf896643bc413943847",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude-plugin/marketplace.json",
+          "sha256": "49d1e650a25265c1cea43d3b82b673fa8bbadc86be95e58d6d4ef903835fc9c2",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude-plugin/plugin.json",
+          "sha256": "c7c604d3e6bc3ed516bb84f5845685536bda1c0aba1443aefabe2585bd287d38",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/build.md",
+          "sha256": "74cc85b5092f8e209bcda36441a4ce17a5cd9efd2a7d8ce76ba202816088e277",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/code-simplify.md",
+          "sha256": "71e9e8d38c5cbab5b7ecff324ed4ea0f1aaa4fd053ea6c2b717f2fbadfb65a91",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/plan.md",
+          "sha256": "4a14758a45963c4c43b239f405dcdf0cf70778fc0de8c90953fd86177f952832",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/review.md",
+          "sha256": "8ad7da75873b430b737328d1bdd95fc8d2de4a4866737087feb4d218abe4e88f",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/ship.md",
+          "sha256": "02d2d0fc10bfb58bb62dcfe22ed396cd2b9f55dced7d5cd92fce6d29f0da4ace",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/spec.md",
+          "sha256": "ac359a9ad030dee29e54bd0db64b96cadaab00daf8eb900043956930f23e17e5",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/test.md",
+          "sha256": "62f72b64cfac6db984db072fdc987a23e6049876191297da5f37367def986ff2",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/.claude/commands/webperf.md",
+          "sha256": "74c0c1335f1397a5138a78eda4275e4e5deba16c4537f3a4b4971c3280d0ba27",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/code-reviewer.md",
+          "sha256": "74667b052cb6a75079791cee8f6e465a248e28fd82178505aaaec8db95c40ccf",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/security-auditor.md",
+          "sha256": "66a3f68f1c691b600ddb44e88afb138e239d0572df37be84e1f9a427c887dd0a",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/test-engineer.md",
+          "sha256": "c4acde91d6307d88515387344a129a2d0679134e587596c3517d73faffcd5aa6",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/agents/web-performance-auditor.md",
+          "sha256": "0928b1cf8103262a364bce0c1fc689a918852e2275441f1b2e687adfa1e607e9",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/adoption-guide.md",
+          "sha256": "21bff9ad02144ff2860243f9d71ad45e90294db6b9066149af74b2f97a1908f6",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/agents.md",
+          "sha256": "e03481592a725146ed48ee22010086dcfebd1faf1373cb99e7f2ed4d2100275c",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/antigravity-setup.md",
+          "sha256": "cd3b7ddf7eb42af069f43cecbddceb98faaa2717fa184568e5e6bccda6612ef0",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/codex-setup.md",
+          "sha256": "a99892641e69e5dee19b7236054d1f18d2759fd854b98f4dfa15fe60f401c47f",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/comparison.md",
+          "sha256": "7edc3360fc5ee5a4fcacdeb8f4d19cd8174f4bed7436b1c04c0369d8c3b72fb8",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/copilot-setup.md",
+          "sha256": "c8fb9c61c286ea2fb0358de0fb2e3cd4cab2b5e356dbc455386fe349fae8a469",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/cursor-setup.md",
+          "sha256": "1ce79da3cddb3217e53b1815c62ddc75dfa740f4965c8d56a5014c2395d15352",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/developer-onboarding.md",
+          "sha256": "59a35b68045f34aa42161bc5901892489e6ecdac4b5bbfcf311fde65f8255eea",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/gemini-cli-setup.md",
+          "sha256": "982d9cdc469fb26cbd4dd6a2d26d1894f2b93e2f821dd8646c188dacb8150803",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/getting-started.md",
+          "sha256": "64021c41172dce3741b262b8b1df87cb6ab4ea5a3a46c08d062f1f5e4c7000a9",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/opencode-setup.md",
+          "sha256": "4ea73ec1e4a46e5fc1a7984a6a15e64b6289522c4d8927147e34d4abdf0030f4",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/skill-anatomy.md",
+          "sha256": "5026d3ade4cec780a6d4c372cc11403ca1014ac369f72791f8c5ebe063519343",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/docs/windsurf-setup.md",
+          "sha256": "1410af016060047d1a265365f8d98aadd00a58bcfa2a048edec06d61d337cd97",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/SDD-CACHE.md",
+          "sha256": "8c1d337a11ed7fd4f3f0e965856cb86a97cdf8b3de0b29b63345ad0133b3db12",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/SIMPLIFY-IGNORE.md",
+          "sha256": "a7121b0505c960a8a7a7f09600c9fa81464fc403ab297b95d23f5109b13ea52a",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/hooks.json",
+          "sha256": "870c97c9cb6f526b66cc1d684e261ad2f7b45066a41e56ca5cb3fa6784df8888",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/sdd-cache-post.sh",
+          "sha256": "cf60a60fd475cceaf8cefdf0462393b1be0d7a4a5a4ea54508172f36ec0883e5",
+          "owner": "using-agent-skills",
+          "mode": "100755"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/sdd-cache-pre.sh",
+          "sha256": "853ad36f5e17e977060b92313e34b848ec1d321f2ac4aa657e9f3b9281cc0473",
+          "owner": "using-agent-skills",
+          "mode": "100755"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/session-start-test.sh",
+          "sha256": "db35bb3e69a98900dddb0c5b1c9ceb8e738cdeb17613ed50177fff7924d350d2",
+          "owner": "using-agent-skills",
+          "mode": "100755"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/session-start.sh",
+          "sha256": "9f3ab636c164463b26bc93af82626d42b184ce323a6b64c9a9aec873dd2c7cb7",
+          "owner": "using-agent-skills",
+          "mode": "100755"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/simplify-ignore-test.sh",
+          "sha256": "8f93c89e46c5a7478c01fa8531fa45e594fc5105411eaa7bd7c9f3ca8343926e",
+          "owner": "using-agent-skills",
+          "mode": "100755"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/hooks/simplify-ignore.sh",
+          "sha256": "1256c677adbce33f3c361793d7dae2405fb02a7efc07b19cc8f42134def8a5cd",
+          "owner": "using-agent-skills",
+          "mode": "100755"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/accessibility-checklist.md",
+          "sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/definition-of-done.md",
+          "sha256": "62564cc59a03daacf45d88c4ab5910116b8ece149bb86e37761ef55fe9a7b516",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/observability-checklist.md",
+          "sha256": "28659e0a4b9625a434285fa9ede632802afa909f768d0f8d839dca227e53d8fe",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/orchestration-patterns.md",
+          "sha256": "61e543d86f19f86b83074f8c1c769455c7085a2c72dd47b1da21a8c63785be4a",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/performance-checklist.md",
+          "sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/security-checklist.md",
+          "sha256": "a8bbff3b1ac9122985e98fbe9a8fa09cd8ad53b190bac7f8f0f63687900f7d7a",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/using-agent-skills/upstream-bundle/references/testing-patterns.md",
+          "sha256": "f0bf05acd0edcadc27297ad5b74f104c8103ccfedba1a05cd6d6ae4af8364c56",
+          "owner": "using-agent-skills",
+          "mode": "100644"
+        }
+      ],
+      "curation_note": "2026-09-07: local cross-agent instruction audit; preserve reviewed upstream tracking and licenses; monitor before replacing curated content."
     }
   ],
   "verification_attempts": [
     {
-      "date": "2026-04-25",
+      "date": "2026-07-27",
       "method": "git-clone-and-local-import",
-      "target": "https://github.com/addyosmani/agent-skills@1f66d57a5e1b041b11e49a8cdca275aa472f0131",
+      "target": "https://github.com/addyosmani/agent-skills@7829ffd90d973b6325f5f12f1b1226dcace74443",
       "result": "success",
-      "evidence": "Imported 21 upstream skills into skills/ai-workflow/."
+      "evidence": "Imported 24 upstream skills into skills/ai-workflow/."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/addyosmani/agent-skills/compare/7829ffd90d973b6325f5f12f1b1226dcace74443...df1edb2e05487d0aa6d93c747141e0aed1187f25",
+      "result": "no-local-change-needed",
+      "evidence": "Reviewed all 24 mapped skills. Fourteen canonical bodies already equal current upstream; the remaining ten differ only by the intentional categorized-layout rewrite from ../../references/ to references/. Preserved local frontmatter and path adaptations."
+    },
+    {
+      "date": "2026-08-24",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "addyosmani/agent-skills@5a5ea45e806f82273549fd85e60adb95d55f510d",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
+    },
+    {
+      "date": "2026-08-31",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "addyosmani/agent-skills@d2c37ef6225dd8726cdd369a8030307f48592d26",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
+    },
+    {
+      "date": "2026-09-06",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "addyosmani/agent-skills@48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
     }
   ]
 }

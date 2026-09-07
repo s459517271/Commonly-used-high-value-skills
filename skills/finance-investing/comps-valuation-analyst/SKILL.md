@@ -1,14 +1,14 @@
 ---
 name: comps-valuation-analyst
 description: 'Use when valuing a public company with peer multiples, building comparable-company tables, or pressure-testing a valuation range with EV/EBITDA, P/E, and EV/Sales.'
-zh_description: "用于可比公司、估值、分析，支持投资研究、风险评估和报告生成。"
-version: "1.0.0"
+zh_description: "依据可比公司和统一财务口径开展相对估值分析。"
+version: "1.0.1"
 author: "seaworld008"
 source: "in-house"
 source_url: ""
 tags: '["analyst", "comps", "finance", "valuation"]'
 created_at: "2026-03-18"
-updated_at: "2026-03-20"
+updated_at: "2026-09-06"
 quality: 2
 complexity: "intermediate"
 ---
@@ -102,7 +102,7 @@ cat assets/sample_comps_input.json
 - 结合 DCF, Comps, Precedent Transactions 的多种估值方法，利用脚本自动生成“足球场图”，直观展示估值交集。
 
 ### 2. 情绪溢价实时监控
-- 结合 `tavily-search` 抓取最新的卖方报告，分析市场情绪对特定倍数的影响力。
+- 结合客户端内置 Web Search 或 `deep-research` 检索可授权访问的最新卖方资料，分析市场情绪对特定倍数的影响。
 
 ## 边界与限制 / Boundaries
 

@@ -3,99 +3,112 @@
 
 This is the one-command entrypoint for routine repository maintenance:
 
-1. refresh addyosmani/agent-skills with its richer bundle-aware importer
-2. refresh all other externally mapped skills through docs/sources provenance
-3. optionally run the repository generation, lint, and test pipeline
-4. optionally install/sync the result into a local Codex skills root
+1. check or apply every provenance-v2 artifact set through one governed engine
+2. optionally run the repository generation, lint, and test pipeline
+
+Installation is intentionally outside this repository-maintenance command.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import subprocess
+import sys
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-ADDY_SOURCE = "github:addyosmani/agent-skills"
-SIMOTA_SOURCE = "github:simota/agent-skills"
-
+PYTHON = sys.executable or "python"
 POST_SYNC_PIPELINE = (
-    ("python", "scripts/enrich_frontmatter.py"),
-    ("python", "scripts/bootstrap_in_house_sources.py", "--write-json", "docs/sources/in-house.skills.json"),
-    ("python", "scripts/refresh_repo_views.py"),
-    ("python", "scripts/generate_tags_index.py"),
-    ("python", "scripts/build_catalog_json.py"),
-    ("python", "scripts/generate_sources_index.py"),
-    ("python", "scripts/lint_skill_quality.py", "--min-lines", "50"),
-    ("python", "-m", "unittest", "discover", "tests", "-v"),
+    (PYTHON, "scripts/enrich_frontmatter.py"),
+    (PYTHON, "scripts/bootstrap_in_house_sources.py", "--write-json", "docs/sources/in-house.skills.json"),
+    (PYTHON, "scripts/refresh_repo_views.py"),
+    (PYTHON, "scripts/generate_tags_index.py"),
+    (PYTHON, "scripts/build_catalog_json.py"),
+    (PYTHON, "scripts/check_readme_sync.py"),
+    (PYTHON, "scripts/generate_sources_index.py"),
+    (PYTHON, "scripts/lint_skill_quality.py", "--min-lines", "50"),
+    (PYTHON, "scripts/validate_skill_sources.py"),
+    (
+        PYTHON,
+        "scripts/reconcile_artifact_inventory.py",
+        "--offline",
+        "--check-clean",
+        "--quiet",
+    ),
+    (PYTHON, "scripts/check_source_coverage.py", "--min-percent", "100"),
+    (PYTHON, "scripts/audit_skill_portfolio.py", "--check-policy"),
+    (PYTHON, "scripts/audit_licenses.py"),
+    (PYTHON, "-m", "pytest", "-q", "tests"),
 )
 
 
-def run(command: tuple[str, ...] | list[str], *, repo_root: Path, enabled: bool = True) -> None:
+def run(command: tuple[str, ...] | list[str], *, repo_root: Path) -> int:
     print("Running:", " ".join(command))
-    if enabled:
-        subprocess.run(command, cwd=repo_root, check=True)
+    result = subprocess.run(command, cwd=repo_root, check=False)
+    return result.returncode
 
 
-def main() -> int:
+def repository_digest(repo_root: Path) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(repo_root.rglob("*")):
+        relative = path.relative_to(repo_root)
+        if any(
+            part in {".git", ".pytest_cache", "__pycache__"}
+            for part in relative.parts
+        ):
+            continue
+        if path.is_symlink() or not path.is_file():
+            continue
+        digest.update(relative.as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Sync all externally tracked upstream skills.")
     parser.add_argument("--apply", action="store_true", help="Write updates. Without this, performs check/dry-run style commands.")
     parser.add_argument("--repo-root", default=str(REPO_ROOT), help="Repository root.")
     parser.add_argument("--run-pipeline", action="store_true", help="Run generation, lint, and tests after syncing.")
-    parser.add_argument("--sync-codex-root", type=Path, help="Sync all repo skills into this Codex skills root after applying.")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     repo_root = Path(args.repo_root).resolve()
+    before = repository_digest(repo_root) if args.apply else None
 
     if args.apply:
-        run(("python", "scripts/sync_addyosmani_agent_skills.py", "--apply"), repo_root=repo_root)
-        run(("python", "scripts/sync_simota_agent_skills.py", "--apply"), repo_root=repo_root)
-        run(
+        sync_state = run(
             (
-                "python",
+                PYTHON,
                 "scripts/sync_upstream.py",
                 "--apply",
-                "--exclude-source",
-                ADDY_SOURCE,
-                "--exclude-source",
-                SIMOTA_SOURCE,
             ),
             repo_root=repo_root,
         )
     else:
-        run(("python", "scripts/sync_addyosmani_agent_skills.py"), repo_root=repo_root)
-        run(("python", "scripts/sync_simota_agent_skills.py"), repo_root=repo_root)
-        run(
+        sync_state = run(
             (
-                "python",
+                PYTHON,
                 "scripts/sync_upstream.py",
                 "--check-only",
-                "--exclude-source",
-                ADDY_SOURCE,
-                "--exclude-source",
-                SIMOTA_SOURCE,
             ),
             repo_root=repo_root,
         )
 
-    if args.apply and args.run_pipeline:
+    if sync_state not in {0, 1, 2}:
+        sync_state = 1
+    wrote_files = (
+        args.apply
+        and before is not None
+        and repository_digest(repo_root) != before
+    )
+    if args.apply and args.run_pipeline and (sync_state == 0 or wrote_files):
         for command in POST_SYNC_PIPELINE:
-            run(command, repo_root=repo_root)
+            if run(command, repo_root=repo_root) != 0:
+                return 1
 
-    if args.apply and args.sync_codex_root:
-        run(
-            (
-                "python",
-                "scripts/sync_codex_skills.py",
-                "--source-root",
-                "skills",
-                "--codex-root",
-                str(args.sync_codex_root.expanduser()),
-            ),
-            repo_root=repo_root,
-        )
-
-    return 0
+    return sync_state
 
 
 if __name__ == "__main__":

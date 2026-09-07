@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-24",
+  "decision_rule": "Retire only after replacement coverage is proven and unique executable assets, external contracts, high-risk guardrails, and acceptance criteria have been preserved.",
+  "decisions": [
+    {
+      "name": "hermes-agent",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "18 official references",
+        "3 official templates"
+      ],
+      "external_contract": "NousResearch/hermes-agent stable release artifact set",
+      "license_lineage": "MIT at pinned v2026.8.18 commit",
+      "local_cleanup_action": "Replace incomplete local copies with the canonical managed mirror.",
+      "rationale": "The complete upstream artifact set is the canonical Hermes capability."
+    },
+    {
+      "name": "graphify",
+      "decision": "merge",
+      "replacement": "graphify",
+      "unique_assets": [
+        "official Codex skill",
+        "8 official references"
+      ],
+      "external_contract": "DeabLabs/graphify stable Codex artifact set",
+      "license_lineage": "Apache-2.0 at pinned v0.9.47 commit",
+      "local_cleanup_action": "Remove the obsolete partial Python package snapshot and keep only the official Codex artifact set.",
+      "rationale": "The old mixed snapshot is fully superseded by the maintained Codex distribution."
+    },
+    {
+      "name": "gsd-core",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "71 skills",
+        "34 agents",
+        "71 commands",
+        "556 runtime files"
+      ],
+      "external_contract": "@opengsd/gsd-core official installer bundle",
+      "license_lineage": "MIT with pinned release, npm digest, and SLSA provenance",
+      "local_cleanup_action": "Manage only through explicit --bundle gsd-core installation; never flatten into canonical skills.",
+      "rationale": "The official installer is the complete supported multi-client distribution."
+    },
+    {
+      "name": "gsd-pi",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "37 skills",
+        "13 agents",
+        "isolated .gsd state"
+      ],
+      "external_contract": "@opengsd/gsd-pi optional official bundle",
+      "license_lineage": "MIT with pinned release, npm digest, and SLSA provenance",
+      "local_cleanup_action": "Keep listable and explicit-only; do not install in this release migration.",
+      "rationale": "Pi remains useful for its native runtime but must not share Core .planning state."
+    },
+    {
+      "name": "hermes-graphify-gsd-nonintrusive-workflow",
+      "decision": "retire",
+      "replacement": null,
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Remove active copies without installing aliases or migration skills; retain only a non-routing denylist.",
+      "rationale": "The copied orchestration is obsolete and has no unique capability worth retaining."
+    },
+    {
+      "name": "hermes-graphify-gsd-runtime-operator",
+      "decision": "retire",
+      "replacement": null,
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Remove active copies without installing aliases or migration skills; retain only a non-routing denylist.",
+      "rationale": "The duplicated runtime orchestration is obsolete and has no unique capability worth retaining."
+    },
+    {
+      "name": "hermes-graphify-gsd-project-integration",
+      "decision": "retire",
+      "replacement": null,
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Remove active copies without installing aliases or migration skills; retain only a non-routing denylist.",
+      "rationale": "The duplicated project-integration orchestration is obsolete and has no unique capability worth retaining."
+    },
+    {
+      "name": "gsd-graphify-brownfield-bootstrap",
+      "decision": "retire",
+      "replacement": null,
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Remove active copies without installing aliases or migration skills; retain only a non-routing denylist.",
+      "rationale": "The duplicated bootstrap orchestration and its migration-only behavior are obsolete."
+    },
+    {
+      "name": "open-gsd-core-migration",
+      "decision": "retire",
+      "replacement": null,
+      "unique_assets": [],
+      "external_contract": null,
+      "license_lineage": "in-house",
+      "local_cleanup_action": "Remove active copies without installing aliases or migration skills; retain only a non-routing denylist.",
+      "rationale": "The compatibility-only migration workflow is no longer part of the supported portfolio."
+    },
+    {
+      "name": "lore",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "upstream-specific knowledge capture workflow"
+      ],
+      "external_contract": "Simota/lore current upstream path",
+      "license_lineage": "permissive upstream license at reviewed checkpoint",
+      "local_cleanup_action": "Follow the moved upstream path and preserve the canonical install.",
+      "rationale": "The path moved, but the skill retains distinct value."
+    },
+    {
+      "name": "lark-minutes",
+      "decision": "merge",
+      "replacement": "lark-meeting",
+      "unique_assets": [
+        "Minutes command references and permission guardrails"
+      ],
+      "external_contract": "larksuite/cli lark-meeting unified CLI skill",
+      "license_lineage": "MIT at reviewed commit 56ad837c3d8f4c49d6b9725a3530c37408533ead",
+      "local_cleanup_action": "Move all Minutes references into lark-meeting and remove the duplicate active route.",
+      "rationale": "The upstream unified skill fully covers Minutes intent and adds cross-domain meeting scenes."
+    },
+    {
+      "name": "lark-vc",
+      "decision": "merge",
+      "replacement": "lark-meeting",
+      "unique_assets": [
+        "vc-domain-boundaries.md"
+      ],
+      "external_contract": "larksuite/cli lark-meeting unified CLI skill",
+      "license_lineage": "MIT at reviewed commit 56ad837c3d8f4c49d6b9725a3530c37408533ead",
+      "local_cleanup_action": "Preserve vc-domain-boundaries.md under lark-meeting and remove the duplicate active route.",
+      "rationale": "The unified skill covers VC search, artifacts, identity continuity, and live meeting operations."
+    },
+    {
+      "name": "lark-vc-agent",
+      "decision": "merge",
+      "replacement": "lark-meeting",
+      "unique_assets": [
+        "Bot join and leave command references"
+      ],
+      "external_contract": "larksuite/cli lark-meeting unified CLI skill",
+      "license_lineage": "MIT at reviewed commit 56ad837c3d8f4c49d6b9725a3530c37408533ead",
+      "local_cleanup_action": "Move join and leave references into lark-meeting and remove the duplicate active route.",
+      "rationale": "The official unified skill now owns the full authorized bot attendance workflow."
+    },
+    {
+      "name": "lark-meeting",
+      "decision": "keep",
+      "replacement": null,
+      "unique_assets": [
+        "26 official files",
+        "6 end-to-end meeting scenes",
+        "preserved cross-domain boundary guardrail"
+      ],
+      "external_contract": "larksuite/cli lark-meeting unified CLI skill",
+      "license_lineage": "MIT at reviewed commit 56ad837c3d8f4c49d6b9725a3530c37408533ead",
+      "local_cleanup_action": "Keep as the only canonical Lark meeting entry point.",
+      "rationale": "It is the complete official workflow and canonical replacement for three overlapping skills."
+    }
+  ]
+}

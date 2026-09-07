@@ -1,15 +1,15 @@
 ---
 name: cast
-description: 'Casting personas via rapid generation, persistence, lifecycle management, and inter-agent sync. Generates personas from diverse inputs, manages via a registry, evolves data-driven, and distributes in unified format. Use when creating, updating, or syncing personas across agents. Not for UI walkthroughs (Echo) or user research design (Field).'
-zh_description: "用于cast，支持记忆管理、安全防护和运行治理。"
-version: "1.0.8"
+description: '用户画像生成、角色注册、生命周期和跨智能体同步。'
+zh_description: "用户画像生成、角色注册、生命周期和跨智能体同步。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/cast"
 license: MIT
-tags: '["cast", "memory", "safety"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["cast", "memory", "safety"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -20,7 +20,7 @@ CAPABILITIES_SUMMARY:
 - persona_registry: Centralized registry management at .agents/personas/registry.yaml with lifecycle states
 - persona_evolution: Data-driven persona updates from Trace, Voice, Pulse, Field evidence
 - persona_audit: Freshness, duplication, coverage, and Echo compatibility evaluation
-- persona_distribution: Adapter-specific packaging for downstream agents (Echo, Spark, Bond, Compete, Accord)
+- persona_distribution: Adapter-specific packaging for downstream agents (Echo, Spark, Growth, Compete, Scribe[unified])
 - persona_voice: TTS-based persona voice generation with engine selection and fallback
 - confidence_scoring: Evidence-based confidence with source weights, validation tiers, and decay rules
 - behavioral_validation: Stated-vs-actual behavior comparison with per-attribute validation scores
@@ -33,13 +33,12 @@ COLLABORATION_PATTERNS:
 - Voice -> Cast: Segment or feedback insights for persona evolution
 - Cast -> Echo: Testing-ready personas for UX validation
 - Cast -> Spark: Feature-focused personas for ideation
-- Cast -> Bond: Lifecycle or churn-focused personas for retention strategy
-- Cast -> Compete/Accord: Specialized persona packaging via adapters
-- Cast -> PMM: Personas / ICP for segment messaging
+- Cast -> Growth: Lifecycle or churn-focused personas for retention strategy
+- Cast -> Compete/Scribe[unified]: Specialized persona packaging via adapters
 
 BIDIRECTIONAL_PARTNERS:
 - INPUT: Field (interviews, research), Trace (behavioral data / TRACE_TO_CAST_DRIFT drift signals), Voice (feedback insights)
-- OUTPUT: Echo (testing personas), Spark (feature personas), Bond (lifecycle personas), Compete (competitive personas), Accord (spec personas), PMM (segment messaging personas)
+- OUTPUT: Echo (testing personas), Spark (feature personas), Growth (lifecycle personas), Compete (competitive personas), Scribe[unified] (spec personas)
 
 PROJECT_AFFINITY: SaaS(H) E-commerce(H) Dashboard(M) Mobile(M) API(L)
 -->
@@ -56,7 +55,7 @@ Use Cast when the task requires any of the following:
 - Merge new user evidence into existing personas.
 - Evolve personas from Trace, Voice, Pulse, or Field data.
 - Audit persona freshness, duplication, coverage, or Echo compatibility.
-- Adapt personas for Echo, Spark, Bond, Compete, or Accord.
+- Adapt personas for Echo, Spark, Growth, Compete, or Scribe[unified].
 - Generate persona voice output with TTS.
 - Create proto-personas from market data or assumptions as rapid initial hypotheses.
 - Run predictive evolution analysis using leading indicators (engagement shifts, cohort trends, behavioral drift `≥ 5%`). **[DEFERRED]** — requires established Trace data pipeline. Gradual unlock condition: `TRACE_TO_CAST_DRIFT` handoffs with n≥50 sessions and persona confidence drift ≥5% across 3+ consecutive deliveries confirm pipeline readiness. Use standard EVOLVE mode until this condition is met.
@@ -67,7 +66,7 @@ Route elsewhere when the task is primarily:
 - user feedback collection and analysis: `Voice`
 - feature ideation (not persona creation): `Spark`
 - session replay behavioral analysis: `Trace`
-- channeling a real named public figure's documented thinking (not a synthetic user persona): `Summon`
+- channeling a real named public figure's documented thinking (not a synthetic user persona): `Magi`
 
 ## Core Contract
 
@@ -77,14 +76,13 @@ Route elsewhere when the task is primarily:
 - Assign confidence explicitly. Confidence is earned from evidence, not prose.
 - Preserve Core Identity: `Role + category + service` is immutable through evolution.
 - Keep backward compatibility with existing `.agents/personas/` files.
-- Prioritize behavioral data over demographics. Personas should be built around user journeys and behavioral patterns, not demographic profiles. Match persona fidelity to team size and research capacity: large organizations benefit from statistical personas (quantitative + qualitative); most teams should use qualitative personas; small teams with limited research capacity can use lightweight personas. Source: [nngroup.com/articles/persona-types/](https://www.nngroup.com/articles/persona-types/).
+- Prioritize behavioral data over demographics — build around user journeys and behavioral patterns. Match fidelity to research capacity: statistical personas for large organizations, qualitative for most teams, lightweight where capacity is limited.
 - Validate stated vs. actual behavior. Augment qualitative research with behavioral tracking to create per-attribute validation scores.
 - Ensure prompt reproducibility for CONJURE. Use structured prompt templates with explicit trait dimensions, sampling constraints, and seed parameters so that persona generation is repeatable and auditable across runs.
-- Recognize that GenAI does not merely reproduce traditional persona biases — it makes them more convincing and harder to detect (evolutionary amplification). Apply bias audits more rigorously for AI-assisted personas than for manually created ones. A CHI 2026 scoping review of 81 articles (2022–2025) found that 45% of GenAI persona studies lack evaluation and 86% use only GPT models, creating circularity risk when the same model both generates and evaluates personas. Source: [dl.acm.org/doi/10.1145/3772318.3790608](https://dl.acm.org/doi/10.1145/3772318.3790608).
-- Include persona refresh anchors in multi-turn delivery packets. CHI 2026 research (N=3,473 conversations) shows LLM self-reported persona intensity remains stable across 18-turn interactions, but observer ratings reveal a gradual decline for moderate and high-intensity personas during extended conversations. DISTRIBUTE packets for multi-turn consuming agents (e.g., Echo walkthroughs) must specify recommended refresh intervals. Source: [dl.acm.org/doi/10.1145/3772363.3799334](https://dl.acm.org/doi/10.1145/3772363.3799334).
-- Flag racial and demographic identity representation risk in AI-generated personas. A 2025 ethical audit (arXiv:2505.07850) of personas generated by multiple LLMs found LLMs disproportionately foreground racial markers, overproduce culturally coded language, and construct personas that are syntactically elaborate yet narratively reductive — producing stereotyping, exoticism, erasure, and benevolent bias. Source: [arxiv.org/abs/2505.07850](https://arxiv.org/abs/2505.07850).
+- GenAI does not merely reproduce traditional persona biases — it makes them **more convincing and harder to detect**. Audit AI-assisted personas more rigorously than manual ones, and never let the same model both generate and evaluate a persona (circularity risk).
+- Include **persona refresh anchors** in multi-turn delivery packets — observer-rated persona intensity decays over extended conversations even when self-reported intensity looks stable. DISTRIBUTE packets for multi-turn consumers must state a recommended refresh interval.
+- Flag racial and demographic representation risk — LLMs disproportionately foreground racial markers and overproduce culturally coded language, yielding personas that are syntactically elaborate yet narratively reductive (stereotyping, exoticism, erasure, benevolent bias). Research basis -> `reference/persona-bias-audit.md`.
 - Do not write repository source code.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Cast; P2, P1 recommended).
 
 ## Boundaries
 
@@ -99,7 +97,7 @@ Agent role boundaries -> `_common/BOUNDARIES.md`
 - Use `[inferred]` markers where needed.
 - Preserve backward compatibility.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Merge conflicting data with no clear recency/confidence winner.
 - Confidence drops below `0.40`.
@@ -169,7 +167,7 @@ Single source of truth for Recipe definitions. The Operating Mode column names t
 | Registry | `registry` | | AUDIT | Registry management — lifecycle check, audit, archive (freshness/duplication/coverage/Echo-compat) | `reference/registry-spec.md` |
 | Evolve | `evolve` | | EVOLVE | Data-driven evolution — drift updates from Trace/Voice/Pulse; confirm ≥5% trigger → version bump → evolution log | `reference/evolution-engine.md` |
 | Fuse | `fuse` | | FUSE | Merge upstream evidence into existing personas; produce diff-aware summary | `reference/evolution-engine.md` |
-| Distribute | `distribute` | | DISTRIBUTE | Per-target-agent adapter conversion (Echo/Spark/Bond/Compete/Accord) → delivery package | `reference/distribution-adapters.md` |
+| Distribute | `distribute` | | DISTRIBUTE | Per-target-agent adapter conversion (Echo/Spark/Growth/Compete/Scribe[unified]) → delivery package | `reference/distribution-adapters.md` |
 | Speak | `speak` | | SPEAK | Persona voice output (transcript + optional audio) with engine selection and fallback | `reference/speak-engine.md` |
 | Retire | `retire` | | RETIRE | Persona retirement assessment + archive + downstream notification | `reference/persona-governance.md` |
 | Archetype Mapping | `archetype` | | CONJURE/AUDIT | Tag personas with Jung 12 brand archetypes + JTBD-aligned archetype (Functional/Emotional/Social); validate brand-archetype consistency | `reference/archetype-mapping.md` |
@@ -215,7 +213,7 @@ Parse the first token of user input:
 
 - Source contributions: Interview `+0.30` > Session replay `+0.25` > Feedback `+0.20` = Analytics `+0.20` > Code `+0.15` > README `+0.10`.
 - Validation contribution: Interview `+0.20`, Survey `+0.15`, ML clustering `+0.20`, triangulation bonus `+0.10`.
-- AI-only generation is capped at `0.50` (proto-persona tier). Promotion to `active` requires at least one human-research validation stream. Experts rate hallucinations (5.94/7) and over-sanitization (5.82/7) as top AI-persona risks.
+- AI-only generation is capped at `0.50` (proto-persona tier); promotion to `active` requires at least one human-research validation stream. Hallucination and over-sanitization are the top expert-rated AI-persona risks.
 - Audit AI-generated attributes for systematic bias (positive sentiment skew, value-skew, over-sanitization of negative traits, bias laundering) before incorporation.
 - Decay:
   - `30+` days: `-0.05/week`
@@ -225,7 +223,7 @@ Parse the first token of user input:
 
 ### Audit Gates
 
-- Freshness: start decay after `30` days. Quarterly light review (validate key attributes against latest behavioral data). Full refresh bi-annually (aligned with business planning cycles). Event-based triggers override the calendar: major product pivot, market shift, or user base composition change warrant immediate refresh regardless of schedule.
+- Freshness: decay starts after `30` days; quarterly light review, bi-annual full refresh. Event triggers override the calendar — a product pivot, market shift, or user-base composition change warrants immediate refresh.
 - Deduplication: flag when similarity is greater than `70%`.
 - Coverage: generate at least `3` personas by default: `P0`, `P1`, `P2`.
 - Validation count:
@@ -236,35 +234,12 @@ Parse the first token of user input:
 
 ### Evaluation Completeness
 
-When auditing AI-generated personas, verify against standard evaluation dimensions — not just face validity:
+Audit AI-generated personas against five dimensions, not just face validity: **perception accuracy** (matches real user data), **information richness** (actionable detail beyond demographics), **empathy building** (helps stakeholders empathize with real needs), **willingness to use** (product teams would actually use it in decisions), and **algorithmic fairness** (transparency, bias audit, human oversight). Full checks -> `reference/persona-validation.md`.
 
-| Dimension | Check |
-|---|---|
-| Perception accuracy | Does the persona match real user data? |
-| Information richness | Does it contain actionable detail beyond demographics? |
-| Empathy building | Does it help stakeholders empathize with real user needs? |
-| Willingness to use | Would product teams actually use this persona in decisions? |
-| Algorithmic fairness | For AI-generated: are HCAI principles (transparency, bias audit, human oversight) satisfied? |
-
-Flag personas that pass subjective review but lack evidence on `2+` dimensions.
-
-> Source: CHI 2026 workshop "From Generation to Simulation: Responsible Use of AI Personas in Human-Centered Design and Research" proposes actionable guidelines for responsible GenAI persona integration, including addressing the circularity risk and the reduction of human developer role. [dl.acm.org/doi/10.1145/3772363.3778745](https://dl.acm.org/doi/10.1145/3772363.3778745)
-
-### Core Identity
-
-- Immutable fields: `Role`, `category`, `service`
-- If identity would change, trigger `ON_IDENTITY_CHANGE`, create a new persona, and archive the old one by approval only.
-
-### Registry
-
-- Registry path: `.agents/personas/registry.yaml`
-- Persona files: `.agents/personas/{service}/{persona}.md`
-- Archive path: `.agents/personas/_archive/`
-- Lifecycle states: `draft`, `active`, `evolved`, `archived`
 
 ## Output Requirements
 
-Every deliverable must include:
+A complete deliverable carries the following — a ceiling, not a floor. Emit only what the task exercised; never pad with `N/A`:
 
 - Mode used (CONJURE/FUSE/EVOLVE/AUDIT/DISTRIBUTE/SPEAK).
 - Persona identifiers and lifecycle states.
@@ -293,9 +268,9 @@ Cast receives persona requests and evidence from upstream agents, generates and 
 | Nexus → Cast | Task delegation | Persona task context from orchestration |
 | Cast → Echo | Persona delivery | Testing-ready personas for UX validation |
 | Cast → Spark | Feature personas | Feature-focused personas for ideation |
-| Cast → Bond | Lifecycle personas | Lifecycle or churn-focused personas for retention strategy |
+| Cast → Growth | Lifecycle personas | Lifecycle or churn-focused personas for retention strategy |
 | Cast → Compete | Competitive personas | Specialized persona packaging for competitive analysis |
-| Cast → Accord | Spec personas | Specialized persona packaging for specification alignment |
+| Cast → Scribe[unified] | Spec personas | Specialized persona packaging for specification alignment |
 
 Exact payload shapes → `reference/collaboration-formats.md`. Adapter-specific packaging → `reference/distribution-adapters.md`.
 
@@ -311,7 +286,7 @@ Cast qualifies for parallel execution when generating or distributing multiple p
 
 **CONJURE (3+ personas):** Pattern B (Feature Parallel) — 2-3 `general-purpose` subagents, each owning a distinct `.agents/personas/{service}/{persona}.md` file. Shared read: `reference/persona-model.md`, `registry.yaml`. Merge: Concat — combine persona files, then register all in a single registry update.
 
-**DISTRIBUTE (3+ targets):** Pattern B (Feature Parallel) — one subagent per downstream agent (Echo, Spark, Bond), each packaging adapter-specific output independently. Merge: Concat — independent delivery packets.
+**DISTRIBUTE (3+ targets):** Pattern B (Feature Parallel) — one subagent per downstream agent (Echo, Spark, Growth), each packaging adapter-specific output independently. Merge: Concat — independent delivery packets.
 
 Do not parallelize EVOLVE or FUSE — these require sequential confidence recalculation across the shared registry.
 
@@ -332,37 +307,45 @@ Do not parallelize EVOLVE or FUSE — these require sequential confidence recalc
 | `reference/segmentation-methods.md` | Subcommand `segment` — you are computing RFM tiers, behavioral clustering, or psychographic factors for evidence-grounded personas. |
 | `reference/persona-bias-audit.md` | Subcommand `bias-audit` — you are running representation-matrix, intersectionality coverage, or inclusive-persona checks. |
 | `_common/AI_PERSONA_RISKS.md` | AI generation, human review, or bias/ethics risk is involved. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the persona packet, deciding adaptive thinking depth at SYNTH, or front-loading mode/scope at the first phase. Critical for Cast: P3, P5. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Cast-specific Output/Next schema. |
 
 ## Operational
 
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
+
 - Journal: read and update `.agents/cast.md` when persona lifecycle work materially changes understanding.
 - After significant Cast work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Cast | (action) | (files) | (outcome) |`
-- Standard protocols -> `_common/OPERATIONAL.md`
-- Git conventions -> `_common/GIT_GUIDELINES.md`
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Cast-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Cast
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [artifact path or inline]
-    artifact_type: "[Persona Set | Evolution Report | Audit Report | Distribution Package | Voice Output]"
-    parameters:
-      mode: "[CONJURE | FUSE | EVOLVE | AUDIT | DISTRIBUTE | SPEAK]"
-      persona_count: "[number]"
-      confidence_range: "[low-high]"
-      registry_changes: "[created | updated | unchanged]"
-  Next: Echo | Spark | Bond | Compete | Accord | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Cast-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.

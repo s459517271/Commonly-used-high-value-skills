@@ -1,14 +1,14 @@
 ---
 name: event-driven-tracker
 description: 'Use when tracking earnings, product launches, M&A, dividends, buybacks, unlocks, or other market-moving dates that need a prioritized event calendar.'
-zh_description: "用于event、驱动、跟踪，支持投资研究、风险评估和报告生成。"
-version: "1.0.0"
+zh_description: "跟踪影响投资标的的公司事件、催化因素和风险。"
+version: "1.0.1"
 author: "seaworld008"
 source: "in-house"
 source_url: ""
 tags: '["driven", "event", "finance", "tracker"]'
 created_at: "2026-03-18"
-updated_at: "2026-03-20"
+updated_at: "2026-09-06"
 quality: 2
 complexity: "intermediate"
 ---
@@ -109,7 +109,7 @@ python scripts/track_events.py --ticker MSFT --range 30d
 - 监控某一并购案的所有监管审批节点（反垄断审查、股东大会投票、反向收购限期），实时计算“Deal Spread”（价差），并在价差异常收窄或扩大时报警。
 
 ### 2. 生物医药 FDA “开盲盒”
-- 针对生物科技公司，跟踪 PDUFA 日期，并结合 `tavily-search` 抓取临床试验数据的专家讨论摘要。
+- 针对生物科技公司，跟踪 PDUFA 日期，并结合客户端内置 Web Search 或 `deep-research` 检索临床试验数据和可追溯的专家讨论。
 
 ## 边界与限制 / Boundaries
 

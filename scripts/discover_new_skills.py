@@ -21,6 +21,11 @@ from pathlib import Path
 from threading import Lock
 from time import sleep
 
+try:
+    from provenance_v2 import atomic_write_json
+except ModuleNotFoundError:  # pragma: no cover - package-style unit import
+    from scripts.provenance_v2 import atomic_write_json
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 WATCHED_REPOS = [
@@ -137,6 +142,24 @@ def load_rejected_keys(path: Path) -> tuple[set[str], set[str]]:
     return names, urls
 
 
+def load_retired_skill_names(path: Path) -> set[str]:
+    """Load hard-retirement denylist names from the portfolio policy."""
+    if not path.exists():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return set()
+    names: set[str] = set()
+    for entry in data.get("retired_skills", []) or []:
+        if not isinstance(entry, dict):
+            continue
+        name = str(entry.get("name", "")).strip()
+        if name:
+            names.add(name)
+    return names
+
+
 def new_source_health() -> dict[str, dict]:
     return {
         SOURCE_GITHUB: {"status": "unknown", "queries": 0, "results": 0, "errors": []},
@@ -193,7 +216,17 @@ def finalize_source_health(source_health: dict[str, dict]) -> dict[str, dict]:
         entry = {
             "queries": raw["queries"],
             "results": raw["results"],
-            "errors": raw["errors"],
+            "raw_results": raw["results"],
+            "emitted": 0,
+            "unique_emitted": 0,
+            "errors": sorted(
+                raw["errors"],
+                key=lambda item: (
+                    str(item.get("kind", "")),
+                    str(item.get("status_code", "")),
+                    str(item.get("message", "")),
+                ),
+            ),
             "status": "unknown",
         }
         if raw["queries"] == 0:
@@ -210,7 +243,8 @@ def finalize_source_health(source_health: dict[str, dict]) -> dict[str, dict]:
 
 def flatten_errors(source_health: dict[str, dict]) -> list[dict]:
     errors = []
-    for source_key, entry in source_health.items():
+    for source_key in (SOURCE_GITHUB, SOURCE_SKILLS_SH, SOURCE_CLAWHUB):
+        entry = source_health[source_key]
         for item in entry.get("errors", []):
             error = dict(item)
             error["source"] = source_key
@@ -273,13 +307,27 @@ def github_api_get(url: str, token: str | None, source_health: dict[str, dict]) 
         return None
 
 
-def make_discovery(*, name: str, source: str, url: str, repo_stars: int, description: str) -> dict:
+def make_discovery(
+    *,
+    source_key: str,
+    name: str,
+    source: str,
+    url: str,
+    repo_stars: int,
+    description: str,
+) -> dict:
+    normalized_stars = (
+        repo_stars
+        if type(repo_stars) is int and repo_stars >= 0
+        else 0
+    )
     return {
-        "name": name,
-        "source": source,
-        "url": url,
-        "repo_stars": repo_stars,
-        "description": description,
+        "source_key": source_key,
+        "name": str(name or "").strip(),
+        "source": str(source or "").strip(),
+        "url": str(url or "").strip(),
+        "repo_stars": normalized_stars,
+        "description": str(description or ""),
         "discovered_at": utc_day(),
     }
 
@@ -305,6 +353,7 @@ def discover_from_watched_repos(token: str | None, source_health: dict[str, dict
             if len(parts) >= 2 and parts[-1] == "SKILL.md":
                 discoveries.append(
                     make_discovery(
+                        source_key=SOURCE_GITHUB,
                         name=parts[-2],
                         source=f"GitHub ({repo})",
                         url=f"https://github.com/{repo}/blob/main/{path}",
@@ -336,6 +385,7 @@ def discover_from_github_search(token: str | None, source_health: dict[str, dict
             seen_repos.add(full_name)
             discoveries.append(
                 make_discovery(
+                    source_key=SOURCE_GITHUB,
                     name=f"[repo] {full_name}",
                     source="GitHub Search",
                     url=repo.get("html_url", ""),
@@ -365,6 +415,7 @@ def discover_from_skills_sh(keywords: list[str], source_health: dict[str, dict])
                         seen_ids.add(skill_id)
                         discoveries.append(
                             make_discovery(
+                                source_key=SOURCE_SKILLS_SH,
                                 name=item.get("name", ""),
                                 source=f"skills.sh ({item.get('source', '')})",
                                 url=f"https://skills.sh/{item.get('id', '')}",
@@ -411,6 +462,7 @@ def discover_from_skills_sh(keywords: list[str], source_health: dict[str, dict])
                     installs = 0
             discoveries.append(
                 make_discovery(
+                    source_key=SOURCE_SKILLS_SH,
                     name=match.group(2).strip(),
                     source="skills.sh (scraped)",
                     url=f"https://skills.sh/{skill_id}",
@@ -443,6 +495,7 @@ def discover_from_clawhub(keywords: list[str], source_health: dict[str, dict]) -
                         seen_slugs.add(slug)
                         discoveries.append(
                             make_discovery(
+                                source_key=SOURCE_CLAWHUB,
                                 name=item.get("displayName", slug),
                                 source="ClawHub",
                                 url=f"https://clawhub.com/s/{slug}",
@@ -468,6 +521,7 @@ def discover_from_clawhub(keywords: list[str], source_health: dict[str, dict]) -
             seen_slugs.add(slug)
             discoveries.append(
                 make_discovery(
+                    source_key=SOURCE_CLAWHUB,
                     name=match.group(2).strip(),
                     source="ClawHub (scraped)",
                     url=f"https://clawhub.com/s/{slug}",
@@ -489,16 +543,33 @@ def dedupe_discoveries(
 ) -> list[dict]:
     rejected_names = rejected_names or set()
     rejected_urls = rejected_urls or set()
+    local_keys = {name.strip().casefold() for name in local_names}
+    rejected_keys = {
+        name.strip().casefold() for name in rejected_names
+    }
     seen_names = set()
     unique_discoveries = []
     for item in all_discoveries:
-        name = item["name"]
+        name = str(item.get("name") or "").strip()
         url = item.get("url", "")
-        if name in local_names or name in seen_names:
+        source_key = item.get("source_key")
+        if (
+            not name
+            or source_key not in {
+                SOURCE_GITHUB,
+                SOURCE_SKILLS_SH,
+                SOURCE_CLAWHUB,
+            }
+            or not isinstance(url, str)
+            or not url.startswith("https://")
+        ):
             continue
-        if name in rejected_names or (url and url in rejected_urls):
+        name_key = name.casefold()
+        if name_key in local_keys or name_key in seen_names:
             continue
-        seen_names.add(name)
+        if name_key in rejected_keys or (url and url in rejected_urls):
+            continue
+        seen_names.add(name_key)
         unique_discoveries.append(item)
     unique_discoveries.sort(key=lambda entry: entry.get("repo_stars", 0), reverse=True)
     return unique_discoveries
@@ -511,10 +582,33 @@ def build_discovery_report(
     unique_discoveries: list[dict],
     source_health: dict[str, dict],
 ) -> dict:
+    expected_sources = {SOURCE_GITHUB, SOURCE_SKILLS_SH, SOURCE_CLAWHUB}
+    if set(source_health) != expected_sources:
+        raise ValueError(
+            "source_health must contain github, skills_sh, and clawhub"
+        )
     finalized_health = finalize_source_health(source_health)
+    for item in all_discoveries:
+        source_key = item.get("source_key")
+        if source_key not in expected_sources:
+            raise ValueError("every raw discovery requires a valid source_key")
+        finalized_health[source_key]["emitted"] += 1
+    for item in unique_discoveries:
+        source_key = item.get("source_key")
+        if source_key not in expected_sources:
+            raise ValueError("every emitted discovery requires a valid source_key")
+        finalized_health[source_key]["unique_emitted"] += 1
+    for source_key, health in finalized_health.items():
+        if health["emitted"] > health["raw_results"]:
+            raise ValueError(
+                f"{source_key} emitted count exceeds raw results"
+            )
     return {
         "generated_at": utc_timestamp(),
         "local_skill_count": local_skill_count,
+        "raw_discovered": sum(
+            entry["raw_results"] for entry in finalized_health.values()
+        ),
         "total_discovered": len(all_discoveries),
         "unique_discovered": len(unique_discoveries),
         "discoveries": unique_discoveries,
@@ -534,6 +628,11 @@ def main() -> None:
         default="docs/sources/rejected-candidates.json",
         help="Path to persistent rejection cache (names/URLs to skip).",
     )
+    parser.add_argument(
+        "--portfolio-policy",
+        default="docs/sources/portfolio-policy.json",
+        help="Path to permanent retired-skill policy.",
+    )
     args = parser.parse_args()
 
     skills_dir = REPO_ROOT / args.skills_dir
@@ -543,6 +642,8 @@ def main() -> None:
     token = resolve_github_token()
     local_names = get_local_skill_names(skills_dir)
     rejected_names, rejected_urls = load_rejected_keys(REPO_ROOT / args.rejected_file)
+    retired_names = load_retired_skill_names(REPO_ROOT / args.portfolio_policy)
+    rejected_names.update(retired_names)
     print(f"Local skills indexed: {len(local_names)}")
     if rejected_names or rejected_urls:
         print(f"Rejection cache: {len(rejected_names)} names, {len(rejected_urls)} URLs")
@@ -581,7 +682,7 @@ def main() -> None:
         source_health=source_health,
     )
 
-    output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    atomic_write_json(output_path, report)
     print(f"\nWrote discovery report: {output_path}")
     print(f"Total discovered: {len(all_discoveries)}, Unique/New: {len(unique_discoveries)}")
 

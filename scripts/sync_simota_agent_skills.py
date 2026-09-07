@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+from copy import deepcopy
 from datetime import date
 from pathlib import Path
 
@@ -15,7 +16,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REPO = "simota/agent-skills"
 SOURCE_URL = f"https://github.com/{SOURCE_REPO}"
-SOURCE_FILE = REPO_ROOT / "docs" / "sources" / "simota-agent-skills-2026-04.skills.json"
+SOURCE_MAPPING_REL = Path("docs/sources/simota-agent-skills-2026-04.skills.json")
+SOURCE_FILE = REPO_ROOT / SOURCE_MAPPING_REL
 
 
 SELECTED_SKILLS: dict[str, list[tuple[str, str]]] = {
@@ -131,6 +133,34 @@ Open questions:
 """.strip()
 }
 
+GENERIC_EXECUTION_CONTRACT = """
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.
+""".strip()
+
 
 def split_frontmatter(text: str) -> tuple[str, str]:
     match = re.match(r"^---\r?\n(.*?)\r?\n---\r?\n?", text, re.DOTALL)
@@ -173,6 +203,7 @@ def render_frontmatter(category: str, name: str, description: str, today: str) -
         "---",
         f"name: {name}",
         f"description: {yaml_quote(description)}",
+        f"zh_description: {yaml_quote(description)}",
         'version: "1.0.0"',
         'author: "seaworld008"',
         f'source: "github:{SOURCE_REPO}"',
@@ -218,7 +249,7 @@ def strip_trailing_whitespace(text: str) -> str:
 
 def normalize_text_tree(root: Path) -> None:
     for path in root.rglob("*"):
-        if not path.is_file():
+        if path.is_symlink() or not path.is_file():
             continue
         try:
             text = path.read_text(encoding="utf-8")
@@ -229,31 +260,75 @@ def normalize_text_tree(root: Path) -> None:
             path.write_text(normalized, encoding="utf-8")
 
 
-def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> list[dict]:
+def ignore_upstream_symlinks(directory: str, names: list[str]) -> list[str]:
+    """Keep imported skill trees self-contained and never follow upstream links."""
+    root = Path(directory)
+    return [name for name in names if (root / name).is_symlink()]
+
+
+def load_existing_entries(repo_root: Path) -> dict[str, dict]:
+    mapping_path = repo_root / SOURCE_MAPPING_REL
+    if not mapping_path.exists():
+        return {}
+    payload = json.loads(mapping_path.read_text(encoding="utf-8"))
+    return {
+        entry["normalized_slug"]: entry
+        for entry in payload.get("skills", [])
+        if entry.get("normalized_slug")
+    }
+
+
+def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> tuple[list[dict], list[str]]:
     today = date.today().isoformat()
     commit = source_commit(source_dir)
     imported: list[dict] = []
+    missing_upstream: list[str] = []
+    existing_entries = load_existing_entries(repo_root)
 
     for category, skills in SELECTED_SKILLS.items():
         for name, description in skills:
             source_skill_dir = source_dir / name
             source_skill_md = source_skill_dir / "SKILL.md"
-            if not source_skill_md.exists():
-                raise FileNotFoundError(f"Missing upstream skill: {source_skill_md}")
-
             destination = repo_root / "skills" / category / name
+            if not source_skill_md.exists():
+                existing = existing_entries.get(name)
+                if existing is None or not (destination / "SKILL.md").exists():
+                    raise FileNotFoundError(
+                        f"Missing upstream skill and no retained local snapshot: {source_skill_md}"
+                    )
+                retained = deepcopy(existing)
+                upstream = retained.setdefault("upstream", {})
+                upstream["last_checked_at"] = today
+                upstream["sync_mode"] = "local-only"
+                upstream["availability"] = "missing"
+                upstream.setdefault("missing_since", today)
+                retained["notes"] = (
+                    "Retained from the last permissively licensed upstream snapshot because "
+                    f"{name}/SKILL.md is no longer present in simota/agent-skills."
+                )
+                imported.append(retained)
+                missing_upstream.append(name)
+                print(f"WARNING: retaining local snapshot; upstream path missing: {name}/SKILL.md")
+                continue
+
             raw = source_skill_md.read_text(encoding="utf-8", errors="replace")
             _, body = split_frontmatter(raw)
             skill_text = render_frontmatter(category, name, description, today) + body.lstrip()
             supplement = QUALITY_SUPPLEMENTS.get(name)
             if supplement:
                 skill_text = skill_text.rstrip() + "\n\n" + supplement + "\n"
+            if "```" not in skill_text:
+                skill_text = skill_text.rstrip() + "\n\n" + GENERIC_EXECUTION_CONTRACT + "\n"
             skill_text = strip_trailing_whitespace(skill_text)
 
             if apply:
-                if destination.exists():
-                    shutil.rmtree(destination)
-                shutil.copytree(source_skill_dir, destination)
+                destination.mkdir(parents=True, exist_ok=True)
+                shutil.copytree(
+                    source_skill_dir,
+                    destination,
+                    dirs_exist_ok=True,
+                    ignore=ignore_upstream_symlinks,
+                )
                 normalize_text_tree(destination)
                 (destination / "SKILL.md").write_text(skill_text.rstrip() + "\n", encoding="utf-8")
 
@@ -276,7 +351,7 @@ def import_selected(source_dir: Path, repo_root: Path, apply: bool) -> list[dict
                 }
             )
 
-    return imported
+    return imported, missing_upstream
 
 
 def write_source_mapping(entries: list[dict], repo_root: Path) -> None:
@@ -296,8 +371,22 @@ def write_source_mapping(entries: list[dict], repo_root: Path) -> None:
         ],
         "skills": entries,
     }
-    SOURCE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SOURCE_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    source_file = repo_root / SOURCE_MAPPING_REL
+    source_file.parent.mkdir(parents=True, exist_ok=True)
+    source_file.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def require_legacy_mapping_for_apply(repo_root: Path) -> None:
+    """Fail closed instead of replacing a governed provenance v2 mapping."""
+    mapping = repo_root / SOURCE_MAPPING_REL
+    if not mapping.exists():
+        return
+    payload = json.loads(mapping.read_text(encoding="utf-8"))
+    if payload.get("schema_version") == 2:
+        raise RuntimeError(
+            "refusing to downgrade provenance v2; use sync_upstream.py "
+            "--record-review plus reconcile_artifact_inventory.py"
+        )
 
 
 def main() -> int:
@@ -308,17 +397,24 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
+    if args.apply:
+        require_legacy_mapping_for_apply(repo_root)
     source_dir, tempdir = resolve_source_dir(args.source_dir)
     try:
-        entries = import_selected(source_dir, repo_root, args.apply)
+        entries, missing_upstream = import_selected(source_dir, repo_root, args.apply)
         if args.apply:
             write_source_mapping(entries, repo_root)
         print(
             f"{'Imported' if args.apply else 'Would import'} "
             f"{len(entries)} simota skills across {len(SELECTED_SKILLS)} categories."
         )
+        if missing_upstream:
+            print(
+                "Retained local snapshots for missing upstream skills: "
+                + ", ".join(sorted(missing_upstream))
+            )
         if args.apply:
-            print(f"Mapping: {SOURCE_FILE}")
+            print(f"Mapping: {repo_root / SOURCE_MAPPING_REL}")
     finally:
         if tempdir is not None:
             tempdir.cleanup()

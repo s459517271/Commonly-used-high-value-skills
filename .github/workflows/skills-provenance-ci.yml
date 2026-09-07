@@ -5,23 +5,39 @@ on:
   push:
     branches: ["main", "master"]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   provenance-checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.13"
+
+      - name: Install test dependencies
+        run: python -m pip install pyyaml pytest
 
       - name: Check merge conflict markers
         run: python3 scripts/check_merge_conflicts.py
 
-      - name: Run provenance tests
-        run: python3 -m unittest tests.test_provenance_pipeline -v
+      - name: Run provenance v2 contract tests
+        run: python -m pytest -q tests/test_provenance_v2.py
 
       - name: Run unified provenance pipeline
         run: python3 scripts/provenance_pipeline.py --mode all --config docs/sources/provenance.config.json
+
+      - name: Ensure provenance mappings are up to date
+        run: git diff --exit-code -- docs/sources

@@ -1,15 +1,15 @@
 ---
 name: growth
-description: 'Optimizing SEO (meta/OGP/JSON-LD/heading hierarchy), SMO (social sharing), CRO (CTA/form/exit-intent), and GEO (AI citation optimization) across four pillars. Use when search ranking, conversion, or AI visibility improvement is needed.'
-zh_description: "用于增长，支持内容、营销、渠道和数据分析。"
-version: "1.0.7"
+description: '搜索、社交、转化和人工智能引用优化的一体化增长。'
+zh_description: "搜索、社交、转化和人工智能引用优化的一体化增长。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/growth"
 license: MIT
-tags: '["growth", "marketing"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["growth", "marketing"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -26,6 +26,8 @@ CAPABILITIES_SUMMARY:
 - cro_cta_optimization: CTA copy, placement, color, urgency improvements with hypothesis-driven testing
 - form_optimization: Field reduction, inline validation, progress indication
 - exit_intent_prevention: Exit-intent detection and retention overlay patterns
+
+- retention_and_reengagement: Retention and churn framing, engagement loops and habit formation, re-engagement and win-back triggers, loyalty program structure, lifecycle-stage interventions — absorbed from `bond` 2026-08-20
 
 COLLABORATION_PATTERNS:
 - Pattern A: Metrics-to-Optimize (Pulse → Growth)
@@ -106,7 +108,6 @@ Route elsewhere when the task is primarily:
 - CRO personalization is expected: showing identical static content to all visitor segments (first-time vs returning, ad-referred vs organic) is a missed conversion opportunity — segment-aware content or dynamic CTAs should be the default recommendation.
 - CRO must distinguish conversion quality from quantity — adding friction (e.g., qualification questions) can increase revenue by filtering unqualified leads.
 - Ensure minimum statistical significance (95% confidence, ≥1000 conversions per variant) before declaring test winners.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Growth; P2, P1 recommended).
 
 ## Boundaries
 
@@ -120,7 +121,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 - Respect GDPR/CCPA.
 - Scale to scope (element < 50 lines, page < 200 lines, site-wide = phased rollout).
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Primary copy/headline changes.
 - External analytics scripts.
@@ -165,6 +166,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 | Keyword | `keyword` | | Keyword research methodology — search intent classification, query clustering, SERP feature analysis, AI prompt mining | `reference/keyword-research.md` |
 | Audit | `audit` | | Full-site SEO audit — crawlability, indexability, content gap, internal linking, log-file analysis | `reference/seo-audit.md` |
 | Vitals | `vitals` | | Core Web Vitals deep optimization — LCP/INP/CLS root-cause and targeted fix patterns at p75 | `reference/core-web-vitals-deep.md` |
+| Retention & Re-engagement | `retention` |  | Design retention mechanics, win-back triggers, and loyalty structure | `reference/retention/retention-analysis.md`, `reference/retention/engagement-triggers.md`, `reference/retention/winback-campaign.md` |
 
 ## Subcommand Dispatch
 
@@ -193,10 +195,10 @@ Behavior notes per Recipe:
 | Signal | Approach | Primary output | Read next |
 |--------|----------|----------------|-----------|
 | `SEO`, `meta`, `title`, `description`, `canonical` | SEO meta implementation | Meta tags + verification | `reference/seo-checklist.md` |
-| `heading`, `h1`, `h2`, `hierarchy` | Heading audit | Heading structure fix | `reference/seo-detailed-checklist.md` |
+| `heading`, `h1`, `h2`, `hierarchy` | Heading audit | Heading structure fix | `reference/seo-checklist.md` |
 | `OG`, `Open Graph`, `Twitter Card`, `social` | Social sharing | OGP/Twitter Card meta | `reference/ogp-twitter-card-guide.md` |
 | `JSON-LD`, `structured data`, `Schema.org` | Structured data | JSON-LD implementation | `reference/json-ld-templates.md` |
-| `LCP`, `INP`, `CLS`, `Core Web Vitals`, `performance` | Core Web Vitals | Performance fix + measurement at p75 (INP <200ms, LCP ≤2.5s, CLS <0.1); VSI for session stability when available | `reference/core-web-vitals.md` |
+| `LCP`, `INP`, `CLS`, `Core Web Vitals`, `performance` | Core Web Vitals | Ranking impact + p75 measurement gap (CrUX vs Lighthouse); remediation code → `bolt/reference/core-web-vitals.md` | `reference/core-web-vitals.md` |
 | `AI Overviews`, `AI Mode`, `GEO`, `AI search`, `citation` | Generative Engine Optimization | Triple schema stack + E-E-A-T + inline citations + platform-specific optimization (ChatGPT/Perplexity/Gemini/Claude/Copilot) | `reference/geo-optimization.md` |
 | `E-E-A-T`, `author`, `expertise`, `trust` | E-E-A-T signals | Author markup, credential schema, experience indicators | `reference/seo-checklist.md` |
 | `CTA`, `conversion`, `signup`, `checkout` | CRO optimization | CTA/form improvement | `reference/cro-patterns.md` |
@@ -214,7 +216,7 @@ Routing rules:
 
 ## Output Requirements
 
-Every deliverable must include:
+A complete deliverable carries the following — a ceiling, not a floor. Emit only what the task exercised; never pad with `N/A`:
 
 - Change type (SEO, SMO, CRO, GEO) and target metric.
 - Before/after comparison or expected impact (quantified: e.g., "+30% CTR from rich results", "INP 320ms → 140ms").
@@ -254,11 +256,10 @@ Growth receives data and insights from upstream agents. Growth sends hypotheses,
 | Reference | Read this when |
 |-----------|----------------|
 | `reference/seo-checklist.md` | You need SEO quick checklist (per-page + technical). |
-| `reference/seo-detailed-checklist.md` | You need detailed SEO checklist (meta/heading/content/images/URLs/site-level). |
 | `reference/ogp-social-templates.md` | You need OGP and social sharing quick reference. |
 | `reference/ogp-twitter-card-guide.md` | You need full OGP/Twitter Card implementation (HTML/Next.js/React Helmet/specs). |
 | `reference/json-ld-templates.md` | You need JSON-LD templates (Product/Article/FAQ/Breadcrumb/Org/Local/SoftwareApp). |
-| `reference/core-web-vitals.md` | You need Core Web Vitals optimization (LCP/INP/CLS strategies + code). |
+| `reference/core-web-vitals.md` | You need CWV ranking impact, CrUX-vs-Lighthouse measurement gap, or SEO verification checklist (remediation code lives in `bolt/reference/core-web-vitals.md`). |
 | `reference/core-web-vitals-deep.md` | You are running the `vitals` recipe — LCP/INP/CLS root-cause analysis at p75 (RUM not lab) with targeted fix patterns (priority hints, long-task breakup, layout reservation). |
 | `reference/cro-patterns.md` | You need CRO patterns (CTA/forms/exit-intent/social proof) + 2026 benchmarks (Baymard cart abandonment, form-field cliffs, Statsig/OpenAI tooling note). |
 | `reference/keyword-research.md` | You are running the `keyword` recipe — search intent classification, query clustering, SERP overlap, AI prompt mining. |
@@ -267,39 +268,46 @@ Growth receives data and insights from upstream agents. Growth sends hypotheses,
 | `reference/channel-lifecycle-planning.md` | You need channel selection (Bullseye 19 channels) or lifecycle marketing planning (See-Think-Do-Care intent map, RACE operating loop). |
 | `reference/geo-optimization.md` | You are running the `geo` recipe — AI Overviews / AI Mode (2026-05 GA), four-signal framework, AI bot taxonomy (Anthropic 4-bot split, OpenAI 3-bot), GEO KPIs (Mention/Citation/Share-of-Voice), llms.txt 2026 status. |
 | `reference/code-standards.md` | You need good/bad code examples. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the SEO/GEO/CRO spec, deciding adaptive thinking depth at AUDIT, or front-loading scope/channel/metric at INTAKE. Critical for Growth: P3, P5. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Growth-specific Output/Next schema. |
+| `reference/retention/` | Designing retention, re-engagement, and loyalty mechanics (absorbed from `bond`) |
 
 ## Operational
 
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
+
 - Journal growth insights in `.agents/growth.md`; create it if missing. Record patterns and learnings worth preserving.
 - After significant Growth work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Growth | (action) | (files) | (outcome) |`
-- Standard protocols → `_common/OPERATIONAL.md`
-- Follow `_common/GIT_GUIDELINES.md`.
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Growth-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Growth
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [artifact path or inline]
-    artifact_type: "[SEO Meta | Heading Fix | OGP Setup | JSON-LD | Stacked Schema | Core Web Vitals Fix | GEO Optimization | E-E-A-T Signals | CRO Optimization | Form Optimization | Exit Prevention]"
-    parameters:
-      pillar: "[SEO | SMO | CRO]"
-      target_metric: "[metric name]"
-      expected_impact: "[description]"
-      mobile_verified: "[yes | no]"
-      lighthouse_score: "[before → after]"
-    compliance: "[GDPR/CCPA notes if applicable]"
-  Next: Experiment | Bolt | Pulse | Artisan | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Growth-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.

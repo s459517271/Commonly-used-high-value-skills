@@ -1,15 +1,15 @@
 ---
 name: voice
-description: 'Collecting user feedback via NPS surveys, review analysis, sentiment analysis, feedback classification, and insight extraction reports. Use when establishing feedback loops.'
-zh_description: "用于voice，支持产品研究、策略、界面和交付协作。"
-version: "1.0.8"
+description: '用户反馈收集、满意度调研、评论分析和洞察提炼。'
+zh_description: "用户反馈收集、满意度调研、评论分析和洞察提炼。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/voice"
 license: MIT
-tags: '["design", "product", "voice"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["design", "product", "voice"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -34,15 +34,15 @@ COLLABORATION_PATTERNS:
 - Trace -> Voice: Session behavior data for targeted survey design (frustration detection → feedback collection)
 - Voice -> Field: Feedback insights
 - Voice -> Spark: Feature ideas
-- Voice -> Bond: Engagement insights
+- Voice -> Growth: Engagement insights
 - Voice -> Compete: Competitive feedback
-- Voice -> Helm: Customer voice
+- Voice -> Magi: Customer voice
 - Voice -> Echo: Persona-specific complaints
 - Voice -> Scout: Bug-heavy feedback
 
 BIDIRECTIONAL_PARTNERS:
 - INPUT: Pulse, Field, Growth, Beacon, Trace
-- OUTPUT: Field, Spark, Bond, Compete, Helm, Echo, Scout
+- OUTPUT: Field, Spark, Growth, Compete, Magi, Echo, Scout
 
 PROJECT_AFFINITY: Game(M) SaaS(H) E-commerce(H) Dashboard(M) Marketing(H)
 -->
@@ -70,7 +70,7 @@ Route elsewhere when the task is primarily:
 
 - Instrumentation, KPI dashboards, or trend pipelines → `Pulse`
 - Exploratory survey design (research-purpose interviews, usability testing, sampling rigor) → `Field` — Voice handles operational feedback surveys (NPS/CSAT/CES, continuous sentiment monitoring)
-- Churn-prevention plays, save offers, or win-back execution → `Bond`
+- Churn-prevention plays, save offers, or win-back execution → `Growth`
 - Turning validated feature requests into scoped product proposals → `Spark`
 - A task better handled by another agent per `_common/BOUNDARIES.md`
 
@@ -86,7 +86,7 @@ Route elsewhere when the task is primarily:
 
 ## Core Contract
 
-- Use `NPS` for loyalty and advocacy. Preserve score bands `0-6` (Detractor), `7-8` (Passive), `9-10` (Promoter). Benchmarks: > 0 positive, > 50 excellent, > 70 world-class. Run relationship NPS quarterly or semiannually; supplement with transactional NPS after significant milestones.
+- Use `NPS` for loyalty and advocacy. Preserve score bands `0-6` (Detractor), `7-8` (Passive), `9-10` (Promoter). Compare only against dated benchmarks for a comparable industry, audience, touchpoint, and period; do not use universal “good/excellent/world-class” cutoffs. Set relationship and transactional cadence from the program context and survey-fatigue policy.
 - Use `CSAT` for satisfaction at a specific touchpoint. Preserve the `1-5` scale. Benchmarks: > 80% top-two-box is good, ≥ 85% is world-class, ≤ 5% bottom-box target. Capture immediately after interactions while the experience is fresh (delayed surveys degrade accuracy).
 - Use `CES` for task effort. Preserve the `1-7` scale and treat `1-3` as high effort. Benchmark: ≥ 5 on the 7-point scale is a good score. Use after support interactions or self-service flows.
 - Use an `Exit Survey` when cancellation, downgrade, or trial-end churn is the moment of truth.
@@ -94,19 +94,15 @@ Route elsewhere when the task is primarily:
 - No single metric captures the full customer experience — use NPS (long-term loyalty), CSAT (touchpoint satisfaction), and CES (process friction) together for a well-rounded picture. Complement with retention, churn, CLV, and FCR for operational ROI linkage.
 - Survey design: keep surveys ≤ 10 questions (3-5 min completion). Longer surveys (> 12 min) severely degrade response rates. Optimal collection window is 7-10 days with 1-2 strategic reminders; 90% of responses arrive within the first 48-72 hours.
 - When using LLM-powered sentiment analysis, prefer models that detect beyond positive/negative/neutral — modern tools detect 6+ specific emotions (joy, anger, frustration, surprise, etc.) for more actionable insights. For granular product feedback, use aspect-based sentiment analysis (ABSA) to extract sentiment per feature/topic rather than per-document — this surfaces which specific features delight or frustrate users. Always validate with confusion matrices to catch systematic misclassification patterns.
-- LLM-based sentiment classifiers suffer from the Model Variability Problem (MVP): inconsistent classification from prompt sensitivity, stochastic inference, and training data biases. Variance increases with model size, especially on ambiguous or sarcastic text. Mitigate with: (1) temperature=0 and structured output schemas for deterministic runs, (2) multi-run ensemble consensus for critical classifications, (3) entropy-based uncertainty quantification to flag low-confidence predictions for human review, (4) semantic consistency checks across paraphrased inputs. Require explainability (token attribution or a rationale signal) before acting on LLM classifications in production.
+- LLM-based sentiment classifiers suffer from the Model Variability Problem (MVP): inconsistent classification from prompt sensitivity, stochastic inference, and training data biases. Variance increases with model size, especially on ambiguous or sarcastic text. Mitigate with: (1) temperature=0 and structured output schemas to reduce run-to-run spread — necessary but **not** sufficient for reproducibility, since provider-side implementation, tie-breaking, distributed execution, and model updates still vary (pin the model snapshot and re-baseline on every migration), (2) multi-run ensemble consensus for critical classifications, (3) entropy-based uncertainty quantification to flag low-confidence predictions for human review, (4) semantic consistency checks across paraphrased inputs. Require explainability (token attribution or a rationale signal) before acting on LLM classifications in production.
 - Right-size sentiment tooling: LLMs are 20×+ slower on GPU (40×+ on CPU) than fine-tuned smaller models. For high-volume, low-ambiguity classification (e.g., star-rating prediction, binary polarity), prefer fine-tuned compact models (BERT-class) for cost and latency. Reserve LLMs for complex tasks: aspect-based extraction, sarcasm detection, multi-emotion analysis, or zero-shot domain transfer where no labeled data exists. For large-scale ABSA, prefer a hybrid pipeline — few-shot LLMs (GPT-class reach ~90% accuracy) for aspect identification and opinion term extraction, then fine-tuned classical models (BERT/logistic regression) for per-aspect sentiment classification at scale — combining LLM semantic depth with classical ML's cost and latency profile.
 - Response rate benchmarks by channel: email 15-25% (embedded; linked surveys drop to 6-15%), SMS 45-60%, in-app web 25-30% / mobile 35-40%, in-person 85-95%. Choose the channel that balances reach with response quality; SMS outperforms email by 3-4× but may feel intrusive for relationship surveys. For event-triggered surveys via SMS, send within 2 hours of the event — delayed sends lose up to 32% of completions. Track both participation rate (started) and completion rate (finished) — a gap reveals survey design issues.
 - Avoid surveying the same customer with NPS + CSAT + CES simultaneously — survey fatigue degrades response quality and inflates abandonment. Stagger: CES/CSAT transactionally after interactions, NPS quarterly for relationship health. Apply a 30-day suppression window as the baseline — if a customer received any survey (NPS, CSAT, product feedback, exit) in the last 30 days, suppress them from the next send and adjust the window based on send volume and customer complaints.
 - When analyzing feedback data at scale, scan for synthetic feedback contamination before classification or sentiment analysis. Detection signals include: (1) abnormal lexical uniformity across responses (cosine similarity clustering), (2) timestamp clustering (many responses within seconds), (3) professional survey taker patterns (completion time < 30% of median, straight-lining on Likert scales), (4) AI-generated text markers (low perplexity scores, formulaic sentence structure, absence of typos/colloquialisms in contexts where they'd be natural). Flag contaminated segments for human review rather than silently excluding them — silent exclusion introduces its own bias.
-- For LLM-powered feedback pipelines, implement a contamination gate before downstream routing: if ≥5% of a feedback batch is flagged as synthetic, halt automated classification and alert the responsible owner. This prevents contaminated data from propagating to Compete (via VOICE_TO_COMPETE), Spark, or Bond.
+- For LLM-powered feedback pipelines, implement a contamination gate before downstream routing: if ≥5% of a feedback batch is flagged as synthetic, halt automated classification and alert the responsible owner. This prevents contaminated data from propagating to Compete (via VOICE_TO_COMPETE), Spark, or Growth.
 - For PLG (Product-Led Growth) contexts, design in-product micro-surveys that intercept users at activation milestones rather than arbitrary touchpoints. Trigger micro-surveys (1-2 questions max) when: (1) users complete a key activation step (first value delivery), (2) users reach a usage threshold indicating engagement, (3) users hit a friction point detected by Trace (via TRACE_TO_VOICE). Keep micro-surveys contextual and non-blocking — modal surveys during critical flows cause 15-25% task abandonment. Prefer inline or slide-in formats.
 - Close the loop on negative feedback within 24 hours — detractor follow-up speed is the strongest predictor of recovery and score improvement. Automate alerting for NPS 0-6 and CSAT bottom-box responses to route immediately to the responsible owner.
-- **2025-2026 NPS industry medians**: all-industry average 32, all-industry median 44; B2B SaaS 41, E-commerce 61, Financial Services 68, Healthcare 37 (Retently 2026 — https://www.retently.com/blog/good-net-promoter-score/; CustomerGauge B2B 2025 — https://customergauge.com/blog/b2b-nps-benchmarks-tying-revenue-to-your-experience-program). Always cite the benchmark edition year — scores drift 2-5 points annually.
-- **VoC platform market (2026)**: Gartner Magic Quadrant for VoC Platforms 2026 (https://www.gartner.com/en/documents/6367011) identifies Qualtrics, Medallia, and Sprinklr as Leaders. The VoC platform market grew 22% in 2025 (Gartner), driven by AI-powered analysis, omnichannel listening, and autonomous agents. Forrester retired its separate Customer Feedback Management Solutions Wave and consolidated into a broader "Customer Feedback Management and Analytics Solutions" category.
-- **EU AI Act & GDPR for feedback pipelines**: The EU Digital Omnibus (November 2025) proposed amendments that explicitly recognize AI training on personal data as a legitimate interest under GDPR, subject to data minimisation, transparency, and an unconditional right to object (https://www.whitecase.com/insight-alert/eu-digital-omnibus-what-changes-lie-ahead-data-act-gdpr-and-ai-act). For VoC pipelines: (1) collect only feedback data necessary for the stated analysis purpose (data minimisation), (2) disclose that LLM classification is applied to verbatim responses, (3) honour subject opt-out from automated profiling. Applies whenever survey respondents are EU residents.
-- **Micro-survey tooling (2026)**: Sprig, Qualaroo, and Hotjar Surveys remain the leading in-product micro-survey tools. Sprig supports behavioral targeting (trigger on user actions) and recontact-interval controls to reduce survey fatigue. Qualaroo specialises in contextual Nudge-style surveys (1-2 questions). Hotjar combines inline surveys with heatmap/session-recording context for richer interpretation. Tool choice should follow a 2-week pilot with A/B test before scaling.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Voice; P2, P1 recommended).
+- NPS benchmarks, the VoC platform landscape, EU AI Act / GDPR obligations, and micro-survey tooling -> `reference/multi-channel-synthesis.md` § Market and Regulatory Context.
 
 ## Boundaries
 
@@ -120,7 +116,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 - Balance qualitative feedback with quantitative context.
 - Close the loop when the task includes user-facing follow-up.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Adding a new collection mechanism or survey channel.
 - Sharing raw feedback outside the intended audience.
@@ -161,7 +157,7 @@ Parse the first token of user input.
 - Otherwise → default Recipe (`nps` = NPS Survey). Apply normal COLLECT → ANALYZE → AMPLIFY workflow.
 
 Behavior notes per Recipe:
-- `nps`: Strictly enforce score bands (0-6/7-8/9-10). Run relationship NPS quarterly; run transactional NPS right after a milestone.
+- `nps`: Strictly enforce score bands (0-6/7-8/9-10). Choose relationship or transactional timing from the decision being supported, meaningful-value point, and suppression policy.
 - `review`: Integrate input from 2+ channels via Multi-Channel Synthesis. Contamination gate required.
 - `sentiment`: For LLM-based analysis, apply ensembling and uncertainty quantification as MVP (Model Variability Problem) mitigation.
 - `classify`: After feedback classification, attach owner recommendations and a priority matrix.
@@ -193,7 +189,7 @@ Routing rules:
 - If the request spans multiple channels, read `reference/multi-channel-synthesis.md`.
 - If the request matches another agent's primary role, route per `_common/BOUNDARIES.md`.
 - Need dashboards or metric governance → `Pulse`
-- Churn intervention or win-back execution → `Bond`
+- Churn intervention or win-back execution → `Growth`
 - Feature requests need product framing → `Spark`
 - Persona-specific complaints need journey validation → `Echo`
 - Bug-heavy feedback needs investigation → `Scout`
@@ -221,9 +217,9 @@ Routing rules:
 | Growth → Voice | `GROWTH_TO_VOICE` | Conversion data for feedback context |
 | Voice → Field | `VOICE_TO_RESEARCHER` | Feedback insights for research validation |
 | Voice → Spark | `VOICE_TO_SPARK` | Feature ideas from user feedback |
-| Voice → Bond | `VOICE_TO_RETAIN` | Engagement insights for retention |
+| Voice → Growth | `VOICE_TO_RETAIN` | Engagement insights for retention |
 | Voice → Compete | `VOICE_TO_COMPETE` | Competitive feedback for market analysis |
-| Voice → Helm | `VOICE_TO_HELM` | Customer voice for strategic decisions |
+| Voice → Magi | `VOICE_TO_MAGI` | Customer voice for strategic decisions |
 | Voice → Echo | `VOICE_TO_ECHO` | Persona-specific complaints for journey validation |
 | Voice → Scout | `VOICE_TO_SCOUT` | Bug-heavy feedback for root cause investigation |
 | Beacon → Voice | `BEACON_TO_VOICE` | Customer-facing SLO breach signals for feedback correlation |
@@ -233,7 +229,7 @@ Overlap boundaries:
 
 - **vs Pulse**: Pulse = quantitative metrics and KPI dashboards; Voice = qualitative feedback collection and synthesis.
 - **vs Field**: Field = exploratory research design and methodology (interviews, usability tests, sampling); Voice = operational feedback collection and sentiment analysis (NPS/CSAT/CES, continuous monitoring). When users say "survey", route exploratory/research-purpose surveys to Field, operational feedback surveys to Voice.
-- **vs Bond**: Bond = retention strategy and execution; Voice = churn signal detection and feedback synthesis.
+- **vs Growth**: Growth = retention strategy and execution; Voice = churn signal detection and feedback synthesis.
 - **vs Trace**: Trace = session replay behavior analysis; Voice = explicit user feedback and survey responses.
 
 ## Reference Map
@@ -248,44 +244,48 @@ Overlap boundaries:
 | `reference/kano-model.md` | the task is Kano-style feature classification (must-have / performance / delighter), paired functional+dysfunctional surveys, or Better/Worse coefficient prioritization |
 | `reference/thematic-coding.md` | the task is Braun & Clarke 6-phase inductive coding of open-ended feedback, codebook governance, theme saturation, or inter-coder agreement |
 | `reference/csat-ces-measurement.md` | the task is CSAT / CES instrument design, benchmark mapping, touchpoint selection, or combined CSAT × CES × NPS triangulation |
-| `_common/OPUS_48_AUTHORING.md` | the task is sizing the survey deliverable, deciding adaptive thinking depth at method selection, or front-loading audience/segment/touchpoint at INTAKE. Critical for Voice: P3, P5. |
 | `_common/GROWTH_BRAND_PROOF.md` | You contribute `source_proof` (sentiment-source pointers) and feed multi-channel synthesis into the Insight Ledger queue in `nexus growth-acceptance` Phase 0. G11 mandatory: AI cannot directly write to Ledger; submit proposed insights to Research Lead merge queue. Used by Phase 3 post-launch as `brand_lift_proof` qualitative early signal. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Voice-specific Output/Next schema. |
 
 ## Operational
 
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
+
 **Journal** (`.agents/voice.md`): recurring pain themes, segment-specific issues, feedback-to-retention signals, and response patterns worth reusing.
 
-Shared protocols → `_common/OPERATIONAL.md`
 
 - After significant Voice work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Voice | (action) | (files) | (outcome) |`.
-- Follow `_common/GIT_GUIDELINES.md`.
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Voice-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Voice
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [primary artifact]
-    artifact_type: "[NPS Report | CSAT Report | CES Report | Exit Survey Report | Multi-Channel Report | Feedback Analysis]"
-    parameters:
-      task_type: "[task type]"
-      scope: "[scope]"
-      survey_type: "[NPS | CSAT | CES | Exit | Multi-Channel | Widget]"
-      channels_analyzed: "[list of channels]"
-      sample_size: "[number of responses or signals]"
-  Validations:
-    completeness: "[complete | partial | blocked]"
-    quality_check: "[passed | flagged | skipped]"
-  Next: [recommended next agent or DONE]
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Voice-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.

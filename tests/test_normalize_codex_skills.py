@@ -86,6 +86,37 @@ class NormalizeCodexSkillsTests(unittest.TestCase):
             self.assertIn("name: competitors-analysis", yaml_text)
             self.assertIn("context: fork", yaml_text)
 
+    def test_preserves_yaml_flow_collection_types(self):
+        module = load_module()
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir) / "skills"
+            skill = root / "hermes-agent"
+            skill.mkdir(parents=True)
+            skill_md = skill / "SKILL.md"
+            skill_md.write_text(
+                textwrap.dedent(
+                    """\
+                    ---
+                    name: hermes-agent
+                    description: Hermes Agent.
+                    platforms: [linux, macos, windows]
+                    compatibility: {shell: zsh, runtime: node}
+                    ---
+
+                    # Hermes Agent
+                    """
+                ),
+                encoding="utf-8",
+            )
+
+            summary = module.normalize_codex_skill_tree(root)
+
+            self.assertEqual(0, summary["normalized_count"])
+            normalized = skill_md.read_text(encoding="utf-8")
+            self.assertIn("platforms: [linux, macos, windows]", normalized)
+            self.assertIn("compatibility: {shell: zsh, runtime: node}", normalized)
+
 
 if __name__ == "__main__":
     unittest.main()

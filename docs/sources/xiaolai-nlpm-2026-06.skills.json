@@ -1,7 +1,8 @@
 {
+  "schema_version": 2,
   "video": {
     "url": "https://nlpm.com/",
-    "checked_at": "2026-07-06",
+    "checked_at": "2026-09-07",
     "note": "Curated from xiaolai/nlpm after reviewing the website, why page, README, LICENSE, author docs, rules, scoring, and testing materials. Imported as an original repository skill that captures the durable audit method rather than mirroring the full upstream command/plugin product."
   },
   "official_references": [
@@ -49,10 +50,146 @@
         "path": "README.md",
         "ref": "main",
         "sync_mode": "monitor",
-        "last_checked_at": "2026-07-06",
-        "last_synced_at": "2026-07-06",
-        "last_synced_commit": "ad3722a695146b90aea9e1e5ff9bc1490a5f38a2"
-      }
+        "last_checked_at": "2026-09-07",
+        "last_synced_at": "2026-09-07",
+        "last_synced_commit": "eb6b088f0218f82a34000f356dd094a242d50a5c",
+        "path_commit": "5959cde46b0c79129dd791e3e0639adb0bdf7222"
+      },
+      "kind": "overlay",
+      "sync_mode": "monitor",
+      "origins": [
+        {
+          "repo": "xiaolai/nlpm",
+          "path": "README.md",
+          "license": "ISC",
+          "sync_mode": "monitor",
+          "artifacts": [
+            {
+              "source": "README.md",
+              "target": "skills/ai-workflow/nlpm-audit/SKILL.md"
+            }
+          ],
+          "tracking": {
+            "channel": "default_branch",
+            "ref": "main",
+            "resolved_commit": "eb6b088f0218f82a34000f356dd094a242d50a5c",
+            "path_commit": "5959cde46b0c79129dd791e3e0639adb0bdf7222",
+            "content_sha256": "0f4df860e8ab1b47d45b439b49b1fb595cf258bf3b5216a5e1a6d78426cb23a8",
+            "last_checked_at": "2026-09-07",
+            "last_synced_at": "2026-09-07",
+            "license_checkpoint": {
+              "path": "LICENSE",
+              "blob_sha": "554937c222c6dd2db191634da77b5486a4a0410b",
+              "content_sha256": "87b3f4064cb76d1c7cc8c39546d7d62790b76372f37cfb9de1bb828a5f652b51",
+              "spdx": "ISC",
+              "resolved_commit": "eb6b088f0218f82a34000f356dd094a242d50a5c",
+              "api_spdx": "ISC"
+            }
+          }
+        },
+        {
+          "repo": "local-repo/curation",
+          "path": "skills/ai-workflow/nlpm-audit",
+          "license": null,
+          "sync_mode": "local-only",
+          "artifacts": [
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/audit-rules.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/audit-rules.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/ci-and-maintenance.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/ci-and-maintenance.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/command-recipes.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/command-recipes.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/scoring-rubric.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/scoring-rubric.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/references/security-patterns.md",
+              "target": "skills/ai-workflow/nlpm-audit/references/security-patterns.md",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py",
+              "target": "skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py",
+              "type": "file"
+            },
+            {
+              "source": "skills/ai-workflow/nlpm-audit/EXTENDED.md",
+              "target": "skills/ai-workflow/nlpm-audit/EXTENDED.md",
+              "type": "file"
+            }
+          ],
+          "tracking": {
+            "channel": "local",
+            "ref": "local",
+            "resolved_commit": null,
+            "path_commit": null,
+            "content_sha256": null,
+            "last_checked_at": "2026-08-20",
+            "last_synced_at": "2026-08-20"
+          }
+        }
+      ],
+      "managed_files": [
+        {
+          "path": "skills/ai-workflow/nlpm-audit/SKILL.md",
+          "sha256": "0f4df860e8ab1b47d45b439b49b1fb595cf258bf3b5216a5e1a6d78426cb23a8",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/audit-rules.md",
+          "sha256": "617e7027a19862ff1fd1774022c242dff1f280e91eba24cc90c86029deded1fb",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/ci-and-maintenance.md",
+          "sha256": "1db27fcc9c7d97296b7796f4ad0a28865c9a1cb2f378078997538e8d91f15f4d",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/command-recipes.md",
+          "sha256": "51aeba20f8747cbd4b47ae60059d4325c0c30eafc962ea06427fd8c54083de0e",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/scoring-rubric.md",
+          "sha256": "c0d1012434b5a70b3fc8a52e2decc37b563c1809afdde7b5a0a51a6ce4080b1a",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/references/security-patterns.md",
+          "sha256": "e2b5eca8c8c767e868990261241b6dffb718b86c67495b39cdb3b69949c08cc7",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py",
+          "sha256": "0600d88a50b1430008894961f7833f2cc6332b14fbf5180c4a83bf8f3d54ec92",
+          "owner": "nlpm-audit",
+          "mode": "100644"
+        },
+        {
+          "path": "skills/ai-workflow/nlpm-audit/EXTENDED.md",
+          "owner": "nlpm-audit",
+          "sha256": "ea780027b05dd4784312b872daa8dfc8579095b6d23720800c808daa5159f5ff",
+          "mode": "100644"
+        }
+      ]
     }
   ],
   "verification_attempts": [
@@ -76,6 +213,90 @@
       "target": "https://github.com/xiaolai/nlpm/compare/3bee76dc34cf...ad3722a695146b90aea9e1e5ff9bc1490a5f38a2",
       "result": "success",
       "evidence": "Reviewed 487 upstream commits since the previous sync point. Most changes were auditor reports, dashboards, exemplars, and product automation; updated local nlpm-audit only for durable method changes visible in README: multi-tool overlays, manifest-vs-disk emphasis, eight commands, NL-TDD, 50-rule rubric, exemplar citations, and marketplace install caveat."
+    },
+    {
+      "date": "2026-07-27",
+      "method": "manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/ad3722a695146b90aea9e1e5ff9bc1490a5f38a2...c23a2735266a59c1c648c24ebeb6d964d2539826",
+      "result": "no-local-change-needed",
+      "evidence": "Reviewed 392 upstream commits and the focused README/rules diff. Changes were generated audits, dashboards, tracking data, exemplar citations, and automation configuration; no durable install, scoring, CI, security, compatibility, or reusable audit-method change required updating the curated nlpm-audit skill."
+    },
+    {
+      "date": "2026-07-27",
+      "method": "manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/c23a2735266a59c1c648c24ebeb6d964d2539826...41ce701962986f23ca79b45e64a1005a0bd3b3f4",
+      "result": "no-local-change-needed",
+      "evidence": "Reviewed the only upstream commit and changed file. It added one generated auditor event-log row and did not change README, install behavior, rules, scoring, CI, security, compatibility, or reusable audit method."
+    },
+    {
+      "date": "2026-08-10",
+      "method": "manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/41ce701962986f23ca79b45e64a1005a0bd3b3f4...06e14047e59a8446275dc1b2f082127fc3bc29de",
+      "result": "success",
+      "evidence": "Reviewed 262 upstream commits. Ignored generated tracking, dashboard, case-study, and product-automation churn; absorbed durable scoring calibration for mention-versus-use and fenced examples, deterministic registry-based vocabulary gates with advisory LLM clustering, changed-artifact PR scoring, and current Codex convention compatibility."
+    },
+    {
+      "date": "2026-08-17",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/a9f24093c69c42a607e6a3d1948240b89b6b63d9...06e14047e59a8446275dc1b2f082127fc3bc29de",
+      "result": "upstream-rollback-no-local-change",
+      "evidence": "GitHub reported current main a9f24093c69c42a607e6a3d1948240b89b6b63d9 as an ancestor 1379 commits behind the reviewed checkpoint. Preserved the newer local curated guidance and checkpoint instead of treating the older README body as an update."
+    },
+    {
+      "date": "2026-08-17",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/06e14047e59a8446275dc1b2f082127fc3bc29de...da65a5d19a08868ff86ae9c47c49e33e7742c302",
+      "result": "success",
+      "evidence": "Reviewed 144 commits after upstream main recovered and advanced during this maintenance run. Absorbed contract-aware manifest-vs-disk classification, definition-backed vague-term calibration, and release-gate coverage plus client-mirror parity checks; skipped issue-lane accounting, dashboards, telemetry, and generated audit artifacts."
+    },
+    {
+      "date": "2026-08-18",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/da65a5d19a08868ff86ae9c47c49e33e7742c302...d4ca2d45618334dc86c79a09ab1b2bbe2c47e1d7",
+      "result": "no-local-change-needed",
+      "evidence": "Reviewed 24 upstream commits and all eight changed paths. The range contains generated tracking, discovery, dashboard, report, feedback, disagreement, and case-study data only; README, installation, scoring, CI, security, compatibility, and reusable audit-method contracts did not change."
+    },
+    {
+      "date": "2026-08-20",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "https://github.com/xiaolai/nlpm/compare/d4ca2d45618334dc86c79a09ab1b2bbe2c47e1d7...12bfa770adafab0669705ab00f444a7dcd19cf1b",
+      "result": "no-local-change-needed",
+      "evidence": "The monitored upstream README is byte-identical across this range. Retained the intentionally independent portable nlpm-audit overlay and advanced the reviewed ISC checkpoint."
+    },
+    {
+      "date": "2026-08-24",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "xiaolai/nlpm@38defa93f1a7ac85cbf971a62f9fbf1b372aaa61",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
+    },
+    {
+      "date": "2026-08-31",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "xiaolai/nlpm@3c85790b2aaafded91db0d166ba6bd125e9f115e",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
+    },
+    {
+      "date": "2026-08-31",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "xiaolai/nlpm@92e64eebd178aaf9892dde3c078afdbe3d3140ca",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
+    },
+    {
+      "date": "2026-09-06",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "xiaolai/nlpm@dffbb03c449fa70bf0cfd2c16ff13055130d794c",
+      "result": "success",
+      "evidence": "Explicit reviewer checkpoint recorded after curating durable method, compatibility, security, CI, and validation changes."
+    },
+    {
+      "date": "2026-09-07",
+      "method": "commit-aware-manual-monitor-review",
+      "target": "xiaolai/nlpm@eb6b088f0218f82a34000f356dd094a242d50a5c",
+      "result": "success",
+      "evidence": "Reviewed 10 commits after dffbb03c449fa70bf0cfd2c16ff13055130d794c. Changes are tracking logs, a daily report, and dashboard data; the managed README blob is unchanged, so no local skill text changed."
     }
   ]
 }

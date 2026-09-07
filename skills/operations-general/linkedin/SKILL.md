@@ -2,14 +2,14 @@
 name: linkedin
 description: 'General-purpose LinkedIn automation – fetch profiles, search people and companies, send messages, manage connections, create posts, and more. Use when the user wants to interact with LinkedIn.'
 zh_description: "通过 Linked API 搜索领英资料、管理连接、消息与内容发布。"
-version: "1.0.0"
+version: "1.0.2"
 author: vprudnikoff
 source: github:Linked-API/linkedin-skills
 source_url: "https://github.com/Linked-API/linkedin-skills/tree/edd0bdbbb25776e9288186b88969b29175531995/linkedin"
 license: MIT
 tags: '[linkedin, automation, social-media, outreach, cli]'
 created_at: "2026-07-10"
-updated_at: "2026-07-10"
+updated_at: "2026-09-06"
 quality: 5
 complexity: intermediate
 ---
@@ -61,59 +61,13 @@ When using this skill, run every `linkedin ...` example below with the
 
 ## Output Format
 
-Success:
-```json
-{"success": true, "data": {"name": "John Doe", "headline": "Engineer"}}
-```
-
-Error:
-```json
-{"success": false, "error": {"type": "personNotFound", "message": "Person not found"}}
-```
-
-Exit code 0 means the API call succeeded – always check the `success` field for the action outcome. Non-zero exit codes indicate infrastructure errors:
-
-| Exit Code | Meaning |
-|-----------|---------|
-| 0 | Success (check `success` field – action may have returned an error like "person not found") |
-| 1 | General/unexpected error |
-| 2 | Missing or invalid tokens |
-| 3 | Subscription/plan required |
-| 4 | LinkedIn account issue |
-| 5 | Invalid arguments |
-| 6 | Rate limited |
-| 7 | Network error |
-| 8 | Workflow timeout (workflowId returned for recovery) |
+Read [the detailed procedure and examples](EXTENDED.md#section-4) when working on this part of the task.
 
 ## Commands
 
 ### Fetch a Person Profile
 
-```bash
-linkedin person fetch <url> [flags] --json -q
-```
-
-Optional flags to include additional data:
-- `--experience` – work history
-- `--education` – education history
-- `--skills` – skills list
-- `--languages` – languages
-- `--posts` – recent posts (with `--posts-limit N`, `--posts-since TIMESTAMP`)
-- `--comments` – recent comments (with `--comments-limit N`, `--comments-since TIMESTAMP`)
-- `--reactions` – recent reactions (with `--reactions-limit N`, `--reactions-since TIMESTAMP`)
-
-Only request additional data when needed – each flag increases execution time.
-
-```bash
-# Basic profile
-linkedin person fetch https://www.linkedin.com/in/username --json -q
-
-# With experience and education
-linkedin person fetch https://www.linkedin.com/in/username --experience --education --json -q
-
-# With last 5 posts
-linkedin person fetch https://www.linkedin.com/in/username --posts --posts-limit 5 --json -q
-```
+Read [the detailed procedure and examples](EXTENDED.md#section-3) when working on this part of the task.
 
 ### Search People
 
@@ -141,43 +95,7 @@ linkedin person search --current-companies "Google" --position "Engineer" --limi
 
 ### Fetch a Company
 
-```bash
-linkedin company fetch <url> [flags] --json -q
-```
-
-Optional flags:
-- `--employees` – include employees
-- `--dms` – include decision makers
-- `--posts` – include company posts
-
-Employee filters (require `--employees`):
-
-| Flag | Description |
-|------|-------------|
-| `--employees-limit` | Max employees to retrieve |
-| `--employees-first-name` | Filter by first name |
-| `--employees-last-name` | Filter by last name |
-| `--employees-position` | Filter by position |
-| `--employees-locations` | Comma-separated locations |
-| `--employees-industries` | Comma-separated industries |
-| `--employees-schools` | Comma-separated school names |
-
-| Flag | Description |
-|------|-------------|
-| `--dms-limit` | Max decision makers to retrieve (requires `--dms`) |
-| `--posts-limit` | Max posts to retrieve (requires `--posts`) |
-| `--posts-since` | Posts since ISO timestamp (requires `--posts`) |
-
-```bash
-# Basic company info
-linkedin company fetch https://www.linkedin.com/company/name --json -q
-
-# With employees filtered by position
-linkedin company fetch https://www.linkedin.com/company/name --employees --employees-position "Engineer" --json -q
-
-# With decision makers and posts
-linkedin company fetch https://www.linkedin.com/company/name --dms --posts --posts-limit 10 --json -q
-```
+Read [the detailed procedure and examples](EXTENDED.md#section-1) when working on this part of the task.
 
 ### Search Companies
 
@@ -394,7 +312,18 @@ linkedin stats performance --json -q
 
 # API usage for a date range
 linkedin stats usage --start 2024-01-01T00:00:00Z --end 2024-01-31T00:00:00Z --json -q
+
+# Who viewed your profile
+linkedin stats viewers --limit 50 --json -q
+
+# Only views since a moment
+linkedin stats viewers --since 2026-08-01T00:00:00Z --json -q
 ```
+
+Each viewer is either `identified` — carrying `name`, `publicUrl` and `urn` (a member URN, `null`
+when LinkedIn does not expose it) — or `anonymous`, carrying only the `description` LinkedIn showed
+and a `searchUrl` you can pass to `linkedin person search --url` to look for them. Viewers come
+newest first, and `viewedAt` is an estimate derived from the relative age LinkedIn displays.
 
 ### Sales Navigator
 
@@ -433,33 +362,7 @@ linkedin navigator person search --years-of-experience "moreThanTen" --position 
 
 #### Fetch company
 
-```bash
-linkedin navigator company fetch <hashed-url> [flags] --json -q
-```
-
-Optional flags:
-- `--employees` – include employees
-- `--dms` – include decision makers
-
-Employee filters (require `--employees`):
-
-| Flag | Description |
-|------|-------------|
-| `--employees-limit` | Max employees to retrieve |
-| `--employees-first-name` | Filter by first name |
-| `--employees-last-name` | Filter by last name |
-| `--employees-positions` | Comma-separated positions |
-| `--employees-locations` | Comma-separated locations |
-| `--employees-industries` | Comma-separated industries |
-| `--employees-schools` | Comma-separated school names |
-| `--employees-years-of-experience` | Comma-separated experience ranges |
-| `--dms-limit` | Max decision makers to retrieve (requires `--dms`) |
-
-```bash
-linkedin navigator company fetch https://www.linkedin.com/sales/company/97ural --employees --dms --json -q
-linkedin navigator company fetch https://www.linkedin.com/sales/company/97ural \
-  --employees --employees-positions "Engineer,Designer" --employees-locations "Europe" --json -q
-```
+Read [the detailed procedure and examples](EXTENDED.md#section-2) when working on this part of the task.
 
 #### Search companies
 
@@ -535,6 +438,42 @@ linkedin reset                                   # Remove active account
 linkedin reset --all                             # Remove all accounts
 ```
 
+## Important Behavior
+
+- **Sequential execution.** All operations for an account run one at a time. Multiple requests queue up.
+- **Not instant.** A real browser navigates LinkedIn – expect 30 seconds to several minutes per operation.
+- **Timestamps in UTC.** All dates and times are in UTC.
+- **Single quotes for text arguments.** Use single quotes around message text, post text, and comments to avoid shell interpretation issues with special characters.
+- **Action limits.** Per-account limits are configurable on the platform. A `limitExceeded` error means the limit was reached.
+- **URL normalization.** All LinkedIn URLs in responses are normalized to `https://www.linkedin.com/...` format without trailing slashes.
+- **Null fields.** Fields that are unavailable are returned as `null` or `[]`, not omitted.
+<!-- LOCAL-QUALITY-SUPPLEMENT:START -->
+## Usage Notes
+
+This supplement is maintained by the repository sync pipeline. It keeps the
+imported upstream skill usable inside this curated collection when the upstream
+source is intentionally concise.
+
+## Common Patterns
+
+```text
+1. Confirm that the user's task matches the skill trigger.
+2. Read the relevant project files or user-provided context before acting.
+3. Choose the smallest reversible action that advances the task.
+4. Run the verification command or manual check that proves the result.
+5. Report the outcome, evidence, and any remaining risk.
+```
+
+## Boundaries
+
+- Prefer the upstream workflow for Linkedin; this section only adds local quality
+  guardrails.
+- Do not invent project facts when required files, vaults, services, or tools are
+  unavailable.
+- Stop and ask for clarification when the next action could overwrite user work,
+  expose private data, or change production state.
+<!-- LOCAL-QUALITY-SUPPLEMENT:END -->
+
 <!-- LOCAL-CURATION-SUPPLEMENT:START -->
 ## Boundaries and Safe Authorization
 
@@ -554,13 +493,3 @@ linkedin reset --all                             # Remove all accounts
 - If the requested authority, target set, or effect is ambiguous, pause before the first
   write and ask the user to clarify it.
 <!-- LOCAL-CURATION-SUPPLEMENT:END -->
-
-## Important Behavior
-
-- **Sequential execution.** All operations for an account run one at a time. Multiple requests queue up.
-- **Not instant.** A real browser navigates LinkedIn – expect 30 seconds to several minutes per operation.
-- **Timestamps in UTC.** All dates and times are in UTC.
-- **Single quotes for text arguments.** Use single quotes around message text, post text, and comments to avoid shell interpretation issues with special characters.
-- **Action limits.** Per-account limits are configurable on the platform. A `limitExceeded` error means the limit was reached.
-- **URL normalization.** All LinkedIn URLs in responses are normalized to `https://www.linkedin.com/...` format without trailing slashes.
-- **Null fields.** Fields that are unavailable are returned as `null` or `[]`, not omitted.

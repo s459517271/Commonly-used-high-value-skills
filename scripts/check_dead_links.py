@@ -81,6 +81,7 @@ IGNORE_URL_SNIPPETS = (
     "hermes-agent.nousresearch.com/docs/developer-guide/",
     "ifrs-sustainability-standards-vector/ifrs-s2-climate-related-disclosures/",
     "x.com/user/status/",
+    "linkedin.com/posts/username_activity-",
 )
 # Treat these codes as ok; some servers block HEAD or require cookies.
 ACCEPTED_CODES = {200, 201, 202, 203, 204, 301, 302, 303, 307, 308, 400, 401, 403, 405, 429}
@@ -108,6 +109,11 @@ PLACEHOLDER_PATH_PATTERNS = (
     "/article/123",
     "/pdf/ID",
 )
+
+
+def normalize_url(candidate: str) -> str:
+    """Remove prose and Markdown emphasis punctuation after a bare URL."""
+    return candidate.rstrip(".,;:!?*_~")
 
 
 def iter_markdown_files() -> list[Path]:
@@ -148,7 +154,7 @@ def collect_urls() -> dict[str, set[str]]:
     for md_file in iter_markdown_files():
         text = md_file.read_text(encoding="utf-8", errors="replace")
         for m in URL_RE.finditer(text):
-            url = m.group(0).rstrip(".,;:)")
+            url = normalize_url(m.group(0))
             if should_ignore_url(url):
                 continue
             urls.setdefault(url, set()).add(str(md_file.relative_to(REPO_ROOT)))
@@ -172,6 +178,11 @@ def curl_probe(url: str, method: str, timeout: int) -> tuple[int | None, str]:
         "skills-deadlink-bot/1.0",
         "--max-time",
         str(timeout),
+        "--retry",
+        "2",
+        "--retry-all-errors",
+        "--retry-delay",
+        "1",
         "--request",
         method,
         url,

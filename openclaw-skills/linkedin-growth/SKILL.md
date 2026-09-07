@@ -1,15 +1,15 @@
 ---
 name: linkedin-growth
-description: 'Two-phase LinkedIn lead pipeline driven by linkedin-cli. Phase A imports leads from a search URL or filters, qualifies them against a configurable ICP via sub-agent, and stores them in a local SQLite database with round-robin assignment across one or more LinkedIn accounts. Phase B runs on a schedule per account — sends connection invites up to a daily limit and withdraws stale pending requests. Use when the user wants to grow their network from LinkedIn searches, manage outgoing invites at scale, ask status questions (counts, conversion, pending older than N days, last imports), pause/resume an account, change ICP, or install the recurring scheduler.'
+description: 'Manage LinkedIn lead qualification and follow-up workflows through linkedin-cli and local lead records; outreach requires existing user authorization.'
 zh_description: "构建领英线索导入、筛选、分配、邀请与待处理请求维护流水线。"
-version: "1.0.0"
+version: "1.0.3"
 author: vprudnikoff
 source: github:Linked-API/linkedin-skills
 source_url: "https://github.com/Linked-API/linkedin-skills/tree/edd0bdbbb25776e9288186b88969b29175531995/linkedin-growth"
 license: MIT
 tags: '[linkedin, lead-generation, growth, outreach, automation]'
 created_at: "2026-07-10"
-updated_at: "2026-07-10"
+updated_at: "2026-09-07"
 quality: 5
 complexity: advanced
 ---
@@ -22,51 +22,6 @@ This skill turns a Sales Navigator (or regular) search into a managed pipeline:
 All state lives in a local SQLite database. Every LinkedIn action goes through
 `linkedin-cli` (the `linkedin` binary). You orchestrate via the Node scripts
 under `scripts/`.
-
-<!-- LOCAL-CURATION-SUPPLEMENT:START -->
-## Trigger / When to Use
-
-Use this skill when the user explicitly asks to:
-
-- import and qualify leads from a LinkedIn or Sales Navigator search;
-- maintain an approved, account-specific connection pipeline;
-- inspect lead, invite, conversion, batch, or account status;
-- configure the ICP, invite pace, active hours, retry policy, or stale-request policy; or
-- install, pause, resume, inspect, or remove the recurring scheduler.
-
-Do not activate the pipeline merely because a conversation mentions growth, recruiting,
-sales, or LinkedIn. A user must deliberately request the pipeline or one of its operations.
-
-## Core Capabilities
-
-- Prepare candidate batches, qualify them against a user-provided ICP, deduplicate them,
-  and commit the approved set to a local SQLite database.
-- Assign leads across authorized accounts while tracking invite attempts, connection state,
-  retries, and terminal outcomes.
-- Pace invitations within per-account hours, intervals, and daily limits, and inspect or
-  withdraw stale pending requests according to the approved policy.
-- Answer status questions from the local database and export the user's pipeline data.
-- Manage account mappings, pipeline settings, scheduler installation, and diagnostics.
-
-## Common Patterns
-
-**Import after explicit scoping:** collect the search URL or filters, list name, ICP, target
-count, and authorized account set; run `prepare`; present qualification results; then commit
-only the intended batch.
-
-**Inspect before changing:** run the relevant status or settings command first, explain the
-current value and proposed effect, then apply only the requested configuration change.
-
-**Start small:** validate a new account and campaign with a small batch and conservative
-limits before enabling recurring operation. Pause the affected account if LinkedIn reports
-an account warning, authentication problem, or rate limit.
-
-```bash
-node scripts/status.mjs --json
-node scripts/settings.mjs get icp_definition
-node scripts/account.mjs list
-```
-<!-- LOCAL-CURATION-SUPPLEMENT:END -->
 
 ## Vocabulary
 
@@ -83,77 +38,7 @@ node scripts/account.mjs list
 
 ## First-run setup
 
-**1. Verify Node ≥ 20:** `node --version`.
-If missing — print the OS-specific install command and stop:
-- macOS: `brew install node`
-- Linux: `apt install nodejs` / `dnf install nodejs` / etc., or nvm
-- Windows: `winget install OpenJS.NodeJS.LTS`
-
-**2. From this skill's directory, run:**
-
-```bash
-node scripts/doctor.mjs --json
-```
-
-If the output is `Cannot find module 'better-sqlite3'`:
-
-```bash
-npm install --omit=dev
-```
-
-Then re-run doctor. (Alternative: `node scripts/doctor.mjs --fix` does this automatically.)
-
-**3. For each FAIL in the doctor output, apply the remediation:**
-
-| Check name | Remediation |
-|------------|-------------|
-| `linkedin-cli` | `npm install -g @linkedapi/linkedin-cli` |
-| `cli-accounts` | Ask the user for their Linked API Token and Identification Token (link: https://app.linkedapi.io), then `linkedin setup --linked-api-token=<a> --identification-token=<b>`. Repeat per LinkedIn account they want connected. |
-| `db` | Auto-fixed by any script on first invocation, or explicitly: `node scripts/db.mjs init` |
-| `db-accounts` | Run `linkedin account list` (prints a table; the `*` marks the active account) and register each one here: `node scripts/account.mjs add --name <short-name> --cli-account "<exact name from linkedin account list>"`. The short name is what every other command takes; the cli-account is the mapping. |
-| `scheduler` | Should pass automatically. On headless Linux without systemd-user, doctor falls back to `cron`. |
-
-**4. Re-run `node scripts/doctor.mjs --json` until `"ok": true`.**
-
-**5. Set the connection pace — ask once, apply to all accounts.** Ask the user a single
-question (not per account): "By default each account sends at most one connection request
-every 15 minutes — keep 15, or change it?". Apply their answer to every account via
-`--min-invite-interval <N>` (either pass it on each `account.mjs add`, or
-`account.mjs update --name <acct> --min-invite-interval <N>` for all afterward). Default is
-15. Let the user know they can fine-tune it per account later just by asking (e.g. "make
-kiril one every 30 minutes") — it is a per-account setting, this question just sets a common
-value for everyone.
-
-**6. Set the retry policy.** Ask the user: "If someone doesn't accept the request, should
-we try connecting from another account? (no / a specific number of accounts / all of them)".
-Then:
-
-```bash
-node scripts/settings.mjs set max_connect_attempts 1      # no retry (default)
-node scripts/settings.mjs set max_connect_attempts 2      # original + 1 more
-node scripts/settings.mjs set max_connect_attempts all    # every account
-```
-
-**7. Enable the background scheduler (only after at least one account is registered):**
-
-```bash
-node scripts/schedule.mjs install
-```
-
-This installs one platform-native background task that keeps the pipeline running
-on its own. When talking to the user, describe it as "the pipeline now runs in the
-background and sends invites during each account's active hours" — do not expose the
-scheduler's internal wake-up frequency (the tick) or other plumbing. (The invite *pace*
-from step 5 — "one connect every N minutes" — is a real user-facing setting and fine to
-discuss; it's the tick's 5-minute heartbeat that stays hidden.) See the **Phase B** and
-**Scheduler** sections below for how it actually works.
-
-**8. Tell the user the next step and offer to do it.** Setup alone sends nothing — the
-pipeline is empty until leads are imported. End onboarding with a concrete call to action,
-e.g.: "You're all set. To start, give me a LinkedIn or Sales Navigator search URL (or
-search filters) and a name for the list, and I'll import and qualify your first batch of
-leads." If the user provides one, proceed straight into **Phase A** below. Do not end the
-setup conversation without this prompt.
+Read [the detailed procedure and examples](EXTENDED.md#section-1) when working on this part of the task.
 
 ## Phase A — Importing leads (interactive)
 
@@ -164,8 +49,9 @@ Triggered by the user via wording like:
 
 ### Step 1 — Prepare
 
-**Always ask the user for a limit first.** Before running `prepare`, ask "how many of the
-found leads should I take?" — the user gives a number, or says "max" for the maximum. The
+**Resolve the requested limit before preparing an import.** Reuse an explicit limit
+from the current task; if none is supplied, ask how many leads to import. The user
+can give a number or choose "max". The
 maximum depends on the search type (these are the Linked API / LinkedIn caps):
 - Sales Navigator (`nv`): **2500**
 - standard search (`st`): **1000**
@@ -339,9 +225,9 @@ Result classification:
   so it never hangs. Never burns a whole queue on a weekly-limit burst.
 - anything else → `status='error'`, `error_type`/`error_message` stored
 
-`linkedin-cli` exit code 4 (account issue) or 6 (rate limit) aborts the whole
-run immediately — no further leads touched. Other non-zero exits mark the lead
-as error and continue.
+`linkedin-cli` exit code 3 (subscription or plan required), 4 (account issue), or 6 (rate limit)
+aborts the whole run immediately — no further leads are touched. Other non-zero exits mark the
+lead as error and continue.
 
 ### Pending outcomes (with cross-account retry)
 
@@ -534,28 +420,29 @@ To inspect what the background runs are doing, read `<data_dir>/logs/<account>-<
 - `import.mjs prepare` creates a new batch every time — call once per intended import.
 - `import.mjs commit` refuses to run twice on the same batch.
 - `schedule.mjs install` overwrites any existing installation of the same service id.
+<!-- LOCAL-QUALITY-SUPPLEMENT:START -->
+## Usage Notes
 
-<!-- LOCAL-CURATION-SUPPLEMENT:START -->
-## Boundaries and Safe Authorization
+This supplement is maintained by the repository sync pipeline. It keeps the
+imported upstream skill usable inside this curated collection when the upstream
+source is intentionally concise.
 
-- Operate only accounts the user owns or is explicitly authorized to manage. Never use
-  borrowed credentials, impersonate another person, or conceal which account performs an
-  action.
-- Searching and local qualification do not authorize contact. Installing or enabling the
-  scheduler, sending invitations, withdrawing requests, changing account mappings, and
-  altering campaign limits are external-impact actions; perform them only after the user
-  has requested or approved their concrete scope.
-- Before the first live run, confirm the account set, lead source, ICP, approximate volume,
-  active hours, invite interval, daily cap, retry count, and stale-withdrawal policy. Reconfirm
-  when a later change materially expands the audience, volume, accounts, or schedule.
-- Keep outreach targeted and proportionate. Do not support spam, harassment, deceptive
-  identities, discriminatory targeting, or attempts to evade LinkedIn enforcement.
-- Never bypass rate limits, CAPTCHAs, access controls, or account warnings. On exit code 4
-  or 6, or any platform warning, pause the affected automation and report the condition.
-- Treat profile and lead data as personal data: collect only what the approved use requires,
-  protect database files and exports, never commit credentials or lead data, and delete
-  temporary exports when they are no longer needed.
-- The user remains responsible for complying with LinkedIn terms, privacy and anti-spam law,
-  and their organization's policies. If authorization or legal scope is unclear, stop before
-  any write or scheduled action and ask for clarification.
-<!-- LOCAL-CURATION-SUPPLEMENT:END -->
+## Common Patterns
+
+```text
+1. Confirm that the user's task matches the skill trigger.
+2. Read the relevant project files or user-provided context before acting.
+3. Choose the smallest reversible action that advances the task.
+4. Run the verification command or manual check that proves the result.
+5. Report the outcome, evidence, and any remaining risk.
+```
+
+## Boundaries
+
+- Prefer the upstream workflow for Linkedin Growth; this section only adds local quality
+  guardrails.
+- Do not invent project facts when required files, vaults, services, or tools are
+  unavailable.
+- Stop and ask for clarification when the next action could overwrite user work,
+  expose private data, or change production state.
+<!-- LOCAL-QUALITY-SUPPLEMENT:END -->

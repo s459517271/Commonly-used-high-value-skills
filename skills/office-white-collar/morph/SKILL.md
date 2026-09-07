@@ -1,15 +1,15 @@
 ---
 name: morph
-description: 'Converting document formats (Markdown/Word/Excel/PDF/HTML). Converts specs from Scribe and reports from Harvest into distributable formats; generates reusable conversion scripts. Use when converting documents, building accessibility-compliant PDFs, or creating Pandoc/LibreOffice pipelines.'
-zh_description: "用于morph，支持文档、表格、演示和资料整理。"
-version: "1.0.7"
+description: 'Converting document formats (Markdown/Word/Excel/PDF/HTML) and generating reusable conversion scripts. Use for distributable specs, accessibility-compliant PDFs, or Pandoc/LibreOffice pipelines.'
+zh_description: "文档格式转换、分发版生成和可复用转换脚本。"
+version: "1.0.3"
 author: "seaworld008"
 source: "github:simota/agent-skills"
-source_url: "https://github.com/simota/agent-skills/tree/main/morph"
+source_url: "https://github.com/simota/agent-skills/tree/6502f44cfcd8f456951a7bfdce14d0ed76d724ef/.archive/morph"
 license: MIT
 tags: '["morph", "office"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+created_at: "2026-07-27"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -24,18 +24,17 @@ CAPABILITIES_SUMMARY:
 
 COLLABORATION_PATTERNS:
 - Scribe -> Morph: Specification documents for format conversion
-- Harvest -> Morph: Reports for stakeholder-ready output
+- Launch -> Morph: PR/release reports and release notes for stakeholder-ready output
 - Quill -> Morph: Documentation for archive/publication formats
 - Canvas -> Morph: Diagrams for PDF/PNG/SVG export
-- Launch -> Morph: Release notes for distributable formatting
 - Sherpa -> Morph: Progress reports for stakeholder delivery
 - Morph -> Guardian: Converted deliverables for PR/release attachment
 - Morph -> Lore: Validated conversion patterns as reusable knowledge
 - Morph -> Gear: CI/CD pipeline conversion workflow setup
 
 BIDIRECTIONAL_PARTNERS:
-- INPUT: Scribe, Harvest, Quill
-- OUTPUT: Scribe, Harvest, Quill
+- INPUT: Scribe, Launch, Quill
+- OUTPUT: Scribe, Launch, Quill
 
 PROJECT_AFFINITY: Game(L) SaaS(M) E-commerce(M) Dashboard(M) Marketing(H)
 -->
@@ -48,7 +47,7 @@ Change the format without changing the document’s intent.
 Use Morph when the task requires any of the following:
 
 - Convert documents between Markdown, Word, PDF, HTML, Excel, Mermaid, or draw.io outputs.
-- Prepare stakeholder-ready deliverables from Scribe, Harvest, Quill, Sherpa, Canvas, or Launch artifacts.
+- Prepare stakeholder-ready deliverables from Scribe, Launch, Quill, Sherpa, or Canvas artifacts.
 - Apply templates, metadata, TOC, or print styling during conversion.
 - Produce accessible, archival, signed, encrypted, merged, or watermarked PDF deliverables.
 - Build a reusable conversion script, batch pipeline, or QA workflow.
@@ -64,16 +63,18 @@ Route elsewhere when the task is primarily:
 ## Core Contract
 
 - Preserve structure, content, links, and intent first — conversion is lossy by nature (Pandoc's AST is less expressive than most source formats); acknowledge and document loss, never hide it.
-- Treat PDF as output-first for structural conversion. Use PDF input only for PDF operations such as merge, split, watermark, signature, metadata, archival, or encryption. PDF stores text as absolute-positioned character streams — extracting semantic structure from PDF is unreliable.
-- Verify output quality before delivery using the quality score weights: Structure 30%, Visual 25%, Content 30%, Metadata 15%. Minimum passing grade: B (80+).
+- Treat PDF as output-first for structural conversion. Use PDF input only for PDF operations such as merge, split, watermark, signature, metadata, archival, or encryption — see Boundaries → Never for why PDF is unreliable as a structural source.
+- Verify output quality before delivery — see Critical Decision Rules → Quality score weights. Minimum passing grade: B (80+).
 - Document unsupported features and expected loss before conversion when fidelity risk exists — especially complex LaTeX equations, custom fonts, and nested tables which are top failure points. Note: Pandoc 3.9 (released February 4, 2026) adds row spans and column spans to its AST and grid tables via new functions `tableWithSpans`/`toTableComponentsWithSpans`, so merged cells are no longer a blanket failure point — but verify the target writer supports them (e.g., DOCX and HTML do; pipe tables do not). Source: https://github.com/jgm/pandoc/discussions/11439
 - Prefer reusable commands, configs, templates, and scripts over one-off manual work.
 - For accessibility-critical outputs, target both PDF/UA and WCAG compliance; see **Critical Decision Rules → Accessibility minimums** for version-specific targets and regulatory deadlines.
 - Use Pandoc Lua filters over JSON filters for AST manipulation — they run in Pandoc's embedded interpreter with no external dependencies and are significantly faster.
 - Use Pandoc defaults files (YAML or JSON) to centralize conversion options — they capture `--from`, `--to`, filters, metadata, and variables in a single reusable config, reducing command-line drift across environments.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Morph; P2, P1 recommended).
 
 ## Boundaries
+
+`_common/` references require the separately installed upstream ecosystem. Use them only when available and selected for this task; otherwise follow host instructions and the domain workflow. Persist journals only when requested by the user or project.
+
 
 ### Always
 
@@ -88,7 +89,7 @@ Route elsewhere when the task is primarily:
 - Use `--from` and `--to` flags explicitly in Pandoc commands to avoid format misdetection.
 - Document expected fidelity loss upfront — Pandoc's intermediate AST is less expressive than many source formats, so lossy conversion is the norm, not the exception.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Unsupported features in the target format.
 - Multiple viable template options.
@@ -156,7 +157,7 @@ Route elsewhere when the task is primarily:
 | Direction         | Token               | Use it when                                                        |
 | ----------------- | ------------------- | ------------------------------------------------------------------ |
 | Scribe -> Morph   | `SCRIBE_TO_MORPH`   | Specs, PRDs, SRS, HLD/LLD, or test docs need distribution formats. |
-| Harvest -> Morph  | `HARVEST_TO_MORPH`  | Reports need management-ready PDF or Word output.                  |
+| Launch -> Morph  | `LAUNCH_TO_MORPH`   | Reports need management-ready PDF or Word output.                  |
 | Canvas -> Morph   | `CANVAS_TO_MORPH`   | Diagrams need export to PDF, PNG, or SVG.                          |
 | Quill -> Morph    | `QUILL_TO_MORPH`    | Documentation needs archive or publication format conversion.      |
 | Sherpa -> Morph   | `SHERPA_TO_MORPH`   | Progress or execution reports need stakeholder-ready output.       |
@@ -214,7 +215,7 @@ Routing rules:
 
 ## Collaboration
 
-**Receives:** Scribe (specification documents), Harvest (reports), Quill (documentation), Canvas (diagrams for export), Launch (release notes), Sherpa (progress reports)
+**Receives:** Scribe (specification documents), Launch (PR/release reports and release notes), Quill (documentation), Canvas (diagrams for export), Sherpa (progress reports)
 **Sends:** Guardian (converted deliverables for PR/release), Lore (validated conversion patterns), Gear (CI/CD conversion pipeline configs)
 
 ### Overlap Boundaries
@@ -225,23 +226,24 @@ Routing rules:
 
 ## Reference Map
 
-- [conversion-matrix.md](~/.claude/skills/morph/reference/conversion-matrix.md): Read this when choosing the best tool for a format pair.
-- [pandoc-recipes.md](~/.claude/skills/morph/reference/pandoc-recipes.md): Read this when you need concrete Pandoc commands, templates, filters, or batch scripts.
-- [conversion-workflow.md](~/.claude/skills/morph/reference/conversion-workflow.md): Read this when preparing source analysis, config, conversion log, or delivery templates.
-- [quality-assurance.md](~/.claude/skills/morph/reference/quality-assurance.md): Read this when scoring fidelity, grading output, or setting up regression checks.
-- [japanese-typography.md](~/.claude/skills/morph/reference/japanese-typography.md): Read this when Japanese layout, kinsoku, fonts, encoding, ruby, or vertical writing matters.
-- [accessibility-guide.md](~/.claude/skills/morph/reference/accessibility-guide.md): Read this when PDF/UA or WCAG compliance is required.
-- [advanced-features.md](~/.claude/skills/morph/reference/advanced-features.md): Read this when you need PDF/A, signature, watermark, merge, split, metadata, encryption, or compression.
-- [template-library.md](~/.claude/skills/morph/reference/template-library.md): Read this when selecting or applying LaTeX, CSS, or Word reference templates.
-- [conversion-calibration.md](~/.claude/skills/morph/reference/conversion-calibration.md): Read this when recording output quality or updating tool/template heuristics.
-- [batch-conversion-pipeline.md](~/.claude/skills/morph/reference/batch-conversion-pipeline.md): Read this when designing Pandoc batch pipelines, Lua filters, Makefile/CI orchestration, or parallel conversion.
-- [epub-generation.md](~/.claude/skills/morph/reference/epub-generation.md): Read this when generating EPUB 3 / KF8 / MOBI outputs, configuring reflowable vs fixed-layout, or applying EPUB Accessibility 1.1.
-- [latex-typesetting.md](~/.claude/skills/morph/reference/latex-typesetting.md): Read this when typesetting academic or book-length output via LaTeX / XeLaTeX / Typst with BibTeX/biblatex citations.
-- [format-conversion-anti-patterns.md](~/.claude/skills/morph/reference/format-conversion-anti-patterns.md): Read this when tool selection, feature loss, or PDF misconceptions are the main risk.
-- [pdf-accessibility-anti-patterns.md](~/.claude/skills/morph/reference/pdf-accessibility-anti-patterns.md): Read this when tagged PDF, alt text, reading order, or assistive-tech safety is the main risk.
-- [css-print-anti-patterns.md](~/.claude/skills/morph/reference/css-print-anti-patterns.md): Read this when printed HTML/CSS layout is unstable.
-- [conversion-pipeline-anti-patterns.md](~/.claude/skills/morph/reference/conversion-pipeline-anti-patterns.md): Read this when CI/CD, Docker, artifact handling, or batch conversion governance is the problem.
-- [\_common/OPUS_48_AUTHORING.md](~/.claude/skills/_common/OPUS_48_AUTHORING.md): Read this when sizing the conversion spec, deciding adaptive thinking depth at filter/accessibility selection, or front-loading source/target/accessibility/CI at SCAN. Critical for Morph: P3, P5.
+- [conversion-matrix.md](reference/conversion-matrix.md): Read this when choosing the best tool for a format pair.
+- [pandoc-recipes.md](reference/pandoc-recipes.md): Read this when you need concrete Pandoc commands, templates, filters, or batch scripts.
+- [conversion-workflow.md](reference/conversion-workflow.md): Read this when preparing source analysis, config, conversion log, or delivery templates.
+- [quality-assurance.md](reference/quality-assurance.md): Read this when scoring fidelity, grading output, or setting up regression checks.
+- [japanese-typography.md](reference/japanese-typography.md): Read this when Japanese layout, kinsoku, fonts, encoding, ruby, or vertical writing matters.
+- [accessibility-guide.md](reference/accessibility-guide.md): Read this when PDF/UA or WCAG compliance is required.
+- [advanced-features.md](reference/advanced-features.md): Read this when you need PDF/A, signature, watermark, merge, split, metadata, encryption, or compression.
+- [template-library.md](reference/template-library.md): Read this when selecting or applying LaTeX, CSS, or Word reference templates.
+- [conversion-calibration.md](reference/conversion-calibration.md): Read this when recording output quality or updating tool/template heuristics.
+- [batch-conversion-pipeline.md](reference/batch-conversion-pipeline.md): Read this when designing Pandoc batch pipelines, Lua filters, Makefile/CI orchestration, or parallel conversion.
+- [epub-generation.md](reference/epub-generation.md): Read this when generating EPUB 3 / KF8 / MOBI outputs, configuring reflowable vs fixed-layout, or applying EPUB Accessibility 1.1.
+- [latex-typesetting.md](reference/latex-typesetting.md): Read this when typesetting academic or book-length output via LaTeX / XeLaTeX / Typst with BibTeX/biblatex citations.
+- [format-conversion-anti-patterns.md](reference/format-conversion-anti-patterns.md): Read this when tool selection, feature loss, or PDF misconceptions are the main risk.
+- [pdf-accessibility-anti-patterns.md](reference/pdf-accessibility-anti-patterns.md): Read this when tagged PDF, alt text, reading order, or assistive-tech safety is the main risk.
+- [css-print-anti-patterns.md](reference/css-print-anti-patterns.md): Read this when printed HTML/CSS layout is unstable.
+- [conversion-pipeline-anti-patterns.md](reference/conversion-pipeline-anti-patterns.md): Read this when CI/CD, Docker, artifact handling, or batch conversion governance is the problem.
+- [autorun-schema.md](reference/autorun-schema.md): Read this when you are emitting the AUTORUN `_STEP_COMPLETE` block — Morph-specific Output/Next schema.
+- [\_common/OPUS_5_AUTHORING.md](../_common/OPUS_5_AUTHORING.md): Read this when sizing the conversion spec, deciding adaptive thinking depth at filter/accessibility selection, or front-loading source/target/accessibility/CI at SCAN. Critical for Morph: P3, P5.
 
 ## Operational
 
@@ -251,25 +253,8 @@ Routing rules:
 
 ## AUTORUN Support
 
-When Morph receives `_AGENT_CONTEXT`, parse `task_type`, `description`, and `Constraints`, execute the standard workflow, and return `_STEP_COMPLETE`.
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Morph-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
-### `_STEP_COMPLETE`
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Morph
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [primary artifact]
-    parameters:
-      task_type: "[task type]"
-      scope: "[scope]"
-  Validations:
-    completeness: "[complete | partial | blocked]"
-    quality_check: "[passed | flagged | skipped]"
-  Next: [recommended next agent or DONE]
-  Reason: [Why this next step]
-```
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, do not call other agents directly. Return all work via `## NEXUS_HANDOFF`.

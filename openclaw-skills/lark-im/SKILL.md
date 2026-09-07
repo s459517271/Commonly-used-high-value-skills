@@ -1,15 +1,15 @@
 ---
 name: lark-im
-description: '飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（Interactive Card）、监听卡片按钮回调（card.action.trigger）。当用户需要发消息、查看或搜索聊天记录、下载聊天中的文件、查看群成员、搜索群、创建群聊或话题群、管理标记数据、管理 Feed 置顶（添加/移除/查询置顶会话）、管理标签数据、处理卡片回调时使用。'
+description: '飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（Interactive Card）、监听卡片按钮回调（card.action.trigger）。当用户需要发消息、查看或搜索聊天记录、下载聊天中的文件、查看群成员、搜索群、创建群聊或话题群、管理标记数据、管理 Feed 置顶（添加/移除/查询置顶会话）、管理标签数据、处理卡片回调时使用。'
 zh_description: "用于发送、读取和处理飞书即时消息与群聊交互。"
-version: "1.0.7"
+version: "1.0.14"
 author: larksuite
 source: "github:larksuite/cli"
 source_url: "https://github.com/larksuite/cli/tree/main/skills/lark-im"
 license: MIT
 tags: '[feishu, lark, lark-cli, messaging, chat]'
 created_at: "2026-05-19"
-updated_at: "2026-07-20"
+updated_at: "2026-09-06"
 quality: 4
 complexity: intermediate
 metadata:
@@ -66,7 +66,7 @@ The four message-pulling shortcuts (`+messages-mget`, `+chat-messages-list`, `+m
 
 ### Opt-in resource auto-download (`--download-resources`)
 
-`+chat-messages-list`, `+messages-mget`, and `+threads-messages-list` accept `--download-resources` (**off by default** — no `resources` block and no extra requests when omitted). When set, eligible message resources (image/file/audio/video/media + post-embedded; **stickers excluded**) are downloaded into `./lark-im-resources/` and each message gains a `resources` array of `{message_id, key, type, local_path, size_bytes}`. Downloads are deduped by `(message_id, file_key)`, run with bounded concurrency, and isolate single-resource failures (`error: true` + stderr warning). **Scope:** requires `im:message:readonly` (already declared by the listing commands — no extra scope); works under both user and bot identity. For one-off downloads use [`+messages-resources-download`](references/lark-im-messages-resources-download.md). Full contract: [`references/lark-im-message-enrichment.md`](references/lark-im-message-enrichment.md).
+`+chat-messages-list`, `+messages-mget`, and `+threads-messages-list` accept `--download-resources` to save eligible attachments into `./lark-im-resources/` and add a `resources` array to each message. It is off by default; stickers are not downloadable. A failed attachment is reported on that resource without aborting the message pull. Use [`+messages-resources-download`](references/lark-im-messages-resources-download.md) for one attachment. See [`references/lark-im-message-enrichment.md`](references/lark-im-message-enrichment.md) for the output contract.
 
 ### Card Messages (Interactive)
 
@@ -114,20 +114,22 @@ Shortcut 是对常用操作的高级封装（`lark-cli im +<verb> [flags]`）。
 | Shortcut | 说明 |
 |----------|------|
 | [`+chat-create`](references/lark-im-chat-create.md) | Create a group chat or topic chat; user/bot; --chat-mode group|topic; private/public; invites users/bots; optionally sets bot manager |
-| [`+chat-list`](references/lark-im-chat-list.md) | List chats the current user/bot is a member of; defaults to groups; pass --types=p2p,group to include p2p single chats (user-only); user/bot; supports sorting, pagination, --exclude-muted (user-only) |
+| [`+chat-list`](references/lark-im-chat-list.md) | List chats the current user/bot is a member of; defaults to groups; pass --types=p2p,group to include p2p single chats (user-only); user/bot; supports sorting, auto-pagination, --exclude-muted (user-only) |
 | [`+chat-members-list`](references/lark-im-chat-members-list.md) | List members of a chat; returns separate users[] / bots[] buckets; callable as user or bot; --member-types filters which kinds to return; --page-all pagination; surfaces truncations[] when the server caps a bucket |
-| [`+chat-messages-list`](references/lark-im-chat-messages-list.md) | List messages in a chat or P2P conversation; user/bot; accepts --chat-id or --user-id, resolves P2P chat_id, supports time range/sort/pagination |
-| [`+chat-search`](references/lark-im-chat-search.md) | Search visible group chats by --query keyword and/or --member-ids; user/bot; e.g. look up chat_id by group name; supports type filters, sorting, pagination, and --exclude-muted (user identity only) |
+| [`+chat-messages-list`](references/lark-im-chat-messages-list.md) | List messages in a chat or P2P conversation; user/bot; accepts --chat-id or --user-id, resolves P2P chat_id, supports time range, --order asc/desc sorting, auto-pagination |
+| [`+chat-search`](references/lark-im-chat-search.md) | Search visible group chats by --query keyword and/or --member-ids; user/bot; e.g. look up chat_id by group name; supports type filters, sorting, auto-pagination, and --exclude-muted (user identity only) |
 | [`+chat-update`](references/lark-im-chat-update.md) | Update group chat name or description; user/bot; updates a chat's name or description |
+| [`+message-read-users`](references/lark-im-message-read-status.md) | List users who read one message; user/bot; identity-specific scopes; supports bounded auto-pagination |
 | [`+messages-mget`](references/lark-im-messages-mget.md) | Batch get messages by IDs; user/bot; fetches up to 50 om_ message IDs, formats sender names, expands thread replies |
+| [`+messages-read-status`](references/lark-im-message-read-status.md) | Batch query whether the current user read 1–50 messages; user-only; returns readable items and invalid message IDs |
 | [`+messages-reply`](references/lark-im-messages-reply.md) | Reply to a message (supports thread replies); user/bot; supports text/markdown/post/media replies, reply-in-thread, idempotency key |
-| [`+messages-resources-download`](references/lark-im-messages-resources-download.md) | Download images/files from a message; user/bot; supports automatic chunked download for large files (8MB chunks), auto-detects file extension from Content-Type |
-| [`+messages-search`](references/lark-im-messages-search.md) | Search messages across chats (supports keyword, sender, time range filters) with user identity; user-only; filters by chat/sender/attachment/time, supports auto-pagination via `--page-all` / `--page-limit`, enriches results via batched mget and chats batch_query |
+| [`+messages-resources-download`](references/lark-im-messages-resources-download.md) | Download an image or file attached to a message; user/bot |
+| [`+messages-search`](references/lark-im-messages-search.md) | Search messages across chats (supports keyword, sender, time range filters) with user or bot identity; filters by chat/sender/attachment/time, supports auto-pagination via `--page-all` / `--page-limit`, enriches results via batched mget and chats batch_query |
 | [`+messages-send`](references/lark-im-messages-send.md) | Send a message to a chat or direct message; user/bot; sends to chat-id or user-id with text/markdown/post/media, supports idempotency key |
-| [`+threads-messages-list`](references/lark-im-threads-messages-list.md) | List messages in a thread; user/bot; accepts om_/omt_ input, resolves message IDs to thread_id, supports sort/pagination |
+| [`+threads-messages-list`](references/lark-im-threads-messages-list.md) | List messages in a thread; user/bot; accepts om_/omt_ input, resolves message IDs to thread_id, supports --order asc/desc sorting, auto-pagination |
 | [`+flag-create`](references/lark-im-flag-create.md) | Create a bookmark on a message; user-only; defaults to message-layer flag; use --flag-type feed for feed-layer flag (item_type auto-detected from chat mode) |
 | [`+flag-cancel`](references/lark-im-flag-cancel.md) | Cancel (remove) a bookmark. When no --flag-type is given, best-effort double-cancel: removes message layer and (when chat_type is determinable) feed layer |
-| [`+flag-list`](references/lark-im-flag-list.md) | List bookmarks; user-only; auto-enriches feed-type thread entries with message content; supports `--page-all` auto-pagination |
+| [`+flag-list`](references/lark-im-flag-list.md) | List bookmarks; user-only; auto-enriches feed-type thread entries with message content; `--page-all` is capped by `--page-limit` (default 20, max 1000), and `has_more=true` means the result is incomplete |
 | [`+feed-shortcut-create`](references/lark-im-feed-shortcut-create.md) | Add chats to the user's feed shortcuts; user-only; oc_xxx chat IDs only; batch up to 10 per call; `--head`/`--tail` controls insertion order; partial failures return an `ok:false` ledger |
 | [`+feed-shortcut-remove`](references/lark-im-feed-shortcut-remove.md) | Remove chats from the user's feed shortcuts; user-only; batch up to 10 per call; removing an absent shortcut is idempotent success; real per-item failures return an `ok:false` ledger |
 | [`+feed-shortcut-list`](references/lark-im-feed-shortcut-list.md) | List one page of the user's feed shortcuts; user-only; omit `--page-token` for the first page; default output enriches CHAT entries under `detail`; pass `--no-detail` to skip the extra lookup and `im:chat:read` scope |
@@ -179,10 +181,11 @@ lark-cli im <resource> <method> [flags] # 调用 API
 
 ### messages
 
+  - `read_status` — 批量查询当前用户对消息的已读状态。Identity: `user` only (`user_access_token`); accepts up to 50 message IDs and returns readable items plus invalid message IDs.[Must-read](references/lark-im-message-read-status.md)
   - `delete` — 撤回消息。Identity: supports `user` and `bot`; for `bot` calls, the bot must be in the chat to revoke group messages; to revoke another user's group message, the bot must be the owner, an admin, or the creator; for user P2P recalls, the target user must be within the bot's availability.
   - `forward` — 转发消息。Identity: supports `user` and `bot`.
   - `merge_forward` — 合并转发消息。Identity: `bot` only (`tenant_access_token`).
-  - `read_users` — 查询消息已读信息。Identity: `bot` only (`tenant_access_token`); the bot must be in the chat, and can only query read status for messages it sent within the last 7 days.
+  - `read_users` — 查询消息已读信息。Identity: supports `user` and `bot`; the caller must still be in the chat. A user can query messages they sent within the last 7 days, while a bot can query only messages sent by that bot within the last 7 days.[Must-read](references/lark-im-message-read-status.md)
   - `urgent_app` — 发送应用内加急。Identity: `bot` only (`tenant_access_token`); the bot must be the message sender and must be in the conversation that contains the message.
   - `urgent_phone` — 发送电话加急。Identity: `bot` only (`tenant_access_token`); the bot must be the message sender and must be in the conversation that contains the message.
   - `urgent_sms` — 发送短信加急。Identity: `bot` only (`tenant_access_token`); the bot must be the message sender and must be in the conversation that contains the message.
@@ -200,7 +203,11 @@ lark-cli im <resource> <method> [flags] # 调用 API
 
 ### images
 
-  - `create` — 上传图片。Identity: `bot` only (`tenant_access_token`).
+  - `create` — 上传图片。Identity: supports `user` and `bot`; user identity requires `im:resource` scope on the UAT.
+
+### files
+
+  - `create` — 上传文件。Identity: supports `user` and `bot`; user identity requires `im:resource` scope on the UAT.
 
 ### pins
 
@@ -235,10 +242,13 @@ lark-cli im <resource> <method> [flags] # 调用 API
 | `chat.managers.delete_managers` | `im:chat.managers:write_only` |
 | `chat.moderation.get` | `im:chat.moderation:read` |
 | `chat.moderation.update` | `im:chat:moderation:write_only` |
+| `+messages-read-status` | user: `im:message:readonly` (recommended), `im:message`, or `im:message:get_as_user` |
+| `+message-read-users` | user: `im:message:readonly` (recommended), `im:message`, `im:message:basic`, or `im:message:get_as_user`; bot: `im:message:readonly` |
+| `messages.read_status` | `im:message:readonly` (recommended), `im:message`, or `im:message:get_as_user` |
 | `messages.delete` | `im:message:recall` |
 | `messages.forward` | `im:message` |
 | `messages.merge_forward` | `im:message` |
-| `messages.read_users` | `im:message:readonly` |
+| `messages.read_users` | user: `im:message:readonly` (recommended), `im:message`, `im:message:basic`, or `im:message:get_as_user`; bot: `im:message:readonly` |
 | `messages.urgent_app` | `im:message.urgent` |
 | `messages.urgent_phone` | `im:message.urgent:phone` |
 | `messages.urgent_sms` | `im:message.urgent:sms` |
@@ -248,6 +258,7 @@ lark-cli im <resource> <method> [flags] # 调用 API
 | `reactions.list` | `im:message.reactions:read` |
 | `threads.forward` | `im:message` |
 | `images.create` | `im:resource` |
+| `files.create` | `im:resource` |
 | `pins.create` | `im:message.pins:write_only` |
 | `pins.delete` | `im:message.pins:write_only` |
 | `pins.list` | `im:message.pins:read` |
@@ -282,4 +293,6 @@ source is intentionally concise.
   unavailable.
 - Stop and ask for clarification when the next action could overwrite user work,
   expose private data, or change production state.
+- Treat skill selection as routing, not ceremony: invoke only the narrowest
+  applicable workflow and keep user or repository instructions authoritative.
 <!-- LOCAL-QUALITY-SUPPLEMENT:END -->

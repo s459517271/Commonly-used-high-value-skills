@@ -4,7 +4,7 @@
 
 Search Feishu messages across conversations. This shortcut automatically performs a multi-step workflow: search for message IDs, batch fetch message details, then enrich the results with chat context.
 
-> **User identity only** (`--as user`). Bot identity is not supported.
+By default each result message also carries a `reactions` block (counts + details from `im.reactions.batch_query`) when the server has reactions for it, and `update_time` for messages that were actually edited. With `--page-all`, every page is enriched; pass `--no-reactions` to skip the extra round-trip. See [message enrichment](lark-im-message-enrichment.md) for the full contract.
 
 This skill maps to the shortcut: `lark-cli im +messages-search` (internally calls `POST /open-apis/im/v1/messages/search` + batched `GET /open-apis/im/v1/messages/mget`, then batch-fetches chat context).
 
@@ -78,11 +78,11 @@ lark-cli im +messages-search --query "test" --dry-run
 | `--start <time>` | No | Start time with local timezone offset required (e.g. `2026-03-24T00:00:00+08:00`) |
 | `--end <time>` | No | End time with local timezone offset required (e.g. `2026-03-25T23:59:59+08:00`) |
 | `--page-size <n>` | No | Page size (default 20, range 1-50) |
-| `--page-token <token>` | No | Pagination token for the next page |
+| `--page-token <token>` | No | Starting cursor, normally returned by a previous response |
 | `--page-all` | No | Automatically paginate through all result pages (up to 40 pages) |
 | `--page-limit <n>` | No | Max pages to fetch when auto-pagination is enabled (default 20, max 40). Setting it explicitly also enables auto-pagination |
 | `--format <fmt>` | No | Output format: `json` (default) / `pretty` / `table` / `ndjson` / `csv` |
-| `--as <identity>` | No | Identity type (defaults to and only supports `user`) |
+| `--as <identity>` | No | Identity type: `user` or `bot` |
 | `--dry-run` | No | Print the request only, do not execute it |
 
 ## Core Constraints
@@ -133,6 +133,7 @@ Each message in JSON output contains:
 - Default behavior is still **single-page**.
 - `--page-token` is the manual continuation mechanism when you already have a token from a previous response.
 - `--page-all` enables auto-pagination and uses a default cap of **40 pages**.
+- With both flags, auto-pagination starts at `--page-token` and continues from that cursor.
 - `--page-limit <n>` enables auto-pagination with an explicit cap. If you pass `--page-limit` without `--page-all`, auto-pagination is still enabled.
 - When auto-pagination stops because of the configured page cap, the response still includes the last `has_more` / `page_token` so you can continue manually.
 
@@ -150,11 +151,26 @@ lark-cli im +threads-messages-list --thread <thread_id>
 
 ## Resource Rendering
 
-Search results reuse the same content formatter as other read commands. Image messages are rendered as placeholders such as `[Image: img_xxx]`; resource binaries are **not** downloaded automatically.
+Search results reuse the same content formatter as other read commands. Image messages are rendered as placeholders such as `![Image](img_xxx)`; `folder` messages in results are expanded one level (see [`lark-im-chat-messages-list`](lark-im-chat-messages-list.md#resource-rendering) for the marker/download contract); resource binaries are **not** downloaded automatically.
 
 Use `im +messages-resources-download` if you need to fetch the underlying image or file bytes from a specific message.
 
 ## AI Usage Guidance
+
+### Query boundary for activity review
+
+Use `--query` only for real message keywords. If the user asks for activity review such as "最近一周我和哪些 Bot 有过交互" or "整理我和某人的聊天记录", and the useful constraints are sender type, chat, person, or time range, keep `--query ""` and rely on those filters. Do not put generic instruction words such as "看看", "总结", "交互内容", or "聊天记录" into `--query`; those words often over-constrain message search and hide the relevant messages.
+
+This guidance applies to both user and bot identity. If the user explicitly asks for application/bot identity, run `im +messages-search --as bot`; for named-group history/listing intents where search is not needed, resolving the group with `im +chat-search --as bot` and listing messages with `im +chat-messages-list --as bot --chat-id <chat_id>` is still a good narrower path.
+
+```bash
+# Review recent bot interactions without forcing a keyword
+lark-cli im +messages-search --query "" --sender-type bot --start "<YYYY-MM-DDT00:00:00+08:00>" --end "<YYYY-MM-DDT23:59:59+08:00>" --page-all --format json
+```
+
+Replace the time placeholders at execution time. For example, "最近一周" means computing the start date and end date from the current day before running the command; do not copy date literals from this reference into answers for relative requests.
+
+For activity summaries, validate evidence by message IDs and chat context. The final answer should cite or retain the `message_id`, sender, chat, and create time for each important item. If the row's source data contains concrete `om_...` message IDs or `ou_...` user IDs, treat those IDs as strong recall targets during verification; do not rely only on a high-level keyword match.
 
 ### Resolving chat_id from a chat name
 

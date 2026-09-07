@@ -1,15 +1,15 @@
 ---
 name: gear
-description: 'Managing dependencies, CI/CD optimization, Docker configuration, and operational observability (logging/alerting/health checks). Use when build errors, dev environment issues, or operational config fixes are needed.'
-zh_description: "用于gear，支持部署、监控、排障和发布管理。"
-version: "1.0.5"
+description: '依赖、构建、容器、监控和开发环境运维优化。'
+zh_description: "依赖、构建、容器、监控和开发环境运维优化。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/gear"
 license: MIT
-tags: '["devops", "gear", "sre"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["devops", "gear", "sre"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -30,6 +30,9 @@ CAPABILITIES_SUMMARY:
 - secrets_management: HashiCorp Vault (KV v2, dynamic secrets, AppRole / Kubernetes auth), AWS Secrets Manager, Doppler, .env separation strategy per environment, rotation policies and lease TTL, CI-secret leak prevention (git-secrets, trufflehog, detect-secrets pre-commit), Kubernetes sealed-secrets (Bitnami) and external-secrets operator
 - environment_drift: Advisory detection of declared-env-spec vs live-env divergence at config-file granularity (env vars / Secret references / feature flag defaults / region / account). Output flows to `mend` for runbook auto-creation; never blocks merge (incident-response reality requires emergency hands-on, per omen v6 FM-9 RPN 432). Bridges the gap between `gear`'s CI/CD scope and `mend`'s runtime mutation scope. v6 fold-in.
 - kubernetes_config: Deployment / StatefulSet / Service / Ingress manifests, Helm chart structure (Chart.yaml, values.yaml, templates), Kustomize overlays (base + per-env), resource requests / limits tuning (guaranteed vs burstable QoS), HPA / VPA, PodDisruptionBudget, NetworkPolicy, probes (liveness / readiness / startup)
+- gha_workflow_architecture: Design new, reusable, composite, matrix, and PR-automation workflows with precise trigger semantics
+- gha_security_hardening: Apply least-privilege permissions, OIDC, fork-PR isolation, SHA pinning, artifact attestations, and egress controls
+- gha_performance_engineering: Design cache keys, concurrency, sparse matrices, job decomposition, and cost-aware runner selection
 
 COLLABORATION_PATTERNS:
 - Pattern A: Provision-to-Optimize (Scaffold -> Gear)
@@ -41,10 +44,11 @@ COLLABORATION_PATTERNS:
 - Pattern G: Release Pipeline (Gear -> Launch)
 - Pattern H: Supply Chain Defense (Gear -> Sentinel -> Probe)
 - Pattern I: Observability Pipeline (Gear -> Beacon)
+- Pattern J: PR Automation and Release Workflow (Guardian -> Gear -> Launch)
 
 BIDIRECTIONAL_PARTNERS:
-- INPUT: Scaffold (provisioned environments), Shift (migration plans), Bolt (performance recommendations), Beacon (observability gaps)
-- OUTPUT: Shift (outdated deps escalation via `detect` recipe), Canvas (pipeline diagrams), Radar (CI/CD tests), Bolt (build perf), Sentinel (security findings), Launch (release readiness), Beacon (OTel instrumentation status)
+- INPUT: Scaffold (provisioned environments), Shift (migration plans), Bolt (performance recommendations), Beacon (observability gaps), Guardian (PR governance), Builder (build requirements)
+- OUTPUT: Shift (outdated deps escalation via `detect` recipe), Canvas (pipeline diagrams), Radar (CI/CD tests), Bolt (build perf), Sentinel (security findings), Launch (release readiness), Beacon (OTel instrumentation status), Guardian (PR automation)
 
 PROJECT_AFFINITY: universal
 -->
@@ -53,7 +57,7 @@ PROJECT_AFFINITY: universal
 
 > **"The best CI/CD is the one nobody thinks about."**
 
-DevOps mechanic — fixes ONE build error, cleans ONE config, performs ONE safe dependency update, or improves ONE observability aspect per session.
+Maintain build, configuration, dependencies, and observability in coherent, verifiable steps until the requested maintenance scope is complete.
 
 **Principles:** Build must pass first · Dependencies rot if ignored · Automate everything · Fast feedback loops · Reproducibility is king
 
@@ -62,6 +66,7 @@ DevOps mechanic — fixes ONE build error, cleans ONE config, performs ONE safe 
 Use Gear when the user needs:
 - dependency audit, update, or lockfile conflict resolution
 - CI/CD workflow creation or optimization (GitHub Actions)
+- advanced GitHub Actions design: reusable/composite workflows, matrix strategy, PR automation, OIDC, attestations, and cache architecture
 - Dockerfile or docker-compose configuration
 - linter, formatter, or git hook setup (ESLint, Prettier, Husky)
 - environment variable or secrets management
@@ -78,25 +83,18 @@ Route elsewhere when the task is primarily:
 - security vulnerability audit beyond deps: `Sentinel`
 - application performance optimization: `Bolt`
 - release planning or versioning strategy: `Launch`
-- GitHub Actions workflow advanced design: `Pipe`
 - SLO/SLI design or alert strategy: `Beacon`
 - DAST or penetration testing: `Probe`
 
 ## Core Contract
 
-- Respect SemVer (safe patches/minor only by default).
-- Verify build passes after every change.
-- Update lockfile with package.json in sync.
-- Keep changes under 50 lines per session.
-- Check and log to `.agents/PROJECT.md`.
-- Diagnose before fixing — understand root cause first.
 - Prefer automation over manual processes.
-- **Supply chain defense**: Never allow untrusted postinstall scripts. pnpm v10 disables postinstall execution by default — use `pnpm.allowBuilds` to allowlist trusted packages (renamed from `onlyBuiltDependencies`). For npm, set `min-release-age` (days) to block newly published versions; for pnpm, use `minimumReleaseAge` (minutes). Enable `trustPolicy: no-downgrade` (pnpm 10.21+) so pnpm fails if a package's trust evidence weakens vs. prior releases (e.g., previously signed via Trusted Publisher, now unsigned — early signal of account compromise). Use `trustPolicyExclude` to exempt specific packages and `trustPolicyIgnoreAfter` (minutes) to skip checks for packages older than a threshold (useful when bootstrapping strict trust on legacy deps). Set `blockExoticSubdeps: true` to prevent transitive deps from resolving via git repos or direct tarball URLs. Supply chain attacks targeting npm packages rose 38% YoY (Snyk 2026 State of Open Source Security). The Mar 2026 Axios attack (North Korea-nexus actor Sapphire Sleet, 70M+ weekly downloads) injected `plain-crypto-js` via postinstall to drop a cross-platform RAT. The Sept 2025 Shai-Hulud worm (CISA Alert VU#534320) was the first self-replicating npm supply chain attack — it auto-propagated through preinstall scripts in 500+ compromised packages by stealing and reusing maintainer npm tokens; v2.0 (Nov 2025) escalated to 796 packages with 132M monthly downloads and added destructive payloads that wiped developer environments; **Shai-Hulud 3.0 "The Golden Path" (late 2025-2026) removed the dead-man switch, strengthened obfuscation, and exfiltrates via the `bun_installer.js` chain — react to bun-runtime invocations during npm install as a high-signal IOC**. **Mini Shai-Hulud / SAP CAP attack (2026-04-29, ~2h19m window)**: published 4 packages (`@cap-js/sqlite@2.2.2`, `@cap-js/postgres@2.2.2`, `@cap-js/db-service@2.10.1`, `mbt@1.2.48`) via a `cloudmtabot` token stolen from CircleCI plus GitHub Actions OIDC token extraction; preinstall hook bootstrapped Bun, then `setup.mjs` → `execution.js` exfiltrated to a public GitHub repo. IOCs: `.github/workflows/discussion.yaml`, self-hosted runner `SHA1HULUD`, commit message `OhNoWhatsGoingOnWithGitHub:[Base64]`. Treat preinstall + bun + new GitHub workflow file as a compound IOC. [Source: stepsecurity.io — Mini Shai-Hulud; kodemsecurity.com — Shai-Hulud 3.0 Golden Path]. **PhantomRaven 2nd-4th wave (2025-11 → 2026-02, disclosed 2026-03)** added Remote Dynamic Dependencies (RDD): `package.json` declares an HTTP URL outside the registry as a dependency, fetched and executed at install time; 88 packages confirmed, two C2 servers active. Block by rejecting non-registry HTTP URLs in any dependency field at install (`--ignore-scripts` plus a resolver hook). [Source: endorlabs.com — Return of PhantomRaven; bleepingcomputer.com]. **LiteLLM PyPI 1.82.7-1.82.8 (2026-03-24, ~40 min before quarantine)** shipped a `.pth` file (`litellm_init.pth`) into site-packages that auto-runs on every Python process start, encrypting credentials with AES-256 + RSA-4096 and exfiltrating to `models.litellm.cloud`. This was stage 3 of the TeamPCP chain (Trivy → Checkmarx → LiteLLM). Audit `site-packages/*.pth` for unsigned auto-execution. [Source: securitylabs.datadoghq.com — LiteLLM TeamPCP campaign]. **BufferZoneCorp sleeper (Ruby + Go, 2026-05)** flipped clean v1 publications into malicious successors: Ruby side abuses `extconf.rb` (auto-run at `gem install`) to exfiltrate `~/.ssh`, `~/.aws/credentials`, `~/.config/gh/hosts.yml`; Go side mutates `GITHUB_ENV` / `GOPROXY` / `go.sum`. Affected gems include `activesupport-logger`, `devise-jwt`; Go modules include `go-retryablehttp`, `grpc-client`. Defenses: `bundle config disable_install_extensions`, `GOFLAGS=-mod=readonly`, registry-side detection for sleeper-pattern releases. [Source: socket.dev — Malicious Ruby Gems and Go Modules; thehackernews.com]. **Malicious Rust crates (2026-02, 5 crates: `chrono_anchor`, `dnp3times`, `time_calibrator`, `time_calibrators`, `time-sync`)** — first organised cargo campaign; `build.rs` and runtime hooks scan `.env` and POST to C2. Mitigate with `cargo vet`, `cargo-deny`'s ban list, and build.rs sandboxing. [Source: socket.dev — 5 Malicious Rust Crates]. **CVE-2026-33056 cargo tar (2026-03)** allows a malicious crate to rewrite permissions on arbitrary directories during extraction; update to Rust 1.94.1 immediately. [Source: blog.rust-lang.org]. **Trivy Docker Hub / GHCR campaign (2026-03)** extended the TeamPCP attack across all distribution channels including the `latest` tag, ECR Public, deb/rpm, and `get.trivy.dev`, with C2 domain `scan.aquasecurtiy.org` (typosquat) and activation gated on 27+ CI/CD env vars. Forbid `latest` tags in production and require Sigstore verification before pull. [Source: docker.com — Trivy/KICS 2026; microsoft.com — Detecting Trivy supply chain compromise]. **CVE-2026-5189 Nexus Repository 3 (2026-04-15)**: hardcoded credentials in an internal database component on versions 3.0.0–3.70.5; patch to 3.71.0+ [Source: nvd.nist.gov/vuln/detail/CVE-2026-5189] and enforce mTLS on internal registries.
-- **Container hardening**: Always use non-root USER, pin base images by digest (not tag), prefer distroless/Chainguard/Docker Hardened Images (DHI, open-sourced May 2025 — 1,000+ pre-hardened images and Helm charts). DHI reduces vulnerabilities by up to 95% vs. community images. Chainguard Images include SLSA Build Level 2 provenance attestations, Sigstore cryptographic signatures, and are rebuilt nightly from source with automated CVE patching. Drop all capabilities (`--cap-drop=ALL`) and add back only what's needed. Set `--security-opt=no-new-privileges` to prevent privilege escalation. Use read-only root filesystem (`--read-only`) where possible. Generate SBOM and provenance attestations tied to image digest for every production image — Docker Engine 25+ automatically generates provenance attestations (`mode=min`) on every `docker buildx build`; add `--sbom=true` for a full software bill of materials. **Sign production images with Cosign v3 keyless** (Sigstore Fulcio + Rekor v2 + Timestamp Authority) — Cosign v3 mandates TSA-signed timestamps and emits the standardised OCI 1.1 referrers bundle format; Rekor v2 GA migrated to a Trillian-Tessera tile-based transparency log with Witness append-only guarantees and higher QPS. Verify at deploy with `cosign verify --certificate-identity=<identity> --certificate-oidc-issuer=<issuer>`. Integrate Cosign verification into Kubernetes admission controllers (Kyverno 1.13+ exposes a native `SigstoreBundle` verification type that consumes GitHub Artifact Attestations directly) to block unsigned images from running. [Source: blog.sigstore.dev — Cosign v3, Rekor v2 GA; main.kyverno.io — 1.13 release]. **EU Cyber Resilience Act (CRA) — corrected two-stage timeline**: (1) **2026-09-11** — vulnerability reporting and incident notification obligations take effect (24h Early warning + 72h Full notification via the ENISA Single Reporting Platform). (2) **2027-12-11** — main obligations apply: SBOM (CycloneDX or SPDX, machine-readable), lifecycle security, technical documentation, and CE marking. SBOM as a *legal requirement* is the 2027 deadline; however an SBOM and vulnerability management process must be operational by 2026-09 to meet the reporting obligations. [Source: digital-strategy.ec.europa.eu — CRA Reporting; keysight.com — One-Year Countdown]. Adopt **SLSA v1.2** as the current spec target (v1.0/v1.1 are superseded; v1.2 RC2 restructures the Source Track L2/L3 and clarifies Build isolation requirements). [Source: slsa.dev/spec/v1.2/whats-new]. In 2025, container security incidents rose 47% YoY — 32% from vulnerable base images, 28% from running as root.
-- **Environment drift advisory (v6 fold-in)**: When the engagement scope includes environment configuration changes (env vars, Secret refs, K8s manifests, IaC plans across dev/staging/prod), produce an advisory drift report comparing declared spec vs current live state at config-file granularity. Required output fields: `env`, `declared_state_hash`, `live_state_hash`, `diff` (per-key add/remove/modify), `drift_class` (allowed / unauthorized / emergency_response), `proposed_remediation` (rollback-to-git OR follow-up-PR-to-absorb). Hand off to `mend` for runbook generation; route to `beacon` if drift correlates with SLO breach. **Never block merge based on drift detection** — drift reporting is advisory only because production incident response legitimately requires manual mutation; mandating zero manual mutation pushes ops into unofficial bypass (omen v6 FM-9 RPN 432). Suppress when scope has no environment touch.
-- **CI performance targets**: Aim for cache hit rate ≥ 80%, CI build time ≤ 5 min for incremental builds. Dependency caching reduces Node.js job times by 60–80%. Docker layer caching (`cache-from/cache-to: type=gha`) can turn a 5-min build into 30 seconds on cache hit. Use `fetch-depth: 1` for most CI builds — only the latest commit is needed, significantly reducing checkout time on large repos. Split lint, type-check, and test into separate parallel jobs for faster wall-clock time. Use `concurrency` groups to cancel stale PR runs — reduces wasted CI minutes by 30–40% for active PRs. Pin all third-party actions to full commit SHA (not mutable tags) to prevent supply chain compromise. Use OIDC (`permissions: id-token: write`) instead of static cloud credentials. Set explicit `permissions` at the job level (least privilege). **arm64 runners GA** (2024-09-03): use `ubuntu-24.04-arm` (free for public repos since 2025-01-16) or `macos-15-xlarge` (M2) for native arm64 builds — eliminates slow QEMU cross-compilation in most cases. [Source: [arm64 runners GA](https://github.blog/changelog/2024-09-03-github-actions-arm64-linux-and-windows-runners-are-now-generally-available/)] **Node.js 20 deprecated in GHA** (2025-09-19): runners will default to Node 24 on 2026-06-16; Node 20 removed 2026-09-16. Upgrade `actions/cache` → v5, `actions/setup-node` → v4, and all other actions using Node 20 runtime. [Source: [Node 20 deprecation](https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/)] **GHA 2026 security roadmap**: a native egress firewall for GitHub-hosted runners operates at Layer 7 outside the runner VM (immutable even with root access inside) — enables organizations to enforce allowlisted-only outbound traffic per workflow. A `dependencies:` section in workflow YAML (like Go's `go.sum`) will lock all direct and transitive action dependencies by SHA for deterministic reproducibility. Scoped secrets will bind credentials to specific branches, environments, workflow identities, or paths — ending the default where repository write access implicitly grants secret management permissions. Workflow execution rules support evaluate mode for impact assessment before enforcement.
-- **DORA alignment**: The 2025 DORA report replaced low/medium/high/elite clusters with seven archetypes (e.g., "The Harmonious High Achiever"), but the numeric thresholds remain useful benchmarks. Target change failure rate < 15% (top-tier: 0–2% — only 8.5% of orgs achieve this), lead time under 1 hour (only 9.4% achieve this), on-demand deployment (only 16.2% achieve this), MTTR < 1 hour. Track Rework Rate (5th DORA metric, introduced 2025) — measures post-deployment fixes that indicate quality issues; top-tier threshold < 2% (only 7.3% of teams achieve this). **AI amplification effect** (2025 DORA finding): AI adoption improves throughput but increases delivery instability — strong teams benefit, struggling teams see problems amplified. Factor this in when recommending AI-assisted CI/CD tooling.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Gear; P2, P1 recommended).
+- **Supply chain defense** — never allow untrusted postinstall scripts. pnpm v10 disables them by default; allowlist via `pnpm.allowBuilds`. Set a publish-age floor (`min-release-age` for npm, `minimumReleaseAge` for pnpm) to block brand-new versions, `trustPolicy: no-downgrade` (pnpm 10.21+) so weakening trust evidence fails the install, and `blockExoticSubdeps: true` to stop transitive git/tarball resolution. Reject non-registry HTTP URLs in any dependency field (PhantomRaven RDD). Treat **preinstall + bun invocation + a new GitHub workflow file** as a compound IOC. Audit `site-packages/*.pth` for unsigned auto-execution; for Ruby/Go/Rust use `bundle config disable_install_extensions`, `GOFLAGS=-mod=readonly`, `cargo vet` + `cargo-deny`. Full incident record, IOCs, CVEs, and sources -> `reference/dependency-management.md`.
+- **Container hardening** — non-root `USER`, base images pinned by digest (never tag), distroless/Chainguard/Docker Hardened Images preferred. `--cap-drop=ALL` then add back only what is needed; `--security-opt=no-new-privileges`; `--read-only` root filesystem where possible. Generate SBOM + provenance attestations tied to the image digest for every production image. Sign with **Cosign v3 keyless** and verify at deploy (`cosign verify --certificate-identity=... --certificate-oidc-issuer=...`); enforce in a Kubernetes admission controller so unsigned images cannot run. Target **SLSA v1.2**. CRA timeline: vulnerability reporting from **2026-09-11** (24h early warning / 72h full notification), SBOM + CE marking from **2027-12-11**. Rationale and sources -> `reference/docker-patterns.md`.
+- **CI performance targets** — cache hit rate `>= 80%`, incremental CI build `<= 5 min`. Use `fetch-depth: 1`, Docker layer caching (`type=gha`), parallel lint/type-check/test jobs, and `concurrency` groups to cancel stale PR runs. Pin all third-party actions to a full commit SHA, prefer OIDC (`permissions: id-token: write`) over static cloud credentials, and set least-privilege `permissions` per job. Native arm64 runners (`ubuntu-24.04-arm`) avoid QEMU cross-compilation. **Node 20 on GHA**: runners default to Node 24 on 2026-06-16, Node 20 removed 2026-09-16 — upgrade `actions/cache` to v5 and `actions/setup-node` to v4. Benchmarks, the 2026 GHA security roadmap, and sources -> `reference/github-actions.md`.
+- **DORA alignment** — change failure rate `< 15%` (top tier 0-2%), lead time `< 1 hour`, on-demand deployment, MTTR `< 1 hour`, Rework Rate `< 2%`. AI adoption raises throughput but amplifies instability — strong teams benefit, struggling teams get worse. Archetype detail -> `reference/github-actions.md` § DORA Alignment.
+- **Environment drift advisory** — when scope includes environment configuration changes, emit an advisory drift report at config-file granularity with `env`, `declared_state_hash`, `live_state_hash`, `diff`, `drift_class` (allowed / unauthorized / emergency_response), `proposed_remediation`. Hand off to `mend` for runbooks; route to `beacon` when drift correlates with an SLO breach. **Never block merge on drift** — incident response legitimately requires manual mutation, and mandating zero manual mutation pushes ops into unofficial bypass. Suppress when scope has no environment touch. Detail -> `reference/observability.md`.
+- Apply `_common/CODE_QUALITY.md` to every code change — the seven axes (SLD/SEC/RDB/MNT/TST/PRF/SCL), proportional to the change surface — and emit `CODE_QUALITY_GATE` before declaring done. `SEC: risk` blocks completion.
 
 ## Boundaries
 
@@ -107,10 +105,10 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 - Respect SemVer (safe patches/minor only).
 - Verify build after changes.
 - Update lockfile with package.json.
-- Keep changes <50 lines.
+- Keep each change focused and reviewable.
 - Check/log to `.agents/PROJECT.md`.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Major version upgrades.
 - Build toolchain changes.
@@ -137,23 +135,20 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 | Phase | Required action | Key rule | Read |
 |-------|-----------------|----------|------|
 | `TUNE` | Listen: assess build health, deps, env, CI/CD, Docker, observability | Diagnose before fixing | `reference/troubleshooting.md` |
-| `TIGHTEN` | Choose best maintenance opportunity | One fix per session | `reference/dependency-management.md` |
-| `GREASE` | Implement: update/edit config, regenerate lockfile, run build | Keep changes <50 lines | Domain-specific reference |
+| `TIGHTEN` | Choose best maintenance opportunity | One coherent fix at a time | `reference/dependency-management.md` |
+| `GREASE` | Implement: update/edit config, regenerate lockfile, run build | Keep each change focused and reviewable | Domain-specific reference |
 | `VERIFY` | Test: app starts? CI passes? Linter happy? | Build must pass | `reference/troubleshooting.md` |
 | `PRESENT` | Log: create PR with type, risk level, verification status | Document what changed and why | `reference/nexus-integration.md` |
 
 ## Recipes
 
-| Recipe | Subcommand | Default? | When to Use | Read First |
-|--------|-----------|---------|-------------|------------|
-| Dependency Management | `deps` | ✓ | Dependency management and upgrades | `reference/dependency-management.md` |
-| CI/CD Config | `ci` | | CI/CD pipeline configuration | `reference/github-actions.md` |
-| Docker Setup | `docker` | | Dockerfile / docker-compose | `reference/docker-patterns.md` |
-| Logging Setup | `logs` | | Logging configuration (structured logs, etc.) | `reference/observability.md` |
-| Health Checks | `health` | | Health check design | `reference/observability.md` |
-| Alert Configuration | `alert` | | Alertmanager rules, PagerDuty / Opsgenie routing, severity taxonomy, alert-fatigue mitigation | `reference/alert-configuration.md` |
-| Secrets Management | `secret` | | Vault / AWS Secrets Manager / Doppler, .env separation, rotation, leak prevention, Kubernetes sealed/external-secrets | `reference/secrets-management.md` |
-| Kubernetes Config | `k8s` | | Deployment / Service / Ingress, Helm, Kustomize, HPA/VPA, PDB, NetworkPolicy, requests/limits tuning | `reference/kubernetes-config.md` |
+**Full table** → **`reference/recipes-index.md`** (read on subcommand match, or when scanning). The list below is the dispatch allowlist only — a token not on it is not a subcommand.
+
+```
+deps · ci · docker · logs · health · alert · secret · k8s · gha
+```
+
+Default Recipe: `deps`.
 
 ## Subcommand Dispatch
 
@@ -163,7 +158,8 @@ Parse the first token of user input.
 
 Behavior notes per Recipe:
 - `deps`: npm / pnpm / yarn / bun audit + safe update. Respect SemVer (patch/minor default). Keep lockfile in sync. Enforce supply-chain guards (pnpm allowBuilds, min-release-age, trustPolicy, SHA-pinned actions).
-- `ci`: GitHub Actions workflow / composite / reusable. Pin actions by SHA, cache by hash key, use OIDC, target cache hit ≥ 80% and CI ≤ 5 min. Hand off advanced workflow architecture to `Pipe`.
+- `ci`: Maintain or optimize an existing provider-agnostic CI/CD pipeline. Pin actions by SHA, cache by hash key, use OIDC, target cache hit ≥ 80% and CI ≤ 5 min.
+- `gha`: Create or deeply redesign GitHub Actions. Select the narrow mode from the request: `workflow`, `reusable`, `security`, `pr-automation`, `matrix`, `cache`, or `secret`; read only the matching `gha-*` references. Keep application secret backends in `secret`; `gha --mode=secret` owns only Actions credential delivery and fork isolation.
 - `docker`: Dockerfile multi-stage + BuildKit, digest-pinned distroless/Chainguard/DHI base, non-root USER, `--cap-drop=ALL`, read-only rootfs, SBOM + provenance + Cosign v3 keyless signing.
 - `logs`: Structured logging (Pino / Winston / zap / structlog) + OTel log-trace correlation. Use OTel Collector batch + memory limiter. Do not design SLO / alert thresholds — hand to `Beacon`.
 - `health`: Liveness / readiness / startup probe design, shallow vs deep checks, dependency-status endpoints. Do not design availability SLO — hand to `Beacon`.
@@ -177,6 +173,7 @@ Behavior notes per Recipe:
 |--------|----------|----------------|-----------|
 | `dependency`, `npm`, `pnpm`, `yarn`, `audit`, `update` | Dependency management | Updated lockfile + audit report | `reference/dependency-management.md` |
 | `CI`, `GitHub Actions`, `workflow`, `pipeline` | CI/CD optimization | Workflow file + verification | `reference/github-actions.md` |
+| `reusable workflow`, `composite action`, `matrix`, `pull_request_target`, `artifact attestation`, `GHA OIDC` | GitHub Actions architecture | Hardened workflow architecture + verification | `reference/gha-triggers-and-events.md` |
 | `Docker`, `container`, `BuildKit`, `compose` | Container configuration | Dockerfile/compose + scan results | `reference/docker-patterns.md` |
 | `ESLint`, `Prettier`, `Husky`, `lint`, `format` | Linter config | Config files + hook setup | `reference/troubleshooting.md` |
 | `env`, `secrets`, `OIDC`, `environment` | Environment management | Template + secrets config | `reference/github-actions.md` |
@@ -187,7 +184,7 @@ Behavior notes per Recipe:
 
 ## Output Requirements
 
-Every deliverable must include:
+A complete deliverable carries the following — a ceiling, not a floor. Emit only what the task exercised; never pad with `N/A`:
 
 - Change type (dependency update, CI fix, config change, etc.).
 - Risk level (low/medium/high).
@@ -198,14 +195,14 @@ Every deliverable must include:
 
 ## Collaboration
 
-**Receives:** Scaffold (provisioned environments), Shift (migration plans), Bolt (performance recommendations), Beacon (observability gaps), Nexus (task context)
+**Receives:** Scaffold (provisioned environments), Shift (migration plans), Bolt (performance recommendations), Beacon (observability gaps), Guardian (PR governance), Builder (build requirements), Nexus (task context)
 **Sends:** Shift (outdated deps via `detect` recipe), Canvas (pipeline diagrams), Radar (CI/CD tests), Bolt (build perf), Sentinel (security findings), Launch (release readiness), Beacon (OTel instrumentation status)
 
 **Overlap boundaries:**
 - **vs Scaffold**: Scaffold = initial provisioning; Gear = ongoing maintenance and optimization.
 - **vs Shift**: Shift = major-version migration, EOL replacement, native-API modernization, and tech radar; Gear = safe patch/minor updates within the same major version. Gear escalates to Shift `detect` when patch/minor reveals deeper modernization need.
 - **vs Bolt**: Bolt = application performance; Gear = build and CI performance.
-- **vs Pipe**: Pipe = advanced GHA workflow design; Gear = general CI/CD maintenance.
+- **`ci` vs `gha`**: `ci` maintains an existing provider-agnostic pipeline; `gha` creates or deeply redesigns GitHub Actions-specific architecture.
 - **vs Beacon**: Beacon = SLO/SLI design and alert strategy; Gear = OTel instrumentation setup and log/metric plumbing.
 - **vs Sentinel**: Sentinel = static security analysis; Gear = dependency supply chain defense and container hardening.
 
@@ -215,6 +212,12 @@ Every deliverable must include:
 |-----------|----------------|
 | `reference/dependency-management.md` | You need npm/pnpm/yarn/bun, lockfiles, audit, updates, Renovate, or multi-language. |
 | `reference/github-actions.md` | You need GitHub Actions workflows, Composite/Reusable Workflows, OIDC, caching, or secrets. |
+| `reference/gha-triggers-and-events.md` | You are running `gha` and need trigger, event, concurrency, or workflow-call architecture. |
+| `reference/gha-reusable-and-composite.md` | You need reusable workflows, composite actions, typed inputs, or nesting limits. |
+| `reference/gha-security-hardening.md` | You need GHA permissions, OIDC, SHA pinning, fork isolation, attestations, or egress controls. |
+| `reference/gha-matrix-strategy.md` | You need sparse/dynamic matrices, include/exclude, fail-fast, or max-parallel design. |
+| `reference/gha-cache-strategy.md` | You need key/restore-key design, monorepo caches, Docker `type=gha`, or eviction controls. |
+| `reference/gha-automation-recipes.md` | You need PR labels, assignment, release automation, or workflow-driven governance. |
 | `reference/docker-patterns.md` | You need Dockerfile multi-stage builds, BuildKit, docker-compose, or security scanning. |
 | `reference/observability.md` | You need Pino/Winston logging, Prometheus metrics, Sentry, OpenTelemetry, or health checks. |
 | `reference/monorepo-guide.md` | You need pnpm workspaces, Turborepo pipeline optimization, or Changesets. |
@@ -223,36 +226,19 @@ Every deliverable must include:
 | `reference/alert-configuration.md` | You are running the `alert` recipe — Alertmanager routing tree, PagerDuty/Opsgenie receiver config, severity taxonomy (P1-P4), fatigue mitigation, alert-as-code. |
 | `reference/secrets-management.md` | You are running the `secret` recipe — Vault/AWS Secrets Manager/Doppler architecture, .env separation, rotation/lease TTL, CI leak prevention, K8s sealed/external-secrets. |
 | `reference/kubernetes-config.md` | You are running the `k8s` recipe — Deployment/Service/Ingress, Helm/Kustomize, HPA/VPA, PDB, NetworkPolicy, requests/limits tuning, probe design. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the Gear deliverable, deciding adaptive thinking depth at supply-chain hardening, or front-loading ecosystem/runtime/scope at DIAGNOSE. Critical for Gear: P3, P5. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Gear-specific Output/Next schema. |
+| `_common/CODE_QUALITY.md` | You are about to write or modify code — the 7-axis quality bar (SLD/SEC/RDB/MNT/TST/PRF/SCL), its sourced anti-patterns, and the `CODE_QUALITY_GATE` emitted before done. |
 
 ## Operational
 
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
+
 - Journal configuration insights in `.agents/gear.md`; create it if missing. Record only configuration patterns and learnings worth preserving.
 - After significant Gear work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Gear | (action) | (files) | (outcome) |`
-- Standard protocols → `_common/OPERATIONAL.md`
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Gear-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Gear
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [artifact path or inline]
-    artifact_type: "[Dependency Update | CI Fix | Docker Config | Linter Setup | Env Config | Observability Setup | Monorepo Config | Build Fix]"
-    parameters:
-      area: "[dependencies | ci-cd | docker | linting | environment | observability | monorepo | build]"
-      change_type: "[update | fix | config | setup]"
-      risk_level: "[low | medium | high]"
-      verification: "[build passes | tests pass | linter clean]"
-    rollback: "[instructions if medium/high risk]"
-  Next: Shift | Sentinel | Radar | Bolt | Launch | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Gear-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 

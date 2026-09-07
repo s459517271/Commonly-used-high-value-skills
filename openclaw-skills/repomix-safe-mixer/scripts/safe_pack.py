@@ -54,7 +54,7 @@ def print_findings_report(findings: list):
         print(f"🔴 {secret_type}: {count} instance(s)")
         for finding in by_type[secret_type][:3]:  # Show first 3
             print(f"   - {finding['file']}:{finding['line']}")
-            print(f"     Match: {finding['match']}")
+            print("     Match: [REDACTED]")
         if len(by_type[secret_type]) > 3:
             print(f"   ... and {len(by_type[secret_type]) - 3} more\n")
         else:
@@ -92,7 +92,7 @@ def main():
         print("\nExamples:")
         print("  safe_pack.py ./my-project")
         print("  safe_pack.py ./my-project --output package.xml")
-        print("  safe_pack.py ./my-project --exclude '.*test.*' '.*\.example'")
+        print(r"  safe_pack.py ./my-project --exclude '.*test.*' '.*\.example'")
         print("  safe_pack.py ./my-project --force  # Dangerous! Skip scan")
         sys.exit(1)
 

@@ -146,6 +146,36 @@ def is_yaml_plain_scalar_safe(text: str) -> bool:
     return bool(re.match(r"^[A-Za-z0-9][A-Za-z0-9 ._/:+()-]*$", text))
 
 
+def is_yaml_flow_collection(text: str) -> bool:
+    """Return true when one outer YAML flow collection spans the full value."""
+    pairs = {"[": "]", "{": "}"}
+    if not text or text[0] not in pairs:
+        return False
+
+    stack: list[str] = []
+    quote: str | None = None
+    escaped = False
+    for index, char in enumerate(text):
+        if quote is not None:
+            if escaped:
+                escaped = False
+            elif char == "\\" and quote == '"':
+                escaped = True
+            elif char == quote:
+                quote = None
+            continue
+        if char in {"'", '"'}:
+            quote = char
+        elif char in pairs:
+            stack.append(pairs[char])
+        elif char in {"]", "}"}:
+            if not stack or stack.pop() != char:
+                return False
+            if not stack and index != len(text) - 1:
+                return False
+    return quote is None and not stack
+
+
 def normalize_frontmatter_block(block_lines: list[str]) -> list[str]:
     if not block_lines:
         return block_lines
@@ -166,6 +196,11 @@ def normalize_frontmatter_block(block_lines: list[str]) -> list[str]:
             parsed_json = try_parse_json_mapping(unquoted)
             if parsed_json is not None:
                 return render_yaml_mapping_block(key, parsed_json)
+            return block_lines
+        if is_yaml_flow_collection(value):
+            # A YAML flow collection is structured metadata, not a scalar that
+            # needs quoting. Quoting it silently changes list/map values into
+            # strings and creates perpetual upstream drift.
             return block_lines
         return [f"{key}: {yaml_scalar(value)}"]
 

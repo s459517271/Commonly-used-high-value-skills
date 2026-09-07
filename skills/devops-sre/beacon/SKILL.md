@@ -1,15 +1,15 @@
 ---
 name: beacon
-description: 'Engineering observability and reliability through SLO/SLI design, distributed tracing, alerting, dashboards, capacity planning, toil automation, and reliability review. Use when designing observability instrumentation, defining SLOs/SLIs, building dashboards/alerts, or reviewing reliability posture.'
-zh_description: "用于beacon，支持部署、监控、排障和发布管理。"
-version: "1.0.6"
+description: '可观测性、服务目标、告警、容量和可靠性设计。'
+zh_description: "可观测性、服务目标、告警、容量和可靠性设计。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/beacon"
 license: MIT
-tags: '["beacon", "devops", "sre"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["beacon", "devops", "sre"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -81,17 +81,10 @@ Route elsewhere when the task is primarily:
 - Use Google SRE multi-window, multi-burn-rate alerting as default strategy — fast burn (14.4× over 1h, confirmed over 5min), medium burn (6× over 6h), slow burn (3× over 3d), baseline (1× over 30d). Ticket alerts at 10% budget consumption in 3 days.
 - Error budget consumption policy gates: 50% → review incidents and investigate; 75% → slow deployments, prioritize stability; 90% → freeze non-critical changes; 100% → halt all deployments until budget resets. Single-incident gate: if one incident consumes >20% of the 4-week budget, mandate postmortem within 5 business days regardless of remaining budget.
 - Default to tail-based sampling in the Collector (not the app): keep 100% error/slow traces, sample 10% of successful traces. Adjust rates based on cost constraints.
-- For brownfield services, evaluate OTel eBPF Instrumentation (OBI) for zero-code observability before committing to SDK integration. OBI captures HTTP/gRPC traces and RED metrics without code changes, suitable for initial visibility; add SDK instrumentation selectively for business-critical spans. OBI is in beta (2026), targeting a stable 1.0 release; expanding protocol coverage to messaging (MQTT, AMQP, NATS) and NoSQL (MongoDB). Evaluate for initial rollout in Kubernetes environments.
-- Mandate OTel semantic conventions (stable core since 1.28; track latest release, currently 1.40+) for all instrumentation — non-negotiable for cross-service correlation and vendor portability. For GenAI workloads, adopt `gen_ai.*` namespace conventions including agent spans (`create_agent`, `invoke_agent` operations); these remain experimental as of 2026 — set `OTEL_SEMCONV_STABILITY_OPT_IN=http/dup` for dual-emission during version transitions to avoid breaking changes on stabilization.
-- Prefer OTel Declarative Configuration (YAML-based SDK config) over code-based setup — stable since 1.0.0 (JSON schema, YAML data model, `OTEL_CONFIG_FILE` env var). Implementations available in Java, Go, PHP, JS, and C++; .NET and Python in development. Reduces instrumentation drift across services and enables configuration-as-code alongside SLOs-as-code.
-- For environments with 10+ Collectors, adopt OpAMP (Open Agent Management Protocol) with supervisor-based orchestration for fleet management — enables remote configuration reload, health reporting, version discovery, and dynamic pipeline reconfiguration without redeployment. OpAMP Gateway Extension addresses WebSocket connection scaling limits for large fleets.
-- Evaluate OTel Profiles (continuous profiling) as the 4th observability pillar during the DESIGN phase. Profiles entered public Alpha in March 2026 with eBPF-based whole-system profiling (donated by Elastic); include profiling assessment for latency-sensitive services but mark as experimental in implementation specs until the signal reaches stable status.
+- **OTel stack rules**: mandate semantic conventions for all instrumentation (non-negotiable for cross-service correlation and vendor portability; `gen_ai.*` for GenAI workloads, dual-emission during version transitions); prefer declarative YAML SDK configuration over code-based setup; evaluate eBPF zero-code instrumentation for brownfield services before committing to SDKs; adopt OpAMP supervisor-based fleet management beyond 10 Collectors; assess continuous Profiles as a fourth pillar during DESIGN, marked experimental until stable. Standardise production-scale profiling on Pyroscope/Parca and wire **temporal flame-graph windows** into leak detection — the leak signature is "allocations inside a window still unfreed at its end", not "high allocation rate". Detail and sources -> `reference/opentelemetry-best-practices.md`.
 - Treat SLO definitions as code (e.g., OpenSLO YAML specs versioned in Git) — enables automated deployment gating, burn-rate alert generation, and cross-service SLO standardization without manual configuration per service.
 - Define SLOs at system boundaries, not individual components — boundary-level SLIs are more actionable for engineers, customers, and business decision-makers than per-component metrics.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Beacon; P2, P1 recommended).
-- **Adopt OpenTelemetry eBPF Instrumentation (OBI) for zero-SDK observation.** Beyla was donated to OpenTelemetry as OBI; KubeCon EU 2026 Beta with a GA roadmap. The Cilium + Hubble + Pixie + Tetragon + Beyla stack now produces RED metrics (Rate / Errors / Duration) and traces with no source-code changes. Recommend OBI when the target system lacks instrumentation, when the team cannot patch source, or when a brown-field service mesh needs uniform observation without per-language SDK rollout. [Source: dev.to/x4nent — OpenTelemetry eBPF Instrumentation OBI: Complete Guide]
-- **Standardise continuous profiling on Pyroscope 2.0 / Parca for production-scale.** Pyroscope 2.0 ingests 19.5 PB/year at Grafana with 95% symbol-storage reduction via write-once symbols; Parca offers the same continuous-profiling primitives under a CNCF-incubating posture. Add continuous profiling as the third pillar alongside metrics (Prometheus / Mimir) and traces (Tempo / Jaeger) — flame graphs over time make the "slow in production only" class of bugs observable. Coordinate with `siege` (concurrency recipe) for memory-leak handoffs (temporal flame graphs) and with `bolt` for CPU hotspot remediation. [Source: grafana.com/blog/pyroscope-2-0-release/; parca.dev]
-- **Wire flame-graph temporal-window analysis** into the leak-detection runbook. `memray` (Python) emits temporal flame graphs that isolate "allocations made inside a window that remain unfreed at the window's end" — the canonical leak signature, not "high allocation rate". Same primitive in `jemalloc heap profiling`, Pyroscope 2.0, and Parca. Surface continuous-profiling burn-rate alerts (allocation rate × retention rate) alongside latency / error burn rates. [Source: bloomberg.github.io/memray/temporal-flame-graphs.html]
+- Apply `_common/CODE_QUALITY.md` to every code change — seven axes (SLD/SEC/RDB/MNT/TST/PRF/SCL), proportional to the change surface — and emit `CODE_QUALITY_GATE` before declaring done. `SEC: risk` blocks completion.
 ## Boundaries
 
 Agent role boundaries → `_common/BOUNDARIES.md`
@@ -106,7 +99,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 - Consider alert fatigue in every design.
 - Review monitoring gaps after incidents.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - SLO targets that affect business decisions.
 - Alert escalation policies.
@@ -201,7 +194,7 @@ Routing rules:
 
 ## Output Requirements
 
-Every deliverable must include:
+A complete deliverable carries the following — a ceiling, not a floor. Emit only what the task exercised; never pad with `N/A`:
 
 - Observability artifact type (SLO document, alert strategy, dashboard spec, etc.).
 - Current state assessment with evidence.
@@ -269,7 +262,7 @@ When auditing observability for 4+ services, spawn 2–3 Explore subagents to sc
 
 | Reference | Read this when |
 |-----------|----------------|
-| `reference/slo-sli-design.md` | You need SLO/SLI definitions, error budgets, burn rates, anti-patterns (SA-01-08), error budget policies, or SLO governance & maturity model. |
+| `reference/slo-sli-design.md` | You need SLO/SLI definitions, error budgets, burn rates, anti-patterns (SA-01-11), error budget policies, SLO governance & maturity model, AI/LLM good-event definitions and quality/latency/safety budget separation, abstention classification, or the missing-data policy. |
 | `reference/opentelemetry-best-practices.md` | You need OTel instrumentation (OT-01-05), semantic conventions, collector pipeline, sampling, distributed tracing, telemetry correlation, cardinality management, cost optimization, or GenAI observability. |
 | `reference/alerting-strategy.md` | You need alert hierarchy, runbooks, escalation, alert quality KPIs, or signal-to-noise ratio. |
 | `reference/dashboard-design.md` | You need RED/USE methods, dashboard-as-code, or dashboard sprawl prevention. |
@@ -282,38 +275,47 @@ When auditing observability for 4+ services, spawn 2–3 Explore subagents to sc
 | `reference/golden-signals.md` | You are running the `golden` recipe — Google SRE Golden Signals (latency / traffic / errors / saturation), RED for request-driven, USE for resource-driven, and SLI candidate extraction before SLO target setting. |
 | `reference/logging-design.md` | You are running the `log` recipe — structured JSON log schema, correlation IDs (trace_id / span_id / request_id), level policy, source-side sampling, PII scrub, and OpenTelemetry Logs signal integration. |
 | `reference/toil-reduction.md` | You are running the `toil` recipe — Google SRE toil definition audit, automation priority scoring (frequency × time × growth × value), 50% toil budget enforcement, and runbook → script → auto-remediation escalation. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the SLO/alert spec, deciding adaptive thinking depth at boundary/burn-rate selection, or front-loading service criticality and reliability target at SURVEY. Critical for Beacon: P3, P5. |
 | `_common/PROOF_CARRYING.md` | You register `rollback_condition` as a live SLO oracle in `nexus acceptance` Phase 5 (Layer 5 — runtime self-verify). Runtime oracle is the last safety net before G3 repair-loop circuit breaker activates. Defines the canary-window shadow-mode requirement before runtime oracle promotion. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Beacon-specific Output/Next schema. |
+| `_common/CODE_QUALITY.md` | You are about to write or modify code — the 7-axis quality bar (SLD/SEC/RDB/MNT/TST/PRF/SCL), its sourced anti-patterns, and the `CODE_QUALITY_GATE` emitted before done. |
 
 ## Operational
 
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
+
 **Journal** (`.agents/beacon.md`): Read/update `.agents/beacon.md` (create if missing) — only record observability insights, SLO patterns, and reliability learnings.
 - After significant Beacon work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Beacon | (action) | (files) | (outcome) |`
-- Standard protocols → `_common/OPERATIONAL.md`
-- Follow `_common/GIT_GUIDELINES.md`.
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Beacon-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Beacon
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [artifact path or inline]
-    artifact_type: "[SLO Document | Alert Strategy | Dashboard Spec | Capacity Model | Tracing Spec | Toil Plan | Reliability Review]"
-    parameters:
-      mode: "[MEASURE | MODEL | DESIGN | SPECIFY]"
-      slo_count: "[number or N/A]"
-      alert_count: "[number or N/A]"
-      cost_impact: "[Low | Medium | High]"
-  Next: Gear | Builder | Triage | Scaffold | Bolt | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Beacon-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.

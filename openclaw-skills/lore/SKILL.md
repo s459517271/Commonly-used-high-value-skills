@@ -1,15 +1,15 @@
 ---
 name: lore
-description: 'Curating cross-agent knowledge and guarding institutional memory. Extracts patterns from agent journals into METAPATTERNS.md, detects knowledge decay, propagates best practices, prevents organizational forgetting. Use when consolidating cross-agent insights, curating memory, or auditing knowledge decay.'
-zh_description: "用于lore，支持知识管理、项目同步和平台集成。"
-version: "1.0.5"
+description: 'Curating cross-agent knowledge and institutional memory: extracts patterns from agent journals into METAPATTERNS.md, detects knowledge decay, propagates best practices. Use for memory curation.'
+zh_description: "跨智能体知识沉淀、模式提炼和最佳实践传播。"
+version: "1.0.6"
 author: "seaworld008"
 source: "github:simota/agent-skills"
-source_url: "https://github.com/simota/agent-skills/tree/main/lore"
+source_url: "https://github.com/simota/agent-skills/tree/6502f44cfcd8f456951a7bfdce14d0ed76d724ef/.agents/skills/lore"
 license: MIT
 tags: '["knowledge", "lore"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+created_at: "2026-07-27"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -86,21 +86,23 @@ Route elsewhere when the task is primarily:
 - Tag every pattern with freshness state and `Last validated` date.
 - Propagate only to clearly relevant consumers at appropriate confidence thresholds.
 - Maintain a catalog freshness score (0-100, where 100 = all patterns current). Alert at < 85%; enter degraded mode at < 70%.
-- Align knowledge lifecycle with ISO 30401:2018 framework: acquire → apply → retain → handle outdated. Every pattern in the catalog must have a clear lifecycle stage. (Note: ISO/CD 30401 revision is in progress — monitor for updated requirements.)
-- Apply domain-specific knowledge half-life: technical docs/architecture patterns ~18 months, operational/incident patterns ~6 months, market/trend/tooling data ~3 months. Reference: WEF reports tech skill half-life at ~2 years; Stanford Engineering estimates engineering knowledge at 3-5 years; IBM projects technical skill half-life < 5 years by 2025 — use these as cross-checks for TTL multiplier calibration.
+- Align the knowledge lifecycle with ISO 30401:2018 (acquire -> apply -> retain -> handle outdated); every catalog pattern carries a clear lifecycle stage.
+- Apply domain-specific knowledge half-life: technical docs and architecture patterns ~18 months, operational/incident patterns ~6 months, market/trend/tooling data ~3 months. Industry skill half-life estimates (2-5 years) cross-check TTL multiplier calibration.
 - Capture knowledge within 48 hours of discovery — delayed documentation loses accuracy exponentially (Ebbinghaus curve).
 - Prevent organizational forgetting by addressing all four forms: failure to capture, failure to maintain, unintentional loss, and accidental purging.
-- Practice organizational unlearning (strategic forgetting): intentionally archive or remove patterns whose underlying assumptions have been invalidated, to prevent outdated knowledge from blocking absorption of new patterns. Organizational unlearning is not knowledge loss — it is knowledge hygiene (PMC: organizational unlearning research confirms deliberate discarding of obsolete knowledge as a prerequisite for new knowledge absorption).
-- Account for the documentation-reality gap: operational knowledge diverges from documented knowledge over time. Journal mining and behavioral observation (what agents actually do) are more reliable than explicit documentation alone for HARVEST completeness.
-- Lore is the local equivalent of Anthropic's **Managed Agents → Dreaming** feature (off-line analysis of past sessions, memory curation, knowledge propagation across future runs). When a chain on the managed platform would call Dreaming, the Nexus-local equivalent is to route to Lore; preserve the shared vocabulary in handoffs so workloads can migrate without re-conceptualisation. [Source: claude.com — *New in Claude: Managed Agents* (2026)]
-- **Architecture node/edge type catalog (v5 fold-in, extended v6)**: `knowledge_graph_enrichment` supports an Architecture sub-graph with the following node types — `service`, `module`, `api`, `event`, `database`, `table`, `queue`, `cloud_resource`, `user_journey`, `persona`, `policy`, `adr`, `runbook`, `dashboard`, `alert`, `owner`, `slo`, **plus ops-extension nodes (v6): `secret`, `config`, `feature_flag`, `environment`, `cluster`, `iam_role`, `vulnerability`, `metric`, `terraform_resource`, `kubernetes_object`, `container_image`** — and edge types — `calls`, `publishes`, `subscribes`, `owns`, `stores`, `reads`, `writes`, `depends_on`, `governed_by`, `documented_by`, `monitored_by`, `decided_by`, **plus ops-extension edges (v6): `reads_secret`, `exposes_data`, `has_vulnerability`, `scaled_by`, `rolled_back_by`, `deployed_to`**. This is the local equivalent of both the "Architecture Knowledge Graph" and the "Ops Knowledge Graph" concepts; both live as a single unified sub-graph within METAPATTERNS.md and the existing knowledge graph, NOT as separate centralized "Living Architecture Twin" or "Ops Twin" Single Source of Truth (the Twin Tyranny anti-pattern — omen v5 FM-V-7 RPN 1080, omen v6 FM-5 RPN 640). The ops-extension nodes/edges are intentionally absorbed into the same Architecture sub-graph to prevent dual-source-of-truth drift between architecture KG and a separate ops KG.
-- **Concept consistency audit (v7 fold-in, advisory only)**: Architecture sub-graph supports a `concept` node sub-type representing key product/domain concepts (e.g. `active_user`, `retention`, `engagement`) with `definition`, `boundary` (included/excluded), `metric_ref`, `aliases`, `category` fields. `concept_consistency_audit` capability detects category errors (concept used inconsistently across journals / docs / METAPATTERNS), naming collisions, and orphan concepts (defined but unreferenced). **Advisory only** — never blocks merge; flags drift for human review per G11 KB Write Authority Separation (AI proposes, Architect/Research Lead merges). Polysemy is preserved: when one concept legitimately has multiple definitions per audience (e.g. Marketing-`active_user` vs Product-`active_user`), the audit records the legitimate variants rather than forcing canonicity (anti-pattern: Concept Graph false canonicity, omen v7 FM-V7-12 RPN 280). Absorbs "Concept Proof / Concept Graph" intent (Reflective Decision OS proposal v7) into existing knowledge graph without creating a parallel SoT.
-- **G11 KB Write Authority Separation applies to Architecture sub-graph**: AI agents are read-only; Architecture node/edge mutations require human Architecture Lead merge (Architect skill). Confidence and freshness fields are deterministic-computed, never hand-set. AI proposed edits go to a queue. The Architecture sub-graph is **advisory** — when divergence with reality codebase is detected, reality wins; the sub-graph is updated to match reality, never the reverse. See `_common/PROOF_CARRYING.md` v3 G11 and the Twin Tyranny anti-pattern.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Lore; P2, P1 recommended).
+- Practice organizational unlearning: archive or remove patterns whose assumptions have been invalidated, so outdated knowledge cannot block absorption of new patterns. This is knowledge hygiene, not knowledge loss.
+- Account for the documentation-reality gap — journal mining and behavioral observation beat documentation alone for HARVEST completeness.
+- Lore is the local equivalent of Managed Agents **Dreaming** (off-line session analysis, memory curation, cross-run propagation). Where a managed chain would call Dreaming, route to Lore and preserve the shared vocabulary so workloads migrate without re-conceptualisation.
+- **Architecture sub-graph**: `knowledge_graph_enrichment` supports Architecture nodes (`service`, `module`, `api`, `event`, `database`, `table`, `queue`, `cloud_resource`, `user_journey`, `persona`, `policy`, `adr`, `runbook`, `dashboard`, `alert`, `owner`, `slo`, plus ops-extension `secret`, `config`, `feature_flag`, `environment`, `cluster`, `iam_role`, `vulnerability`, `metric`, `terraform_resource`, `kubernetes_object`, `container_image`) and edges (`calls`, `publishes`, `subscribes`, `owns`, `stores`, `reads`, `writes`, `depends_on`, `governed_by`, `documented_by`, `monitored_by`, `decided_by`, plus `reads_secret`, `exposes_data`, `has_vulnerability`, `scaled_by`, `rolled_back_by`, `deployed_to`). Architecture and Ops live as **one unified sub-graph** inside METAPATTERNS.md — never a separate centralized "Living Twin" SoT (the Twin Tyranny anti-pattern).
+- **Concept consistency audit (advisory only)**: a `concept` node sub-type carries `definition`, `boundary`, `metric_ref`, `aliases`, `category`; the audit detects category errors, naming collisions, and orphan concepts. **Never blocks merge** — it flags drift for human review. Legitimate polysemy is preserved (one concept may hold audience-specific definitions) rather than forced to canonicity.
+- **G11 KB Write Authority Separation applies to the Architecture sub-graph**: AI agents are read-only and propose edits to a queue; mutations require a human Architecture Lead merge. Confidence and freshness are deterministic-computed, never hand-set. The sub-graph is **advisory** — on divergence, reality wins and the graph is updated to match, never the reverse.
 
 ---
 
 ## Boundaries
+
+`_common/` references require the separately installed upstream ecosystem. Use them only when available and selected for this task; otherwise follow host instructions and the domain workflow. Persist journals only when requested by the user or project.
+
 
 Agent role boundaries → `_common/BOUNDARIES.md`
 
@@ -110,7 +112,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 - Structure extracted patterns as entity-relation triples per Workflow postmortem mining rules, with proactive validity windows (expected TTL based on domain multiplier) to enable automated revalidation scheduling before patterns reach STALE state.
 - When consuming Darwin fitness trend data, cross-reference with existing pattern decay signals to identify ecosystem-wide knowledge gaps.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Archiving patterns with `< 3` evidence instances.
 - Resolving contradictions between agent learnings.
@@ -203,7 +205,7 @@ Routing rules:
 
 ## Output Requirements
 
-Every deliverable must include:
+A complete deliverable carries the following — a ceiling, not a floor. Emit only what the task exercised; never pad with `N/A`:
 
 - Pattern ID using `[DOMAIN]-[TYPE]-[NNN]` format.
 - Confidence level with evidence count.
@@ -289,7 +291,7 @@ When HARVEST scope includes 3+ independent source categories (e.g., agent journa
 | `reference/propagation-protocol.md` | You are choosing consumers, urgency, `LORE_INSIGHT` or `LORE_ALERT`, or compressing context for propagation. |
 | `reference/decay-detection.md` | You are evaluating freshness, applying TTL multipliers, revalidating stale patterns, or managing archive state. |
 | `reference/official-pattern-taxonomy.md` | You are mapping ecosystem patterns to official Anthropic patterns, evaluating quality signals against official metrics, or propagating official-aligned insights during CATALOG or PROPAGATE. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the knowledge report, deciding adaptive thinking depth at freshness/unlearning, or front-loading domain/cutoff/audience at HARVEST. Critical for Lore: P3, P5. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Lore-specific Output/Next schema. |
 
 ---
 
@@ -305,27 +307,36 @@ When HARVEST scope includes 3+ independent source categories (e.g., agent journa
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Lore-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Lore
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [report path or inline]
-    artifact_type: "[Harvest Report | Synthesis Report | METAPATTERNS Update | LORE_INSIGHT | Audit Report | Contradiction Resolution]"
-    parameters:
-      patterns_discovered: "[count]"
-      patterns_promoted: "[count]"
-      contradictions_found: "[count]"
-      stale_patterns: "[count]"
-      consumers_notified: ["[agent list]"]
-  Next: Architect | Darwin | Sigil | Nexus | Mend | Triage | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Lore-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+<!-- LOCAL-QUALITY-SUPPLEMENT:START -->
+## Usage Notes
+
+This supplement is maintained by the repository sync pipeline. It keeps the
+imported upstream skill usable inside this curated collection when the upstream
+source is intentionally concise.
+
+## Common Patterns
+
+```text
+1. Confirm that the user's task matches the skill trigger.
+2. Read the relevant project files or user-provided context before acting.
+3. Choose the smallest reversible action that advances the task.
+4. Run the verification command or manual check that proves the result.
+5. Report the outcome, evidence, and any remaining risk.
+```
+
+## Boundaries
+
+- Prefer the upstream workflow for Lore; this section only adds local quality
+  guardrails.
+- Do not invent project facts when required files, vaults, services, or tools are
+  unavailable.
+- Stop and ask for clarification when the next action could overwrite user work,
+  expose private data, or change production state.
+- Treat skill selection as routing, not ceremony: invoke only the narrowest
+  applicable workflow and keep user or repository instructions authoritative.
+<!-- LOCAL-QUALITY-SUPPLEMENT:END -->

@@ -9,23 +9,32 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   discover-and-sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.13'
 
       - name: Discover new skills from external sources
+        id: discovery
         run: python scripts/discover_new_skills.py --output docs/sources/reports/discovery.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
 
       - name: Check upstream GitHub updates
+        id: upstream
         run: python scripts/check_upstream_github_updates.py --online --write-json docs/sources/reports/upstream-check.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,17 +44,143 @@ jobs:
         id: report
         run: python scripts/generate_sync_report.py --discovery docs/sources/reports/discovery.json --upstream docs/sources/reports/upstream-check.json --output docs/sources/reports/sync-report.md
 
-      - name: Create issue if updates found
-        if: steps.report.outputs.has_updates == 'true'
-        uses: peter-evans/create-issue-from-file@v5
+      - name: Reconcile weekly sync issue
+        if: always()
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          NEEDS_ATTENTION: ${{ steps.report.outputs.needs_attention }}
+          SYNC_STATE: ${{ steps.report.outputs.sync_state }}
+          REPORT_OUTCOME: ${{ steps.report.outcome }}
+          REPORT_PATH: docs/sources/reports/sync-report.md
         with:
-          title: "[Auto Sync] Weekly skill discovery report — ${{ github.event.schedule && 'scheduled' || 'manual' }}"
-          content-filepath: docs/sources/reports/sync-report.md
-          labels: auto-sync,skill-discovery
+          script: |
+            const fs = require('fs');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = '[Auto Sync] Weekly skill discovery report';
+            const labels = ['auto-sync', 'skill-discovery'];
+            const reportSucceeded = process.env.REPORT_OUTCOME === 'success';
+            const reportExists = fs.existsSync(process.env.REPORT_PATH);
+            const report = reportExists
+              ? fs.readFileSync(process.env.REPORT_PATH, 'utf8')
+              : '# Weekly Skill Sync Report\n\nReport rendering failed before an artifact was written.';
+            const needsAttention = reportSucceeded
+              ? process.env.NEEDS_ATTENTION === 'true'
+              : true;
+            const syncState = reportSucceeded
+              ? (process.env.SYNC_STATE || 'failed')
+              : 'failed';
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              labels: labels.join(','),
+              per_page: 100,
+            });
+            const matching = openIssues
+              .filter(issue => !issue.pull_request && issue.title === title)
+              .sort((a, b) => b.number - a.number);
+
+            if (syncState !== 'complete') {
+              const primary = matching.shift();
+              if (primary) {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: primary.number,
+                  title,
+                  body: report,
+                });
+              } else {
+                await github.rest.issues.create({
+                  owner,
+                  repo,
+                  title,
+                  body: report,
+                  labels,
+                });
+              }
+              // A degraded or failed scan is not authoritative enough to close
+              // duplicates. Preserve every additional issue for human review.
+            } else if (needsAttention) {
+              let primary = matching.shift();
+              if (primary) {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: primary.number,
+                  title,
+                  body: report,
+                });
+              } else {
+                primary = (await github.rest.issues.create({
+                  owner,
+                  repo,
+                  title,
+                  body: report,
+                  labels,
+                })).data;
+              }
+              for (const duplicate of matching) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: duplicate.number,
+                  body: `Superseded by #${primary.number}; future runs update one canonical report.`,
+                });
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: duplicate.number,
+                  state: 'closed',
+                  state_reason: 'completed',
+                });
+              }
+            } else {
+              for (const issue of matching) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: issue.number,
+                  body: `The latest weekly scan completed with state ${syncState} and found no meaningful discovery or upstream drift. Closing automatically.`,
+                });
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'completed',
+                });
+              }
+            }
 
       - name: Upload reports as artifacts
-        uses: actions/upload-artifact@v4
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: sync-reports
           path: docs/sources/reports/
           retention-days: 30
+
+      - name: Enforce sync automation state
+        if: always()
+        env:
+          SYNC_STATE: ${{ steps.report.outputs.sync_state }}
+          REPORT_OUTCOME: ${{ steps.report.outcome }}
+        run: |
+          if [ "$REPORT_OUTCOME" != "success" ]; then
+            echo "::error::Sync report rendering failed; refusing to trust or reconcile its outputs."
+            exit 1
+          fi
+          case "$SYNC_STATE" in
+            complete)
+              echo "Upstream automation completed."
+              ;;
+            degraded)
+              echo "::warning::Upstream automation is degraded; the canonical issue records required review."
+              ;;
+            *)
+              echo "::error::Upstream automation failed or produced no trustworthy state."
+              exit 1
+              ;;
+          esac

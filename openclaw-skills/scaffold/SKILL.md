@@ -1,15 +1,15 @@
 ---
 name: scaffold
-description: 'Provisioning infrastructure via cloud IaC (Terraform/OpenTofu/CloudFormation/Pulumi) and local development environments (Docker Compose/dev setup/env vars). Use when IaC design, environment setup, or multi-cloud provisioning is needed.'
-zh_description: "用于scaffold，支持部署发布、配置、预览和故障处理。"
-version: "1.0.4"
+description: '云基础设施、环境配置和本地开发部署脚手架。'
+zh_description: "云基础设施、环境配置和本地开发部署脚手架。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/scaffold"
 license: MIT
-tags: '["deployment", "scaffold"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["deployment", "scaffold"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -57,7 +57,7 @@ Use Scaffold when the task needs one or more of the following:
 - AWS, GCP, Azure, or multi-cloud infrastructure selection
 - State encryption, IaC tool migration (Terraform ↔ OpenTofu), licensing evaluation (BSL vs open-source), or orchestration platform evaluation (Spacelift, Env0, Scalr)
 
-Use `Gear` for CI/CD, runtime operations, and monitoring. Use `Anvil` for CLI or developer tooling rather than infrastructure provisioning.
+Use `Gear` for CI/CD, runtime operations, and monitoring. Use `Builder` for CLI or developer tooling rather than infrastructure provisioning.
 
 Route elsewhere when the task is primarily:
 - CI/CD pipeline configuration without IaC changes → `Gear`
@@ -73,11 +73,11 @@ Route elsewhere when the task is primarily:
 - Default to reproducible, tagged, remote-state-backed infrastructure with state encryption enabled (OpenTofu native or backend-level).
 - Prefer least privilege, private networking, encryption, and environment separation. A single over-permissive role or stale token has cascaded into nine-figure financial losses (e.g., Bybit $1.5B, 2025).
 - Keep local environments close enough to production to catch integration issues without copying production risk blindly.
-- Support OpenTofu as a first-class alternative to Terraform. Since Terraform moved to the Business Source License (BSL 1.1, August 2023) and IBM acquired HashiCorp ($6.4B, completed February 2025), OpenTofu is the CNCF-graduated (April 2025) open-source path. Evaluate licensing implications when recommending Terraform vs OpenTofu — BSL restricts embedding, managed-service offering, and resale without a commercial license. OpenTofu offers client-side state encryption (PBKDF2, AWS KMS, GCP KMS, OpenBao), ephemeral values/resources (1.11+) for transient secrets that never persist to state, provider-defined functions in dynamic blocks (1.12+), Azure DevOps workload identity federation (1.12+), dynamic `prevent_destroy` with input variables (1.12+), resource identity for imports (1.12+), `destroy` lifecycle meta-argument (1.12+) for removing objects from state without provider destruction (critical for zero-downtime migrations), `language` block (1.12+) for tool-specific version constraints separating OpenTofu from other software requirements, `const` input variables (1.12+) for static evaluation guarantees, and concurrent provider installation (1.12+) for faster `tofu init`. Maintains provider/module compatibility with the 3,900+ provider ecosystem; 50% of Spacelift deployments now run on OpenTofu (2026).
+- Support OpenTofu as a first-class alternative to Terraform (BSL 1.1 vs CNCF-graduated open-source — licensing/version/feature detail and adoption stats in `reference/terraform-modules.md` § Engine Selection). Evaluate licensing implications before recommending one over the other — BSL restricts embedding, managed-service offering, and resale without a commercial license.
 - Prefer ephemeral values/resources for short-lived credentials (tokens, temporary keys). Use state encryption for data that must persist. Combine both strategies: ephemeral prevents storage, encryption protects what must be stored.
 - Keep modules focused with single responsibility. Flag modules exceeding ~200 HCL lines or managing resources across multiple concern domains for split review.
 - Avoid monolithic state files ("terralith"). Split state by environment, service boundary, or blast-radius domain. A single state file managing an entire environment slows plan/apply, increases lock contention, and amplifies the blast radius of any change. Prefer one state per deployable unit.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P6 critical for Scaffold; P2, P1 recommended).
+- Apply `_common/CODE_QUALITY.md` to every code change — the seven axes (SLD solid / SEC secure / RDB readable / MNT maintainable / TST testable / PRF performant / SCL scalable), proportional to the change surface — and emit `CODE_QUALITY_GATE` before declaring done. `SEC: risk` blocks completion.
 
 ## Boundaries
 
@@ -90,7 +90,7 @@ Route elsewhere when the task is primarily:
 - Document variables, outputs, assumptions, and provider-specific caveats.
 - Record durable infra decisions in `.agents/scaffold.md` and `.agents/PROJECT.md`.
 
-### Ask First
+### Ask First When Not Already Authorized
 - New cloud accounts or projects
 - VPC, VNet, routing, or subnet changes
 - IAM, SCP, Organization Policy, or other security-boundary changes
@@ -135,7 +135,7 @@ Route elsewhere when the task is primarily:
 | AWS specialist | AWS-only and advanced networking/compute/database/event patterns matter | `reference/aws-specialist.md` |
 | GCP specialist | GCP-only and advanced networking/GKE/Cloud Run/database patterns matter | `reference/gcp-specialist.md` |
 | Azure / Pulumi / mixed cloud | Azure, Pulumi, or cross-cloud design is required | `reference/multicloud-patterns.md` |
-| Local development environment | Docker Compose, `.env`, local mocks, watch mode, profiles, or developer bootstrap is the main task | `reference/docker-compose-templates.md` |
+| Local development environment | Docker Compose, `.env`, local mocks, watch mode, profiles, or developer bootstrap is the main task | `reference/docker-environment-anti-patterns.md`, `reference/security-and-cost.md` |
 | Compliance / risk review | Policy-as-code, state safety, or anti-pattern review dominates | `reference/terraform-compliance.md` and relevant anti-pattern reference |
 | Nexus AUTORUN | Input explicitly invokes AUTORUN | Normal deliverable plus `_STEP_COMPLETE:` footer |
 | Nexus Hub | Input contains `## NEXUS_ROUTING` | Return only `## NEXUS_HANDOFF` packet |
@@ -147,7 +147,7 @@ Route elsewhere when the task is primarily:
 | Terraform / OpenTofu | `terraform` | ✓ | Terraform/OpenTofu IaC (most common) | `reference/terraform-modules.md` |
 | CloudFormation | `cloudformation` | | AWS CloudFormation | `reference/aws-specialist.md` |
 | Pulumi | `pulumi` | | Pulumi IaC | `reference/multicloud-patterns.md` |
-| Docker Compose | `compose` | | Local development environment | `reference/docker-compose-templates.md` |
+| Docker Compose | `compose` | | Local development environment | `reference/docker-environment-anti-patterns.md`, `reference/security-and-cost.md` |
 | Env Vars | `env` | | Environment variable design (.env, etc.) | `reference/security-and-cost.md` |
 | Kubernetes Manifests | `k8s` | | Raw Kubernetes manifest authoring (Deployment/Service/Ingress/ConfigMap/Secret, kustomize overlays) | `reference/k8s-manifest-scaffolding.md` |
 | Helm Chart | `helm` | | Helm chart authoring (Chart.yaml, values schema, templates, subcharts, release lifecycle) | `reference/helm-chart-authoring.md` |
@@ -159,15 +159,15 @@ Parse the first token of user input.
 - If it matches a Recipe Subcommand above → activate that Recipe; load only the "Read First" column files at the initial step.
 - Otherwise → default Recipe (`terraform` = Terraform / OpenTofu). Apply normal ASSESS → DESIGN → IMPLEMENT → VERIFY → HANDOFF workflow.
 
-Behavior notes per Recipe:
-- `terraform`: Default generic IaC path. Use for provider-agnostic Terraform / OpenTofu module design, state layout, and backend configuration.
-- `cloudformation`: AWS-only native IaC. Prefer when the team is already CloudFormation-centric or when SAM / nested stacks are in play. For new AWS-native TypeScript/Python work, prefer `cdk`.
-- `pulumi`: General-purpose imperative IaC in TypeScript/Python/Go. Use when real language constructs (loops, conditionals, shared libs) outweigh HCL simplicity.
-- `compose`: Local developer environment only. Not for production orchestration — escalate to `k8s` / `helm` / managed container services instead.
-- `env`: Environment variable design and `.env` schema. Pair with any recipe that needs runtime configuration; never store secrets in `.env` committed to the repo.
-- `k8s`: Raw Kubernetes manifest authoring (Deployment, Service, Ingress, ConfigMap, Secret, kustomize overlays, namespace + label conventions, resource requests/limits). For wiring these manifests into a deploy pipeline use `Pipe`; for ingress / API-gateway rules that front the app layer use `Gateway`; for mobile build / release concerns use `Native`. If the chart is reusable and versioned, prefer `helm` over raw manifests.
-- `helm`: Helm chart authoring — `Chart.yaml`, `values.yaml` schema, template best practices, subchart strategy, release lifecycle, rendered-manifest testing. Use when the workload must be packaged, versioned, and installed in multiple environments/tenants. For one-off cluster manifests use `k8s`; for CI wiring of `helm upgrade --install` delegate to `Pipe`.
-- `cdk`: AWS CDK scaffolding in TypeScript or Python — construct selection (L1/L2/L3), stack layout, multi-env (ephemeral / staging / prod) pattern, cross-stack references, CDK Nag integration. Use when AWS is fixed and the team wants real code over HCL. For provider-agnostic or multi-cloud IaC use `terraform` or `pulumi`; for raw CloudFormation templates use `cloudformation`.
+Behavior notes per Recipe (full routing detail in each Recipe's "Read First" reference):
+- `terraform`: Default generic IaC path — provider-agnostic module design, state layout, backend configuration.
+- `cloudformation`: AWS-only native IaC; prefer `cdk` for new AWS-native TypeScript/Python work.
+- `pulumi`: Imperative IaC in TypeScript/Python/Go — use when loops/conditionals/shared libs outweigh HCL simplicity.
+- `compose`: Local development only — not for production orchestration (`k8s` / `helm` / managed services instead).
+- `env`: Environment variable design and `.env` schema; pairs with any recipe needing runtime configuration.
+- `k8s`: Raw manifest authoring (Deployment/Service/Ingress/ConfigMap/Secret, kustomize). Escalate to `helm` once the chart is reusable/versioned.
+- `helm`: Chart authoring (`Chart.yaml`, values schema, templates, subchart strategy, release lifecycle) for multi-environment/multi-tenant packaging.
+- `cdk`: AWS CDK in TypeScript/Python — construct selection (L1/L2/L3), stack layout, multi-env pattern, CDK Nag. Use when AWS is fixed and real code beats HCL.
 
 ## Critical Constraints
 
@@ -228,6 +228,8 @@ Add these when relevant:
 
 ## Operational
 
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
+
 - Before starting (mandatory): read `.agents/scaffold.md` and `.agents/PROJECT.md`; create `.agents/scaffold.md` if missing.
 - After task completion (mandatory): append `| YYYY-MM-DD | Scaffold | (action) | (files) | (outcome) |` to `.agents/PROJECT.md`.
 - Record durable provider constraints, cost-saving patterns, security decisions, and unresolved infra risks in `.agents/scaffold.md`.
@@ -251,7 +253,6 @@ Add these when relevant:
 | `reference/aws-specialist.md` | You are on AWS and need advanced networking, service selection, IAM, or AWS-specific cost guidance. |
 | `reference/gcp-specialist.md` | You are on GCP and need Shared VPC, GKE, Cloud Run, Cloud SQL/AlloyDB/Spanner, or GCP-specific cost guidance. |
 | `reference/multicloud-patterns.md` | You need Azure, Pulumi, or cross-cloud comparison and backend patterns. |
-| `reference/docker-compose-templates.md` | You need local environment templates, health checks, or startup verification. |
 | `reference/security-and-cost.md` | You need secrets, IAM, network guardrails, `.env.example`, or env validation patterns. |
 | `reference/k8s-manifest-scaffolding.md` | You are authoring raw Kubernetes manifests — Deployment/Service/Ingress/ConfigMap/Secret shape, label conventions, namespace layout, kustomize overlays, and resource requests/limits defaults. |
 | `reference/helm-chart-authoring.md` | You are packaging a workload as a Helm chart — Chart.yaml, values.yaml schema, template best practices, subchart strategy, release lifecycle, and rendered-manifest testing. |
@@ -263,29 +264,13 @@ Add these when relevant:
 | `reference/docker-environment-anti-patterns.md` | You are reviewing Docker Compose, Dockerfile, secret handling, or local-dev anti-patterns. |
 | `reference/cloud-infrastructure-anti-patterns.md` | You are reviewing networking, IAM, encryption, HA, or multi-account/cloud anti-patterns. |
 | `reference/cost-finops-anti-patterns.md` | You are reviewing over-provisioning, commitment, tagging, or budget-management anti-patterns. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the IaC report, calibrating effort to env/blast-radius scope, or front-loading provider/env at ASSESS. Critical for Scaffold: P3, P6. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Scaffold-specific Output/Next schema. |
+| `_common/CODE_QUALITY.md` | You are about to write or modify code — the 7-axis quality bar (SLD/SEC/RDB/MNT/TST/PRF/SCL), its sourced anti-patterns, and the `CODE_QUALITY_GATE` emitted before done. |
 
 ## AUTORUN Support
 
-When Scaffold receives `_AGENT_CONTEXT`, parse `task_type`, `description`, and `Constraints`, execute the standard workflow, and return `_STEP_COMPLETE`.
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Scaffold-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
-### `_STEP_COMPLETE`
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Scaffold
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [primary artifact]
-    parameters:
-      task_type: "[task type]"
-      scope: "[scope]"
-  Validations:
-    completeness: "[complete | partial | blocked]"
-    quality_check: "[passed | flagged | skipped]"
-  Next: [recommended next agent or DONE]
-  Reason: [Why this next step]
-```
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, do not call other agents directly. Return all work via `## NEXUS_HANDOFF`.

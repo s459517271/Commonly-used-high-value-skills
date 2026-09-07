@@ -1,15 +1,15 @@
 ---
 name: pulse
-description: 'Defining KPIs, designing tracking events, and specifying dashboards. Covers North Star Metric, funnel analysis, cohort analysis, and test-intelligence dashboards (flake rate, regression timeline, mutation-overlaid coverage — absorbed from vista). GA4/Amplitude/Mixpanel/PostHog integration. Use when metrics or test-telemetry dashboards are needed.'
-zh_description: "用于pulse，支持内容、营销、渠道和数据分析。"
-version: "1.0.7"
+description: '关键指标、埋点、漏斗、留存和仪表盘规格设计。'
+zh_description: "关键指标、埋点、漏斗、留存和仪表盘规格设计。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/pulse"
 license: MIT
-tags: '["growth", "marketing", "pulse"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["growth", "marketing", "pulse"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -21,11 +21,11 @@ CAPABILITIES_SUMMARY:
 - funnel_analysis: Design conversion funnels with step definitions, expected rates (visitor-to-lead 1.5-2.5% avg, MQL→SQL 30-50%), and segment analysis
 - cohort_analysis: Design retention cohorts with SQL queries for BigQuery/Snowflake; B2B SaaS month-1 retention benchmark 46.9%
 - dashboard_specification: Specify dashboard sections, chart types, filters, and refresh rates
-- analytics_platform_integration: GA4 (incl. Analytics Advisor AI, cross-channel budgeting, 2026-06-15 consent split), Amplitude (Ask Amplitude AI, session replay, heatmaps, $49 Plus tier; AMPL on NASDAQ since 2021-09-28), Mixpanel (2025-02 pricing rebuild — 1M events/mo free, Spark AI + MCP Server, re-launched experimentation/feature flags late 2025), PostHog (all-in-one + PostHog AI agent), Heap (now Contentsquare since 2023-12-07), Statsig (under OpenAI since 2025-09-02, $1.1B), Snowplow (SLULA license since 2024-01-08 — not Apache 2.0); server-side GTM v3.2.0+ and Consent Mode v2; auto-capture vs manual instrumentation tradeoff
+- analytics_platform_integration: GA4, Amplitude, Mixpanel, PostHog, Contentsquare, Statsig, Snowplow; server-side GTM and Consent Mode v2; auto-capture vs manual instrumentation tradeoff
 - privacy_consent_management: Consent-aware tracking, PII removal, GDPR/Consent Mode v2, server-side first-party tracking
 - data_quality_monitoring: Schema validation, schema drift detection, freshness monitoring, volume tracking, completeness checks
-- semantic_metric_schema: Machine-readable KPI definition contract — every named metric (e.g. `active_user`, `activation_rate`, `retention`, `engagement`) MUST declare `formal_definition`, `event_source` (specific event names + identity source), `exclusion_rules` (internal_user / test_account / bot / deleted_account / preview_session), `bot_filter_method` (UA + behavior heuristic + IP allowlist), `dupe_detection` (idempotency key / dedup window / event-source hash), `polysemy_caveats` (legitimate cross-team variants per `lore.concept_consistency_audit` rule — e.g. Marketing-MAU vs Product-engaged-30d are recorded as parallel definitions, never forced into single canonical form). Anchors the Data Reality / Semantic Metrics Layer (Round 8 proposal intent) to existing pulse capability; consumes Insight Ledger `category: metric_definition` (v8 schema extension). v8 fold-in.
-- revenue_analytics: MRR/ARR/ARPU/LTV/CAC/NRR tracking and movement analysis; CAC:LTV ≥ 1:3 health / ≥ 1:5 top-tier; NRR >100% healthy / >110% strong / >120% top-tier; B2B SaaS avg churn 3.5% (top performers <3%, B2C 6.5-8%); enterprise <1%; CAC payback <12mo good / <80 days elite
+- semantic_metric_schema: Machine-readable KPI contract — every named metric declares `formal_definition`, `event_source`, `exclusion_rules`, `bot_filter_method`, `dupe_detection`, and `polysemy_caveats` (legitimate cross-team variants recorded in parallel, never forced canonical)
+- revenue_analytics: MRR/ARR/ARPU/LTV/CAC/NRR tracking and movement analysis with benchmark thresholds (CAC:LTV, NRR, churn, CAC payback)
 - alerts_anomaly_detection: Z-score anomaly detection, threshold alerts (≥20% conversion drop, ≥30% velocity spike), trend monitoring
 - activation_rate_design: Define activation milestones, measure time-to-value, self-serve target 50-70%; segment by acquisition channel
 
@@ -42,6 +42,10 @@ COLLABORATION_PATTERNS:
 - Pulse -> Voice: Quantitative context for feedback analysis
 - Beacon -> Pulse: Data observability alerts for schema drift and freshness issues
 - Pulse -> Beacon: Analytics pipeline health signals for observability
+
+BIDIRECTIONAL_PARTNERS:
+- INPUT: Voice, Growth, Experiment, Scout, Beacon
+- OUTPUT: Experiment, Growth, Canvas, Scout, Compete, Voice, Beacon
 
 PROJECT_AFFINITY: SaaS(H) E-commerce(H) Mobile(H) Dashboard(M) Data(M)
 -->
@@ -95,7 +99,6 @@ Route elsewhere when the task is primarily:
 - Keep event payloads minimal but complete; always include `value`, `currency`, `transaction_id` for purchase events (missing parameters break ROAS attribution).
 - Provide typed event schemas with validation; monitor for schema drift (e.g., `productID` → `product_id` renames break downstream).
 - Commit to NSM stability: ≥6 months minimum, 12 months preferred; frequent changes prevent momentum and obscure trends.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Pulse; P2, P1 recommended).
 
 ## Boundaries
 
@@ -110,7 +113,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 - Consider privacy implications (PII, consent).
 - Keep event payloads minimal but complete.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Adding new tracking to production.
 - Changing existing event schemas.
@@ -138,7 +141,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 
 | Phase | Required action | Key rule | Read |
 |-------|-----------------|----------|------|
-| `DEFINE` | Clarify success: define North Star Metric, KPIs, OKRs, and supporting/counter metrics | Every metric must answer "What decision will this inform?" | `reference/metrics-frameworks.md` |
+| `DEFINE` | Clarify success: define North Star Metric, KPIs, OKRs, and supporting/counter metrics | Every metric must answer "What decision will this inform?" | — |
 | `TRACK` | Design typed event schemas, implement with analytics platform, validate consent | Use `object_action` snake_case naming; check consent before tracking | `reference/event-schema.md`, `reference/platform-integration.md` |
 | `ANALYZE` | Design funnels, cohorts, dashboards, anomaly detection, and data quality checks | Leading indicators predict; lagging indicators confirm | `reference/funnel-cohort-analysis.md`, `reference/dashboard-spec.md` |
 | `DELIVER` | Present metrics framework, implementation code, dashboard specs, and alert rules | Include privacy review and data quality plan | `reference/privacy-consent.md`, `reference/data-quality.md` |
@@ -147,7 +150,7 @@ Agent role boundaries → `_common/BOUNDARIES.md`
 
 | Recipe | Subcommand | Default? | When to Use | Read First |
 |--------|-----------|---------|-------------|------------|
-| KPI Framework | `kpi` | ✓ | North Star Metric definition, KPI tree design, and OKR setup | `reference/metrics-frameworks.md` |
+| KPI Framework | `kpi` | ✓ | North Star Metric definition, KPI tree design, and OKR setup | — |
 | Funnel Analysis | `funnel` | | Conversion funnel analysis and drop-off identification | `reference/funnel-cohort-analysis.md` |
 | Cohort Analysis | `cohort` | | Retention cohort analysis and churn measurement | `reference/funnel-cohort-analysis.md` |
 | Event Schema | `event` | | Event schema design and analytics implementation | `reference/event-schema.md` |
@@ -188,12 +191,12 @@ Behavior notes per Recipe:
 
 | Signal | Approach | Primary output | Read next |
 |--------|----------|----------------|-----------|
-| `north star`, `KPI`, `OKR`, `success metric` | North Star Metric definition | Metrics framework | `reference/metrics-frameworks.md` |
+| `north star`, `KPI`, `OKR`, `success metric` | North Star Metric definition | Metrics framework | — |
 | `event`, `tracking`, `schema`, `event design` | Event schema design | Typed event interface | `reference/event-schema.md` |
 | `funnel`, `conversion`, `drop-off` | Funnel analysis design | Funnel definition + GA4 impl | `reference/funnel-cohort-analysis.md` |
 | `cohort`, `retention`, `churn` | Cohort analysis design | Cohort config + SQL queries | `reference/funnel-cohort-analysis.md` |
 | `dashboard`, `chart`, `visualization spec` | Dashboard specification | Dashboard spec + chart configs | `reference/dashboard-spec.md` |
-| `activation`, `aha moment`, `time to value` | Activation rate design | Activation milestones + measurement plan | `reference/metrics-frameworks.md` |
+| `activation`, `aha moment`, `time to value` | Activation rate design | Activation milestones + measurement plan | — |
 | `GA4`, `Amplitude`, `Mixpanel`, `PostHog`, `analytics setup` | Platform integration | Implementation code + React hook | `reference/platform-integration.md` |
 | `consent`, `GDPR`, `privacy`, `PII` | Privacy and consent management | Consent flow + PII removal | `reference/privacy-consent.md` |
 | `data quality`, `validation`, `freshness` | Data quality monitoring | Quality checks + alerts | `reference/data-quality.md` |
@@ -201,7 +204,7 @@ Behavior notes per Recipe:
 | `anomaly`, `alert`, `threshold` | Anomaly detection and alerts | Alert rules + Z-score config | `reference/alerts-anomaly-detection.md` |
 | `server-side`, `consent mode`, `ad blocker` | Server-side tracking + Consent Mode v2 | SST config + consent flow | `reference/privacy-consent.md` |
 | `schema drift`, `event validation`, `data observability` | Data quality + schema drift detection | Validation rules + drift alerts | `reference/data-quality.md` |
-| unclear metrics request | North Star Metric definition (default) | Metrics framework | `reference/metrics-frameworks.md` |
+| unclear metrics request | North Star Metric definition (default) | Metrics framework | — |
 
 Routing rules:
 
@@ -214,7 +217,7 @@ Routing rules:
 
 ## Output Requirements
 
-Every deliverable must include:
+A complete deliverable carries the following — a ceiling, not a floor. Emit only what the task exercised; never pad with `N/A`:
 
 - Metric definition with decision context ("what decision does this inform?") and metric tree position (input vs output KPI).
 - Typed event schema (interface or type definition) with 15-25 event target range.
@@ -257,7 +260,6 @@ Every deliverable must include:
 
 | Reference | Read this when |
 |-----------|----------------|
-| `reference/metrics-frameworks.md` | You need NSM definition template or product-type examples. |
 | `reference/event-schema.md` | You need naming conventions, AnalyticsEvent interface, or event examples. |
 | `reference/funnel-cohort-analysis.md` | You need funnel + cohort templates, GA4 implementation, or SQL queries. |
 | `reference/attribution-modeling.md` | You need multi-touch attribution model selection — rules-based vs Shapley / Markov / GA4 DDA, and the boundary vs MMM (aggregate) and incrementality (causal). |
@@ -272,44 +274,47 @@ Every deliverable must include:
 | `reference/activation-design.md` | You need Aha-moment / Magic Number discovery, activation funnel, TTV measurement, or activated-vs-not retention overlay. |
 | `reference/product-qualified-leads.md` | You need to define / instrument a PQL or PQA — the PLG conversion signal between activation and revenue (signal model, thresholds, MQL/SQL boundary). |
 | `reference/code-standards.md` | You need good/bad Pulse code examples. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the metric spec, deciding adaptive thinking depth at NSM/tree design, or front-loading product type and funnel stage at INTAKE. Critical for Pulse: P3, P5. |
 | `_common/GROWTH_BRAND_PROOF.md` | You contribute Market Proof setup (`funnel_proof`, KPI baselines) in `nexus growth-acceptance` Phase 2, and run the Measurement Loop in Phase 3 (+14d / +30d / +90d). Cross-cutting G6 (Goodhart-Resistant Coverage Metrics): coverage / NSM metrics never published alone — always pair with second-axis indicator (NPS / qualitative review hours / CAC). Step 1 (Measurement Loop) is the minimum Layer C adoption for SMB orgs. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Pulse-specific Output/Next schema. |
 
 ## Operational
+
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
 
 - Journal domain insights and metrics learnings in `.agents/pulse.md`; create it if missing.
 - Record effective metric patterns, data quality findings, and analytics platform quirks.
 - After significant Pulse work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Pulse | (action) | (files) | (outcome) |`
-- Follow `_common/GIT_GUIDELINES.md`.
-- Standard protocols → `_common/OPERATIONAL.md`
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Pulse-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Pulse
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [artifact path or inline]
-    artifact_type: "[Metrics Framework | Event Schema | Funnel Analysis | Cohort Analysis | Dashboard Spec | Platform Integration | Privacy Review | Data Quality | Revenue Analytics | Alert Config]"
-    parameters:
-      metric_scope: "[North Star | KPI | Event | Funnel | Cohort | Dashboard | Revenue | Alert]"
-      platform: "[GA4 | Amplitude | Mixpanel | Custom]"
-      events_defined: "[count]"
-      privacy_reviewed: "[yes | no]"
-      data_quality_plan: "[yes | no]"
-    Validations:
-      completeness: "[complete | partial | blocked]"
-      quality_check: "[passed | flagged | skipped]"
-      privacy_reviewed: "[yes | no]"
-  Next: Experiment | Growth | Canvas | Scout | Builder | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Pulse-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.

@@ -1,15 +1,15 @@
 ---
 name: nlpm-audit
-description: 'Audits natural-language programming artifacts such as SKILL.md, AGENTS.md, CLAUDE.md, slash commands, plugin manifests, hooks, rules, and prompt files. Use when reviewing AI-agent repositories, checking manifest-vs-disk consistency, scoring skill or agent quality, adding NL artifact CI gates, or diagnosing vocabulary and version drift across Claude Code, Codex, Cursor, Gemini, and Antigravity-style projects.'
+description: 'Audit SKILL.md, AGENTS.md, prompts, hooks, and plugin manifests for instruction conflicts, quality, broken references, and manifest-to-disk drift.'
 zh_description: "审计 SKILL.md、AGENTS.md、CLAUDE.md、插件清单、hooks、commands 和提示词，检查安装一致性、质量评分、安全风险与版本漂移。"
-version: "1.0.2"
+version: "1.0.5"
 author: seaworld008
 source: github:xiaolai/nlpm
 source_url: "https://github.com/xiaolai/nlpm"
 license: ISC
 tags: '[nlpm, natural-language-programming, skill-quality, agent-audit, ci, prompt-engineering]'
 created_at: "2026-06-12"
-updated_at: "2026-07-06"
+updated_at: "2026-09-06"
 quality: 4
 complexity: advanced
 ---
@@ -25,7 +25,7 @@ This skill is inspired by the NLPM project, but it is a portable audit workflow:
 you can apply the method manually, with repository scripts, or with the upstream
 `nlpm-check` validator when the project wants a standalone CI gate.
 
-## 2026-07-06 Upstream Sync Notes
+## 2026-08-10 Upstream Sync Notes
 
 The latest upstream NLPM repository is still a fast-moving product, so this
 skill remains a curated portable workflow instead of a mirror. The current
@@ -47,6 +47,19 @@ stable ideas to preserve locally are:
   real repository audits;
 - NL-TDD test specs for writing artifacts against expected trigger behavior and
   output contracts before publishing them.
+- scoring exclusions that distinguish an instruction using vague or deprecated
+  language from a rule that names that language as data to detect or reject;
+- example counting that ignores examples shown only inside fenced templates;
+- deterministic vocabulary enforcement based on a reviewed registry, with
+  open-ended LLM synonym clustering kept advisory;
+- pull-request gates that score changed natural-language artifacts instead of
+  re-judging an unrelated repository-wide corpus.
+- manifest-vs-disk differences that remain observations until a repository's
+  own publish contract proves the omitted artifact should be shipped;
+- vague-term calibration that accepts a later reference to measurable
+  selection criteria already defined earlier in the same artifact;
+- release-gate coverage tests that enumerate every shipped client layout and
+  assert mirrored skill bodies stay semantically synchronized.
 
 Use those ideas when they improve this portable skill. Do not mirror the whole
 upstream product surface unless the user explicitly asks to install or run NLPM
@@ -235,50 +248,7 @@ Classify each artifact:
 
 ### 2. Check Manifest-vs-Disk Consistency
 
-This is the highest-value deterministic check. Look for both directions:
-
-- **Declared but missing:** a manifest references a skill, command, agent, hook,
-  or script path that does not exist.
-- **Present but unreachable:** a `SKILL.md`, command, agent, or hook exists on
-  disk but is absent from the manifest, marketplace file, README index, catalog,
-  or install surface users rely on.
-
-Example report:
-
-```text
-BROKEN  .claude-plugin/plugin.json references skills/reviewer/SKILL.md
-        file not found; actual path is skills/code-reviewer/SKILL.md
-
-ORPHAN  skills/refactor-helper/SKILL.md
-        skill exists on disk but is not listed in plugin.json or catalog
-
-DRIFT   plugin.json version 1.4.0, marketplace.json version 1.3.9
-        release metadata will publish a stale version
-```
-
-For machine checks, prefer a deterministic script over manual review. If the
-project only needs a lightweight bundled check:
-
-```bash
-python skills/ai-workflow/nlpm-audit/scripts/nl_artifact_check.py . --json
-```
-
-If the project wants the upstream NLPM validator:
-
-```bash
-curl -fsSL -o ./nlpm-check https://raw.githubusercontent.com/xiaolai/nlpm/main/bin/nlpm-check
-python3 ./nlpm-check .
-```
-
-Pin the downloaded script to a reviewed commit in CI if supply-chain stability is
-more important than receiving upstream fixes immediately.
-
-For badge output, use upstream `nlpm-badge` with the JSON stream from
-`nlpm-check`:
-
-```bash
-nlpm-check --json . | nlpm-badge > nlpm-badge.json
-```
+Read [the detailed procedure and examples](EXTENDED.md#section-2) when working on this part of the task.
 
 ### 3. Score Artifact Quality
 
@@ -408,56 +378,7 @@ registry-backed gate.
 
 ### 7. Add CI or Pre-Commit Gates
 
-Use different gates for different confidence levels.
-
-Blocking gates:
-
-- manifest references missing files;
-- disk artifacts missing from install manifest or generated catalog;
-- invalid YAML/TOML/JSON frontmatter;
-- hook scripts referenced but absent;
-- version metadata inconsistent across release surfaces;
-- security-sensitive executable artifact added without review.
-
-Advisory gates:
-
-- quality score below threshold;
-- too many vague terms;
-- missing examples;
-- description has weak trigger phrases;
-- vocabulary drift candidates.
-
-Example GitHub Actions shape:
-
-```yaml
-name: nl-artifact-check
-on:
-  pull_request:
-    paths:
-      - "skills/**"
-      - "agents/**"
-      - "commands/**"
-      - ".claude-plugin/**"
-      - ".codex-plugin/**"
-      - "AGENTS.md"
-      - "CLAUDE.md"
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run deterministic NL artifact checks
-        run: |
-          curl -fsSL -o nlpm-check https://raw.githubusercontent.com/xiaolai/nlpm/main/bin/nlpm-check
-          python3 nlpm-check .
-```
-
-For repositories like this one, keep using the local canonical pipeline first.
-Add NLPM-style checks only when they catch a gap the repository pipeline does
-not already cover.
-
-For plugin monorepos or README badges, prefer upstream `nlpm-check` because it
-knows how to isolate nested plugin roots and produce badge-ready JSON.
+Read [the detailed procedure and examples](EXTENDED.md#section-1) when working on this part of the task.
 
 ## Triage Rules
 

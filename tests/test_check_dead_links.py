@@ -38,6 +38,7 @@ class CheckDeadLinksTests(unittest.TestCase):
             "http://www.larkoffice.com/sml/2.0",
             "https://api.semanticscholar.org/recommendations/v1/papers/",
             "https://x.com/user/status/456",
+            "https://www.linkedin.com/posts/username_activity-123",
         ]
         for url in urls:
             self.assertTrue(self.module.should_ignore_url(url), url)
@@ -50,6 +51,47 @@ class CheckDeadLinksTests(unittest.TestCase):
         ]
         for url in urls:
             self.assertFalse(self.module.should_ignore_url(url), url)
+
+    def test_normalize_url_strips_markdown_emphasis_boundaries(self) -> None:
+        self.assertEqual(
+            "https://hermes-agent.nousresearch.com/docs/llms.txt",
+            self.module.normalize_url(
+                "https://hermes-agent.nousresearch.com/docs/llms.txt.**"
+            ),
+        )
+        self.assertEqual(
+            "https://example.test/path/",
+            self.module.normalize_url("https://example.test/path/"),
+        )
+
+    def test_curl_probe_retries_transient_failures(self) -> None:
+        command = {}
+
+        class Result:
+            returncode = 0
+            stdout = "200"
+            stderr = ""
+
+        original_which = self.module.shutil.which
+        original_run = self.module.subprocess.run
+        self.module.shutil.which = lambda _name: "/usr/bin/curl"
+
+        def fake_run(cmd, **_kwargs):
+            command["argv"] = cmd
+            return Result()
+
+        self.module.subprocess.run = fake_run
+        try:
+            status, error = self.module.curl_probe("https://example.test", "HEAD", 10)
+        finally:
+            self.module.shutil.which = original_which
+            self.module.subprocess.run = original_run
+
+        self.assertEqual(200, status)
+        self.assertEqual("", error)
+        self.assertIn("--retry-all-errors", command["argv"])
+        retry_index = command["argv"].index("--retry")
+        self.assertEqual("2", command["argv"][retry_index + 1])
 
 
 if __name__ == "__main__":

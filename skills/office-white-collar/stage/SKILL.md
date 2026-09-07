@@ -1,15 +1,15 @@
 ---
 name: stage
-description: 'Generating slides via Marp, reveal.js, or Slidev, designing narrative arcs, and optimizing conference talks with WPM-calibrated timing. Use when creating or pacing presentations.'
-zh_description: "用于stage，支持文档、表格、演示和资料整理。"
-version: "1.0.7"
+description: '演示文稿生成、叙事节奏设计和会议演讲优化。'
+zh_description: "演示文稿生成、叙事节奏设计和会议演讲优化。"
+version: "1.0.1"
 author: "seaworld008"
 source: "github:simota/agent-skills"
 source_url: "https://github.com/simota/agent-skills/tree/main/stage"
 license: MIT
-tags: '["office", "stage"]'
-created_at: "2026-04-25"
-updated_at: "2026-07-20"
+tags: ["office", "stage"]
+created_at: "2026-08-24"
+updated_at: "2026-09-06"
 quality: 5
 complexity: "advanced"
 ---
@@ -29,12 +29,12 @@ COLLABORATION_PATTERNS:
 - Scribe -> Stage: Specification documents to presentation slides
 - Canvas -> Stage: Diagrams and charts for slide embedding
 - Tome -> Stage: Learning materials to presentation format
-- Stage -> Director: Presentation recording with Playwright
+- Stage -> Cue: Presentation recording with Playwright
 - Muse -> Stage: Design tokens for theme consistency
 
 BIDIRECTIONAL_PARTNERS:
 - INPUT: Scribe (specs), Canvas (diagrams), Tome (learning materials), Muse (design tokens), User (requirements)
-- OUTPUT: Director (recording), User (slides)
+- OUTPUT: Cue (recording), User (slides)
 
 PROJECT_AFFINITY: Game(L) SaaS(M) E-commerce(L) Dashboard(M) Marketing(H)
 -->
@@ -58,7 +58,7 @@ Use Stage when the user needs:
 Route elsewhere when the task is primarily:
 - diagrams or charts without slide context: `Canvas`
 - specification or design documents: `Scribe`
-- document format conversion: `Morph`
+- document format conversion: `Scribe`
 - UX writing or microcopy: `Prose`
 - video scripts or storyboards: `Cue`
 - learning document creation: `Tome`
@@ -74,7 +74,6 @@ Route elsewhere when the task is primarily:
 - Include visual cues (diagram placeholders, image suggestions) for non-text content; a single well-designed visual replaces paragraphs.
 - Generate a self-contained slide deck that can be previewed with a single command.
 - Calibrate timing with speaker pace (120-160 WPM; 140 WPM default for technical conference talks, 125 WPM for keynotes and non-native audiences). Total word budget = duration × WPM; flag decks that exceed the budget at DRAFT. Source: TED2026 cluster 130-150 WPM (https://conferences.ted.com/ted2026); University of Edinburgh study — listeners at 190+ WPM retain 30% less than at 150 WPM.
-- Author for Opus 4.8 defaults. See `_common/OPUS_48_AUTHORING.md` (P3, P5 critical for Stage; P2, P1 recommended).
 
 ## Boundaries
 
@@ -88,7 +87,7 @@ Agent role boundaries -> `_common/BOUNDARIES.md`
 - Generate self-contained, runnable Markdown slide code.
 - Include framework-specific frontmatter and directives.
 
-### Ask First
+### Ask First When Not Already Authorized
 
 - Presentation exceeds `40` slides.
 - Target framework is ambiguous (Marp vs reveal.js vs Slidev).
@@ -109,7 +108,7 @@ Agent role boundaries -> `_common/BOUNDARIES.md`
 | Marp | `marp` | ✓ | Marp Markdown slide generation | `reference/patterns.md` |
 | Reveal | `reveal` | | reveal.js HTML slide generation | `reference/patterns.md` |
 | Slidev | `slidev` | | Slidev Vue slide generation | `reference/patterns.md` |
-| Conference | `conference` | | LT / conference talk optimization | `reference/patterns.md`, `reference/examples.md` |
+| Conference | `conference` |  | LT / conference talk optimization | `reference/patterns.md` |
 | Timing | `timing` | | WPM-based pacing and speaker notes | `reference/patterns.md` |
 | Narrative | `narrative` | | Narrative arc design — Pixar formula, Hero's Journey for talks, Problem-Solution-Benefit, Minto Pyramid | `reference/narrative-arc-design.md` |
 | Visual | `visual` | | Slide visual design — typography hierarchy, color/contrast (WCAG AA), image use, alignment grid | `reference/slide-visual-design.md` |
@@ -188,56 +187,63 @@ Pace baseline: 120-160 WPM; use 140 WPM for technical conference talks, 125 WPM 
 ## Collaboration
 
 **Receives:** Scribe (specs to present), Canvas (diagrams to embed), Tome (learning materials), Muse (design tokens for theming), User (outlines, topics)
-**Sends:** Director (slides for recording), User (slide deck)
+**Sends:** Cue (slides for recording), User (slide deck)
 
 | Direction | Handoff | Purpose |
 |-----------|---------|---------|
 | Scribe → Stage | `SCRIBE_TO_STAGE_HANDOFF` | Specification → slide conversion |
 | Canvas → Stage | `CANVAS_TO_STAGE_HANDOFF` | Diagram embedding |
-| Stage → Director | `STAGE_TO_DIRECTOR_HANDOFF` | Presentation recording |
+| Stage → Cue | `STAGE_TO_CUE_HANDOFF` | Presentation recording |
 
 ## Reference Map
 
 | Reference | Read this when |
 |-----------|----------------|
 | `reference/patterns.md` | You need slide framework syntax, theme templates, or layout patterns. |
-| `reference/examples.md` | You need complete slide deck examples for different formats. |
 | `reference/handoffs.md` | You need handoff templates for collaboration with other agents. |
 | `reference/narrative-arc-design.md` | You are designing the deck story arc (Pixar formula, Hero's Journey for talks, Problem-Solution-Benefit, Minto Pyramid) — used by the `narrative` recipe. |
 | `reference/slide-visual-design.md` | You are designing typography hierarchy, color/contrast (WCAG AA), image use, or alignment grid before applying a theme — used by the `visual` recipe. |
 | `reference/rehearsal-delivery.md` | You are producing a rehearsal plan covering breathing, pacing, pause discipline, eye-contact routing, and Q&A handling — used by the `rehearsal` recipe. |
-| `_common/OPUS_48_AUTHORING.md` | You are sizing the slide deck, deciding adaptive thinking depth at framework/6x6, or front-loading talk-type/audience/duration at OUTLINE. Critical for Stage: P3, P5. |
+| `reference/autorun-schema.md` | You are emitting the AUTORUN `_STEP_COMPLETE` block — Stage-specific Output/Next schema. |
 
 ## Operational
+
+**Host integration:** `_common/` paths refer to the separately installed upstream ecosystem. Apply those protocols only when available and selected for this task; otherwise use host instructions and the domain workflow here. Journals and shared project logs require a project convention or user request.
 
 - Journal presentation patterns and framework choices in `.agents/stage.md`; create if missing.
 - Record only reusable narrative patterns and theme decisions.
 - After significant Stage work, append to `.agents/PROJECT.md`: `| YYYY-MM-DD | Stage | (action) | (files) | (outcome) |`
-- Follow `_common/OPERATIONAL.md` and `_common/GIT_GUIDELINES.md`.
 
 ## AUTORUN Support
 
-See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling).
-
-Stage-specific `_STEP_COMPLETE.Output` schema:
-
-```yaml
-_STEP_COMPLETE:
-  Agent: Stage
-  Status: SUCCESS | PARTIAL | BLOCKED | FAILED
-  Output:
-    deliverable: [artifact path or inline]
-    framework: "[Marp | reveal.js | Slidev]"
-    parameters:
-      slide_count: [N]
-      duration: "[estimated total time]"
-      narrative_pattern: "[Problem-Solution | AIDA | Before-After | Hero's Journey | Tutorial]"
-      audience: "[beginner | intermediate | expert]"
-    preview_command: "[command to preview]"
-  Next: Director | DONE
-  Reason: [Why this next step]
-```
+See `_common/AUTORUN.md` for the protocol (`_AGENT_CONTEXT` input, mode semantics, error handling). Stage-specific `_STEP_COMPLETE.Output` schema lives in `reference/autorun-schema.md`.
 
 ## Nexus Hub Mode
 
 When input contains `## NEXUS_ROUTING`, return via `## NEXUS_HANDOFF` (canonical schema in `_common/HANDOFF.md`).
+
+## Local Execution Contract
+
+Before applying this skill, make the requested outcome and its validation explicit. Use this compact contract to prevent scope drift and make the final handoff reviewable:
+
+```yaml
+goal: "What measurable outcome should change?"
+scope:
+  included: []
+  excluded: []
+inputs:
+  required: []
+  optional: []
+constraints:
+  safety: []
+  compatibility: []
+deliverables: []
+validation:
+  checks: []
+  evidence: []
+risks:
+  - risk: ""
+    mitigation: ""
+```
+
+Keep the contract proportional to the task. Omit irrelevant fields, but always retain a concrete goal, deliverables, and validation evidence.

@@ -75,7 +75,8 @@ stabilizes.
 Blocking deterministic findings:
 
 - missing files referenced by manifests;
-- files present on disk but unreachable from manifests or generated catalogs;
+- files omitted from manifests or catalogs despite an explicit repository
+  contract that says they must be published;
 - invalid JSON/TOML/YAML syntax;
 - missing required frontmatter;
 - wrong hook event case;
@@ -91,6 +92,19 @@ Advisory judgment findings:
 
 R51 vocabulary drift stays advisory unless the repository opts in with a
 reviewed registry that names canonical terms and deprecated synonyms.
+
+Apply three calibration rules before deducting points:
+
+- Treat a vague or deprecated token as data, not an instruction, when the
+  clause explicitly asks the reader or tool to detect, reject, replace, avoid,
+  or report it.
+- Do not deduct for a deprecated term in the registry field that declares it;
+  do review prose and uses outside that declaration.
+- Count `<example>` blocks only outside fenced code, so a template showing how
+  to write examples does not satisfy an example requirement.
+- Do not penalize a vague term that refers to measurable selection criteria
+  defined earlier in the same artifact; verify that the earlier table or
+  procedure names concrete commands, files, or values.
 
 ## Calibration Examples
 

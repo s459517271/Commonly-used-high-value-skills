@@ -8,9 +8,15 @@ directory) so tests and callers can run in an isolated, hermetic environment.
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 import json
 from pathlib import Path
 from typing import Final
+
+try:
+    from scripts.skills_refresh_planner import build_queue
+except ModuleNotFoundError:  # Direct execution from scripts/
+    from skills_refresh_planner import build_queue
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -37,11 +43,19 @@ def compute_source_coverage(root: Path) -> dict[str, float | int]:
     return {"covered": covered, "total": total_skills, "percent": round(pct, 2)}
 
 
+def load_refresh_queue(root: Path, reports_dir: Path) -> list[dict]:
+    """Use live provenance metadata for the real repo, fixtures for isolated tests."""
+    if reports_dir.resolve() == DEFAULT_REPORTS_DIR.resolve():
+        return [asdict(item) for item in build_queue(root, stale_days=30)]
+    payload = load_json(reports_dir / "refresh-queue.json") or []
+    return payload if isinstance(payload, list) else []
+
+
 def build_payload(root: Path, reports_dir: Path) -> dict:
     catalog = load_json(root / "docs" / "catalog.json") or {}
     license_audit = load_json(reports_dir / "license-audit.json") or {}
     dead_links = load_json(reports_dir / "dead-links.json") or {}
-    refresh_queue = load_json(reports_dir / "refresh-queue.json") or []
+    refresh_queue = load_refresh_queue(root, reports_dir)
     source_catalog = load_json(reports_dir / "catalog.json") or {}
 
     source_coverage = compute_source_coverage(root)
@@ -138,6 +152,12 @@ def main() -> int:
     args = parser.parse_args()
 
     reports_dir = (REPO_ROOT / args.reports_dir).resolve()
+    if reports_dir == DEFAULT_REPORTS_DIR.resolve():
+        live_queue = load_refresh_queue(REPO_ROOT, reports_dir)
+        (reports_dir / "refresh-queue.json").write_text(
+            json.dumps(live_queue, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
     payload = build_payload(REPO_ROOT, reports_dir)
     json_path = REPO_ROOT / args.output_json
     md_path = REPO_ROOT / args.output_md
